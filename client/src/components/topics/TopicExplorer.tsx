@@ -1,30 +1,18 @@
-import React, { useRef, useState } from "react";
-import { Card, List, Typography, Button, message, Spin } from "antd";
+import React, { useRef, useState, useCallback } from "react";
+import { Typography, Button, message, Spin } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
+import type { TopicConcepts, Concept } from "../../store/topics/types";
+import DifficultyCard from "./DifficultyCard";
+import useTopics from "../../store/topics/hook";
 
 const { Title } = Typography;
 
-interface Topic {
-  emoji: string;
-  topic: string;
-}
-
-interface TopicsByDifficulty {
-  [key: string]: Topic[];
-}
-
 interface TopicDisplayProps {
   topic: string;
-  topics: TopicsByDifficulty | null;
+  topics: TopicConcepts;
   isLoading: boolean;
 }
-
-const difficultyColors = {
-  beginner: "#4CAF50",
-  intermediate: "#2196F3",
-  advanced: "#F44336",
-};
 
 const TopicDisplay: React.FC<TopicDisplayProps> = ({
   topic,
@@ -33,8 +21,9 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSaving, setIsSaving] = useState(false);
+  const { generateConcepts } = useTopics();
 
-  const saveAsPNG = async () => {
+  const saveAsPNG = useCallback(async () => {
     if (containerRef.current) {
       setIsSaving(true);
       try {
@@ -80,6 +69,16 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
         setIsSaving(false);
       }
     }
+  }, [containerRef, topic]);
+
+  const handleConceptClick = (concept: Concept) => {
+    const parts = topic.split("/");
+    const mainTopic = parts[0];
+    const context = parts.length > 1 ? parts.slice(1) : [];
+    context.push(concept.topic);
+
+    console.log(mainTopic, context);
+    generateConcepts(mainTopic, context);
   };
 
   if (isLoading) {
@@ -135,75 +134,18 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
             justifyContent: "center",
           }}
         >
-          {Object.entries(topics).map(([difficulty, topicList], index) => (
+          {Object.entries(topics).map(([difficulty, conceptList], index) => (
             <motion.div
               key={difficulty}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
             >
-              <Card
-                title={
-                  <Title
-                    level={4}
-                    style={{
-                      textTransform: "capitalize",
-                      margin: 0,
-                      color:
-                        difficultyColors[
-                          difficulty as keyof typeof difficultyColors
-                        ],
-                    }}
-                  >
-                    {difficulty}
-                  </Title>
-                }
-                style={{
-                  width: 300,
-                  backgroundColor: "#2a2a2a",
-                  color: "white",
-                }}
-                styles={{
-                  header: {
-                    backgroundColor: "#333333",
-                    borderBottom: `2px solid ${
-                      difficultyColors[
-                        difficulty as keyof typeof difficultyColors
-                      ]
-                    }`,
-                  },
-                  body: { padding: "12px" },
-                }}
-              >
-                <List
-                  itemLayout="horizontal"
-                  dataSource={topicList}
-                  renderItem={(item, idx) => (
-                    <motion.div
-                      initial={{ opacity: 0, x: -20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.3, delay: idx * 0.05 }}
-                    >
-                      <List.Item>
-                        <List.Item.Meta
-                          avatar={
-                            <span style={{ fontSize: "24px" }}>
-                              {item.emoji}
-                            </span>
-                          }
-                          title={
-                            <span
-                              style={{ fontWeight: "bold", color: "white" }}
-                            >
-                              {item.topic}
-                            </span>
-                          }
-                        />
-                      </List.Item>
-                    </motion.div>
-                  )}
-                />
-              </Card>
+              <DifficultyCard
+                difficulty={difficulty}
+                conceptList={conceptList}
+                onConceptClick={handleConceptClick}
+              />
             </motion.div>
           ))}
         </div>
