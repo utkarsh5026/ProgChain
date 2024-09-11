@@ -14,7 +14,7 @@ async def api_generate_topics(request: Request):
         if isinstance(context, str):
             context = [context]
 
-        topics = generate_topics(data['main_topic'], context)
+        topics = await generate_topics(data['main_topic'], context)
         return {"topics": topics}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

@@ -12,9 +12,9 @@ topic_generator_template = PromptTemplate(
     For each difficulty level (Beginner, Intermediate, Advanced), provide 5-8 topics with relevant emojis.
     Ensure the topics progress logically and cover the subject thoroughly for each difficulty level.
     Return the result in the following format:
-    Beginner: emoji1 topic1, emoji2 topic2, ...
-    Intermediate: emoji1 topic1, emoji2 topic2, ...
-    Advanced: emoji1 topic1, emoji2 topic2, ...
+    Beginner: emoji1 topic1 || emoji2 topic2 || emoji3 topic3, ...
+    Intermediate: emoji1 topic1 || emoji2 topic2 || emoji3 topic3, ...
+    Advanced: emoji1 topic1 || emoji2 topic2 || emoji3 topic3, ...
     and dont include any other text than the topics and emojis.
     """
 )
@@ -76,11 +76,12 @@ def parse_topic_response(response: str) -> Dict[str, List[Dict[str, str]]]:
         level = level.strip().lower()
         topic_list = []
 
-        for topic in topics.strip().split(','):
+        for topic in topics.strip().split('||'):
             topic = topic.strip()
             parts = topic.split(' ', 1)
 
-            emoji, topic_text = parts
+            if len(parts) == 2:
+                emoji, topic_text = parts
             topic_list.append({"emoji": emoji, "topic": topic_text.strip()})
 
         result[level] = topic_list
@@ -88,7 +89,7 @@ def parse_topic_response(response: str) -> Dict[str, List[Dict[str, str]]]:
     return result
 
 
-def generate_topics(main_topic: str, context: List[str]) -> Dict[str, List[Dict[str, str]]]:
+async def generate_topics(main_topic: str, context: List[str]) -> Dict[str, List[Dict[str, str]]]:
     """
     Generate a list of programming topics based on a main topic and optional context.
 
@@ -109,8 +110,10 @@ def generate_topics(main_topic: str, context: List[str]) -> Dict[str, List[Dict[
         - "topic": The text description of the topic.
     """
     context_str = " > ".join(context) if context else "None"
+
+    print(main_topic, context_str, "\n\n\n\n\n\n")
     try:
-        result = topic_chain.invoke(input={
+        result = await topic_chain.ainvoke(input={
             "main_topic": main_topic,
             "context": context_str
         })

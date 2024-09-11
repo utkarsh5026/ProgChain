@@ -13,4 +13,5 @@ llm = ChatOpenAI(
     temperature=0.0,
     max_tokens=None,
     max_retries=3,
+    request_timeout=30.0,
 )
