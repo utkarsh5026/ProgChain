@@ -1,6 +1,5 @@
-from langchain_core.pydantic_v1 import BaseModel, Field
+from langchain_core.pydantic_v1 import BaseModel
 from langchain_core.prompts import PromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
 from config.openai import llm
 from typing import List, Dict
 import re
@@ -16,6 +15,7 @@ topic_generator_template = PromptTemplate(
     Beginner: emoji1 topic1, emoji2 topic2, ...
     Intermediate: emoji1 topic1, emoji2 topic2, ...
     Advanced: emoji1 topic1, emoji2 topic2, ...
+    and dont include any other text than the topics and emojis.
     """
 )
 
@@ -25,32 +25,65 @@ class TopicRequest(BaseModel):
     context: str = ""
 
 
-class TopicList(BaseModel):
-    beginner: list[str] = Field(description="List of beginner topics")
-    intermediate: list[str] = Field(description="List of intermediate topics")
-    advanced: list[str] = Field(description="List of advanced topics")
+class TopicOutput(BaseModel):
+    emoji: str
+    topic: str
 
 
 topic_chain = topic_generator_template | llm
 
 
-def parse_topics(text):
-    # Split the text into sections
-    sections = re.split(r'###\s+(\w+):', text)
+def parse_topic_response(response: str) -> Dict[str, List[Dict[str, str]]]:
+    """
+    Parse the topic response string into a structured dictionary.
 
-    # Remove the first empty element
-    sections = sections[1:]
+    This function takes a string response containing topics categorized by difficulty levels,
+    and parses it into a dictionary where each difficulty level is a key, and the value is a
+    list of dictionaries containing emojis and topic texts.
 
+    Args:
+        response (str): A string containing the topic response, formatted as:
+                        "Difficulty: emoji topic, emoji topic, ..."
+
+    Returns:
+        Dict[str, List[Dict[str, str]]]: A dictionary where:
+            - Keys are difficulty levels (e.g., "beginner", "intermediate", "advanced")
+            - Values are lists of dictionaries, each containing:
+                - "emoji": The emoji associated with the topic
+                - "topic": The text description of the topic
+
+    Example:
+        Input: "Beginner: 🐍 Python Basics, 🔢 Variables\nIntermediate: 🔁 Loops, 📚 Functions"
+        Output: {
+            "beginner": [
+                {"emoji": "🐍", "topic": "Python Basics"},
+                {"emoji": "🔢", "topic": "Variables"}
+            ],
+            "intermediate": [
+                {"emoji": "🔁", "topic": "Loops"},
+                {"emoji": "📚", "topic": "Functions"}
+            ]
+        }
+    """
     result = {}
-    for i in range(0, len(sections), 2):
-        level = sections[i].strip().lower()
-        topics = sections[i+1].strip().split('\n')
+    lines = response.strip().split('\n')
 
-        # Clean up each topic
-        cleaned_topics = [topic.strip().replace('**', '')
-                          for topic in topics if topic.strip()]
+    for line in lines:
+        if line.strip() == "" or ":" not in line.strip():
+            continue
 
-        result[level] = cleaned_topics
+        level, topics = line.split(':', 1)
+        level = level.strip().lower()
+        topic_list = []
+
+        for topic in topics.strip().split(','):
+            topic = topic.strip()
+            parts = topic.split(' ', 1)
+
+            emoji, topic_text = parts
+            topic_list.append({"emoji": emoji, "topic": topic_text.strip()})
+
+        result[level] = topic_list
 
     return result
 
@@ -82,9 +115,8 @@ def generate_topics(main_topic: str, context: List[str]) -> Dict[str, List[Dict[
             "context": context_str
         })
         result_content = result.content
-        print("result_content")
         print(result_content)
-        return parse_topics(result_content)
+        return parse_topic_response(result_content)
     except Exception as e:
         print(f"Error generating topics: {e}")
         return {}
