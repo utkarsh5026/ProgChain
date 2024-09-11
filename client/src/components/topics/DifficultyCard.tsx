@@ -17,6 +17,16 @@ const difficultyColors = {
   advanced: "#F44336",
 };
 
+/**
+ * DifficultyCard component displays a card with a list of concepts for a specific difficulty level.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {string} props.difficulty - The difficulty level of the concepts (e.g., "beginner", "intermediate", "advanced").
+ * @param {Concept[]} props.conceptList - An array of Concept objects to be displayed in the card.
+ * @param {function} props.onConceptClick - Callback function to be called when a concept is clicked.
+ * @returns {React.ReactElement} A card component displaying concepts for a specific difficulty level.
+ */
 const DifficultyCard: React.FC<DifficultyCardProps> = ({
   difficulty,
   conceptList,

@@ -18,6 +18,12 @@ const initialState: TopicState = {
   currentTopic: "Python",
 };
 
+/**
+ * Async thunk to fetch generated topics.
+ * @param mainTopic - The main topic to generate sub-topics for.
+ * @param context - An array of context strings to provide additional information for topic generation.
+ * @returns An object containing the main topic, generated topics, and context.
+ */
 export const fetchGeneratedTopics = createAsyncThunk(
   "topics/fetchGeneratedTopics",
   async (
@@ -37,7 +43,13 @@ export const fetchGeneratedTopics = createAsyncThunk(
   }
 );
 
-const createTopicKey = (mainTopic: string, context: string[]) => {
+/**
+ * Creates a unique key for a topic based on the main topic and context.
+ * @param mainTopic - The main topic.
+ * @param context - An array of context strings.
+ * @returns A string key combining the main topic and context.
+ */
+export const createTopicKey = (mainTopic: string, context: string[]) => {
   return `${mainTopic}${DELIMITER}${context.join(DELIMITER)}`;
 };
 

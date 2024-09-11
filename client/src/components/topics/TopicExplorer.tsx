@@ -78,7 +78,7 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
     context.push(concept.topic);
 
     console.log(mainTopic, context);
-    generateConcepts(mainTopic, context);
+    generateConcepts(mainTopic, context, false);
   };
 
   if (isLoading) {
