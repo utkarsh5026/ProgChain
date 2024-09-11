@@ -1,5 +1,5 @@
 import { useCallback } from "react";
-import { fetchGeneratedTopics } from "./slice";
+import { fetchGeneratedTopics, setCurrentTopic } from "./slice";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import type { TopicConcepts } from "./types";
 
@@ -8,6 +8,7 @@ interface TopicsHookResult {
   topicConcepts: Record<string, TopicConcepts>;
   loading: boolean;
   generateConcepts: (mainTopic: string, context: string[]) => void;
+  setCurrTopic: (topic: string) => void;
 }
 
 /**
@@ -18,6 +19,7 @@ interface TopicsHookResult {
  *   - topicConcepts: A record of topic concepts organized by difficulty
  *   - loading: A boolean indicating if topics are being fetched
  *   - generateConcepts: A function to generate new concepts for a given topic
+ *   - setCurrTopic: A function to set the current topic
  */
 const useTopics = (): TopicsHookResult => {
   const dispatch = useAppDispatch();
@@ -34,11 +36,19 @@ const useTopics = (): TopicsHookResult => {
     [dispatch]
   );
 
+  const setCurrTopic = useCallback(
+    (topic: string) => {
+      dispatch(setCurrentTopic(topic));
+    },
+    [dispatch]
+  );
+
   return {
     currentTopic,
     topicConcepts,
     loading,
     generateConcepts,
+    setCurrTopic,
   };
 };
 
