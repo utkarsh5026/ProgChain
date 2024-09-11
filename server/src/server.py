@@ -1,6 +1,6 @@
 from config.fast import app
 import uvicorn
+from config.openai import llm
+from handlers.topics import router as topics_router
 
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
+app.include_router(topics_router)
