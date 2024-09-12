@@ -1,0 +1,64 @@
+{
+    "questions": [
+        {
+            "question": "1. What are the main differences between a list and a tuple in Python?",
+            "type": "open-ended",
+            "difficulty": "easy",
+            "assessment": "This question assesses the candidate's understanding of basic Python data structures and their properties."
+        },
+        {
+            "question": "2. Given a list of integers, write a Python function to return a new list with only the even numbers.",
+            "type": "coding challenge",
+            "difficulty": "medium",
+            "assessment": "This question evaluates the candidate's ability to manipulate lists and use control flow to filter data."
+        },
+        {
+            "question": "3. Which of the following data structures is best suited for implementing a LIFO (Last In, First Out) system? \nA) List \nB) Dictionary \nC) Set \nD) Queue",
+            "type": "multiple-choice",
+            "difficulty": "easy",
+            "assessment": "This question checks the candidate's theoretical knowledge of data structures and their typical use cases."
+        },
+        {
+            "question": "4. Explain how a dictionary in Python is implemented and discuss its average time complexity for insertion, deletion, and lookup operations.",
+            "type": "open-ended",
+            "difficulty": "medium",
+            "assessment": "This question assesses the candidate's understanding of hash tables and the efficiency of dictionary operations."
+        },
+        {
+            "question": "5. Write a Python function to merge two sorted lists into a single sorted list.",
+            "type": "coding challenge",
+            "difficulty": "medium",
+            "assessment": "This question evaluates the candidate's ability to work with lists and implement algorithms to merge and sort data."
+        },
+        {
+            "question": "6. Describe a scenario where using a set would be more appropriate than using a list.",
+            "type": "scenario-based",
+            "difficulty": "medium",
+            "assessment": "This question assesses the candidate's ability to choose the appropriate data structure based on the requirements of a specific problem."
+        },
+        {
+            "question": "7. How would you implement a stack using a deque in Python? Provide a brief code example.",
+            "type": "coding challenge",
+            "difficulty": "hard",
+            "assessment": "This question evaluates the candidate's knowledge of the deque data structure and their ability to implement a stack using it."
+        },
+        {
+            "question": "8. What are the advantages and disadvantages of using a linked list over an array?",
+            "type": "open-ended",
+            "difficulty": "medium",
+            "assessment": "This question assesses the candidate's understanding of different data structures and their trade-offs in terms of performance and memory usage."
+        },
+        {
+            "question": "9. Given a list of integers, write a Python function to find the first duplicate element. If no duplicates are found, return None.",
+            "type": "coding challenge",
+            "difficulty": "hard",
+            "assessment": "This question evaluates the candidate's problem-solving skills and their ability to work with lists and sets to detect duplicates."
+        },
+        {
+            "question": "10. Explain the concept of list comprehensions in Python and provide an example where it can be used to create a list of squares of even numbers from 1 to 10.",
+            "type": "open-ended",
+            "difficulty": "easy",
+            "assessment": "This question assesses the candidate's understanding of list comprehensions and their ability to use them to create lists efficiently."
+        }
+    ]
+}

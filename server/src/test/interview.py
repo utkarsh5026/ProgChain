@@ -23,6 +23,9 @@ def test_interview():
 
         print(json.dumps(result, indent=2, ensure_ascii=False))
 
+        with open("interview.json", "w", encoding="utf-8") as f:
+            json.dump(result, f, indent=4, ensure_ascii=False)
+
         assert "questions" in result, "'questions' key should be in the response"
         assert isinstance(result["questions"],
                           list), "'questions' should be a list"
