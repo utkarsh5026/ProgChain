@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { ConfigProvider } from "antd";
-import App from "./App.tsx";
+import { RouterProvider } from "react-router-dom";
 import store from "./store/store.ts";
 import { Provider } from "react-redux";
 import "./index.css";
-
+import router from "./router.tsx";
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ConfigProvider
@@ -16,7 +16,7 @@ createRoot(document.getElementById("root")!).render(
       }}
     >
       <Provider store={store}>
-        <App />
+        <RouterProvider router={router} />
       </Provider>
     </ConfigProvider>
   </StrictMode>
