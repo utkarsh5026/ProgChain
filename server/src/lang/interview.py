@@ -1,6 +1,13 @@
-from langchain import PromptTemplate
+from langchain.pydantic_v1 import BaseModel
+from langchain_core.prompts import PromptTemplate
 from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from config.openai import llm
+
+
+class Question(BaseModel):
+    topic: str
+    context: str
+    extra_instructions: str
 
 
 # Define the prompt template
