@@ -31,7 +31,7 @@ const Quiz: React.FC = () => {
         <DownloadDropdown quiz={quiz} />
       </div>
       {quiz.instructions && <p>Additional Instructions: {quiz.instructions}</p>}
-      <QuizContent questions={quiz.questions} onAnswerChange={() => {}} />
+      <QuizContent questions={quiz.questions} />
     </Space>
   );
 };

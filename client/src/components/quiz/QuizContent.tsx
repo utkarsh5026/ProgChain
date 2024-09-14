@@ -8,7 +8,6 @@ import { parseCategory } from "../../store/quiz/slice";
 
 interface QuizContentProps {
   questions: Question[];
-  onAnswerChange: (questionIndex: number, answers: string[]) => void;
 }
 
 /**
@@ -16,13 +15,9 @@ interface QuizContentProps {
  *
  * @param {QuizContentProps} props - The component props
  * @param {Question[]} props.questions - Array of Question objects
- * @param {Function} props.onAnswerChange - Callback function to handle answer changes
  * @returns {React.ReactElement} Rendered QuizContent component
  */
-const QuizContent: React.FC<QuizContentProps> = ({
-  questions,
-  onAnswerChange,
-}) => {
+const QuizContent: React.FC<QuizContentProps> = ({ questions }) => {
   const groupedQuestions = useMemo(
     () => groupQuestionsByCategory(questions),
     [questions]
@@ -65,7 +60,6 @@ const QuizContent: React.FC<QuizContentProps> = ({
             <QuizCategoryGroup
               category={selectedCategory}
               questions={groupedQuestions[selectedCategory]}
-              onAnswerChange={onAnswerChange}
             />
           )}
         </motion.div>

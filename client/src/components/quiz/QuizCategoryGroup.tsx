@@ -9,7 +9,6 @@ const { Title } = Typography;
 interface QuizCategoryGroupProps {
   category: string;
   questions: Question[];
-  onAnswerChange: (questionIndex: number, answers: string[]) => void;
 }
 
 /**
@@ -47,7 +46,6 @@ const CategoryTitle: React.FC<{ category: string }> = ({ category }) => {
 const QuizCategoryGroup: React.FC<QuizCategoryGroupProps> = ({
   category,
   questions,
-  onAnswerChange,
 }) => {
   return (
     <Card style={{ marginBottom: "2rem" }} bordered={false}>
@@ -57,7 +55,6 @@ const QuizCategoryGroup: React.FC<QuizCategoryGroupProps> = ({
           key={`${question.text}-${index}`}
           index={index}
           question={question}
-          onAnswerChange={onAnswerChange}
         />
       ))}
     </Card>
