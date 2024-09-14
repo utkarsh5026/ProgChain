@@ -1,7 +1,12 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { generateQuizThunk } from "./slice";
-import type { QuizSetupValues, Quiz } from "./type";
+import {
+  generateQuizThunk,
+  changeQuestionStatus as changeQuestionStatusAction,
+  changeSelectedAnswers as changeSelectedAnswersAction,
+  markQuestionAsNotCompleted as markQuestionAsNotCompletedAction,
+} from "./slice";
+import type { QuizSetupValues, Quiz, CompletionStatus } from "./type";
 
 interface QuizHook {
   quiz: Quiz | null;
@@ -33,4 +38,39 @@ const useQuiz = (): QuizHook => {
   return { quiz, loading, error, fecthQuiz };
 };
 
+interface QuizQuestionHook {
+  changeQuestionStatus: (status: CompletionStatus, questionIdx: number) => void;
+  changeSelectedOptions: (answers: number[], questionIdx: number) => void;
+}
+
+/**
+ * Custom hook for managing quiz question state and actions.
+ *
+ * @returns {QuizQuestionHook} An object containing:
+ *   - changeQuestionStatus: Function to update the completion status of a question
+ *   - changeSelectedOptions: Function to update the selected answers for a question
+ */
+const useQuizQuestion = (): QuizQuestionHook => {
+  const dispatch = useAppDispatch();
+
+  const changeQuestionStatus = useCallback(
+    (status: CompletionStatus, questionIdx: number) => {
+      if (status === "not_started")
+        dispatch(markQuestionAsNotCompletedAction(questionIdx));
+      else dispatch(changeQuestionStatusAction({ status, questionIdx }));
+    },
+    [dispatch]
+  );
+
+  const changeSelectedOptions = useCallback(
+    (answers: number[], questionIdx: number) => {
+      dispatch(changeSelectedAnswersAction({ answers, questionIdx }));
+    },
+    [dispatch]
+  );
+
+  return { changeQuestionStatus, changeSelectedOptions };
+};
+
 export default useQuiz;
+export { useQuizQuestion };

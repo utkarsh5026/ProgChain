@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
-import type { Quiz, QuizSetupValues, Question } from "./type";
+import type { Quiz, QuizSetupValues, Question, CompletionStatus } from "./type";
 import { generateQuiz } from "./api";
 
 interface QuizState {
@@ -15,6 +15,11 @@ const initialState: QuizState = {
   error: null,
 };
 
+/**
+ * Parses a category string by capitalizing each word and replacing underscores with spaces.
+ * @param {string} category - The category string to parse.
+ * @returns {string} The parsed category string.
+ */
 export const parseCategory = (category: string) => {
   const parts = category.toLowerCase().split("_");
   return parts
@@ -22,15 +27,24 @@ export const parseCategory = (category: string) => {
     .join(" ");
 };
 
+/**
+ * Parses the quiz response from the API into the Quiz format used by the application.
+ * @param {any} response - The raw response from the API.
+ * @returns {Quiz} The parsed Quiz object.
+ */
 const parseQuiz = (response: any): Quiz => {
   const questions = response.questions;
+  let id = 0;
   const parsedQuestions = questions.map((question: any) => ({
+    id: id++,
     text: question["question"],
     answers: question["options"],
     level: question["difficulty"],
     type: question["question_type"],
     correctAnswers: question["correct_answers"],
     category: question["category"],
+    status: "not_started" as CompletionStatus,
+    selectedOptions: [],
   })) as Question[];
 
   console.log("parsedQuestions", parsedQuestions);
@@ -42,6 +56,10 @@ const parseQuiz = (response: any): Quiz => {
   };
 };
 
+/**
+ * Async thunk for generating a quiz.
+ * It calls the generateQuiz API function and then parses the response.
+ */
 export const generateQuizThunk = createAsyncThunk(
   "quiz/generateQuiz",
   async (values: QuizSetupValues) => {
@@ -66,6 +84,29 @@ const quizSlice = createSlice({
       state.loading = false;
       state.error = action.payload;
     },
+    changeQuestionStatus: (
+      state,
+      action: PayloadAction<{ questionIdx: number; status: CompletionStatus }>
+    ) => {
+      const { questionIdx, status } = action.payload;
+      if (state.quiz && state.quiz.questions[questionIdx])
+        state.quiz.questions[questionIdx].status = status;
+    },
+    changeSelectedAnswers: (
+      state,
+      action: PayloadAction<{ questionIdx: number; answers: number[] }>
+    ) => {
+      const { questionIdx, answers } = action.payload;
+      if (state.quiz && state.quiz.questions[questionIdx])
+        state.quiz.questions[questionIdx].selectedOptions = answers;
+    },
+    markQuestionAsNotCompleted: (state, action: PayloadAction<number>) => {
+      const questionIdx = action.payload;
+      if (state.quiz && state.quiz.questions[questionIdx]) {
+        state.quiz.questions[questionIdx].status = "not_started";
+        state.quiz.questions[questionIdx].selectedOptions = [];
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(generateQuizThunk.pending, (state) => {
@@ -84,6 +125,12 @@ const quizSlice = createSlice({
   },
 });
 
-export const { generateQuizStart, generateQuizSuccess } = quizSlice.actions;
+export const {
+  generateQuizStart,
+  generateQuizSuccess,
+  changeQuestionStatus,
+  changeSelectedAnswers,
+  markQuestionAsNotCompleted,
+} = quizSlice.actions;
 
 export default quizSlice.reducer;
