@@ -13,6 +13,7 @@ const Quiz: React.FC = () => {
   const { quiz, fecthQuiz, submitQuiz } = useQuiz();
   const location = useLocation();
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isSetupModalVisible, setIsSetupModalVisible] = useState(false);
 
   const handleSubmit = () => {
     submitQuiz();
@@ -21,13 +22,15 @@ const Quiz: React.FC = () => {
 
   const handleClickSubmit = () => setIsModalVisible(true);
   const handleCancel = () => setIsModalVisible(false);
+  const handleSetupModal = () => setIsSetupModalVisible(true);
+  const handleSetupModalClose = () => setIsSetupModalVisible(false);
 
   useEffect(() => {
     const state = location.state as QuizSetupValues | null;
     if (state) fecthQuiz(state);
   }, [location, fecthQuiz]);
 
-  if (!quiz) return <QuizSetupModal visible={quiz === null} />;
+  if (!quiz) return <QuizSetupModal visible={true} />;
 
   return (
     <Space direction="vertical" size="large" style={{ width: "70vw" }}>
@@ -40,7 +43,9 @@ const Quiz: React.FC = () => {
         }}
       >
         <DownloadDropdown quiz={quiz} />
-        <Button icon={<PlusOutlined />}>Generate Another Quiz</Button>
+        <Button icon={<PlusOutlined />} onClick={handleSetupModal}>
+          Generate Another Quiz
+        </Button>
         <Button
           type="primary"
           disabled={quiz.submitted}
@@ -57,6 +62,13 @@ const Quiz: React.FC = () => {
         onSubmit={handleSubmit}
         onCancel={handleCancel}
         questions={quiz.questions}
+      />
+      <QuizSetupModal
+        visible={isSetupModalVisible}
+        extraProps={{
+          closable: true,
+          onCancel: handleSetupModalClose,
+        }}
       />
     </Space>
   );

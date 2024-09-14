@@ -1,11 +1,21 @@
 import React, { useState } from "react";
-import { Modal, Input, Button, Form, Select, message, Slider } from "antd";
+import {
+  Modal,
+  Input,
+  Button,
+  Form,
+  Select,
+  message,
+  Slider,
+  ModalProps,
+} from "antd";
 import { PlayCircleOutlined } from "@ant-design/icons";
 import type { QuizSetupValues, Level } from "../../store/quiz/type";
 import useQuiz from "../../store/quiz/hook";
 
 interface QuizSetupModalProps {
   visible: boolean;
+  extraProps?: ModalProps;
 }
 
 const difficultyLevels: Level[] = ["easy", "medium", "hard"];
@@ -20,7 +30,10 @@ const difficultyColors = {
  * Modal component for setting up a new quiz.
  * Allows users to specify topic, difficulty levels, and additional instructions.
  */
-const QuizSetupModal: React.FC<QuizSetupModalProps> = ({ visible }) => {
+const QuizSetupModal: React.FC<QuizSetupModalProps> = ({
+  visible,
+  extraProps,
+}) => {
   const [form] = Form.useForm();
   const { fecthQuiz } = useQuiz();
   const [loading, setLoading] = useState(false);
@@ -40,7 +53,13 @@ const QuizSetupModal: React.FC<QuizSetupModalProps> = ({ visible }) => {
   };
 
   return (
-    <Modal title="Quiz Setup" open={visible} footer={null} closable={false}>
+    <Modal
+      title="Quiz Setup"
+      open={visible}
+      footer={null}
+      closable={false}
+      {...extraProps}
+    >
       <Form form={form} onFinish={handleSubmit} layout="vertical">
         <Form.Item
           name="topic"
