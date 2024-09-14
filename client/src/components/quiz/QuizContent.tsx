@@ -1,7 +1,10 @@
-import React, { useMemo } from "react";
-import { Space } from "antd";
+import React, { useMemo, useState } from "react";
+import { Space, Segmented } from "antd";
+import { motion, AnimatePresence } from "framer-motion";
 import QuizCategoryGroup from "./QuizCategoryGroup";
 import type { Question } from "../../store/quiz/type";
+import { getCategoryIcon } from "./categoryIcons";
+import { parseCategory } from "../../store/quiz/slice";
 
 interface QuizContentProps {
   questions: Question[];
@@ -30,16 +33,66 @@ const QuizContent: React.FC<QuizContentProps> = ({
     }, {} as Record<string, Question[]>);
   }, [questions]);
 
+  const categories = useMemo(() => {
+    return Object.keys(groupedQuestions).map((category) => ({
+      label: parseCategory(category),
+      value: category,
+      icon: React.createElement(getCategoryIcon(category)),
+    }));
+  }, [groupedQuestions]);
+
+  const [selectedCategory, setSelectedCategory] = useState<string>(
+    categories[0].value
+  );
+
+  const containerVariants = {
+    hidden: { opacity: 0, scale: 0.8 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        ease: "easeInOut",
+        stiffness: 300,
+        damping: 30,
+        mass: 0.5,
+        duration: 0.5,
+      },
+    },
+  };
+
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
-      {Object.entries(groupedQuestions).map(([category, categoryQuestions]) => (
-        <QuizCategoryGroup
-          key={category}
-          category={category}
-          questions={categoryQuestions}
-          onAnswerChange={onAnswerChange}
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "flex-end",
+          marginBottom: "16px",
+        }}
+      >
+        <Segmented
+          options={categories}
+          value={selectedCategory}
+          onChange={(value) => setSelectedCategory(value as string)}
         />
-      ))}
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={selectedCategory}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+          exit="exit"
+        >
+          {groupedQuestions[selectedCategory] && (
+            <QuizCategoryGroup
+              category={selectedCategory}
+              questions={groupedQuestions[selectedCategory]}
+              onAnswerChange={onAnswerChange}
+            />
+          )}
+        </motion.div>
+      </AnimatePresence>
     </Space>
   );
 };

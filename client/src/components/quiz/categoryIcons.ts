@@ -19,5 +19,6 @@ export const categoryIcons = {
 export type CategoryIconType = keyof typeof categoryIcons;
 
 export const getCategoryIcon = (category: string) => {
+  category = category.toLowerCase();
   return categoryIcons[category as CategoryIconType] || BulbOutlined;
 };

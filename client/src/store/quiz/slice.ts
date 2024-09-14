@@ -15,8 +15,14 @@ const initialState: QuizState = {
   error: null,
 };
 
+export const parseCategory = (category: string) => {
+  const parts = category.toLowerCase().split("_");
+  return parts
+    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
+    .join(" ");
+};
+
 const parseQuiz = (response: any): Quiz => {
-  console.log(response);
   const questions = response.questions;
   const parsedQuestions = questions.map((question: any) => ({
     text: question["question"],
@@ -39,8 +45,8 @@ const parseQuiz = (response: any): Quiz => {
 export const generateQuizThunk = createAsyncThunk(
   "quiz/generateQuiz",
   async (values: QuizSetupValues) => {
-    const response = await generateQuiz(values);
-    return parseQuiz(response);
+    const data = await generateQuiz(values);
+    return parseQuiz(data);
   }
 );
 

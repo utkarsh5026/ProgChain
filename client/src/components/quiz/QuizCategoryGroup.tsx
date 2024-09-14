@@ -20,10 +20,6 @@ interface QuizCategoryGroupProps {
  * @returns {React.ReactElement} Rendered CategoryTitle component
  */
 const CategoryTitle: React.FC<{ category: string }> = ({ category }) => {
-  const parts = category.toLowerCase().split("_");
-  const formattedCategory = parts
-    .map((part) => part.charAt(0).toUpperCase() + part.slice(1))
-    .join(" ");
   return (
     <Space
       direction="horizontal"
@@ -33,7 +29,7 @@ const CategoryTitle: React.FC<{ category: string }> = ({ category }) => {
     >
       <Avatar icon={React.createElement(getCategoryIcon(category))} />
       <Title level={3} style={{ margin: 0 }}>
-        {formattedCategory}
+        {category}
       </Title>
     </Space>
   );

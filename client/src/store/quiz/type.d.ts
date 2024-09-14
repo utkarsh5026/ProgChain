@@ -18,7 +18,7 @@ export interface Question {
   answers: string[];
   level: Level;
   type: QuestionType;
-  correctAnswers: string[];
+  correctAnswers: number[];
   category: string;
 }
 
