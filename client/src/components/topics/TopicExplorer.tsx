@@ -29,10 +29,8 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
       try {
         const canvas = await html2canvas(containerRef.current, {
           backgroundColor: null,
-          scale: 2, // Increase resolution
+          scale: 2,
         });
-
-        // Create a new canvas with padding for the border
         const paddedCanvas = document.createElement("canvas");
         const ctx = paddedCanvas.getContext("2d");
         const padding = 20; // Border width
@@ -44,11 +42,8 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
           ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
           ctx.fillStyle = "#1f1f1f";
           ctx.fillRect(padding, padding, canvas.width, canvas.height);
-
-          // Draw the original canvas content
           ctx.drawImage(canvas, padding, padding);
 
-          // Add watermark
           ctx.font = "bold 24px Arial";
           ctx.fillStyle = "rgba(255, 255, 255, 0.2)";
           ctx.textAlign = "center";

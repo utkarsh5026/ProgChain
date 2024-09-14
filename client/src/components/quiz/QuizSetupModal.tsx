@@ -1,18 +1,20 @@
 import React, { useState } from "react";
-import { Modal, Input, Button, Form, Select } from "antd";
+import { Modal, Input, Button, Form, Select, message, Slider } from "antd";
 import { PlayCircleOutlined } from "@ant-design/icons";
+import type { QuizSetupValues, Level } from "../../store/quiz/type";
+import useQuiz from "../../store/quiz/hook";
 
 interface QuizSetupModalProps {
   visible: boolean;
 }
 
-export interface QuizSetupValues {
-  topic: string;
-  levels: string[];
-  instructions?: string;
-}
+const difficultyLevels: Level[] = ["easy", "medium", "hard"];
 
-const difficultyLevels = ["Easy", "Medium", "Hard"];
+const difficultyColors = {
+  easy: "green",
+  medium: "orange",
+  hard: "red",
+};
 
 /**
  * Modal component for setting up a new quiz.
@@ -20,14 +22,21 @@ const difficultyLevels = ["Easy", "Medium", "Hard"];
  */
 const QuizSetupModal: React.FC<QuizSetupModalProps> = ({ visible }) => {
   const [form] = Form.useForm();
+  const { fecthQuiz } = useQuiz();
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (values: QuizSetupValues) => {
-    setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 3000);
     console.log(values);
+    setLoading(true);
+
+    try {
+      await fecthQuiz(values);
+    } catch (error) {
+      console.log(error + "564847");
+      message.error("Failed to generate quiz 📞📞📞");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -52,12 +61,31 @@ const QuizSetupModal: React.FC<QuizSetupModalProps> = ({ visible }) => {
             placeholder="Select difficulty levels"
             options={difficultyLevels.map((level) => ({
               value: level,
-              label: level,
+              label: level.charAt(0).toUpperCase() + level.slice(1),
+              style: { color: difficultyColors[level] },
             }))}
           />
         </Form.Item>
         <Form.Item name="instructions" label="Additional Instructions">
           <Input.TextArea />
+        </Form.Item>
+        <Form.Item
+          name="count"
+          label="Number of Questions"
+          rules={[
+            {
+              required: true,
+              message: "Please select the number of questions",
+            },
+          ]}
+          initialValue={10}
+        >
+          <Slider
+            min={5}
+            max={30}
+            step={1}
+            tooltip={{ formatter: (value) => `${value} questions` }}
+          />
         </Form.Item>
         <Form.Item>
           <Button

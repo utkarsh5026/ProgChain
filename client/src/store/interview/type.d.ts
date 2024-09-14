@@ -13,3 +13,15 @@ export interface Question {
   assessment: string;
   options?: string[]; // Only for multiple-choice questions
 }
+
+export interface RequestQuestion {
+  topic: string;
+  context: string;
+  extraInstructions: string;
+}
+
+export interface ResponseQuestion {
+  topic: string;
+  context: string;
+  questions: Question[];
+}

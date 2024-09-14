@@ -19,7 +19,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import styled from "styled-components";
 import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
-import "highlight.js/styles/github.css"; // Choose your preferred style
+import "highlight.js/styles/github.css";
 
 import type { Difficulty, Question } from "../../store/interview/type";
 import { getInterviewAnswer } from "../../store/interview/api";
