@@ -23,42 +23,19 @@ const QuizContent: React.FC<QuizContentProps> = ({
   questions,
   onAnswerChange,
 }) => {
-  const groupedQuestions = useMemo(() => {
-    return questions.reduce((acc, question) => {
-      if (!acc[question.category]) {
-        acc[question.category] = [];
-      }
-      acc[question.category].push(question);
-      return acc;
-    }, {} as Record<string, Question[]>);
-  }, [questions]);
+  const groupedQuestions = useMemo(
+    () => groupQuestionsByCategory(questions),
+    [questions]
+  );
 
-  const categories = useMemo(() => {
-    return Object.keys(groupedQuestions).map((category) => ({
-      label: parseCategory(category),
-      value: category,
-      icon: React.createElement(getCategoryIcon(category)),
-    }));
-  }, [groupedQuestions]);
+  const categories = useMemo(
+    () => makeSegmentedOptions(groupedQuestions),
+    [groupedQuestions]
+  );
 
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0].value
   );
-
-  const containerVariants = {
-    hidden: { opacity: 0, scale: 0.8 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        ease: "easeInOut",
-        stiffness: 300,
-        damping: 30,
-        mass: 0.5,
-        duration: 0.5,
-      },
-    },
-  };
 
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
@@ -95,6 +72,54 @@ const QuizContent: React.FC<QuizContentProps> = ({
       </AnimatePresence>
     </Space>
   );
+};
+
+/**
+ * Groups questions by their category.
+ * @param questions - An array of Question objects.
+ * @returns An object where keys are categories and values are arrays of questions in that category.
+ */
+const groupQuestionsByCategory = (
+  questions: Question[]
+): Record<string, Question[]> => {
+  return questions.reduce((acc, question) => {
+    if (!acc[question.category]) {
+      acc[question.category] = [];
+    }
+    acc[question.category].push(question);
+    return acc;
+  }, {} as Record<string, Question[]>);
+};
+
+/**
+ * Creates options for the Segmented component based on grouped questions.
+ * @param groupedQuestions - An object with categories as keys and arrays of questions as values.
+ * @returns An array of objects, each representing a category option for the Segmented component.
+ */
+const makeSegmentedOptions = (groupedQuestions: Record<string, Question[]>) => {
+  return Object.keys(groupedQuestions).map((category) => ({
+    label: parseCategory(category),
+    value: category,
+    icon: React.createElement(getCategoryIcon(category)),
+  }));
+};
+
+/**
+ * Variants for the motion.div used to animate the content.
+ */
+const containerVariants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      ease: "easeInOut",
+      stiffness: 300,
+      damping: 30,
+      mass: 0.5,
+      duration: 0.5,
+    },
+  },
 };
 
 export default QuizContent;
