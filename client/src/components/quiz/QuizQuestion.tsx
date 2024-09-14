@@ -16,7 +16,6 @@ import QuizOptions from "./QuizOption";
 interface QuizQuestionProps {
   index: number;
   question: Question;
-  onAnswerChange: (questionIndex: number, answers: string[]) => void;
 }
 
 const statusColors: Record<CompletionStatus, string> = {
