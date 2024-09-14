@@ -1,24 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
-import { Layout as AntLayout } from "antd";
-import { Outlet } from "react-router-dom";
 import ProgrammingQAComponent from "./components/interview/InterviewQA";
 import TopicChain from "./components/topics/TopicChain";
-import Sidebar from "./components/home/Sidebar";
 import Quiz from "./components/quiz/Quiz";
-const { Content } = AntLayout;
-
-const Layout: React.FC = () => {
-  return (
-    <AntLayout style={{ minHeight: "100vh" }}>
-      <Sidebar />
-      <AntLayout>
-        <Content style={{ margin: "24px 16px", padding: 24, minHeight: 280 }}>
-          <Outlet />
-        </Content>
-      </AntLayout>
-    </AntLayout>
-  );
-};
+import Layout from "./components/home/Layout";
 
 const router = createBrowserRouter([
   {
