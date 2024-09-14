@@ -60,6 +60,7 @@ const parseQuiz = (response: any): Quiz => {
     topic: response["topic"],
     instructions: response["instructions"],
     questions: parsedQuestions,
+    submitted: false,
   };
 };
 
@@ -81,6 +82,9 @@ const quizSlice = createSlice({
   reducers: {
     generateQuizStart: (state) => {
       state.loading = true;
+    },
+    submitQuiz: (state) => {
+      if (state.quiz) state.quiz.submitted = true;
     },
     generateQuizSuccess: (state, action: PayloadAction<Quiz>) => {
       state.quiz = action.payload;
@@ -138,6 +142,7 @@ export const {
   changeQuestionStatus,
   changeSelectedAnswers,
   markQuestionAsNotCompleted,
+  submitQuiz,
 } = quizSlice.actions;
 
 export default quizSlice.reducer;

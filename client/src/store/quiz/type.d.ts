@@ -34,4 +34,5 @@ export interface Quiz {
   topic: string;
   questions: Question[];
   instructions?: string;
+  submitted: boolean;
 }
