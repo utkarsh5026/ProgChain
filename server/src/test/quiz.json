@@ -1,0 +1,36 @@
+{
+  "questions": [
+    {
+      "question": "Which of the following are features of Python? (Select all that apply)",
+      "options": [
+        "Dynamic typing",
+        "Compiled language",
+        "Interpreted language",
+        "Extensive standard library"
+      ],
+      "correct_answers": [
+        0,
+        2,
+        3
+      ],
+      "difficulty": "medium",
+      "question_type": "multi_correct",
+      "category": "conceptual"
+    },
+    {
+      "question": "What is the output of the following code snippet?\n\n```python\ndef add(a, b=5):\n    return a + b\n\nprint(add(3))\n```",
+      "options": [
+        "3",
+        "5",
+        "8",
+        "Error: missing argument"
+      ],
+      "correct_answers": [
+        2
+      ],
+      "difficulty": "easy",
+      "question_type": "single_correct",
+      "category": "code_comprehension"
+    }
+  ]
+}
