@@ -108,8 +108,11 @@ const quizSlice = createSlice({
       action: PayloadAction<{ questionIdx: number; answers: number[] }>
     ) => {
       const { questionIdx, answers } = action.payload;
-      if (state.quiz && state.quiz.questions[questionIdx])
+      if (state.quiz && state.quiz.questions[questionIdx]) {
         state.quiz.questions[questionIdx].selectedOptions = answers;
+        if (state.quiz.questions[questionIdx].status === "not_started")
+          state.quiz.questions[questionIdx].status = "completed";
+      }
     },
     markQuestionAsNotCompleted: (state, action: PayloadAction<number>) => {
       const questionIdx = action.payload;

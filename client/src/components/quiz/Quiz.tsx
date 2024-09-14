@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Space, Button } from "antd";
+import { CheckCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { useLocation } from "react-router-dom";
 import QuizSetupModal from "./QuizSetupModal";
 import type { QuizSetupValues } from "../../store/quiz/type";
@@ -9,21 +10,17 @@ import DownloadDropdown from "./DownloadDropdown";
 import SubmitModal from "./SubmitModal";
 
 const Quiz: React.FC = () => {
-  const { quiz, fecthQuiz } = useQuiz();
+  const { quiz, fecthQuiz, submitQuiz } = useQuiz();
   const location = useLocation();
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const handleClickSubmit = () => {
-    setIsModalVisible(true);
-  };
-
   const handleSubmit = () => {
+    submitQuiz();
     setIsModalVisible(false);
   };
 
-  const handleCancel = () => {
-    setIsModalVisible(false);
-  };
+  const handleClickSubmit = () => setIsModalVisible(true);
+  const handleCancel = () => setIsModalVisible(false);
 
   useEffect(() => {
     const state = location.state as QuizSetupValues | null;
@@ -43,7 +40,13 @@ const Quiz: React.FC = () => {
         }}
       >
         <DownloadDropdown quiz={quiz} />
-        <Button type="primary" onClick={handleClickSubmit}>
+        <Button icon={<PlusOutlined />}>Generate Another Quiz</Button>
+        <Button
+          type="primary"
+          disabled={quiz.submitted}
+          onClick={handleClickSubmit}
+          icon={<CheckCircleOutlined />}
+        >
           Submit Quiz
         </Button>
       </div>

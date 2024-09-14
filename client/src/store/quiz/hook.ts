@@ -1,10 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   generateQuizThunk,
   changeQuestionStatus as changeQuestionStatusAction,
   changeSelectedAnswers as changeSelectedAnswersAction,
   markQuestionAsNotCompleted as markQuestionAsNotCompletedAction,
+  submitQuiz as submitQuizAction,
 } from "./slice";
 import type { QuizSetupValues, Quiz, CompletionStatus } from "./type";
 
@@ -13,6 +14,8 @@ interface QuizHook {
   loading: boolean;
   error: string | null;
   fecthQuiz: (values: QuizSetupValues) => Promise<void>;
+  submitQuiz: () => Promise<void>;
+  isSubmitted: boolean;
 }
 
 /**
@@ -23,6 +26,8 @@ interface QuizHook {
  *   - loading: Boolean indicating if a quiz is being fetched
  *   - error: Error message string or null
  *   - fecthQuiz: Function to dispatch the quiz generation action
+ *   - submitQuiz: Function to dispatch the quiz submission action
+ *   - isSubmitted: Boolean indicating if the quiz is submitted
  */
 const useQuiz = (): QuizHook => {
   const dispatch = useAppDispatch();
@@ -35,7 +40,16 @@ const useQuiz = (): QuizHook => {
     [dispatch]
   );
 
-  return { quiz, loading, error, fecthQuiz };
+  const submitQuiz = useCallback(async () => {
+    dispatch(submitQuizAction());
+  }, [dispatch]);
+
+  const isSubmitted = useMemo(
+    () => quiz?.submitted ?? false,
+    [quiz?.submitted]
+  );
+
+  return { quiz, loading, error, fecthQuiz, submitQuiz, isSubmitted };
 };
 
 interface QuizQuestionHook {

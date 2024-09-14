@@ -41,6 +41,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({ index, question }) => {
     type: questionType,
     answers,
     selectedOptions,
+    correctAnswers,
   } = question;
 
   const handleOptionChange = (answers: number[]) => {
@@ -97,6 +98,7 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({ index, question }) => {
       </ReactMarkdown>
       <Space direction="vertical" style={{ width: "100%" }}>
         <QuizOptions
+          correctAnswers={correctAnswers}
           questionType={questionType}
           answers={answers}
           selectedOptions={selectedOptions}
