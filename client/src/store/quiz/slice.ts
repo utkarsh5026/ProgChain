@@ -3,6 +3,13 @@ import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import type { Quiz, QuizSetupValues, Question, CompletionStatus } from "./type";
 import { generateQuiz } from "./api";
 
+export enum QuestionStatus {
+  NOT_STARTED = "not_started",
+  LEFT_FOR_REVIEW = "left_for_review",
+  COMPLETED = "completed",
+  SKIPPED = "skipped",
+}
+
 interface QuizState {
   quiz: Quiz | null;
   loading: boolean;

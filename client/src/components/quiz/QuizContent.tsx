@@ -1,10 +1,29 @@
 import React, { useMemo, useState } from "react";
-import { Space, Segmented } from "antd";
-import { motion, AnimatePresence } from "framer-motion";
+import { Space, Segmented, Row, Col, Tooltip } from "antd";
+import {
+  CheckCircleOutlined,
+  ClockCircleOutlined,
+  QuestionCircleOutlined,
+} from "@ant-design/icons";
+import styled from "styled-components";
 import QuizCategoryGroup from "./QuizCategoryGroup";
+import { motion, AnimatePresence } from "framer-motion";
 import type { Question } from "../../store/quiz/type";
 import { getCategoryIcon } from "./categoryIcons";
 import { parseCategory } from "../../store/quiz/slice";
+
+const StatBox = styled.div`
+  display: flex;
+  align-items: center;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: bold;
+`;
+
+const StatNumber = styled.span`
+  margin-left: 4px;
+`;
 
 interface QuizContentProps {
   questions: Question[];
@@ -28,25 +47,48 @@ const QuizContent: React.FC<QuizContentProps> = ({ questions }) => {
     [groupedQuestions]
   );
 
+  const [completedCount, skippedCount, remainingCount] = useMemo(
+    () => filterQuestionsByCategory(questions),
+    [questions]
+  );
+
   const [selectedCategory, setSelectedCategory] = useState<string>(
     categories[0].value
   );
 
   return (
     <Space direction="vertical" size="large" style={{ width: "100%" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "flex-end",
-          marginBottom: "16px",
-        }}
-      >
-        <Segmented
-          options={categories}
-          value={selectedCategory}
-          onChange={(value) => setSelectedCategory(value as string)}
-        />
-      </div>
+      <Row justify="space-between" align="middle">
+        <Col>
+          <Space size="small" align="center">
+            <Tooltip title="Completed">
+              <StatBox style={{ backgroundColor: "#e6f7ff", color: "#1890ff" }}>
+                <CheckCircleOutlined style={{ marginRight: 4 }} />
+                <StatNumber>{completedCount}</StatNumber>
+              </StatBox>
+            </Tooltip>
+            <Tooltip title="Skipped">
+              <StatBox style={{ backgroundColor: "#fff7e6", color: "#faad14" }}>
+                <ClockCircleOutlined style={{ marginRight: 4 }} />
+                <StatNumber>{skippedCount}</StatNumber>
+              </StatBox>
+            </Tooltip>
+            <Tooltip title="Remaining">
+              <StatBox style={{ backgroundColor: "#f6ffed", color: "#52c41a" }}>
+                <QuestionCircleOutlined style={{ marginRight: 4 }} />
+                <StatNumber>{remainingCount}</StatNumber>
+              </StatBox>
+            </Tooltip>
+          </Space>
+        </Col>
+        <Col>
+          <Segmented
+            options={categories}
+            value={selectedCategory}
+            onChange={(value) => setSelectedCategory(value as string)}
+          />
+        </Col>
+      </Row>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -96,6 +138,18 @@ const makeSegmentedOptions = (groupedQuestions: Record<string, Question[]>) => {
     value: category,
     icon: React.createElement(getCategoryIcon(category)),
   }));
+};
+
+/**
+ * Filters questions by their status and returns the count of completed, skipped, and remaining questions.
+ * @param questions - An array of Question objects.
+ * @returns An array with the count of completed, skipped, and remaining questions.
+ */
+const filterQuestionsByCategory = (questions: Question[]) => {
+  const completed = questions.filter((q) => q.status === "completed").length;
+  const skipped = questions.filter((q) => q.status === "skip").length;
+  const remaining = questions.length - completed - skipped;
+  return [completed, skipped, remaining];
 };
 
 /**
