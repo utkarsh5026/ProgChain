@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Input } from "antd";
+import { Input, Typography } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import useExplore from "../../store/explore/hook";
+
+const { Title } = Typography;
 
 /**
  * AskQuestion Component
@@ -43,6 +45,18 @@ const AskQuestion: React.FC = () => {
           borderRadius: "8px",
         }}
       >
+        <Title
+          level={2}
+          style={{
+            background: "linear-gradient(45deg, #2196F3, #FF4081)",
+            WebkitBackgroundClip: "text",
+            WebkitTextFillColor: "transparent",
+            marginBottom: "20px",
+            textAlign: "center",
+          }}
+        >
+          Unlock Your Curiosity!
+        </Title>
         <Input.Search
           placeholder="Ask a question"
           value={inputQuestion}
