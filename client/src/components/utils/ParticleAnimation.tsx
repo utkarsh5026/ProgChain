@@ -9,6 +9,21 @@ interface ParticleAnimationProps {
   maxDuration?: number;
 }
 
+/**
+ * ParticleAnimation Component
+ *
+ * This component creates an animated particle effect using Framer Motion.
+ * It renders a container with multiple colored particles moving across the screen.
+ *
+ * @component
+ * @param {Object} props - The component props
+ * @param {string} [props.width="100%"] - The width of the animation container
+ * @param {number} [props.height=200] - The height of the animation container in pixels
+ * @param {number} [props.particleCount=20] - The number of particles to render
+ * @param {number} [props.minDuration=8] - The minimum duration of a particle's animation in seconds
+ * @param {number} [props.maxDuration=12] - The maximum duration of a particle's animation in seconds
+ * @returns {React.ReactElement} The rendered ParticleAnimation component
+ */
 const ParticleAnimation: React.FC<ParticleAnimationProps> = ({
   width = "100%",
   height = 200,
