@@ -28,3 +28,35 @@ async def is_prog_topic(topic: str) -> tuple[bool, str]:
         return True, response[4:].strip()
     else:
         raise ValueError("Unexpected response format from LLM")
+
+
+question_prompt = PromptTemplate(
+    input_variables=["question"],
+    template="""
+    Analyze the following question, which may contain misspellings or errors:
+
+    Question: {question}
+
+    1. If the question is not related at all to programming, respond with 'No: [reason]'.
+    2. If it is related to programming:
+       a) Correct any spelling or grammatical errors.
+       b) Enhance the question to make it more specific and clear.
+       c) Respond with 'Yes: [corrected and enhanced question]'.
+
+    Response:
+    """
+)
+
+quest_chain = question_prompt | llm
+
+
+async def process_question(question: str) -> tuple[bool, str]:
+    result = await quest_chain.ainvoke({"question": question})
+    response = result.content.strip()
+
+    if response.lower().startswith("no:"):
+        return False, response[3:].strip()
+    elif response.lower().startswith("yes:"):
+        return True, response[4:].strip()
+    else:
+        raise ValueError("Unexpected response format from LLM")

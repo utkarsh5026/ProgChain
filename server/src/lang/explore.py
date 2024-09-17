@@ -3,7 +3,7 @@ from langchain.output_parsers import StructuredOutputParser, ResponseSchema
 from config.openai import llm
 
 prompt_template = """
-You are an expert programming tutor. Given the following programming question, provide a detailed technical explanation and solution, followed by 10 related follow-up questions.
+You are an expert programming tutor. Given the following programming question, provide a detailed technical explanation and solution, followed by 5 related follow-up questions.
 
 Question: {question}
 

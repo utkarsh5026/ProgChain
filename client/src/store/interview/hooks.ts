@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { fetchQuestionsThunk } from "./question";
+import { fetchQuestionsThunk } from "./slice";
 import type { ResponseQuestion, RequestQuestion } from "./type";
 
 interface InterviewQuestionsHook {

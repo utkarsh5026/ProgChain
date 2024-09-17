@@ -14,11 +14,13 @@ const fetchQuestionsThunk = createAsyncThunk(
 
 interface QuestionState {
   topicQuestions: Record<string, ResponseQuestion[]>;
+  currentTopic: string | null;
   loading: boolean;
   error: string | null;
 }
 
 const initialState: QuestionState = {
+  currentTopic: null,
   topicQuestions: {},
   loading: false,
   error: null,

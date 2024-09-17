@@ -12,6 +12,7 @@
   "dependencies": {
     "@reduxjs/toolkit": "^2.2.7",
     "@types/react-redux": "^7.1.33",
+    "@xyflow/react": "^12.3.0",
     "antd": "^5.20.6",
     "axios": "^1.7.7",
     "framer-motion": "^11.5.4",

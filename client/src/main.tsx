@@ -11,7 +11,8 @@ createRoot(document.getElementById("root")!).render(
     <ConfigProvider
       theme={{
         token: {
-          fontFamily: "'Cascadia Mono', monospace",
+          fontFamily: "monospace",
+          fontSize: 18,
         },
       }}
     >

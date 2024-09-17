@@ -1,8 +1,10 @@
 import { createBrowserRouter } from "react-router-dom";
-import ProgrammingQAComponent from "./components/interview/InterviewQA";
+import Interview from "./components/interview/Interview";
 import TopicChain from "./components/topics/TopicChain";
 import Quiz from "./components/quiz/Quiz";
 import Layout from "./components/home/Layout";
+import FlowChart from "./components/flow/FlowChart";
+import Explore from "./components/explore/Explore";
 
 const router = createBrowserRouter([
   {
@@ -15,11 +17,19 @@ const router = createBrowserRouter([
       },
       {
         path: "interview",
-        element: <ProgrammingQAComponent />,
+        element: <Interview />,
       },
       {
         path: "quiz",
         element: <Quiz />,
+      },
+      {
+        path: "flow",
+        element: <FlowChart />,
+      },
+      {
+        path: "explore",
+        element: <Explore />,
       },
     ],
   },

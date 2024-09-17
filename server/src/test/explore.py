@@ -22,6 +22,9 @@ def test_explore():
 
         print(json.dumps(result, indent=2, ensure_ascii=False))
 
+        with open("test_explore.json", "w", encoding="utf-8") as f:
+            json.dump(result, f, indent=2, ensure_ascii=False)
+
         assert "explanation" in result, "Response doesn't contain 'explanation' key"
         assert isinstance(result["explanation"],
                           str), "'explanation' should be a string"
