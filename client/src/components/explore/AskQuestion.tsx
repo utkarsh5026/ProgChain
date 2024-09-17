@@ -4,6 +4,15 @@ import { Input } from "antd";
 import { SendOutlined } from "@ant-design/icons";
 import useExplore from "../../store/explore/hook";
 
+/**
+ * AskQuestion Component
+ *
+ * This component renders an input field for users to ask programming-related questions.
+ * It uses Framer Motion for animations and Ant Design for the input field.
+ *
+ * @component
+ * @returns {React.ReactElement} The rendered AskQuestion component
+ */
 const AskQuestion: React.FC = () => {
   const [inputQuestion, setInputQuestion] = useState<string>("");
   const { fetchQuestion } = useExplore();

@@ -6,6 +6,15 @@ import useExplore from "../../store/explore/hook";
 import AskQuestion from "./AskQuestion";
 import Explanation from "./Explanation";
 
+/**
+ * Explore Component
+ *
+ * This component manages the main exploration interface for programming questions.
+ * It displays either the initial question input or the current exploration path with explanations.
+ *
+ * @component
+ * @returns {React.ReactElement} The rendered Explore component
+ */
 const Explore: React.FC = () => {
   const { rootQuestion, currentPath, resetExplore } = useExplore();
 

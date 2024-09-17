@@ -11,6 +11,17 @@ interface ExplanationProps {
   questionID: string;
 }
 
+/**
+ * Explanation Component
+ *
+ * This component renders an explanation card for a given programming question.
+ * It displays the question text, explanation (if available), and related questions.
+ *
+ * @component
+ * @param {Object} props - The component props
+ * @param {string} props.questionID - The ID of the question to display
+ * @returns {React.ReactElement|null} The rendered Explanation component or null if question is not found
+ */
 const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
   const { getQuestion, fetchQuestion } = useExplore();
   const question = getQuestion(questionID);
