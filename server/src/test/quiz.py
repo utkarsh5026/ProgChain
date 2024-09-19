@@ -7,7 +7,7 @@ BASE_URL = "http://localhost:8000/quiz/generate"
 def test_quiz():
     response = requests.post(BASE_URL, json={
         "topic": "Python",
-        "count": 2,
+        "count": 15,
         "levels": ["easy", "medium", "hard"],
         "instructions": "Create a quiz on Python programming language"
     })

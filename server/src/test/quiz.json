@@ -1,36 +1,222 @@
 {
+  "topic": "Python programming language, its features, applications, and best practices for software development.",
   "questions": [
+    {
+      "question": "What is the output of the following code: print(type([]))?",
+      "options": [
+        "<class 'list'>",
+        "<class 'dict'>",
+        "<class 'tuple'>",
+        "<class 'set'>"
+      ],
+      "correct_answers": [
+        0
+      ],
+      "difficulty": "EASY",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CODE_COMPREHENSION"
+    },
     {
       "question": "Which of the following are features of Python? (Select all that apply)",
       "options": [
-        "Dynamic typing",
-        "Compiled language",
-        "Interpreted language",
-        "Extensive standard library"
+        "Dynamic Typing",
+        "Compiled Language",
+        "Interpreted Language",
+        "Object-Oriented"
       ],
       "correct_answers": [
         0,
         2,
         3
       ],
-      "difficulty": "medium",
-      "question_type": "multi_correct",
-      "category": "conceptual"
+      "difficulty": "MEDIUM",
+      "question_type": "MULTI_CORRECT",
+      "category": "CONCEPTUAL"
     },
     {
-      "question": "What is the output of the following code snippet?\n\n```python\ndef add(a, b=5):\n    return a + b\n\nprint(add(3))\n```",
+      "question": "What is the purpose of the 'self' keyword in Python?",
       "options": [
-        "3",
-        "5",
+        "To refer to the instance of the class",
+        "To define a class variable",
+        "To create a new instance",
+        "To access class methods"
+      ],
+      "correct_answers": [
+        0
+      ],
+      "difficulty": "EASY",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CONCEPTUAL"
+    },
+    {
+      "question": "Which of the following statements about Python lists is true?",
+      "options": [
+        "Lists are immutable",
+        "Lists can contain mixed data types",
+        "Lists are defined using curly braces",
+        "Lists cannot be nested"
+      ],
+      "correct_answers": [
+        1
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CONCEPTUAL"
+    },
+    {
+      "question": "What will be the output of the following code: print(2 ** 3 ** 2)?",
+      "options": [
+        "64",
         "8",
-        "Error: missing argument"
+        "16",
+        "9"
+      ],
+      "correct_answers": [
+        0
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CODE_COMPREHENSION"
+    },
+    {
+      "question": "Which of the following are valid ways to define a function in Python? (Select all that apply)",
+      "options": [
+        "def my_function():",
+        "function my_function():",
+        "my_function() = function:",
+        "lambda my_function:"
+      ],
+      "correct_answers": [
+        0,
+        3
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "MULTI_CORRECT",
+      "category": "CONCEPTUAL"
+    },
+    {
+      "question": "What is the main advantage of using virtual environments in Python?",
+      "options": [
+        "To speed up the execution of code",
+        "To manage dependencies for different projects",
+        "To improve the performance of Python",
+        "To allow multiple Python versions"
+      ],
+      "correct_answers": [
+        1
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "SINGLE_CORRECT",
+      "category": "BEST_PRACTICES"
+    },
+    {
+      "question": "What will happen if you try to access a key that does not exist in a Python dictionary?",
+      "options": [
+        "It will return None",
+        "It will raise a KeyError",
+        "It will create a new key with a default value",
+        "It will return an empty string"
+      ],
+      "correct_answers": [
+        1
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CONCEPTUAL"
+    },
+    {
+      "question": "Which of the following are common applications of Python? (Select all that apply)",
+      "options": [
+        "Web Development",
+        "Data Analysis",
+        "Game Development",
+        "Mobile App Development"
+      ],
+      "correct_answers": [
+        0,
+        1,
+        2
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "MULTI_CORRECT",
+      "category": "CONCEPTUAL"
+    },
+    {
+      "question": "What is the purpose of the 'with' statement in Python?",
+      "options": [
+        "To handle exceptions",
+        "To simplify file handling",
+        "To create a new thread",
+        "To define a context manager"
+      ],
+      "correct_answers": [
+        1,
+        3
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "MULTI_CORRECT",
+      "category": "BEST_PRACTICES"
+    },
+    {
+      "question": "What is the output of the following code: print([x**2 for x in range(5)])?",
+      "options": [
+        "[0, 1, 4, 9, 16]",
+        "[1, 4, 9, 16, 25]",
+        "[0, 1, 2, 3, 4]",
+        "[0, 1, 2, 3, 4, 5]"
+      ],
+      "correct_answers": [
+        0
+      ],
+      "difficulty": "EASY",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CODE_COMPREHENSION"
+    },
+    {
+      "question": "Which of the following is a correct way to handle exceptions in Python?",
+      "options": [
+        "try: ... except: ...",
+        "try: ... catch: ...",
+        "try: ... finally: ...",
+        "except: ... try: ..."
+      ],
+      "correct_answers": [
+        0,
+        2
+      ],
+      "difficulty": "MEDIUM",
+      "question_type": "MULTI_CORRECT",
+      "category": "BEST_PRACTICES"
+    },
+    {
+      "question": "What is the output of the following code: print('Hello' + 5)?",
+      "options": [
+        "Hello5",
+        "Hello",
+        "TypeError",
+        "None"
       ],
       "correct_answers": [
         2
       ],
-      "difficulty": "easy",
-      "question_type": "single_correct",
-      "category": "code_comprehension"
+      "difficulty": "HARD",
+      "question_type": "SINGLE_CORRECT",
+      "category": "DEBUGGING"
+    },
+    {
+      "question": "What is the purpose of the 'pass' statement in Python?",
+      "options": [
+        "To skip the current iteration",
+        "To define an empty function or class",
+        "To raise an exception",
+        "To terminate a loop"
+      ],
+      "correct_answers": [
+        1
+      ],
+      "difficulty": "EASY",
+      "question_type": "SINGLE_CORRECT",
+      "category": "CONCEPTUAL"
     }
   ]
 }
