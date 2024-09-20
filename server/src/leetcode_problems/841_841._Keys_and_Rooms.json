@@ -1,0 +1,17 @@
+{
+    "description": "There are <code>n</code> rooms labeled from <code>0</code> to <code>n - 1</code>&nbsp;and all the rooms are locked except for room <code>0</code>. Your goal is to visit all the rooms. However, you cannot enter a locked room without having its key.\n\nWhen you visit a room, you may find a set of <strong>distinct keys</strong> in it. Each key has a number on it, denoting which room it unlocks, and you can take all of them with you to unlock the other rooms.\n\nGiven an array <code>rooms</code> where <code>rooms[i]</code> is the set of keys that you can obtain if you visited room <code>i</code>, return <code>true</code> <em>if you can visit <strong>all</strong> the rooms, or</em> <code>false</code> <em>otherwise</em>.\n\n",
+    "tags": [
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        }
+    ]
+}

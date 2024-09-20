@@ -1,0 +1,17 @@
+{
+    "description": "There are <code>n</code> people in a line queuing to buy tickets, where the <code>0<sup>th</sup></code> person is at the <strong>front</strong> of the line and the <code>(n - 1)<sup>th</sup></code> person is at the <strong>back</strong> of the line.\n\nYou are given a <strong>0-indexed</strong> integer array <code>tickets</code> of length <code>n</code> where the number of tickets that the <code>i<sup>th</sup></code> person would like to buy is <code>tickets[i]</code>.\n\nEach person takes <strong>exactly 1 second</strong> to buy a ticket. A person can only buy <strong>1 ticket at a time</strong> and has to go back to <strong>the end</strong> of the line (which happens <strong>instantaneously</strong>) in order to buy more tickets. If a person does not have any tickets left to buy, the person will <strong>leave </strong>the line.\n\nReturn <em>the <strong>time taken</strong> for the person at position </em><code>k</code><em>&nbsp;</em><strong><em>(0-indexed)</em>&nbsp;</strong><em>to finish buying tickets</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

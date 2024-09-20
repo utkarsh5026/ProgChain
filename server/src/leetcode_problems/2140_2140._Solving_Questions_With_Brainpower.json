@@ -1,0 +1,13 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> 2D integer array <code>questions</code> where <code>questions[i] = [points<sub>i</sub>, brainpower<sub>i</sub>]</code>.\n\nThe array describes the questions of an exam, where you have to process the questions <strong>in order</strong> (i.e., starting from question <code>0</code>) and make a decision whether to <strong>solve</strong> or <strong>skip</strong> each question. Solving question <code>i</code> will <strong>earn</strong> you <code>points<sub>i</sub></code> points but you will be <strong>unable</strong> to solve each of the next <code>brainpower<sub>i</sub></code> questions. If you skip question <code>i</code>, you get to make the decision on the next question.\n\nReturn <em>the <strong>maximum</strong> points you can earn for the exam</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

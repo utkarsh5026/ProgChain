@@ -1,0 +1,17 @@
+{
+    "description": "You are given an array <code>happiness</code> of length <code>n</code>, and a <strong>positive</strong> integer <code>k</code>.\n\nThere are <code>n</code> children standing in a queue, where the <code>i<sup>th</sup></code> child has <strong>happiness value</strong> <code>happiness[i]</code>. You want to select <code>k</code> children from these <code>n</code> children in <code>k</code> turns.\n\nIn each turn, when you select a child, the <strong>happiness value</strong> of all the children that have <strong>not</strong> been selected till now decreases by <code>1</code>. Note that the happiness value <strong>cannot</strong> become negative and gets decremented <strong>only</strong> if it is positive.\n\nReturn <em>the <strong>maximum</strong> sum of the happiness values of the selected children you can achieve by selecting </em><code>k</code> <em>children</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

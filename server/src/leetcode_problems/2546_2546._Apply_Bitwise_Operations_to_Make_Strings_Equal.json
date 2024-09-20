@@ -1,0 +1,13 @@
+{
+    "description": "You are given two <strong>0-indexed binary</strong> strings <code>s</code> and <code>target</code> of the same length <code>n</code>. You can do the following operation on <code>s</code> <strong>any</strong> number of times:\n\nFor example, if <code>s = \"0110\"</code>, you can choose <code>i = 0</code> and <code>j = 2</code>, then simultaneously replace <code>s[0]</code> with (<code>s[0]</code> <strong>OR</strong> <code>s[2]</code> = <code>0</code> <strong>OR</strong> <code>1</code> = <code>1</code>), and <code>s[2]</code> with (<code>s[0]</code> <strong>XOR</strong> <code>s[2]</code> = <code>0</code> <strong>XOR</strong> <code>1</code> = <code>1</code>), so we will have <code>s = \"1110\"</code>.\n\nReturn <code>true</code> <em>if you can make the string </em><code>s</code><em> equal to </em><code>target</code><em>, or </em><code>false</code><em> otherwise</em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

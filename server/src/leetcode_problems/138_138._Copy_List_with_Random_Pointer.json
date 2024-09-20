@@ -1,0 +1,13 @@
+{
+    "description": "A linked list of length <code>n</code> is given such that each node contains an additional random pointer, which could point to any node in the list, or <code>null</code>.\n\nConstruct a <a href=\"https://en.wikipedia.org/wiki/Object_copying#Deep_copy\" target=\"_blank\"><strong>deep copy</strong></a> of the list. The deep copy should consist of exactly <code>n</code> <strong>brand new</strong> nodes, where each new node has its value set to the value of its corresponding original node. Both the <code>next</code> and <code>random</code> pointer of the new nodes should point to new nodes in the copied list such that the pointers in the original list and copied list represent the same list state. <strong>None of the pointers in the new list should point to nodes in the original list</strong>.\n\nFor example, if there are two nodes <code>X</code> and <code>Y</code> in the original list, where <code>X.random --&gt; Y</code>, then for the corresponding two nodes <code>x</code> and <code>y</code> in the copied list, <code>x.random --&gt; y</code>.\n\nReturn <em>the head of the copied linked list</em>.\n\nThe linked list is represented in the input/output as a list of <code>n</code> nodes. Each node is represented as a pair of <code>[val, random_index]</code> where:\n\nYour code will <strong>only</strong> be given the <code>head</code> of the original linked list.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        }
+    ]
+}

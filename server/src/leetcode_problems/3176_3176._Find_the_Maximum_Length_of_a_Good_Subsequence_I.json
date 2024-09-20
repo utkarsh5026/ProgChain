@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code> and a <strong>non-negative</strong> integer <code>k</code>. A sequence of integers <code>seq</code> is called <strong>good</strong> if there are <strong>at most</strong> <code>k</code> indices <code>i</code> in the range <code>[0, seq.length - 2]</code> such that <code>seq[i] != seq[i + 1]</code>.\n\nReturn the <strong>maximum</strong> possible length of a <strong>good</strong> <span data-keyword=\"subsequence-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>subsequence</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(368px, 315px);\"></div></div></div></span> of <code>nums</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

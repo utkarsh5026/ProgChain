@@ -1,0 +1,21 @@
+{
+    "description": "Given an array of positive integers <code>nums</code> and a positive integer <code>target</code>, return <em>the <strong>minimal length</strong> of a </em><span data-keyword=\"subarray-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div><em>subarray</em></div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(305px, 204px);\"></div></div></div></span><em> whose sum is greater than or equal to</em> <code>target</code>. If there is no such subarray, return <code>0</code> instead.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

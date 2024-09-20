@@ -1,0 +1,25 @@
+{
+    "description": "You are given a 2D boolean matrix <code>grid</code>.\n\nReturn an integer that is the number of <strong>right triangles</strong> that can be made with the 3 elements of <code>grid</code> such that <strong>all</strong> of them have a value of 1.\n\n<strong>Note:</strong>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

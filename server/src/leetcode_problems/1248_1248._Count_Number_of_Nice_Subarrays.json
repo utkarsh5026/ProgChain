@@ -1,0 +1,21 @@
+{
+    "description": "Given an array of integers <code>nums</code> and an integer <code>k</code>. A continuous subarray is called <strong>nice</strong> if there are <code>k</code> odd numbers on it.\n\nReturn <em>the number of <strong>nice</strong> sub-arrays</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, return <em>the sum of every tree node's <strong>tilt</strong>.</em>\n\nThe <strong>tilt</strong> of a tree node is the <strong>absolute difference</strong> between the sum of all left subtree node <strong>values</strong> and all right subtree node <strong>values</strong>. If a node does not have a left child, then the sum of the left subtree node <strong>values</strong> is treated as <code>0</code>. The rule is similar if the node does not have a right child.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

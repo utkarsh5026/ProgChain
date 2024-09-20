@@ -1,0 +1,21 @@
+{
+    "description": "You are given an <code>n x n</code> <code>grid</code> where we place some <code>1 x 1 x 1</code> cubes that are axis-aligned with the <code>x</code>, <code>y</code>, and <code>z</code> axes.\n\nEach value <code>v = grid[i][j]</code> represents a tower of <code>v</code> cubes placed on top of the cell <code>(i, j)</code>.\n\nWe view the projection of these cubes onto the <code>xy</code>, <code>yz</code>, and <code>zx</code> planes.\n\nA <strong>projection</strong> is like a shadow, that maps our <strong>3-dimensional</strong> figure to a <strong>2-dimensional</strong> plane. We are viewing the \"shadow\" when looking at the cubes from the top, the front, and the side.\n\nReturn <em>the total area of all three projections</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Geometry",
+            "url": "https://leetcode.com/tag/geometry/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given a <code>m x n</code> <code>grid</code> filled with non-negative numbers, find a path from top left to bottom right, which minimizes the sum of all numbers along its path.\n\n<strong>Note:</strong> You can only move either down or right at any point in time.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

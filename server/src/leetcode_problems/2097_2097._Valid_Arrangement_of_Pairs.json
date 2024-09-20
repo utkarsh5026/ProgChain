@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> 2D integer array <code>pairs</code> where <code>pairs[i] = [start<sub>i</sub>, end<sub>i</sub>]</code>. An arrangement of <code>pairs</code> is <strong>valid</strong> if for every index <code>i</code> where <code>1 &lt;= i &lt; pairs.length</code>, we have <code>end<sub>i-1</sub> == start<sub>i</sub></code>.\n\nReturn <em><strong>any</strong> valid arrangement of </em><code>pairs</code>.\n\n<strong>Note:</strong> The inputs will be generated such that there exists a valid arrangement of <code>pairs</code>.\n\n",
+    "tags": [
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        },
+        {
+            "name": "Eulerian Circuit",
+            "url": "https://leetcode.com/tag/eulerian-circuit/"
+        }
+    ]
+}

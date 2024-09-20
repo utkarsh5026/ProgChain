@@ -1,0 +1,13 @@
+{
+    "description": "Write a function that reverses a string. The input string is given as an array of characters <code>s</code>.\n\nYou must do this by modifying the input array <a href=\"https://en.wikipedia.org/wiki/In-place_algorithm\" target=\"_blank\">in-place</a> with <code>O(1)</code> extra memory.\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

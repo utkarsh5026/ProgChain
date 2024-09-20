@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> 2D matrix <code>grid</code> of size <code>n x n</code>, where <code>(r, c)</code> represents:\n\nYou are initially positioned at cell <code>(0, 0)</code>. In one move, you can move to any adjacent cell in the grid, including cells containing thieves.\n\nThe <strong>safeness factor</strong> of a path on the grid is defined as the <strong>minimum</strong> manhattan distance from any cell in the path to any thief in the grid.\n\nReturn <em>the <strong>maximum safeness factor</strong> of all paths leading to cell </em><code>(n - 1, n - 1)</code><em>.</em>\n\nAn <strong>adjacent</strong> cell of cell <code>(r, c)</code>, is one of the cells <code>(r, c + 1)</code>, <code>(r, c - 1)</code>, <code>(r + 1, c)</code> and <code>(r - 1, c)</code> if it exists.\n\nThe <strong>Manhattan distance</strong> between two cells <code>(a, b)</code> and <code>(x, y)</code> is equal to <code>|a - x| + |b - y|</code>, where <code>|val|</code> denotes the absolute value of val.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Union Find",
+            "url": "https://leetcode.com/tag/union-find/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

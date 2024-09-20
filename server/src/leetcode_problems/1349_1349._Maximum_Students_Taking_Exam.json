@@ -1,0 +1,25 @@
+{
+    "description": "Given a <code>m&nbsp;* n</code>&nbsp;matrix <code>seats</code>&nbsp;&nbsp;that represent seats distributions&nbsp;in a classroom.&nbsp;If a seat&nbsp;is&nbsp;broken, it is denoted by <code>'#'</code> character otherwise it is denoted by a <code>'.'</code> character.\n\nStudents can see the answers of those sitting next to the left, right, upper left and upper right, but he cannot see the answers of the student sitting&nbsp;directly in front or behind him. Return the <strong>maximum </strong>number of students that can take the exam together&nbsp;without any cheating being possible.\n\nStudents must be placed in seats in good condition.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        },
+        {
+            "name": "Bitmask",
+            "url": "https://leetcode.com/tag/bitmask/"
+        }
+    ]
+}

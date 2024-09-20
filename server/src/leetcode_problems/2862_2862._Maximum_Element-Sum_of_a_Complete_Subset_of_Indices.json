@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>1</strong><strong>-indexed</strong> array <code>nums</code>. Your task is to select a <strong>complete subset</strong> from <code>nums</code> where every pair of selected indices multiplied is a <span data-keyword=\"perfect-square\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>perfect square,</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(162px, 257px);\"></div></div></div></span>. i. e. if you select <code>a<sub>i</sub></code> and <code>a<sub>j</sub></code>, <code>i * j</code> must be a perfect square.\n\nReturn the <em>sum</em> of the complete subset with the <em>maximum sum</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "description": "You are given an <code>n x n</code> binary grid <code>board</code>. In each move, you can swap any two rows with each other, or any two columns with each other.\n\nReturn <em>the minimum number of moves to transform the board into a <strong>chessboard board</strong></em>. If the task is impossible, return <code>-1</code>.\n\nA <strong>chessboard board</strong> is a board where no <code>0</code>'s and no <code>1</code>'s are 4-directionally adjacent.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

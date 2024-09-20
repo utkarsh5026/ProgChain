@@ -1,0 +1,25 @@
+{
+    "description": "Given the <code>root</code> of a binary search tree, rearrange the tree in <strong>in-order</strong> so that the leftmost node in the tree is now the root of the tree, and every node has no left child and only one right child.\n\n",
+    "tags": [
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Search Tree",
+            "url": "https://leetcode.com/tag/binary-search-tree/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

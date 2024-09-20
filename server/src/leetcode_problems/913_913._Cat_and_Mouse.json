@@ -1,0 +1,29 @@
+{
+    "description": "A game on an <strong>undirected</strong> graph is played by two players, Mouse and Cat, who alternate turns.\n\nThe graph is given as follows: <code>graph[a]</code> is a list of all nodes <code>b</code> such that <code>ab</code> is an edge of the graph.\n\nThe mouse starts at node <code>1</code> and goes first, the cat starts at node <code>2</code> and goes second, and there is a hole at node <code>0</code>.\n\nDuring each player's turn, they <strong>must</strong> travel along one&nbsp;edge of the graph that meets where they are.&nbsp; For example, if the Mouse is at node 1, it <strong>must</strong> travel to any node in <code>graph[1]</code>.\n\nAdditionally, it is not allowed for the Cat to travel to the Hole (node <code>0</code>).\n\nThen, the game can end in three&nbsp;ways:\n\nGiven a <code>graph</code>, and assuming both players play optimally, return\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        },
+        {
+            "name": "Topological Sort",
+            "url": "https://leetcode.com/tag/topological-sort/"
+        },
+        {
+            "name": "Memoization",
+            "url": "https://leetcode.com/tag/memoization/"
+        },
+        {
+            "name": "Game Theory",
+            "url": "https://leetcode.com/tag/game-theory/"
+        }
+    ]
+}

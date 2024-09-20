@@ -1,0 +1,21 @@
+{
+    "description": "Given the radius and the position of the center of a circle, implement the function <code>randPoint</code> which generates a uniform random point inside the circle.\n\nImplement the <code>Solution</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Geometry",
+            "url": "https://leetcode.com/tag/geometry/"
+        },
+        {
+            "name": "Rejection Sampling",
+            "url": "https://leetcode.com/tag/rejection-sampling/"
+        },
+        {
+            "name": "Randomized",
+            "url": "https://leetcode.com/tag/randomized/"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "description": "Design the <code>CombinationIterator</code> class:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Iterator",
+            "url": "https://leetcode.com/tag/iterator/"
+        }
+    ]
+}

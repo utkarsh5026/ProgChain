@@ -1,0 +1,4 @@
+{
+    "description": "You are given an integer array <code>nums</code> and a <strong>positive</strong> integer <code>k</code>.\n\nThe <strong>value</strong> of a sequence <code>seq</code> of size <code>2 * x</code> is defined as:\n\nReturn the <strong>maximum</strong> <strong>value</strong> of any <span data-keyword=\"subsequence-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>subsequence</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(286px, 347px);\"></div></div></div></span> of <code>nums</code> having size <code>2 * k</code>.\n\n",
+    "tags": []
+}

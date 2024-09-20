@@ -1,0 +1,21 @@
+{
+    "description": "There is a <strong>binary</strong> tree rooted at <code>0</code> consisting of <code>n</code> nodes. The nodes are labeled from <code>0</code> to <code>n - 1</code>. You are given a <strong>0-indexed</strong> integer array <code>parents</code> representing the tree, where <code>parents[i]</code> is the parent of node <code>i</code>. Since node <code>0</code> is the root, <code>parents[0] == -1</code>.\n\nEach node has a <strong>score</strong>. To find the score of a node, consider if the node and the edges connected to it were <strong>removed</strong>. The tree would become one or more <strong>non-empty</strong> subtrees. The <strong>size</strong> of a subtree is the number of the nodes in it. The <strong>score</strong> of the node is the <strong>product of the sizes</strong> of all those subtrees.\n\nReturn <em>the <strong>number</strong> of nodes that have the <strong>highest score</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

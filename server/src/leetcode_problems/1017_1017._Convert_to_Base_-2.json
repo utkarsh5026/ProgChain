@@ -1,0 +1,9 @@
+{
+    "description": "Given an integer <code>n</code>, return <em>a binary string representing its representation in base</em> <code>-2</code>.\n\n<strong>Note</strong> that the returned string should not have leading zeros unless the string is <code>\"0\"</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

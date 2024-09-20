@@ -1,0 +1,13 @@
+{
+    "description": "Given the <code>head</code> of a singly linked list, reverse the list, and return <em>the reversed list</em>.\n\n",
+    "tags": [
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Recursion",
+            "url": "https://leetcode.com/tag/recursion/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, return <em>the same tree where every subtree (of the given tree) not containing a </em><code>1</code><em> has been removed</em>.\n\nA subtree of a node <code>node</code> is <code>node</code> plus every node that is a descendant of <code>node</code>.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given an integer array <code>hours</code> representing times in <strong>hours</strong>, return an integer denoting the number of pairs <code>i</code>, <code>j</code> where <code>i &lt; j</code> and <code>hours[i] + hours[j]</code> forms a <strong>complete day</strong>.\n\nA <strong>complete day</strong> is defined as a time duration that is an <strong>exact</strong> <strong>multiple</strong> of 24 hours.\n\nFor example, 1 day is 24 hours, 2 days is 48 hours, 3 days is 72 hours, and so on.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

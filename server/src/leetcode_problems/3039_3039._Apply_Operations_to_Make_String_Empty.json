@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string <code>s</code>.\n\nConsider performing the following operation until <code>s</code> becomes <strong>empty</strong>:\n\nFor example, let initially <code>s = \"aabcbbca\"</code>. We do the following operations:\n\nReturn <em>the value of the string </em><code>s</code><em> right <strong>before</strong> applying the <strong>last</strong> operation</em>. In the example above, answer is <code>\"ba\"</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

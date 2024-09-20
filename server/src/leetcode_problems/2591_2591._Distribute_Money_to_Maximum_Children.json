@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer <code>money</code> denoting the amount of money (in dollars) that you have and another integer <code>children</code> denoting the number of children that you must distribute the money to.\n\nYou have to distribute the money according to the following rules:\n\nReturn <em>the <strong>maximum</strong> number of children who may receive <strong>exactly</strong> </em><code>8</code> <em>dollars if you distribute the money according to the aforementioned rules</em>. If there is no way to distribute the money, return <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code>. An <strong>awesome</strong> substring is a non-empty substring of <code>s</code> such that we can make any number of swaps in order to make it a palindrome.\n\nReturn <em>the length of the maximum length <strong>awesome substring</strong> of</em> <code>s</code>.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

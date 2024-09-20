@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code>.\n\nIn one move, you can choose one element of <code>nums</code> and change it to <strong>any value</strong>.\n\nReturn <em>the minimum difference between the largest and smallest value of <code>nums</code> <strong>after performing at most three moves</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

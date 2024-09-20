@@ -1,0 +1,13 @@
+{
+    "description": "You are given a binary string <code>binary</code> consisting of only <code>0</code>'s or <code>1</code>'s. You can apply each of the following operations any number of times:\n\n<em>Return the <strong>maximum binary string</strong> you can obtain after any number of operations. Binary string <code>x</code> is greater than binary string <code>y</code> if <code>x</code>'s decimal representation is greater than <code>y</code>'s decimal representation.</em>\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

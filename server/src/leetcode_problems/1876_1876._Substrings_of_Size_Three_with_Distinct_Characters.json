@@ -1,0 +1,21 @@
+{
+    "description": "A string is <strong>good</strong> if there are no repeated characters.\n\nGiven a string <code>s</code>\u200b\u200b\u200b\u200b\u200b, return <em>the number of <strong>good substrings</strong> of length <strong>three </strong>in </em><code>s</code>\u200b\u200b\u200b\u200b\u200b\u200b.\n\nNote that if there are multiple occurrences of the same substring, every occurrence should be counted.\n\nA <strong>substring</strong> is a contiguous sequence of characters in a string.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

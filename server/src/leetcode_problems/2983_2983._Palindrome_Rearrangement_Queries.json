@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> string <code>s</code> having an <strong>even</strong> length <code>n</code>.\n\nYou are also given a <strong>0-indexed</strong> 2D integer array, <code>queries</code>, where <code>queries[i] = [a<sub>i</sub>, b<sub>i</sub>, c<sub>i</sub>, d<sub>i</sub>]</code>.\n\nFor each query <code>i</code>, you are allowed to perform the following operations:\n\nFor each query, your task is to determine whether it is possible to make <code>s</code> a <strong>palindrome</strong> by performing the operations.\n\nEach query is answered <strong>independently</strong> of the others.\n\nReturn <em>a <strong>0-indexed</strong> array </em><code>answer</code><em>, where </em><code>answer[i] == true</code><em> if it is possible to make </em><code>s</code><em> a palindrome by performing operations specified by the </em><code>i<sup>th</sup></code><em> query, and </em><code>false</code><em> otherwise.</em>\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

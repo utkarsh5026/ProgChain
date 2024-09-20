@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer <code>power</code> and two integer arrays <code>damage</code> and <code>health</code>, both having length <code>n</code>.\n\nBob has <code>n</code> enemies, where enemy <code>i</code> will deal Bob <code>damage[i]</code> <strong>points</strong> of damage per second while they are <em>alive</em> (i.e. <code>health[i] &gt; 0</code>).\n\nEvery second, <strong>after</strong> the enemies deal damage to Bob, he chooses <strong>one</strong> of the enemies that is still <em>alive</em> and deals <code>power</code> points of damage to them.\n\nDetermine the <strong>minimum</strong> total amount of damage points that will be dealt to Bob before <strong>all</strong> <code>n</code> enemies are <em>dead</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

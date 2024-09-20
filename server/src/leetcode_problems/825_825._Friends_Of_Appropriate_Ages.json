@@ -1,0 +1,21 @@
+{
+    "description": "There are <code>n</code> persons on a social media website. You are given an integer array <code>ages</code> where <code>ages[i]</code> is the age of the <code>i<sup>th</sup></code> person.\n\nA Person <code>x</code> will not send a friend request to a person <code>y</code> (<code>x != y</code>) if any of the following conditions is true:\n\nOtherwise, <code>x</code> will send a friend request to <code>y</code>.\n\nNote that if <code>x</code> sends a request to <code>y</code>, <code>y</code> will not necessarily send a request to <code>x</code>. Also, a person will not send a friend request to themself.\n\nReturn <em>the total number of friend requests made</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

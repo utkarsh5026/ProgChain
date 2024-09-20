@@ -1,0 +1,13 @@
+{
+    "description": "You are given two integers <code>num1</code> and <code>num2</code>.\n\nIn one operation, you can choose integer <code>i</code> in the range <code>[0, 60]</code> and subtract <code>2<sup>i</sup> + num2</code> from <code>num1</code>.\n\nReturn <em>the integer denoting the <strong>minimum</strong> number of operations needed to make</em> <code>num1</code> <em>equal to</em> <code>0</code>.\n\nIf it is impossible to make <code>num1</code> equal to <code>0</code>, return <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Brainteaser",
+            "url": "https://leetcode.com/tag/brainteaser/"
+        }
+    ]
+}

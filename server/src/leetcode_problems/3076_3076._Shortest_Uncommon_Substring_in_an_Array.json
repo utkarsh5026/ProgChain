@@ -1,0 +1,21 @@
+{
+    "description": "You are given an array <code>arr</code> of size <code>n</code> consisting of <strong>non-empty</strong> strings.\n\nFind a string array <code>answer</code> of size <code>n</code> such that:\n\nReturn <em>the array </em><code>answer</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        }
+    ]
+}

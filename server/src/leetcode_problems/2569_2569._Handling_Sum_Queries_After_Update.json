@@ -1,0 +1,13 @@
+{
+    "description": "You are given two <strong>0-indexed</strong> arrays <code>nums1</code> and <code>nums2</code> and a 2D array <code>queries</code> of queries. There are three types of queries:\n\nReturn <em>an array containing all the answers to the third type&nbsp;queries.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        }
+    ]
+}

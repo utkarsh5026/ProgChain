@@ -1,0 +1,17 @@
+{
+    "description": "We had some 2-dimensional coordinates, like <code>\"(1, 3)\"</code> or <code>\"(2, 0.5)\"</code>. Then, we removed all commas, decimal points, and spaces and ended up with the string s.\n\nReturn <em>a list of strings representing all possibilities for what our original coordinates could have been</em>.\n\nOur original representation never had extraneous zeroes, so we never started with numbers like <code>\"00\"</code>, <code>\"0.0\"</code>, <code>\"0.00\"</code>, <code>\"1.0\"</code>, <code>\"001\"</code>, <code>\"00.01\"</code>, or any other number that can be represented with fewer digits. Also, a decimal point within a number never occurs without at least one digit occurring before it, so we never started with numbers like <code>\".1\"</code>.\n\nThe final answer list can be returned in any order. All coordinates in the final answer have exactly one space between them (occurring after the comma.)\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

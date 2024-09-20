@@ -1,0 +1,17 @@
+{
+    "description": "You are given a 2D matrix <code>grid</code> of size <code>3 x 3</code> consisting only of characters <code>'B'</code> and <code>'W'</code>. Character <code>'W'</code> represents the white color, and character <code>'B'</code> represents the black color.\n\nYour task is to change the color of <strong>at most one</strong> cell so that the matrix has a <code>2 x 2</code> square where all cells are of the same color.\n\nReturn <code>true</code> if it is possible to create a <code>2 x 2</code> square of the same color, otherwise, return <code>false</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

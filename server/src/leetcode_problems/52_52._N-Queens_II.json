@@ -1,0 +1,9 @@
+{
+    "description": "The <strong>n-queens</strong> puzzle is the problem of placing <code>n</code> queens on an <code>n x n</code> chessboard such that no two queens attack each other.\n\nGiven an integer <code>n</code>, return <em>the number of distinct solutions to the&nbsp;<strong>n-queens puzzle</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

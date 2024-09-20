@@ -1,0 +1,13 @@
+{
+    "description": "Given an array <code>nums</code> of integers, return how many of them contain an <strong>even number</strong> of digits.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

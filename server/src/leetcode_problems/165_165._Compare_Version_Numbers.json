@@ -1,0 +1,13 @@
+{
+    "description": "Given two <strong>version strings</strong>, <code>version1</code> and <code>version2</code>, compare them. A version string consists of <strong>revisions</strong> separated by dots <code>'.'</code>. The <strong>value of the revision</strong> is its <strong>integer conversion</strong> ignoring leading zeros.\n\nTo compare version strings, compare their revision values in <strong>left-to-right order</strong>. If one of the version strings has fewer revisions, treat the missing revision values as <code>0</code>.\n\nReturn the following:\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

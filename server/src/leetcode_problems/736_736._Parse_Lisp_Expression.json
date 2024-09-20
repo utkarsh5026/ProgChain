@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string expression representing a Lisp-like expression to return the integer value of.\n\nThe syntax for these expressions is given as follows.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Recursion",
+            "url": "https://leetcode.com/tag/recursion/"
+        }
+    ]
+}

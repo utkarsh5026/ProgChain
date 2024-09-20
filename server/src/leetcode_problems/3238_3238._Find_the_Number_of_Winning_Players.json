@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer <code>n</code> representing the number of players in a game and a 2D array <code>pick</code> where <code>pick[i] = [x<sub>i</sub>, y<sub>i</sub>]</code> represents that the player <code>x<sub>i</sub></code> picked a ball of color <code>y<sub>i</sub></code>.\n\nPlayer <code>i</code> <strong>wins</strong> the game if they pick <strong>strictly more</strong> than <code>i</code> balls of the <strong>same</strong> color. In other words,\n\nReturn the number of players who <strong>win</strong> the game.\n\n<strong>Note</strong> that <em>multiple</em> players can win the game.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "Given a <strong>valid parentheses string</strong> <code>s</code>, return the <strong>nesting depth</strong> of<em> </em><code>s</code>. The nesting depth is the <strong>maximum</strong> number of nested parentheses.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        }
+    ]
+}

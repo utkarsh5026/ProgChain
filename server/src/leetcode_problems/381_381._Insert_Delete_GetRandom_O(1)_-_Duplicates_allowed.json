@@ -1,0 +1,25 @@
+{
+    "description": "<code>RandomizedCollection</code> is a data structure that contains a collection of numbers, possibly duplicates (i.e., a multiset). It should support inserting and removing specific elements and also reporting a random element.\n\nImplement the <code>RandomizedCollection</code> class:\n\nYou must implement the functions of the class such that each function works on <strong>average</strong> <code>O(1)</code> time complexity.\n\n<strong>Note:</strong> The test cases are generated such that <code>getRandom</code> will only be called if there is <strong>at least one</strong> item in the <code>RandomizedCollection</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Randomized",
+            "url": "https://leetcode.com/tag/randomized/"
+        }
+    ]
+}

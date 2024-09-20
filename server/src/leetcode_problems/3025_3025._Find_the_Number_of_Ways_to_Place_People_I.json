@@ -1,0 +1,25 @@
+{
+    "description": "You are given a 2D array <code>points</code> of size <code>n x 2</code> representing integer coordinates of some points on a 2D plane, where <code>points[i] = [x<sub>i</sub>, y<sub>i</sub>]</code>.\n\nCount the number of pairs of points <code>(A, B)</code>, where\n\nReturn the count.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Geometry",
+            "url": "https://leetcode.com/tag/geometry/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

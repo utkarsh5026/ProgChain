@@ -1,0 +1,13 @@
+{
+    "description": "You are given two arrays <code>nums1</code> and <code>nums2</code> consisting of positive integers.\n\nYou have to replace <strong>all</strong> the <code>0</code>'s in both arrays with <strong>strictly</strong> positive integers such that the sum of elements of both arrays becomes <strong>equal</strong>.\n\nReturn <em>the <strong>minimum</strong> equal sum you can obtain, or </em><code>-1</code><em> if it is impossible</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

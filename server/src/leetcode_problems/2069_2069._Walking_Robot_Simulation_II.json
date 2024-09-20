@@ -1,0 +1,13 @@
+{
+    "description": "A <code>width x height</code> grid is on an XY-plane with the <strong>bottom-left</strong> cell at <code>(0, 0)</code> and the <strong>top-right</strong> cell at <code>(width - 1, height - 1)</code>. The grid is aligned with the four cardinal directions (<code>\"North\"</code>, <code>\"East\"</code>, <code>\"South\"</code>, and <code>\"West\"</code>). A robot is <strong>initially</strong> at cell <code>(0, 0)</code> facing direction <code>\"East\"</code>.\n\nThe robot can be instructed to move for a specific number of <strong>steps</strong>. For each step, it does the following.\n\nAfter the robot finishes moving the number of steps required, it stops and awaits the next instruction.\n\nImplement the <code>Robot</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

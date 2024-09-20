@@ -1,0 +1,17 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, return <em>the length of the longest path, where each node in the path has the same value</em>. This path may or may not pass through the root.\n\n<strong>The length of the path</strong> between two nodes is represented by the number of edges between them.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

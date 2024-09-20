@@ -1,0 +1,21 @@
+{
+    "description": "You are given an array of <strong>positive</strong> integers <code>nums</code> of length <code>n</code>.\n\nA <strong>polygon</strong> is a closed plane figure that has at least <code>3</code> sides. The <strong>longest side</strong> of a polygon is <strong>smaller</strong> than the sum of its other sides.\n\nConversely, if you have <code>k</code> (<code>k &gt;= 3</code>) <strong>positive</strong> real numbers <code>a<sub>1</sub></code>, <code>a<sub>2</sub></code>, <code>a<sub>3</sub></code>, ..., <code>a<sub>k</sub></code> where <code>a<sub>1</sub> &lt;= a<sub>2</sub> &lt;= a<sub>3</sub> &lt;= ... &lt;= a<sub>k</sub></code> <strong>and</strong> <code>a<sub>1</sub> + a<sub>2</sub> + a<sub>3</sub> + ... + a<sub>k-1</sub> &gt; a<sub>k</sub></code>, then there <strong>always</strong> exists a polygon with <code>k</code> sides whose lengths are <code>a<sub>1</sub></code>, <code>a<sub>2</sub></code>, <code>a<sub>3</sub></code>, ..., <code>a<sub>k</sub></code>.\n\nThe <strong>perimeter</strong> of a polygon is the sum of lengths of its sides.\n\nReturn <em>the <strong>largest</strong> possible <strong>perimeter</strong> of a <strong>polygon</strong> whose sides can be formed from</em> <code>nums</code>, <em>or</em> <code>-1</code> <em>if it is not possible to create a polygon</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

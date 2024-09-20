@@ -1,0 +1,9 @@
+{
+    "description": "In a string <code><font face=\"monospace\">s</font></code>&nbsp;of lowercase letters, these letters form consecutive groups of the same character.\n\nFor example, a string like <code>s = \"abbxxxxzyy\"</code> has the groups <code>\"a\"</code>, <code>\"bb\"</code>, <code>\"xxxx\"</code>, <code>\"z\"</code>, and&nbsp;<code>\"yy\"</code>.\n\nA group is identified by an interval&nbsp;<code>[start, end]</code>, where&nbsp;<code>start</code>&nbsp;and&nbsp;<code>end</code>&nbsp;denote the start and end&nbsp;indices (inclusive) of the group. In the above example,&nbsp;<code>\"xxxx\"</code>&nbsp;has the interval&nbsp;<code>[3,6]</code>.\n\nA group is considered&nbsp;<strong>large</strong>&nbsp;if it has 3 or more characters.\n\nReturn&nbsp;<em>the intervals of every <strong>large</strong> group sorted in&nbsp;<strong>increasing order by start index</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

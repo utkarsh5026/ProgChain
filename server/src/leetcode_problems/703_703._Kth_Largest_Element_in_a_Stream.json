@@ -1,0 +1,29 @@
+{
+    "description": "You are part of a university admissions office and need to keep track of the <code>kth</code> highest test score from applicants in real-time. This helps to determine cut-off marks for interviews and admissions dynamically as new applicants submit their scores.\n\nYou are tasked to implement a class which, for a given integer&nbsp;<code>k</code>, maintains a stream of test scores and continuously returns the&nbsp;<code>k</code>th highest test score&nbsp;<strong>after</strong>&nbsp;a new score has been submitted. More specifically, we are looking for the <code>k</code>th highest score in the sorted list of all scores.\n\nImplement the&nbsp;<code>KthLargest</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Binary Search Tree",
+            "url": "https://leetcode.com/tag/binary-search-tree/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        },
+        {
+            "name": "Data Stream",
+            "url": "https://leetcode.com/tag/data-stream/"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "description": "Given an <code>m x n</code> integer matrix <code>heightMap</code> representing the height of each unit cell in a 2D elevation map, return <em>the volume of water it can trap after raining</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

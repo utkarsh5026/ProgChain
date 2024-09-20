@@ -1,0 +1,9 @@
+{
+    "description": "Given an integer <code>n</code>, add a dot (\".\") as the thousands separator and return it in string format.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

@@ -1,0 +1,33 @@
+{
+    "description": "A magician has various spells.\n\nYou are given an array <code>power</code>, where each element represents the damage of a spell. Multiple spells can have the same damage value.\n\nIt is a known fact that if a magician decides to cast a spell with a damage of <code>power[i]</code>, they <strong>cannot</strong> cast any spell with a damage of <code>power[i] - 2</code>, <code>power[i] - 1</code>, <code>power[i] + 1</code>, or <code>power[i] + 2</code>.\n\nEach spell can be cast <strong>only once</strong>.\n\nReturn the <strong>maximum</strong> possible <em>total damage</em> that a magician can cast.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

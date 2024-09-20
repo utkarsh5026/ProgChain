@@ -1,0 +1,13 @@
+{
+    "description": "Given two integers <code>n</code> and <code>k</code>, construct a list <code>answer</code> that contains <code>n</code> different positive integers ranging from <code>1</code> to <code>n</code> and obeys the following requirement:\n\nReturn <em>the list</em> <code>answer</code>. If there multiple valid answers, return <strong>any of them</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

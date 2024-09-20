@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code> of lowercase English letters and an integer array <code>shifts</code> of the same length.\n\nCall the <code>shift()</code> of a letter, the next letter in the alphabet, (wrapping around so that <code>'z'</code> becomes <code>'a'</code>).\n\nNow for each <code>shifts[i] = x</code>, we want to shift the first <code>i + 1</code> letters of <code>s</code>, <code>x</code> times.\n\nReturn <em>the final string after all such shifts to s are applied</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

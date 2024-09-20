@@ -1,0 +1,9 @@
+{
+    "description": "Given a date, return the corresponding day of the week for that date.\n\nThe input is given as three integers representing the <code>day</code>, <code>month</code> and <code>year</code> respectively.\n\nReturn the answer as one of the following values&nbsp;<code>{\"Sunday\", \"Monday\", \"Tuesday\", \"Wednesday\", \"Thursday\", \"Friday\", \"Saturday\"}</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

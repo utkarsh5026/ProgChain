@@ -1,0 +1,21 @@
+{
+    "description": "Design a data structure that supports adding new words and finding if a string matches any previously added string.\n\nImplement the <code>WordDictionary</code> class:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        }
+    ]
+}

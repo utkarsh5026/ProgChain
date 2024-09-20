@@ -1,0 +1,13 @@
+{
+    "description": "You are given a string <code>s</code> of length <code>n</code> and an integer <code>k</code>, where <code>n</code> is a <strong>multiple</strong> of <code>k</code>. Your task is to hash the string <code>s</code> into a new string called <code>result</code>, which has a length of <code>n / k</code>.\n\nFirst, divide <code>s</code> into <code>n / k</code> <strong><span data-keyword=\"substring-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>substrings</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(225px, 262px);\"></div></div></div></span></strong>, each with a length of <code>k</code>. Then, initialize <code>result</code> as an <strong>empty</strong> string.\n\nFor each <strong>substring</strong> in order from the beginning:\n\nReturn <code>result</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

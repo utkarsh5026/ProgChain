@@ -1,0 +1,13 @@
+{
+    "description": "You are given two <strong>0-indexed</strong> strings <code>str1</code> and <code>str2</code>.\n\nIn an operation, you select a <strong>set</strong> of indices in <code>str1</code>, and for each index <code>i</code> in the set, increment <code>str1[i]</code> to the next character <strong>cyclically</strong>. That is <code>'a'</code> becomes <code>'b'</code>, <code>'b'</code> becomes <code>'c'</code>, and so on, and <code>'z'</code> becomes <code>'a'</code>.\n\nReturn <code>true</code> <em>if it is possible to make </em><code>str2</code> <em>a subsequence of </em><code>str1</code> <em>by performing the operation <strong>at most once</strong></em>, <em>and</em> <code>false</code> <em>otherwise</em>.\n\n<strong>Note:</strong> A subsequence of a string is a new string that is formed from the original string by deleting some (possibly none) of the characters without disturbing the relative positions of the remaining characters.\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

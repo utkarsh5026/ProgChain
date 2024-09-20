@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed </strong>integer array <code>nums</code>.\n\nThe <strong>distinct count</strong> of a subarray of <code>nums</code> is defined as:\n\nReturn <em>the sum of the <strong>squares</strong> of <strong>distinct counts</strong> of all subarrays of </em><code>nums</code>.\n\nSince the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\nA subarray is a contiguous <strong>non-empty</strong> sequence of elements within an array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        }
+    ]
+}

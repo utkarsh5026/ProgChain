@@ -1,0 +1,21 @@
+{
+    "description": "Given the <code>root</code> of a binary search tree (BST) with duplicates, return <em>all the <a href=\"https://en.wikipedia.org/wiki/Mode_(statistics)\" target=\"_blank\">mode(s)</a> (i.e., the most frequently occurred element) in it</em>.\n\nIf the tree has more than one mode, return them in <strong>any order</strong>.\n\nAssume a BST is defined as follows:\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Search Tree",
+            "url": "https://leetcode.com/tag/binary-search-tree/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given an integer array <code>nums</code>, move all the even integers at the beginning of the array followed by all the odd integers.\n\nReturn <em><strong>any array</strong> that satisfies this condition</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

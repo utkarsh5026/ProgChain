@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <code>n x n</code> 2D array <code>grid</code> containing <strong>distinct</strong> elements in the range <code>[0, n<sup>2</sup> - 1]</code>.\n\nImplement the <code>NeighborSum</code> class:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2024/06/24/design.png\" style=\"width: 400px; height: 248px;\">\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

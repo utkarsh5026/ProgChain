@@ -1,0 +1,17 @@
+{
+    "description": "Given an array of integers <code>nums</code>, find the maximum length of a subarray where the product of all its elements is positive.\n\nA subarray of an array is a consecutive sequence of zero or more values taken out of that array.\n\nReturn <em>the maximum length of a subarray with positive product</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

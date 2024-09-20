@@ -1,0 +1,29 @@
+{
+    "description": "You have <code>n</code> binary tree nodes numbered from <code>0</code> to <code>n - 1</code> where node <code>i</code> has two children <code>leftChild[i]</code> and <code>rightChild[i]</code>, return <code>true</code> if and only if <strong>all</strong> the given nodes form <strong>exactly one</strong> valid binary tree.\n\nIf node <code>i</code> has no left child then <code>leftChild[i]</code> will equal <code>-1</code>, similarly for the right child.\n\nNote that the nodes have no values and that we only use the node numbers in this problem.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Union Find",
+            "url": "https://leetcode.com/tag/union-find/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

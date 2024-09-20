@@ -1,0 +1,13 @@
+{
+    "description": "There are <code>n</code> oranges in the kitchen and you decided to eat some of these oranges every day as follows:\n\nYou can only choose one of the actions per day.\n\nGiven the integer <code>n</code>, return <em>the minimum number of days to eat</em> <code>n</code> <em>oranges</em>.\n\n",
+    "tags": [
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Memoization",
+            "url": "https://leetcode.com/tag/memoization/"
+        }
+    ]
+}

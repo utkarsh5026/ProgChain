@@ -1,0 +1,17 @@
+{
+    "description": "Given a string <code>s</code>, you&nbsp;can transform every letter individually to be lowercase or uppercase to create another string.\n\nReturn <em>a list of all possible strings we could create</em>. Return the output in <strong>any order</strong>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

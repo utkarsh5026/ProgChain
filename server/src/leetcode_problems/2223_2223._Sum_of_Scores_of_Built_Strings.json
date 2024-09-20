@@ -1,0 +1,29 @@
+{
+    "description": "You are <strong>building</strong> a string <code>s</code> of length <code>n</code> <strong>one</strong> character at a time, <strong>prepending</strong> each new character to the <strong>front</strong> of the string. The strings are labeled from <code>1</code> to <code>n</code>, where the string with length <code>i</code> is labeled <code>s<sub>i</sub></code>.\n\nThe <strong>score</strong> of <code>s<sub>i</sub></code> is the length of the <strong>longest common prefix</strong> between <code>s<sub>i</sub></code> and <code>s<sub>n</sub></code> (Note that <code>s == s<sub>n</sub></code>).\n\nGiven the final string <code>s</code>, return<em> the <strong>sum</strong> of the <strong>score</strong> of every </em><code>s<sub>i</sub></code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Rolling Hash",
+            "url": "https://leetcode.com/tag/rolling-hash/"
+        },
+        {
+            "name": "Suffix Array",
+            "url": "https://leetcode.com/tag/suffix-array/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

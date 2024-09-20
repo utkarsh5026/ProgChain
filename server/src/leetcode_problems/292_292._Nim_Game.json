@@ -1,0 +1,17 @@
+{
+    "description": "You are playing the following Nim Game with your friend:\n\nGiven <code>n</code>, the number of stones in the heap, return <code>true</code><em> if you can win the game assuming both you and your friend play optimally, otherwise return </em><code>false</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Brainteaser",
+            "url": "https://leetcode.com/tag/brainteaser/"
+        },
+        {
+            "name": "Game Theory",
+            "url": "https://leetcode.com/tag/game-theory/"
+        }
+    ]
+}

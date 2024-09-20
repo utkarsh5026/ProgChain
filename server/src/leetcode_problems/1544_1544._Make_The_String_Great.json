@@ -1,0 +1,13 @@
+{
+    "description": "Given a string <code>s</code> of lower and upper case English letters.\n\nA good string is a string which doesn't have <strong>two adjacent characters</strong> <code>s[i]</code> and <code>s[i + 1]</code> where:\n\nTo make the string good, you can choose <strong>two adjacent</strong> characters that make the string bad and remove them. You can keep doing this until the string becomes good.\n\nReturn <em>the string</em> after making it good. The answer is guaranteed to be unique under the given constraints.\n\n<strong>Notice</strong> that an empty string is also good.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "You are given a string <code>s</code> and an integer <code>k</code>.\n\nDefine a function <code>distance(s<sub>1</sub>, s<sub>2</sub>)</code> between two strings <code>s<sub>1</sub></code> and <code>s<sub>2</sub></code> of the same length <code>n</code> as:\n\nFor example, <code>distance(\"ab\", \"cd\") == 4</code>, and <code>distance(\"a\", \"z\") == 1</code>.\n\nYou can <strong>change</strong> any letter of <code>s</code> to <strong>any</strong> other lowercase English letter, <strong>any</strong> number of times.\n\nReturn a string denoting the <strong><span data-keyword=\"lexicographically-smaller-string\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>lexicographically smallest</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(288px, 505px);\"></div></div></div></span></strong> string <code>t</code> you can get after some changes, such that <code>distance(s, t) &lt;= k</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

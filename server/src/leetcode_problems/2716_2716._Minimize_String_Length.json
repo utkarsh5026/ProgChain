@@ -1,0 +1,13 @@
+{
+    "description": "Given a string <code>s</code>, you have two types of operation:\n\nYour task is to <strong>minimize</strong> the length of <code>s</code> by performing the above operations zero or more times.\n\nReturn an integer denoting the length of the <strong>minimized</strong> string.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

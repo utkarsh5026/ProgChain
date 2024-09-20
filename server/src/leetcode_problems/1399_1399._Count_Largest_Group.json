@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer <code>n</code>.\n\nEach number from <code>1</code> to <code>n</code> is grouped according to the sum of its digits.\n\nReturn <em>the number of groups that have the largest size</em>.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

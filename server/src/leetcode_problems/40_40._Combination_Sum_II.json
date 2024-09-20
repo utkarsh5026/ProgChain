@@ -1,0 +1,13 @@
+{
+    "description": "Given a collection of candidate numbers (<code>candidates</code>) and a target number (<code>target</code>), find all unique combinations in <code>candidates</code>&nbsp;where the candidate numbers sum to <code>target</code>.\n\nEach number in <code>candidates</code>&nbsp;may only be used <strong>once</strong> in the combination.\n\n<strong>Note:</strong>&nbsp;The solution set must not contain duplicate combinations.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

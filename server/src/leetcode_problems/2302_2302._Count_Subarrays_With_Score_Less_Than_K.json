@@ -1,0 +1,21 @@
+{
+    "description": "The <strong>score</strong> of an array is defined as the <strong>product</strong> of its sum and its length.\n\nGiven a positive integer array <code>nums</code> and an integer <code>k</code>, return <em>the <strong>number of non-empty subarrays</strong> of</em> <code>nums</code> <em>whose score is <strong>strictly less</strong> than</em> <code>k</code>.\n\nA <strong>subarray</strong> is a contiguous sequence of elements within an array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

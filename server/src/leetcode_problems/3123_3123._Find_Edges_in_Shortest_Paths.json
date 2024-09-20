@@ -1,0 +1,25 @@
+{
+    "description": "You are given an undirected weighted graph of <code>n</code> nodes numbered from 0 to <code>n - 1</code>. The graph consists of <code>m</code> edges represented by a 2D array <code>edges</code>, where <code>edges[i] = [a<sub>i</sub>, b<sub>i</sub>, w<sub>i</sub>]</code> indicates that there is an edge between nodes <code>a<sub>i</sub></code> and <code>b<sub>i</sub></code> with weight <code>w<sub>i</sub></code>.\n\nConsider all the shortest paths from node 0 to node <code>n - 1</code> in the graph. You need to find a <strong>boolean</strong> array <code>answer</code> where <code>answer[i]</code> is <code>true</code> if the edge <code>edges[i]</code> is part of <strong>at least</strong> one shortest path. Otherwise, <code>answer[i]</code> is <code>false</code>.\n\nReturn the array <code>answer</code>.\n\n<strong>Note</strong> that the graph may not be connected.\n\n",
+    "tags": [
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Shortest Path",
+            "url": "https://leetcode.com/tag/shortest-path/"
+        }
+    ]
+}

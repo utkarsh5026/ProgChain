@@ -1,0 +1,33 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>heights</code> of positive integers, where <code>heights[i]</code> represents the height of the <code>i<sup>th</sup></code> building.\n\nIf a person is in building <code>i</code>, they can move to any other building <code>j</code> if and only if <code>i &lt; j</code> and <code>heights[i] &lt; heights[j]</code>.\n\nYou are also given another array <code>queries</code> where <code>queries[i] = [a<sub>i</sub>, b<sub>i</sub>]</code>. On the <code>i<sup>th</sup></code> query, Alice is in building <code>a<sub>i</sub></code> while Bob is in building <code>b<sub>i</sub></code>.\n\nReturn <em>an array</em> <code>ans</code> <em>where</em> <code>ans[i]</code> <em>is <strong>the index of the leftmost building</strong> where Alice and Bob can meet on the</em> <code>i<sup>th</sup></code> <em>query</em>. <em>If Alice and Bob cannot move to a common building on query</em> <code>i</code>, <em>set</em> <code>ans[i]</code> <em>to</em> <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Monotonic Stack",
+            "url": "https://leetcode.com/tag/monotonic-stack/"
+        }
+    ]
+}

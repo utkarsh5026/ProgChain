@@ -1,0 +1,9 @@
+{
+    "description": "A <strong>fancy string</strong> is a string where no <strong>three</strong> <strong>consecutive</strong> characters are equal.\n\nGiven a string <code>s</code>, delete the <strong>minimum</strong> possible number of characters from <code>s</code> to make it <strong>fancy</strong>.\n\nReturn <em>the final string after the deletion</em>. It can be shown that the answer will always be <strong>unique</strong>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

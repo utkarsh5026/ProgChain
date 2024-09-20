@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> and a target element <code>target</code>.\n\nA <strong>target index</strong> is an index <code>i</code> such that <code>nums[i] == target</code>.\n\nReturn <em>a list of the target indices of</em> <code>nums</code> after<em> sorting </em><code>nums</code><em> in <strong>non-decreasing</strong> order</em>. If there are no target indices, return <em>an <strong>empty</strong> list</em>. The returned list must be sorted in <strong>increasing</strong> order.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

@@ -1,0 +1,21 @@
+{
+    "description": "An <strong>ugly number</strong> is a positive integer that is divisible by <code>a</code>, <code>b</code>, or <code>c</code>.\n\nGiven four integers <code>n</code>, <code>a</code>, <code>b</code>, and <code>c</code>, return the <code>n<sup>th</sup></code> <strong>ugly number</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

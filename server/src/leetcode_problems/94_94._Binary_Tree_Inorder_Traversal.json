@@ -1,0 +1,21 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, return <em>the inorder traversal of its nodes' values</em>.\n\n",
+    "tags": [
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

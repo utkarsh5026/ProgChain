@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code>. In one step, <strong>remove</strong> all elements <code>nums[i]</code> where <code>nums[i - 1] &gt; nums[i]</code> for all <code>0 &lt; i &lt; nums.length</code>.\n\nReturn <em>the number of steps performed until </em><code>nums</code><em> becomes a <strong>non-decreasing</strong> array</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Monotonic Stack",
+            "url": "https://leetcode.com/tag/monotonic-stack/"
+        }
+    ]
+}

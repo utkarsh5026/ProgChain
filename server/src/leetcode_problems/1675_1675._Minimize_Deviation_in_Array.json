@@ -1,0 +1,21 @@
+{
+    "description": "You are given an array <code>nums</code> of <code>n</code> positive integers.\n\nYou can perform two types of operations on any element of the array any number of times:\n\nThe <strong>deviation</strong> of the array is the <strong>maximum difference</strong> between any two elements in the array.\n\nReturn <em>the <strong>minimum deviation</strong> the array can have after performing some number of operations.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Ordered Set",
+            "url": "https://leetcode.com/tag/ordered-set/"
+        }
+    ]
+}

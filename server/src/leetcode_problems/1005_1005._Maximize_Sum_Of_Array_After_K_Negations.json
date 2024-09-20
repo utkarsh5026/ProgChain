@@ -1,0 +1,17 @@
+{
+    "description": "Given an integer array <code>nums</code> and an integer <code>k</code>, modify the array in the following way:\n\nYou should apply this process exactly <code>k</code> times. You may choose the same index <code>i</code> multiple times.\n\nReturn <em>the largest possible sum of the array after modifying it in this way</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

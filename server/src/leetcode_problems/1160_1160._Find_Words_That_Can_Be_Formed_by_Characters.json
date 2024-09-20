@@ -1,0 +1,21 @@
+{
+    "description": "You are given an array of strings <code>words</code> and a string <code>chars</code>.\n\nA string is <strong>good</strong> if it can be formed by characters from <code>chars</code> (each character can only be used once).\n\nReturn <em>the sum of lengths of all good strings in words</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

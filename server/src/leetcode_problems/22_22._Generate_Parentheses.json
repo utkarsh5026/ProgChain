@@ -1,0 +1,17 @@
+{
+    "description": "Given <code>n</code> pairs of parentheses, write a function to <em>generate all combinations of well-formed parentheses</em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

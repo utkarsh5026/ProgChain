@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer array <code>nums</code>. You need to create a 2D array from <code>nums</code> satisfying the following conditions:\n\nReturn <em>the resulting array</em>. If there are multiple answers, return any of them.\n\n<strong>Note</strong> that the 2D array can have a different number of elements on each row.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        }
+    ]
+}

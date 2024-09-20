@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>target</code> and an integer <code>n</code>.\n\nYou have an empty stack with the two following operations:\n\nYou also have a stream of the integers in the range <code>[1, n]</code>.\n\nUse the two stack operations to make the numbers in the stack (from the bottom to the top) equal to <code>target</code>. You should follow the following rules:\n\nReturn <em>the stack operations needed to build </em><code>target</code> following the mentioned rules. If there are multiple valid answers, return <strong>any of them</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

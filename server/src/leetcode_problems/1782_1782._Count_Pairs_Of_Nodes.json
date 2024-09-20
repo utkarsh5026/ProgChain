@@ -1,0 +1,25 @@
+{
+    "description": "You are given an undirected graph defined by an integer <code>n</code>, the number of nodes, and a 2D integer array <code>edges</code>, the edges in the graph, where <code>edges[i] = [u<sub>i</sub>, v<sub>i</sub>]</code> indicates that there is an <strong>undirected</strong> edge between <code>u<sub>i</sub></code> and <code>v<sub>i</sub></code>. You are also given an integer array <code>queries</code>.\n\nLet <code>incident(a, b)</code> be defined as the <strong>number of edges</strong> that are connected to <strong>either</strong> node <code>a</code> or <code>b</code>.\n\nThe answer to the <code>j<sup>th</sup></code> query is the <strong>number of pairs</strong> of nodes <code>(a, b)</code> that satisfy <strong>both</strong> of the following conditions:\n\nReturn <em>an array </em><code>answers</code><em> such that </em><code>answers.length == queries.length</code><em> and </em><code>answers[j]</code><em> is the answer of the </em><code>j<sup>th</sup></code><em> query</em>.\n\nNote that there can be <strong>multiple edges</strong> between the same two nodes.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Graph",
+            "url": "https://leetcode.com/tag/graph/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

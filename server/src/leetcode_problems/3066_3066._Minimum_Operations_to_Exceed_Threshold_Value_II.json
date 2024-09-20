@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code>, and an integer <code>k</code>.\n\nIn one operation, you will:\n\n<strong>Note</strong> that you can only apply the described operation if <code>nums</code> contains at least two elements.\n\nReturn <em>the <strong>minimum</strong> number of operations needed so that all elements of the array are greater than or equal to</em> <code>k</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given the head of a linked list <code>head</code>, in which each node contains an integer value.\n\nBetween every pair of adjacent nodes, insert a new node with a value equal to the <strong>greatest common divisor</strong> of them.\n\nReturn <em>the linked list after insertion</em>.\n\nThe <strong>greatest common divisor</strong> of two numbers is the largest positive integer that evenly divides both numbers.\n\n",
+    "tags": [
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

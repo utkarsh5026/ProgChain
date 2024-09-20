@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>word</code> of size <code>n</code>, and an integer <code>k</code> such that <code>k</code> divides <code>n</code>.\n\nIn one operation, you can pick any two indices <code>i</code> and <code>j</code>, that are divisible by <code>k</code>, then replace the <span data-keyword=\"substring\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>substring</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(252px, 294px);\"></div></div></div></span> of length <code>k</code> starting at <code>i</code> with the substring of length <code>k</code> starting at <code>j</code>. That is, replace the substring <code>word[i..i + k - 1]</code> with the substring <code>word[j..j + k - 1]</code>.\n\nReturn <em>the <strong>minimum</strong> number of operations required to make</em> <code>word</code> <em><strong>k-periodic</strong></em>.\n\nWe say that <code>word</code> is <strong>k-periodic</strong> if there is some string <code>s</code> of length <code>k</code> such that <code>word</code> can be obtained by concatenating <code>s</code> an arbitrary number of times. For example, if <code>word == \u201cababab\u201d</code>, then <code>word</code> is 2-periodic for <code>s = \"ab\"</code>.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

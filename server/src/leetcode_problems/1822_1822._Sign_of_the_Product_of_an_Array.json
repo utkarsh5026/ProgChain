@@ -1,0 +1,13 @@
+{
+    "description": "Implement a function <code>signFunc(x)</code> that returns:\n\nYou are given an integer array <code>nums</code>. Let <code>product</code> be the product of all values in the array <code>nums</code>.\n\nReturn <code>signFunc(product)</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

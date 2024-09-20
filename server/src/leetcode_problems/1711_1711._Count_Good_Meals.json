@@ -1,0 +1,13 @@
+{
+    "description": "A <strong>good meal</strong> is a meal that contains <strong>exactly two different food items</strong> with a sum of deliciousness equal to a power of two.\n\nYou can pick <strong>any</strong> two different foods to make a good meal.\n\nGiven an array of integers <code>deliciousness</code> where <code>deliciousness[i]</code> is the deliciousness of the <code>i<sup>\u200b\u200b\u200b\u200b\u200b\u200bth</sup>\u200b\u200b\u200b\u200b</code>\u200b\u200b\u200b\u200b item of food, return <em>the number of different <strong>good meals</strong> you can make from this list modulo</em> <code>10<sup>9</sup> + 7</code>.\n\nNote that items with different indices are considered different even if they have the same deliciousness value.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        }
+    ]
+}

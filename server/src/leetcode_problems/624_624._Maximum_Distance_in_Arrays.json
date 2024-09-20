@@ -1,0 +1,13 @@
+{
+    "description": "You are given <code>m</code> <code>arrays</code>, where each array is sorted in <strong>ascending order</strong>.\n\nYou can pick up two integers from two different arrays (each array picks one) and calculate the distance. We define the distance between two integers <code>a</code> and <code>b</code> to be their absolute difference <code>|a - b|</code>.\n\nReturn <em>the maximum distance</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "You are given two strings, <code>word1</code> and <code>word2</code>. You want to construct a string in the following manner:\n\nReturn <em>the <strong>length</strong> of the longest <strong>palindrome</strong> that can be constructed in the described manner. </em>If no palindromes can be constructed, return <code>0</code>.\n\nA <strong>subsequence</strong> of a string <code>s</code> is a string that can be made by deleting some (possibly none) characters from <code>s</code> without changing the order of the remaining characters.\n\nA <strong>palindrome</strong> is a string that reads the same forward&nbsp;as well as backward.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

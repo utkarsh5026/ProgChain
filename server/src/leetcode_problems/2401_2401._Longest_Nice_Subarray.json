@@ -1,0 +1,17 @@
+{
+    "description": "You are given an array <code>nums</code> consisting of <strong>positive</strong> integers.\n\nWe call a subarray of <code>nums</code> <strong>nice</strong> if the bitwise <strong>AND</strong> of every pair of elements that are in <strong>different</strong> positions in the subarray is equal to <code>0</code>.\n\nReturn <em>the length of the <strong>longest</strong> nice subarray</em>.\n\nA <strong>subarray</strong> is a <strong>contiguous</strong> part of an array.\n\n<strong>Note</strong> that subarrays of length <code>1</code> are always considered nice.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

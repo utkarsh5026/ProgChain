@@ -1,0 +1,17 @@
+{
+    "description": "The <strong>beauty</strong> of a string is the difference in frequencies between the most frequent and least frequent characters.\n\nGiven a string <code>s</code>, return <em>the sum of <strong>beauty</strong> of all of its substrings.</em>\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

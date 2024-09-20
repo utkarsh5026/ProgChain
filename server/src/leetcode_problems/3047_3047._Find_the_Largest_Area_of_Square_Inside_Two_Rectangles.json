@@ -1,0 +1,17 @@
+{
+    "description": "There exist <code>n</code> rectangles in a 2D plane with edges parallel to the x and y axis. You are given two 2D integer arrays&nbsp;<code>bottomLeft</code> and <code>topRight</code>&nbsp;where <code>bottomLeft[i] = [a_i, b_i]</code> and <code>topRight[i] = [c_i, d_i]</code> represent&nbsp;the <strong>bottom-left</strong> and <strong>top-right</strong> coordinates of the <code>i<sup>th</sup></code> rectangle, respectively.\n\nYou need to find the <strong>maximum</strong> area of a <strong>square</strong> that can fit inside the intersecting region of at least two rectangles. Return <code>0</code> if such a square does not exist.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Geometry",
+            "url": "https://leetcode.com/tag/geometry/"
+        }
+    ]
+}

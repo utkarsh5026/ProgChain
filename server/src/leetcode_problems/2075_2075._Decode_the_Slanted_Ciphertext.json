@@ -1,0 +1,13 @@
+{
+    "description": "A string <code>originalText</code> is encoded using a <strong>slanted transposition cipher</strong> to a string <code>encodedText</code> with the help of a matrix having a <strong>fixed number of rows</strong> <code>rows</code>.\n\n<code>originalText</code> is placed first in a top-left to bottom-right manner.\n\nThe blue cells are filled first, followed by the red cells, then the yellow cells, and so on, until we reach the end of <code>originalText</code>. The arrow indicates the order in which the cells are filled. All empty cells are filled with <code>' '</code>. The number of columns is chosen such that the rightmost column will <strong>not be empty</strong> after filling in <code>originalText</code>.\n\n<code>encodedText</code> is then formed by appending all characters of the matrix in a row-wise fashion.\n\nThe characters in the blue cells are appended first to <code>encodedText</code>, then the red cells, and so on, and finally the yellow cells. The arrow indicates the order in which the cells are accessed.\n\nFor example, if <code>originalText = \"cipher\"</code> and <code>rows = 3</code>, then we encode it in the following manner:\n\nThe blue arrows depict how <code>originalText</code> is placed in the matrix, and the red arrows denote the order in which <code>encodedText</code> is formed. In the above example, <code>encodedText = \"ch ie pr\"</code>.\n\nGiven the encoded string <code>encodedText</code> and number of rows <code>rows</code>, return <em>the original string</em> <code>originalText</code>.\n\n<strong>Note:</strong> <code>originalText</code> <strong>does not</strong> have any trailing spaces <code>' '</code>. The test cases are generated such that there is only one possible <code>originalText</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

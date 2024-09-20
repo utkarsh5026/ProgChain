@@ -1,0 +1,17 @@
+{
+    "description": "Solve a given equation and return the value of <code>'x'</code> in the form of a string <code>\"x=#value\"</code>. The equation contains only <code>'+'</code>, <code>'-'</code> operation, the variable <code>'x'</code> and its coefficient. You should return <code>\"No solution\"</code> if there is no solution for the equation, or <code>\"Infinite solutions\"</code> if there are infinite solutions for the equation.\n\nIf there is exactly one solution for the equation, we ensure that the value of <code>'x'</code> is an integer.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

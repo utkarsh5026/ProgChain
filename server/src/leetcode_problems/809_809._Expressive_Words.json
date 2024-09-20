@@ -1,0 +1,17 @@
+{
+    "description": "Sometimes people repeat letters to represent extra feeling. For example:\n\nIn these strings like <code>\"heeellooo\"</code>, we have groups of adjacent letters that are all the same: <code>\"h\"</code>, <code>\"eee\"</code>, <code>\"ll\"</code>, <code>\"ooo\"</code>.\n\nYou are given a string <code>s</code> and an array of query strings <code>words</code>. A query word is <strong>stretchy</strong> if it can be made to be equal to <code>s</code> by any number of applications of the following extension operation: choose a group consisting of characters <code>c</code>, and add some number of characters <code>c</code> to the group so that the size of the group is <strong>three or more</strong>.\n\nReturn <em>the number of query strings that are <strong>stretchy</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

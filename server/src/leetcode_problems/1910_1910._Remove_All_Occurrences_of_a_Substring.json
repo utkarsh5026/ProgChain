@@ -1,0 +1,17 @@
+{
+    "description": "Given two strings <code>s</code> and <code>part</code>, perform the following operation on <code>s</code> until <strong>all</strong> occurrences of the substring <code>part</code> are removed:\n\nReturn <code>s</code><em> after removing all occurrences of </em><code>part</code>.\n\nA <strong>substring</strong> is a contiguous sequence of characters in a string.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

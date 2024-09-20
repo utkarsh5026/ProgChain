@@ -1,0 +1,13 @@
+{
+    "description": "There is a circle of red and blue tiles. You are given an array of integers <code>colors</code>. The color of tile <code>i</code> is represented by <code>colors[i]</code>:\n\nEvery 3 contiguous tiles in the circle with <strong>alternating</strong> colors (the middle tile has a different color from its <strong>left</strong> and <strong>right</strong> tiles) is called an <strong>alternating</strong> group.\n\nReturn the number of <strong>alternating</strong> groups.\n\n<strong>Note</strong> that since <code>colors</code> represents a <strong>circle</strong>, the <strong>first</strong> and the <strong>last</strong> tiles are considered to be next to each other.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

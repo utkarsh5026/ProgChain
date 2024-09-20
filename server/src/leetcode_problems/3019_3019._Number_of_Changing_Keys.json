@@ -1,0 +1,9 @@
+{
+    "description": "You are given a <strong>0-indexed </strong>string <code>s</code> typed by a user. Changing a key is defined as using a key different from the last used key. For example, <code>s = \"ab\"</code> has a change of a key while <code>s = \"bBBb\"</code> does not have any.\n\nReturn <em>the number of times the user had to change the key. </em>\n\n<strong>Note: </strong>Modifiers like <code>shift</code> or <code>caps lock</code> won't be counted in changing the key that is if a user typed the letter <code>'a'</code> and then the letter <code>'A'</code> then it will not be considered as a changing of key.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

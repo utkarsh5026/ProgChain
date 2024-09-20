@@ -1,0 +1,17 @@
+{
+    "description": "Given an integer <code>num</code>, repeatedly add all its digits until the result has only one digit, and return it.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

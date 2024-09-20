@@ -1,0 +1,25 @@
+{
+    "description": "Design a HashSet without using any built-in hash table libraries.\n\nImplement <code>MyHashSet</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

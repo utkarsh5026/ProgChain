@@ -1,0 +1,17 @@
+{
+    "description": "Let's define a function <code>countUniqueChars(s)</code> that returns the number of unique characters in&nbsp;<code>s</code>.\n\nGiven a string <code>s</code>, return the sum of <code>countUniqueChars(t)</code> where <code>t</code> is a substring of <code>s</code>. The test cases are generated such that the answer fits in a 32-bit integer.\n\nNotice that some substrings can be repeated so in this case you have to count the repeated ones too.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

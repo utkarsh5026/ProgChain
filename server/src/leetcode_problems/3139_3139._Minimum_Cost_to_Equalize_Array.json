@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code> and two integers <code>cost1</code> and <code>cost2</code>. You are allowed to perform <strong>either</strong> of the following operations <strong>any</strong> number of times:\n\nReturn the <strong>minimum</strong> <strong>cost</strong> required to make all elements in the array <strong>equal</strong><em>. </em>\n\nSince the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

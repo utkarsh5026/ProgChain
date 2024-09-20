@@ -1,0 +1,21 @@
+{
+    "description": "Alice and Bob take turns playing a game, with Alice starting first.\n\nInitially, there is a number <code>n</code> on the chalkboard. On each player's turn, that player makes a move consisting of:\n\nAlso, if a player cannot make a move, they lose the game.\n\nReturn <code>true</code> <em>if and only if Alice wins the game, assuming both players play optimally</em>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Brainteaser",
+            "url": "https://leetcode.com/tag/brainteaser/"
+        },
+        {
+            "name": "Game Theory",
+            "url": "https://leetcode.com/tag/game-theory/"
+        }
+    ]
+}

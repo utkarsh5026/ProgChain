@@ -1,0 +1,9 @@
+{
+    "description": "Given a positive integer, check whether it has alternating bits: namely, if two adjacent bits will always have different values.\n\n",
+    "tags": [
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

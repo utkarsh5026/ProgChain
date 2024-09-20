@@ -1,0 +1,4 @@
+{
+    "description": "Write a solution to calculate and display the <strong>number of rows and columns</strong> of <code>players</code>.\n\nReturn the result as an array:\n\n<code>[number of rows, number of columns]</code>\n\nThe result format is in the following example.\n\n",
+    "tags": []
+}

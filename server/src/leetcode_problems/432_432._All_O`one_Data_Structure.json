@@ -1,0 +1,21 @@
+{
+    "description": "Design a data structure to store the strings' count with the ability to return the strings with minimum and maximum counts.\n\nImplement the <code>AllOne</code> class:\n\n<strong>Note</strong> that each function must run in <code>O(1)</code> average time complexity.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Doubly-Linked List",
+            "url": "https://leetcode.com/tag/doubly-linked-list/"
+        }
+    ]
+}

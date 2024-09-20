@@ -1,0 +1,17 @@
+{
+    "description": "There is an <code>m x n</code> cake that needs to be cut into <code>1 x 1</code> pieces.\n\nYou are given integers <code>m</code>, <code>n</code>, and two arrays:\n\nIn one operation, you can choose any piece of cake that is not yet a <code>1 x 1</code> square and perform one of the following cuts:\n\nAfter the cut, the piece of cake is divided into two distinct pieces.\n\nThe cost of a cut depends only on the initial cost of the line and does not change.\n\nReturn the <strong>minimum</strong> total cost to cut the entire cake into <code>1 x 1</code> pieces.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

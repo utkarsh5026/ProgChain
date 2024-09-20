@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code> of length <code>n</code>.\n\nAssume <code>arr<sub>k</sub></code> to be an array obtained by rotating <code>nums</code> by <code>k</code> positions clock-wise. We define the <strong>rotation function</strong> <code>F</code> on <code>nums</code> as follow:\n\nReturn <em>the maximum value of</em> <code>F(0), F(1), ..., F(n-1)</code>.\n\nThe test cases are generated so that the answer fits in a <strong>32-bit</strong> integer.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

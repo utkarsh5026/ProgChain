@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code>, an integer <code>modulo</code>, and an integer <code>k</code>.\n\nYour task is to find the count of subarrays that are <strong>interesting</strong>.\n\nA <strong>subarray</strong> <code>nums[l..r]</code> is <strong>interesting</strong> if the following condition holds:\n\nReturn <em>an integer denoting the count of interesting subarrays. </em>\n\n<span><strong>Note:</strong> A subarray is <em>a contiguous non-empty sequence of elements within an array</em>.</span>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

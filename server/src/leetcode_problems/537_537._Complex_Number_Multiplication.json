@@ -1,0 +1,17 @@
+{
+    "description": "A <a href=\"https://en.wikipedia.org/wiki/Complex_number\" target=\"_blank\">complex number</a> can be represented as a string on the form <code>\"<strong>real</strong>+<strong>imaginary</strong>i\"</code> where:\n\nGiven two complex numbers <code>num1</code> and <code>num2</code> as strings, return <em>a string of the complex number that represents their multiplications</em>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

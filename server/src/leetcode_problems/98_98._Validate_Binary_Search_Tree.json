@@ -1,0 +1,21 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, <em>determine if it is a valid binary search tree (BST)</em>.\n\nA <strong>valid BST</strong> is defined as follows:\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Search Tree",
+            "url": "https://leetcode.com/tag/binary-search-tree/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

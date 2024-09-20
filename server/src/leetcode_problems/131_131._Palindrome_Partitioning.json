@@ -1,0 +1,17 @@
+{
+    "description": "Given a string <code>s</code>, partition <code>s</code> such that every <span data-keyword=\"substring-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rv:\"><div>substring</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(334px, 183px);\"></div></div></div></span> of the partition is a <span data-keyword=\"palindrome-string\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:r11:\"><div><strong>palindrome</strong></div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(88px, 204px);\"></div></div></div></span>. Return <em>all possible palindrome partitioning of </em><code>s</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

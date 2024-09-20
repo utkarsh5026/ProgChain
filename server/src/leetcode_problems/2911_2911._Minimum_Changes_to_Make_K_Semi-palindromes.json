@@ -1,0 +1,17 @@
+{
+    "description": "Given a string <code>s</code> and an integer <code>k</code>, partition <code>s</code> into <code>k</code> <strong><span data-keyword=\"substring-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>substrings</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(398px, 215px);\"></div></div></div></span></strong> such that the letter changes needed to make each substring a <strong>semi-palindrome</strong>&nbsp;are minimized.\n\nReturn the <em><strong>minimum</strong> number of letter changes</em> required<em>.</em>\n\nA <strong>semi-palindrome</strong> is a special type of string that can be divided into <strong><span data-keyword=\"palindrome\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rq:\"><div>palindromes</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(67px, 352px);\"></div></div></div></span></strong> based on a repeating pattern. To check if a string is a semi-palindrome:\u200b\n\nConsider the string <code>\"abcabc\"</code>:\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

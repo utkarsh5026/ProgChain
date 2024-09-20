@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code> of length <code>n</code>, and a <strong>positive</strong> integer <code>k</code>.\n\nThe <strong>power</strong> of a <span data-keyword=\"subsequence-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>subsequence</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(165px, 273px);\"></div></div></div></span> is defined as the <strong>minimum</strong> absolute difference between <strong>any</strong> two elements in the subsequence.\n\nReturn <em>the <strong>sum</strong> of <strong>powers</strong> of <strong>all</strong> subsequences of </em><code>nums</code><em> which have length</em> <strong><em>equal to</em></strong> <code>k</code>.\n\nSince the answer may be large, return it <strong>modulo</strong> <code>10<sup>9 </sup>+ 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "description": "The string <code>\"PAYPALISHIRING\"</code> is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)\n\nAnd then read line by line: <code>\"PAHNAPLSIIGYIR\"</code>\n\nWrite the code that will take a string and make this conversion given a number of rows:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

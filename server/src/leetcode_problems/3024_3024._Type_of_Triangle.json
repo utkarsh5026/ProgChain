@@ -1,0 +1,17 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> of size <code>3</code> which can form the sides of a triangle.\n\nReturn <em>a string representing</em> <em>the type of triangle that can be formed </em><em>or </em><code>\"none\"</code><em> if it <strong>cannot</strong> form a triangle.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

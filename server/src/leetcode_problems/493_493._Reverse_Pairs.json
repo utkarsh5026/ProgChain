@@ -1,0 +1,33 @@
+{
+    "description": "Given an integer array <code>nums</code>, return <em>the number of <strong>reverse pairs</strong> in the array</em>.\n\nA <strong>reverse pair</strong> is a pair <code>(i, j)</code> where:\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        },
+        {
+            "name": "Merge Sort",
+            "url": "https://leetcode.com/tag/merge-sort/"
+        },
+        {
+            "name": "Ordered Set",
+            "url": "https://leetcode.com/tag/ordered-set/"
+        }
+    ]
+}

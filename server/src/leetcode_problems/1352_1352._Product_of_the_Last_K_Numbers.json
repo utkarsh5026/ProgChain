@@ -1,0 +1,25 @@
+{
+    "description": "Design an algorithm that accepts a stream of integers and retrieves the product of the last <code>k</code> integers of the stream.\n\nImplement the <code>ProductOfNumbers</code> class:\n\nThe test cases are generated so that, at any time, the product of any contiguous sequence of numbers will fit into a single 32-bit integer without overflowing.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Data Stream",
+            "url": "https://leetcode.com/tag/data-stream/"
+        }
+    ]
+}

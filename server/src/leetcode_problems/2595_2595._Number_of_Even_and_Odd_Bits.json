@@ -1,0 +1,9 @@
+{
+    "description": "You are given a <strong>positive</strong> integer <code>n</code>.\n\nLet <code>even</code> denote the number of even indices in the binary representation of <code>n</code> with value 1.\n\nLet <code>odd</code> denote the number of odd indices in the binary representation of <code>n</code> with value 1.\n\nNote that bits are indexed from <strong>right to left</strong> in the binary representation of a number.\n\nReturn the array <code>[even, odd]</code>.\n\n",
+    "tags": [
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

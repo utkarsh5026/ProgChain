@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer array&nbsp;<code>nums</code>. You can choose <strong>exactly one</strong> index (<strong>0-indexed</strong>) and remove the element. Notice that the index of the elements may change after the removal.\n\nFor example, if <code>nums = [6,1,7,4,1]</code>:\n\nAn array is <strong>fair</strong> if the sum of the odd-indexed values equals the sum of the even-indexed values.\n\nReturn the <em><strong>number</strong> of indices that you could choose such that after the removal, </em><code>nums</code><em> </em><em>is <strong>fair</strong>. </em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

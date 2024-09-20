@@ -1,0 +1,13 @@
+{
+    "description": "You are given positive integers <code>low</code>, <code>high</code>, and <code>k</code>.\n\nA number is <strong>beautiful</strong> if it meets both of the following conditions:\n\nReturn <em>the number of beautiful integers in the range</em> <code>[low, high]</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

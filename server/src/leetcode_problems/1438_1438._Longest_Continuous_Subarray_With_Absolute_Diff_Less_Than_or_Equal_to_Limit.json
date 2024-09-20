@@ -1,0 +1,29 @@
+{
+    "description": "Given an array of integers <code>nums</code> and an integer <code>limit</code>, return the size of the longest <strong>non-empty</strong> subarray such that the absolute difference between any two elements of this subarray is less than or equal to <code>limit</code><em>.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Ordered Set",
+            "url": "https://leetcode.com/tag/ordered-set/"
+        },
+        {
+            "name": "Monotonic Queue",
+            "url": "https://leetcode.com/tag/monotonic-queue/"
+        }
+    ]
+}

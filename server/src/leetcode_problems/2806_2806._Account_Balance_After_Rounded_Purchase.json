@@ -1,0 +1,9 @@
+{
+    "description": "Initially, you have a bank account balance of <strong>100</strong> dollars.\n\nYou are given an integer <code>purchaseAmount</code> representing the amount you will spend on a purchase in dollars, in other words, its price.\n\nWhen making the purchase, first the <code>purchaseAmount</code> <strong>is rounded to the nearest multiple of 10</strong>. Let us call this value <code>roundedAmount</code>. Then, <code>roundedAmount</code> dollars are removed from your bank account.\n\nReturn an integer denoting your final bank account balance after this purchase.\n\n<strong>Notes:</strong>\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

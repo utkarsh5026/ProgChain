@@ -1,0 +1,17 @@
+{
+    "description": "Suppose we have a file system that stores both files and directories. An example of one system is represented in the following picture:\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2020/08/28/mdir.jpg\" style=\"width: 681px; height: 322px;\">\n\nHere, we have <code>dir</code> as the only directory in the root. <code>dir</code> contains two subdirectories, <code>subdir1</code> and <code>subdir2</code>. <code>subdir1</code> contains a file <code>file1.ext</code> and subdirectory <code>subsubdir1</code>. <code>subdir2</code> contains a subdirectory <code>subsubdir2</code>, which contains a file <code>file2.ext</code>.\n\nIn text form, it looks like this (with \u27f6 representing the tab character):\n\nIf we were to write this representation in code, it will look like this: <code>\"dir\\n\\tsubdir1\\n\\t\\tfile1.ext\\n\\t\\tsubsubdir1\\n\\tsubdir2\\n\\t\\tsubsubdir2\\n\\t\\t\\tfile2.ext\"</code>. Note that the <code>'\\n'</code> and <code>'\\t'</code> are the new-line and tab characters.\n\nEvery file and directory has a unique <strong>absolute path</strong> in the file system, which is the order of directories that must be opened to reach the file/directory itself, all concatenated by <code>'/'s</code>. Using the above example, the <strong>absolute path</strong> to <code>file2.ext</code> is <code>\"dir/subdir2/subsubdir2/file2.ext\"</code>. Each directory name consists of letters, digits, and/or spaces. Each file name is of the form <code>name.extension</code>, where <code>name</code> and <code>extension</code> consist of letters, digits, and/or spaces.\n\nGiven a string <code>input</code> representing the file system in the explained format, return <em>the length of the <strong>longest absolute path</strong> to a <strong>file</strong> in the abstracted file system</em>. If there is no file in the system, return <code>0</code>.\n\n<strong>Note</strong> that the testcases are generated such that the file system is valid and no file or directory name has length 0.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        }
+    ]
+}

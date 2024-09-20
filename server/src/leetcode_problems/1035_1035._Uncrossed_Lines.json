@@ -1,0 +1,13 @@
+{
+    "description": "You are given two integer arrays <code>nums1</code> and <code>nums2</code>. We write the integers of <code>nums1</code> and <code>nums2</code> (in the order they are given) on two separate horizontal lines.\n\nWe may draw connecting lines: a straight line connecting two numbers <code>nums1[i]</code> and <code>nums2[j]</code> such that:\n\nNote that a connecting line cannot intersect even at the endpoints (i.e., each number can only belong to one connecting line).\n\nReturn <em>the maximum number of connecting lines we can draw in this way</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

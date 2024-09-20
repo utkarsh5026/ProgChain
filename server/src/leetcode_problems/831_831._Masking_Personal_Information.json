@@ -1,0 +1,9 @@
+{
+    "description": "You are given a personal information string <code>s</code>, representing either an <strong>email address</strong> or a <strong>phone number</strong>. Return <em>the <strong>masked</strong> personal information using the below rules</em>.\n\n<u><strong>Email address:</strong></u>\n\nAn email address is:\n\nTo mask an email:\n\n<u><strong>Phone number:</strong></u>\n\nA phone number is formatted as follows:\n\nTo mask a phone number:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

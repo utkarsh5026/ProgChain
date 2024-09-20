@@ -1,0 +1,9 @@
+{
+    "description": "A word is considered <strong>valid</strong> if:\n\nYou are given a string <code>word</code>.\n\nReturn <code>true</code> if <code>word</code> is valid, otherwise, return <code>false</code>.\n\n<strong>Notes:</strong>\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

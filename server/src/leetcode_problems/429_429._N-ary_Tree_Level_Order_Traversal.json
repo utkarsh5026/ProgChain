@@ -1,0 +1,13 @@
+{
+    "description": "Given an n-ary tree, return the <em>level order</em> traversal of its nodes' values.\n\n<em>Nary-Tree input serialization is represented in their level order traversal, each group of children is separated by the null value (See examples).</em>\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        }
+    ]
+}

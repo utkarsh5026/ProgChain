@@ -1,0 +1,13 @@
+{
+    "description": "There are some red and blue tiles arranged circularly. You are given an array of integers <code>colors</code> and a 2D integers array <code>queries</code>.\n\nThe color of tile <code>i</code> is represented by <code>colors[i]</code>:\n\nAn <strong>alternating</strong> group is a contiguous subset of tiles in the circle with <strong>alternating</strong> colors (each tile in the group except the first and last one has a different color from its <b>adjacent</b> tiles in the group).\n\nYou have to process queries of two types:\n\nReturn an array <code>answer</code> containing the results of the queries of the first type <em>in order</em>.\n\n<strong>Note</strong> that since <code>colors</code> represents a <strong>circle</strong>, the <strong>first</strong> and the <strong>last</strong> tiles are considered to be next to each other.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        }
+    ]
+}

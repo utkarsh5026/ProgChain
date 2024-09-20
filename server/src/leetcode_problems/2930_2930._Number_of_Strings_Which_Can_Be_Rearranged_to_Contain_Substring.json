@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer <code>n</code>.\n\nA string <code>s</code> is called <strong>good </strong>if it contains only lowercase English characters <strong>and</strong> it is possible to rearrange the characters of <code>s</code> such that the new string contains <code>\"leet\"</code> as a <strong>substring</strong>.\n\nFor example:\n\nReturn <em>the <strong>total</strong> number of good strings of length </em><code>n</code>.\n\nSince the answer may be large, return it <strong>modulo </strong><code>10<sup>9</sup> + 7</code>.\n\nA <strong>substring</strong> is a contiguous sequence of characters within a string.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        }
+    ]
+}

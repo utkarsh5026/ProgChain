@@ -1,0 +1,13 @@
+{
+    "description": "Given an integer array <code>nums</code> where <code>nums[i]</code> is either a positive integer or <code>-1</code>. We need to find for each <code>-1</code> the respective positive integer, which we call the last visited integer.\n\nTo achieve this goal, let's define two empty arrays: <code>seen</code> and <code>ans</code>.\n\nStart iterating from the beginning of the array <code>nums</code>.\n\nReturn the array<em> </em><code>ans</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

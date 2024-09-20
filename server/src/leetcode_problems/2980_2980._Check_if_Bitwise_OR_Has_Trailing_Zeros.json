@@ -1,0 +1,13 @@
+{
+    "description": "You are given an array of <strong>positive</strong> integers <code>nums</code>.\n\nYou have to check if it is possible to select <strong>two or more</strong> elements in the array such that the bitwise <code>OR</code> of the selected elements has <strong>at least </strong>one trailing zero in its binary representation.\n\nFor example, the binary representation of <code>5</code>, which is <code>\"101\"</code>, does not have any trailing zeros, whereas the binary representation of <code>4</code>, which is <code>\"100\"</code>, has two trailing zeros.\n\nReturn <code>true</code> <em>if it is possible to select two or more elements whose bitwise</em> <code>OR</code> <em>has trailing zeros, return</em> <code>false</code> <em>otherwise</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

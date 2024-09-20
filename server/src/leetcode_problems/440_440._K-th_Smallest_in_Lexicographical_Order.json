@@ -1,0 +1,9 @@
+{
+    "description": "Given two integers <code>n</code> and <code>k</code>, return <em>the</em> <code>k<sup>th</sup></code> <em>lexicographically smallest integer in the range</em> <code>[1, n]</code>.\n\n",
+    "tags": [
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        }
+    ]
+}

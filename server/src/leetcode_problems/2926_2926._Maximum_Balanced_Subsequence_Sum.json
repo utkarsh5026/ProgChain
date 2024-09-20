@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code>.\n\nA <strong>subsequence</strong> of <code>nums</code> having length <code>k</code> and consisting of <strong>indices</strong> <code>i<sub>0</sub>&nbsp;&lt;&nbsp;i<sub>1</sub> &lt;&nbsp;... &lt; i<sub>k-1</sub></code> is <strong>balanced</strong> if the following holds:\n\nA <strong>subsequence</strong> of <code>nums</code> having length <code>1</code> is considered balanced.\n\nReturn <em>an integer denoting the <strong>maximum</strong> possible <strong>sum of elements</strong> in a <strong>balanced</strong> subsequence of </em><code>nums</code>.\n\nA <strong>subsequence</strong> of an array is a new <strong>non-empty</strong> array that is formed from the original array by deleting some (<strong>possibly none</strong>) of the elements without disturbing the relative positions of the remaining elements.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        }
+    ]
+}

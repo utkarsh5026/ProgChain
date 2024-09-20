@@ -1,0 +1,29 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array of non-negative integers <code>nums</code>. For each integer in <code>nums</code>, you must find its respective <strong>second greater</strong> integer.\n\nThe <strong>second greater</strong> integer of <code>nums[i]</code> is <code>nums[j]</code> such that:\n\nIf there is no such <code>nums[j]</code>, the second greater integer is considered to be <code>-1</code>.\n\nReturn<em> an integer array </em><code>answer</code><em>, where </em><code>answer[i]</code><em> is the second greater integer of </em><code>nums[i]</code><em>.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Monotonic Stack",
+            "url": "https://leetcode.com/tag/monotonic-stack/"
+        }
+    ]
+}

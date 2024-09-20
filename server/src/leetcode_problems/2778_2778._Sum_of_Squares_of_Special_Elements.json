@@ -1,0 +1,13 @@
+{
+    "description": "You are given a <strong>1-indexed</strong> integer array <code>nums</code> of length <code>n</code>.\n\nAn element <code>nums[i]</code> of <code>nums</code> is called <strong>special</strong> if <code>i</code> divides <code>n</code>, i.e. <code>n % i == 0</code>.\n\nReturn <em>the <strong>sum of the squares</strong> of all <strong>special</strong> elements of </em><code>nums</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

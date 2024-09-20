@@ -1,0 +1,21 @@
+{
+    "description": "You are given a 2D integer array <code>groups</code> of length <code>n</code>. You are also given an integer array <code>nums</code>.\n\nYou are asked if you can choose <code>n</code> <strong>disjoint </strong>subarrays from the array <code>nums</code> such that the <code>i<sup>th</sup></code> subarray is equal to <code>groups[i]</code> (<b>0-indexed</b>), and if <code>i &gt; 0</code>, the <code>(i-1)<sup>th</sup></code> subarray appears <strong>before</strong> the <code>i<sup>th</sup></code> subarray in <code>nums</code> (i.e. the subarrays must be in the same order as <code>groups</code>).\n\nReturn <code>true</code> <em>if you can do this task, and</em> <code>false</code> <em>otherwise</em>.\n\nNote that the subarrays are <strong>disjoint</strong> if and only if there is no index <code>k</code> such that <code>nums[k]</code> belongs to more than one subarray. A subarray is a contiguous sequence of elements within an array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        }
+    ]
+}

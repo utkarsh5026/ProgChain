@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string <code>s</code> consisting only of lowercase English letters.\n\nIn one <strong>move</strong>, you can select any two <strong>adjacent</strong> characters of <code>s</code> and swap them.\n\nReturn <em>the <strong>minimum number of moves</strong> needed to make</em> <code>s</code> <em>a palindrome</em>.\n\n<strong>Note</strong> that the input will be generated such that <code>s</code> can always be converted to a palindrome.\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        }
+    ]
+}

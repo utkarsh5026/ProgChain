@@ -1,0 +1,21 @@
+{
+    "description": "Given two strings <code>s1</code> and <code>s2</code>, return <code>true</code> if <code>s2</code> contains a <span data-keyword=\"permutation-string\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>permutation</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(64px, 204px);\"></div></div></div></span> of <code>s1</code>, or <code>false</code> otherwise.\n\nIn other words, return <code>true</code> if one of <code>s1</code>'s permutations is the substring of <code>s2</code>.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

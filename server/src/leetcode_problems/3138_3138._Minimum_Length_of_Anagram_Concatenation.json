@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code>, which is known to be a concatenation of <strong>anagrams</strong> of some string <code>t</code>.\n\nReturn the <strong>minimum</strong> possible length of the string <code>t</code>.\n\nAn <strong>anagram</strong> is formed by rearranging the letters of a string. For example, \"aab\", \"aba\", and, \"baa\" are anagrams of \"aab\".\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

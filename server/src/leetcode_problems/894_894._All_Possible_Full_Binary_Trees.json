@@ -1,0 +1,25 @@
+{
+    "description": "Given an integer <code>n</code>, return <em>a list of all possible <strong>full binary trees</strong> with</em> <code>n</code> <em>nodes</em>. Each node of each tree in the answer must have <code>Node.val == 0</code>.\n\nEach element of the answer is the root node of one possible tree. You may return the final list of trees in <strong>any order</strong>.\n\nA <strong>full binary tree</strong> is a binary tree where each node has exactly <code>0</code> or <code>2</code> children.\n\n",
+    "tags": [
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Recursion",
+            "url": "https://leetcode.com/tag/recursion/"
+        },
+        {
+            "name": "Memoization",
+            "url": "https://leetcode.com/tag/memoization/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

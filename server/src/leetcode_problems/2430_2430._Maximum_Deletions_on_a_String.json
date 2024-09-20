@@ -1,0 +1,25 @@
+{
+    "description": "You are given a string <code>s</code> consisting of only lowercase English letters. In one operation, you can:\n\nFor example, if <code>s = \"ababc\"</code>, then in one operation, you could delete the first two letters of <code>s</code> to get <code>\"abc\"</code>, since the first two letters of <code>s</code> and the following two letters of <code>s</code> are both equal to <code>\"ab\"</code>.\n\nReturn <em>the <strong>maximum</strong> number of operations needed to delete all of </em><code>s</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Rolling Hash",
+            "url": "https://leetcode.com/tag/rolling-hash/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

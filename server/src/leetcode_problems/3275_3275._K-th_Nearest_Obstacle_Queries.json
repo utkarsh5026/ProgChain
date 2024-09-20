@@ -1,0 +1,13 @@
+{
+    "description": "There is an infinite 2D plane.\n\nYou are given a positive integer <code>k</code>. You are also given a 2D array <code>queries</code>, which contains the following queries:\n\nAfter each query, you need to find the <strong>distance</strong> of the <code>k<sup>th</sup></code> <strong>nearest</strong> obstacle from the origin.\n\nReturn an integer array <code>results</code> where <code>results[i]</code> denotes the <code>k<sup>th</sup></code> nearest obstacle after query <code>i</code>, or <code>results[i] == -1</code> if there are less than <code>k</code> obstacles.\n\n<strong>Note</strong> that initially there are <strong>no</strong> obstacles anywhere.\n\nThe <strong>distance</strong> of an obstacle at coordinate <code>(x, y)</code> from the origin is given by <code>|x| + |y|</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        }
+    ]
+}

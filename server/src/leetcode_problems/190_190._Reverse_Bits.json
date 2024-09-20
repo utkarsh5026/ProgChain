@@ -1,0 +1,13 @@
+{
+    "description": "Reverse bits of a given 32 bits unsigned integer.\n\n<strong>Note:</strong>\n\n",
+    "tags": [
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

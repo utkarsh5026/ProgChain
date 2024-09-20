@@ -1,0 +1,13 @@
+{
+    "description": "Given an unsorted integer array <code>nums</code>. Return the <em>smallest positive integer</em> that is <em>not present</em> in <code>nums</code>.\n\nYou must implement an algorithm that runs in <code>O(n)</code> time and uses <code>O(1)</code> auxiliary space.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        }
+    ]
+}

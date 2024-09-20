@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> and an integer <code>value</code>.\n\nIn one operation, you can add or subtract <code>value</code> from any element of <code>nums</code>.\n\nThe MEX (minimum excluded) of an array is the smallest missing <strong>non-negative</strong> integer in it.\n\nReturn <em>the maximum MEX of </em><code>nums</code><em> after applying the mentioned operation <strong>any number of times</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

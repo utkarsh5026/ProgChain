@@ -1,0 +1,21 @@
+{
+    "description": "We run a&nbsp;preorder&nbsp;depth-first search (DFS) on the <code>root</code> of a binary tree.\n\nAt each node in this traversal, we output <code>D</code> dashes (where <code>D</code> is the depth of this node), then we output the value of this node.&nbsp; If the depth of a node is <code>D</code>, the depth of its immediate child is <code>D + 1</code>.&nbsp; The depth of the <code>root</code> node is <code>0</code>.\n\nIf a node has only one child, that child is guaranteed to be <strong>the left child</strong>.\n\nGiven the output <code>traversal</code> of this traversal, recover the tree and return <em>its</em> <code>root</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

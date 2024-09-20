@@ -1,0 +1,17 @@
+{
+    "description": "You are given an array of integers <code>nums</code> with length <code>n</code>, and a positive <strong>odd</strong> integer <code>k</code>.\n\nSelect exactly <b><code>k</code></b> disjoint <span data-keyword=\"subarray-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>subarrays</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(208px, 273px);\"></div></div></div></span> <b><code>sub<sub>1</sub>, sub<sub>2</sub>, ..., sub<sub>k</sub></code></b> from <code>nums</code> such that the last element of <code>sub<sub>i</sub></code> appears before the first element of <code>sub<sub>{i+1}</sub></code> for all <code>1 &lt;= i &lt;= k-1</code>. The goal is to maximize their combined strength.\n\nThe strength of the selected subarrays is defined as:\n\n<code>strength = k * sum(sub<sub>1</sub>)- (k - 1) * sum(sub<sub>2</sub>) + (k - 2) * sum(sub<sub>3</sub>) - ... - 2 * sum(sub<sub>{k-1}</sub>) + sum(sub<sub>k</sub>)</code>\n\nwhere <b><code>sum(sub<sub>i</sub>)</code></b> is the sum of the elements in the <code>i</code>-th subarray.\n\nReturn the <strong>maximum</strong> possible strength that can be obtained from selecting exactly <b><code>k</code></b> disjoint subarrays from <code>nums</code>.\n\n<strong>Note</strong> that the chosen subarrays <strong>don't</strong> need to cover the entire array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

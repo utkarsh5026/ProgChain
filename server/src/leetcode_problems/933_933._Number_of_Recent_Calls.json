@@ -1,0 +1,17 @@
+{
+    "description": "You have a <code>RecentCounter</code> class which counts the number of recent requests within a certain time frame.\n\nImplement the <code>RecentCounter</code> class:\n\nIt is <strong>guaranteed</strong> that every call to <code>ping</code> uses a strictly larger value of <code>t</code> than the previous call.\n\n",
+    "tags": [
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Data Stream",
+            "url": "https://leetcode.com/tag/data-stream/"
+        }
+    ]
+}

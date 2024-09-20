@@ -1,0 +1,13 @@
+{
+    "description": "Write a function that takes the binary representation of a positive integer and returns the number of <span data-keyword=\"set-bit\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>set bits</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(263px, 204px);\"></div></div></div></span> it has (also known as the <a href=\"http://en.wikipedia.org/wiki/Hamming_weight\" target=\"_blank\">Hamming weight</a>).\n\n",
+    "tags": [
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

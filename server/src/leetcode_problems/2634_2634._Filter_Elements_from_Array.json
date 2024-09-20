@@ -1,0 +1,4 @@
+{
+    "description": "Given an integer array <code>arr</code> and a filtering function <code>fn</code>, return a filtered array <code>filteredArr</code>.\n\nThe <code>fn</code> function takes one or two arguments:\n\n<code>filteredArr</code> should only contain the elements from the&nbsp;<code>arr</code> for which the expression <code>fn(arr[i], i)</code> evaluates to a <strong>truthy</strong> value. A&nbsp;<strong>truthy</strong>&nbsp;value is a value where&nbsp;<code>Boolean(value)</code>&nbsp;returns&nbsp;<code>true</code>.\n\nPlease solve it without the built-in <code>Array.filter</code> method.\n\n",
+    "tags": []
+}

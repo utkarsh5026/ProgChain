@@ -1,0 +1,17 @@
+{
+    "description": "Given the heads of two singly linked-lists <code>headA</code> and <code>headB</code>, return <em>the node at which the two lists intersect</em>. If the two linked lists have no intersection at all, return <code>null</code>.\n\nFor example, the following two linked lists begin to intersect at node <code>c1</code>:\n\nThe test cases are generated such that there are no cycles anywhere in the entire linked structure.\n\n<strong>Note</strong> that the linked lists must <strong>retain their original structure</strong> after the function returns.\n\n<strong>Custom Judge:</strong>\n\nThe inputs to the <strong>judge</strong> are given as follows (your program is <strong>not</strong> given these inputs):\n\nThe judge will then create the linked structure based on these inputs and pass the two heads, <code>headA</code> and <code>headB</code> to your program. If you correctly return the intersected node, then your solution will be <strong>accepted</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        }
+    ]
+}

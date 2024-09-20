@@ -1,0 +1,13 @@
+{
+    "description": "You are standing at position <code>0</code> on an infinite number line. There is a destination at position <code>target</code>.\n\nYou can make some number of moves <code>numMoves</code> so that:\n\nGiven the integer <code>target</code>, return <em>the <strong>minimum</strong> number of moves required (i.e., the minimum </em><code>numMoves</code><em>) to reach the destination</em>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        }
+    ]
+}

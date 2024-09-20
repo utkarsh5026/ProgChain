@@ -1,0 +1,21 @@
+{
+    "description": "You are given a 2D array of integers <code>envelopes</code> where <code>envelopes[i] = [w<sub>i</sub>, h<sub>i</sub>]</code> represents the width and the height of an envelope.\n\nOne envelope can fit into another if and only if both the width and height of one envelope are greater than the other envelope's width and height.\n\nReturn <em>the maximum number of envelopes you can Russian doll (i.e., put one inside the other)</em>.\n\n<strong>Note:</strong> You cannot rotate an envelope.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "description": "Implement the <code>myAtoi(string s)</code> function, which converts a string to a 32-bit signed integer.\n\nThe algorithm for <code>myAtoi(string s)</code> is as follows:\n\nReturn the integer as the final result.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

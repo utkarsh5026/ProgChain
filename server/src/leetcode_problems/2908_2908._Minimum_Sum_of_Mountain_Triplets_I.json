@@ -1,0 +1,9 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>nums</code> of integers.\n\nA triplet of indices <code>(i, j, k)</code> is a <strong>mountain</strong> if:\n\nReturn <em>the <strong>minimum possible sum</strong> of a mountain triplet of</em> <code>nums</code>. <em>If no such triplet exists, return</em> <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        }
+    ]
+}

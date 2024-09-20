@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>nums</code> of size <code>n</code> consisting of positive integers.\n\nYou are also given a 2D array <code>queries</code> of size <code>m</code> where <code>queries[i] = [index<sub>i</sub>, k<sub>i</sub>]</code>.\n\nInitially all elements of the array are <strong>unmarked</strong>.\n\nYou need to apply <code>m</code> queries on the array in order, where on the <code>i<sup>th</sup></code> query you do the following:\n\nReturn <em>an array answer of size </em><code>m</code><em> where </em><code>answer[i]</code><em> is the <strong>sum</strong> of unmarked elements in the array after the </em><code>i<sup>th</sup></code><em> query</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

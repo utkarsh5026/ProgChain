@@ -1,0 +1,13 @@
+{
+    "description": "There are <code>n</code> projects numbered from <code>0</code> to <code>n - 1</code>. You are given an integer array <code>milestones</code> where each <code>milestones[i]</code> denotes the number of milestones the <code>i<sup>th</sup></code> project has.\n\nYou can work on the projects following these two rules:\n\nOnce all the milestones of all the projects are finished, or if the only milestones that you can work on will cause you to violate the above rules, you will <strong>stop working</strong>. Note that you may not be able to finish every project's milestones due to these constraints.\n\nReturn <em>the <strong>maximum</strong> number of weeks you would be able to work on the projects without violating the rules mentioned above</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

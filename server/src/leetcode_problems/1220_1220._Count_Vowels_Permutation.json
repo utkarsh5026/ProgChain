@@ -1,0 +1,9 @@
+{
+    "description": "Given an integer <code>n</code>, your task is to count how many strings of length <code>n</code> can be formed under the following rules:\n\nSince the answer&nbsp;may be too large,&nbsp;return it modulo&nbsp;<code>10^9 + 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

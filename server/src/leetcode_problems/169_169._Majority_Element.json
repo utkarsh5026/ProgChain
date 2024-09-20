@@ -1,0 +1,25 @@
+{
+    "description": "Given an array <code>nums</code> of size <code>n</code>, return <em>the majority element</em>.\n\nThe majority element is the element that appears more than <code>\u230an / 2\u230b</code> times. You may assume that the majority element always exists in the array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

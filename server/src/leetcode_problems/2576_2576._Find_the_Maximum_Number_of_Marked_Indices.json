@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code>.\n\nInitially, all of the indices are unmarked. You are allowed to make this operation any number of times:\n\nReturn <em>the maximum possible number of marked indices in <code>nums</code> using the above operation any number of times</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

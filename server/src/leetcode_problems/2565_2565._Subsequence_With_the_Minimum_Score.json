@@ -1,0 +1,17 @@
+{
+    "description": "You are given two strings <code>s</code> and <code>t</code>.\n\nYou are allowed to remove any number of characters from the string <code>t</code>.\n\nThe score of the string is <code>0</code> if no characters are removed from the string <code>t</code>, otherwise:\n\nThen the score of the string is <code>right - left + 1</code>.\n\nReturn <em>the minimum possible score to make </em><code>t</code><em>&nbsp;a subsequence of </em><code>s</code><em>.</em>\n\nA <strong>subsequence</strong> of a string is a new string that is formed from the original string by deleting some (can be none) of the characters without disturbing the relative positions of the remaining characters. (i.e., <code>\"ace\"</code> is a subsequence of <code>\"<u>a</u>b<u>c</u>d<u>e</u>\"</code> while <code>\"aec\"</code> is not).\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "description": "Given an array <code>arr</code> of positive integers, consider all binary trees such that:\n\nAmong all possible binary trees considered, return <em>the smallest possible sum of the values of each non-leaf node</em>. It is guaranteed this sum fits into a <strong>32-bit</strong> integer.\n\nA node is a <strong>leaf</strong> if and only if it has zero children.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Monotonic Stack",
+            "url": "https://leetcode.com/tag/monotonic-stack/"
+        }
+    ]
+}

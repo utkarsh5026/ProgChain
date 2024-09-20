@@ -1,0 +1,13 @@
+{
+    "description": "Given an array of integers <code>nums</code> sorted in non-decreasing order, find the starting and ending position of a given <code>target</code> value.\n\nIf <code>target</code> is not found in the array, return <code>[-1, -1]</code>.\n\nYou must&nbsp;write an algorithm with&nbsp;<code>O(log n)</code> runtime complexity.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        }
+    ]
+}

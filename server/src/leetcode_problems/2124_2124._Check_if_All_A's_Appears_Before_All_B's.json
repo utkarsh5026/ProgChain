@@ -1,0 +1,9 @@
+{
+    "description": "Given a string <code>s</code> consisting of <strong>only</strong> the characters <code>'a'</code> and <code>'b'</code>, return <code>true</code> <em>if <strong>every</strong> </em><code>'a'</code> <em>appears before <strong>every</strong> </em><code>'b'</code><em> in the string</em>. Otherwise, return <code>false</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

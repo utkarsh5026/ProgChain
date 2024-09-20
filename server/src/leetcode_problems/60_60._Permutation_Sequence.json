@@ -1,0 +1,13 @@
+{
+    "description": "The set <code>[1, 2, 3, ...,&nbsp;n]</code> contains a total of <code>n!</code> unique permutations.\n\nBy listing and labeling all of the permutations in order, we get the following sequence for <code>n = 3</code>:\n\nGiven <code>n</code> and <code>k</code>, return the <code>k<sup>th</sup></code> permutation sequence.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Recursion",
+            "url": "https://leetcode.com/tag/recursion/"
+        }
+    ]
+}

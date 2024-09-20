@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> string <code>num</code> representing a non-negative integer.\n\nIn one operation, you can pick any digit of <code>num</code> and delete it. Note that if you delete all the digits of <code>num</code>, <code>num</code> becomes <code>0</code>.\n\nReturn <em>the <strong>minimum number of operations</strong> required to make</em> <code>num</code> <i>special</i>.\n\nAn integer <code>x</code> is considered <strong>special</strong> if it is divisible by <code>25</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

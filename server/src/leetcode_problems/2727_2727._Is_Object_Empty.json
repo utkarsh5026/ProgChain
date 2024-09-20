@@ -1,0 +1,4 @@
+{
+    "description": "Given an object or an array, return if it is empty.\n\nYou may assume the object or array is the output of&nbsp;<code>JSON.parse</code>.\n\n",
+    "tags": []
+}

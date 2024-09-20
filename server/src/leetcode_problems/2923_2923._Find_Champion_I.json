@@ -1,0 +1,13 @@
+{
+    "description": "There are <code>n</code> teams numbered from <code>0</code> to <code>n - 1</code> in a tournament.\n\nGiven a <strong>0-indexed</strong> 2D boolean matrix <code>grid</code> of size <code>n * n</code>. For all <code>i, j</code> that <code>0 &lt;= i, j &lt;= n - 1</code> and <code>i != j</code> team <code>i</code> is <strong>stronger</strong> than team <code>j</code> if <code>grid[i][j] == 1</code>, otherwise, team <code>j</code> is <strong>stronger</strong> than team <code>i</code>.\n\nTeam <code>a</code> will be the <strong>champion</strong> of the tournament if there is no team <code>b</code> that is stronger than team <code>a</code>.\n\nReturn <em>the team that will be the champion of the tournament.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

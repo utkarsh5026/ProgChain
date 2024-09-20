@@ -1,0 +1,25 @@
+{
+    "description": "You are playing a variation of the game Zuma.\n\nIn this variation of Zuma, there is a <strong>single row</strong> of colored balls on a board, where each ball can be colored red <code>'R'</code>, yellow <code>'Y'</code>, blue <code>'B'</code>, green <code>'G'</code>, or white <code>'W'</code>. You also have several colored balls in your hand.\n\nYour goal is to <strong>clear all</strong> of the balls from the board. On each turn:\n\nGiven a string <code>board</code>, representing the row of balls on the board, and a string <code>hand</code>, representing the balls in your hand, return <em>the <strong>minimum</strong> number of balls you have to insert to clear all the balls from the board. If you cannot clear all the balls from the board using the balls in your hand, return </em><code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Memoization",
+            "url": "https://leetcode.com/tag/memoization/"
+        }
+    ]
+}

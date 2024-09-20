@@ -1,0 +1,13 @@
+{
+    "description": "Given an array <code>nums</code> of integers, a <em>move</em>&nbsp;consists of choosing any element and <strong>decreasing it by 1</strong>.\n\nAn array <code>A</code> is a&nbsp;<em>zigzag array</em>&nbsp;if either:\n\nReturn the minimum number of moves to transform the given array <code>nums</code> into a zigzag array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

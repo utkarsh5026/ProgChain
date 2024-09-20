@@ -1,0 +1,17 @@
+{
+    "description": "There is a programming language with only <strong>four</strong> operations and <strong>one</strong> variable <code>X</code>:\n\nInitially, the value of <code>X</code> is <code>0</code>.\n\nGiven an array of strings <code>operations</code> containing a list of operations, return <em>the <strong>final </strong>value of </em><code>X</code> <em>after performing all the operations</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

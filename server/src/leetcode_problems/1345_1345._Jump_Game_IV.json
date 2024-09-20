@@ -1,0 +1,17 @@
+{
+    "description": "Given an array of&nbsp;integers <code>arr</code>, you are initially positioned at the first index of the array.\n\nIn one step you can jump from index <code>i</code> to index:\n\nReturn <em>the minimum number of steps</em> to reach the <strong>last index</strong> of the array.\n\nNotice that you can not jump outside of the array at any time.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        }
+    ]
+}

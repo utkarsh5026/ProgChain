@@ -1,0 +1,13 @@
+{
+    "description": "You are given an <em>absolute</em> path for a Unix-style file system, which always begins with a slash <code>'/'</code>. Your task is to transform this absolute path into its <strong>simplified canonical path</strong>.\n\nThe <em>rules</em> of a Unix-style file system are as follows:\n\nThe simplified canonical path should follow these <em>rules</em>:\n\nReturn the <strong>simplified canonical path</strong>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        }
+    ]
+}

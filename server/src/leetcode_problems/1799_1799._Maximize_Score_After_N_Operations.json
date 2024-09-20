@@ -1,0 +1,33 @@
+{
+    "description": "You are given <code>nums</code>, an array of positive integers of size <code>2 * n</code>. You must perform <code>n</code> operations on this array.\n\nIn the <code>i<sup>th</sup></code> operation <strong>(1-indexed)</strong>, you will:\n\nReturn <em>the maximum score you can receive after performing </em><code>n</code><em> operations.</em>\n\nThe function <code>gcd(x, y)</code> is the greatest common divisor of <code>x</code> and <code>y</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        },
+        {
+            "name": "Bitmask",
+            "url": "https://leetcode.com/tag/bitmask/"
+        }
+    ]
+}

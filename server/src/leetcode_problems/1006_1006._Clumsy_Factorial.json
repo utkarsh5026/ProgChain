@@ -1,0 +1,17 @@
+{
+    "description": "The <strong>factorial</strong> of a positive integer <code>n</code> is the product of all positive integers less than or equal to <code>n</code>.\n\nWe make a <strong>clumsy factorial</strong> using the integers in decreasing order by swapping out the multiply operations for a fixed rotation of operations with multiply <code>'*'</code>, divide <code>'/'</code>, add <code>'+'</code>, and subtract <code>'-'</code> in this order.\n\nHowever, these operations are still applied using the usual order of operations of arithmetic. We do all multiplication and division steps before any addition or subtraction steps, and multiplication and division steps are processed left to right.\n\nAdditionally, the division that we use is floor division such that <code>10 * 9 / 8 = 90 / 8 = 11</code>.\n\nGiven an integer <code>n</code>, return <em>the clumsy factorial of </em><code>n</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

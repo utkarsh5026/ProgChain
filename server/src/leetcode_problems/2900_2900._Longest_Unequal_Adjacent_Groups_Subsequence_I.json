@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string array <code>words</code> and a <strong>binary</strong> array <code>groups</code> both of length <code>n</code>, where <code>words[i]</code> is associated with <code>groups[i]</code>.\n\nYour task is to select the <strong>longest alternating</strong> <span data-keyword=\"subsequence-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>subsequence</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(348px, 273px);\"></div></div></div></span> from <code>words</code>. A subsequence of <code>words</code> is alternating if for any two consecutive strings in the sequence, their corresponding elements in the binary array <code>groups</code> differ. Essentially, you are to choose strings such that adjacent elements have non-matching corresponding bits in the <code>groups</code> array.\n\nFormally, you need to find the longest subsequence of an array of indices <code>[0, 1, ..., n - 1]</code> denoted as <code>[i<sub>0</sub>, i<sub>1</sub>, ..., i<sub>k-1</sub>]</code>, such that <code>groups[i<sub>j</sub>] != groups[i<sub>j+1</sub>]</code> for each <code>0 &lt;= j &lt; k - 1</code> and then find the words corresponding to these indices.\n\nReturn <em>the selected subsequence. If there are multiple answers, return <strong>any</strong> of them.</em>\n\n<strong>Note:</strong> The elements in <code>words</code> are distinct.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

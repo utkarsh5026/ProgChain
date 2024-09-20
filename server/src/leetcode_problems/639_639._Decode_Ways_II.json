@@ -1,0 +1,13 @@
+{
+    "description": "A message containing letters from <code>A-Z</code> can be <strong>encoded</strong> into numbers using the following mapping:\n\nTo <strong>decode</strong> an encoded message, all the digits must be grouped then mapped back into letters using the reverse of the mapping above (there may be multiple ways). For example, <code>\"11106\"</code> can be mapped into:\n\nNote that the grouping <code>(1 11 06)</code> is invalid because <code>\"06\"</code> cannot be mapped into <code>'F'</code> since <code>\"6\"</code> is different from <code>\"06\"</code>.\n\n<strong>In addition</strong> to the mapping above, an encoded message may contain the <code>'*'</code> character, which can represent any digit from <code>'1'</code> to <code>'9'</code> (<code>'0'</code> is excluded). For example, the encoded message <code>\"1*\"</code> may represent any of the encoded messages <code>\"11\"</code>, <code>\"12\"</code>, <code>\"13\"</code>, <code>\"14\"</code>, <code>\"15\"</code>, <code>\"16\"</code>, <code>\"17\"</code>, <code>\"18\"</code>, or <code>\"19\"</code>. Decoding <code>\"1*\"</code> is equivalent to decoding <strong>any</strong> of the encoded messages it can represent.\n\nGiven a string <code>s</code> consisting of digits and <code>'*'</code> characters, return <em>the <strong>number</strong> of ways to <strong>decode</strong> it</em>.\n\nSince the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

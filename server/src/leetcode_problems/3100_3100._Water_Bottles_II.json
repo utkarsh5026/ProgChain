@@ -1,0 +1,13 @@
+{
+    "description": "You are given two integers <code>numBottles</code> and <code>numExchange</code>.\n\n<code>numBottles</code> represents the number of full water bottles that you initially have. In one operation, you can perform one of the following operations:\n\nNote that you cannot exchange multiple batches of empty bottles for the same value of <code>numExchange</code>. For example, if <code>numBottles == 3</code> and <code>numExchange == 1</code>, you cannot exchange <code>3</code> empty water bottles for <code>3</code> full bottles.\n\nReturn <em>the <strong>maximum</strong> number of water bottles you can drink</em>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

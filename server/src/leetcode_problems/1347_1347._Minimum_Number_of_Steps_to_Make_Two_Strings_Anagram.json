@@ -1,0 +1,17 @@
+{
+    "description": "You are given two strings of the same length <code>s</code> and <code>t</code>. In one step you can choose <strong>any character</strong> of <code>t</code> and replace it with <strong>another character</strong>.\n\nReturn <em>the minimum number of steps</em> to make <code>t</code> an anagram of <code>s</code>.\n\nAn <strong>Anagram</strong> of a string is a string that contains the same characters with a different (or the same) ordering.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

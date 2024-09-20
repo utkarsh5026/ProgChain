@@ -1,0 +1,13 @@
+{
+    "description": "A <strong>maximum tree</strong> is a tree where every node has a value greater than any other value in its subtree.\n\nYou are given the <code>root</code> of a maximum binary tree and an integer <code>val</code>.\n\nJust as in the <a href=\"https://leetcode.com/problems/maximum-binary-tree/\" target=\"_blank\">previous problem</a>, the given tree was constructed from a list <code>a</code> (<code>root = Construct(a)</code>) recursively with the following <code>Construct(a)</code> routine:\n\nNote that we were not given <code>a</code> directly, only a root node <code>root = Construct(a)</code>.\n\nSuppose <code>b</code> is a copy of <code>a</code> with the value <code>val</code> appended to it. It is guaranteed that <code>b</code> has unique values.\n\nReturn <code>Construct(b)</code>.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}
