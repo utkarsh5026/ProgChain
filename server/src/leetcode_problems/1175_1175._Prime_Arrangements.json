@@ -1,9 +1,0 @@
-{
-    "description": "Return the number of permutations of 1 to <code>n</code> so that prime numbers are at prime indices (1-indexed.)\n\n<em>(Recall that an integer&nbsp;is prime if and only if it is greater than 1, and cannot be written as a product of two positive integers&nbsp;both smaller than it.)</em>\n\nSince the answer may be large, return the answer <strong>modulo <code>10^9 + 7</code></strong>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

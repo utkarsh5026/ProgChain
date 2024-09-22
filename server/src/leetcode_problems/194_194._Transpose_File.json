@@ -1,9 +1,0 @@
-{
-    "description": "Given a text file <code>file.txt</code>, transpose its content.\n\nYou may assume that each row has the same number of columns, and each field is separated by the <code>' '</code> character.\n\n<strong class=\"example\">Example:</strong>\n\nIf <code>file.txt</code> has the following content:\n\nOutput the following:\n\n",
-    "tags": [
-        {
-            "name": "Shell",
-            "url": "https://leetcode.com/tag/shell/"
-        }
-    ]
-}

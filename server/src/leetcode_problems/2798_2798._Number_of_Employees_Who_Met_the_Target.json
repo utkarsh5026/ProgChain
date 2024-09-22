@@ -1,9 +1,0 @@
-{
-    "description": "There are <code>n</code> employees in a company, numbered from <code>0</code> to <code>n - 1</code>. Each employee <code>i</code> has worked for <code>hours[i]</code> hours in the company.\n\nThe company requires each employee to work for <strong>at least</strong> <code>target</code> hours.\n\nYou are given a <strong>0-indexed</strong> array of non-negative integers <code>hours</code> of length <code>n</code> and a non-negative integer <code>target</code>.\n\nReturn <em>the integer denoting the number of employees who worked at least</em> <code>target</code> <em>hours</em>.\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

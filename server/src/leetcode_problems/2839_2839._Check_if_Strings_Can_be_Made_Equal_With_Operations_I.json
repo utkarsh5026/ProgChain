@@ -1,9 +1,0 @@
-{
-    "description": "You are given two strings <code>s1</code> and <code>s2</code>, both of length <code>4</code>, consisting of <strong>lowercase</strong> English letters.\n\nYou can apply the following operation on any of the two strings <strong>any</strong> number of times:\n\nReturn <code>true</code><em> if you can make the strings </em><code>s1</code><em> and </em><code>s2</code><em> equal, and </em><code>false</code><em> otherwise</em>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

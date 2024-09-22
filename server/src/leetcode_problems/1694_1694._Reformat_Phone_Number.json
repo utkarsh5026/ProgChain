@@ -1,9 +1,0 @@
-{
-    "description": "You are given a phone number as a string <code>number</code>. <code>number</code> consists of digits, spaces <code>' '</code>, and/or dashes <code>'-'</code>.\n\nYou would like to reformat the phone number in a certain manner. Firstly, <strong>remove</strong> all spaces and dashes. Then, <strong>group</strong> the digits from left to right into blocks of length 3 <strong>until</strong> there are 4 or fewer digits. The final digits are then grouped as follows:\n\nThe blocks are then joined by dashes. Notice that the reformatting process should <strong>never</strong> produce any blocks of length 1 and produce <strong>at most</strong> two blocks of length 2.\n\nReturn <em>the phone number after formatting.</em>\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

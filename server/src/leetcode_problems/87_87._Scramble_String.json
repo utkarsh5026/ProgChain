@@ -1,4 +1,0 @@
-{
-    "description": "We can scramble a string s to get a string t using the following algorithm:\n\nGiven two strings <code>s1</code> and <code>s2</code> of <strong>the same length</strong>, return <code>true</code> if <code>s2</code> is a scrambled string of <code>s1</code>, otherwise, return <code>false</code>.\n\n",
-    "tags": []
-}

@@ -1,9 +1,0 @@
-{
-    "description": "You are given four integers <code>sx</code>, <code>sy</code>, <code>fx</code>, <code>fy</code>, and a <strong>non-negative</strong> integer <code>t</code>.\n\nIn an infinite 2D grid, you start at the cell <code>(sx, sy)</code>. Each second, you <strong>must</strong> move to any of its adjacent cells.\n\nReturn <code>true</code> <em>if you can reach cell </em><code>(fx, fy)</code> <em>after<strong> exactly</strong></em> <code>t</code> <strong><em>seconds</em></strong>, <em>or</em> <code>false</code> <em>otherwise</em>.\n\nA cell's <strong>adjacent cells</strong> are the 8 cells around it that share at least one corner with it. You can visit the same cell several times.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

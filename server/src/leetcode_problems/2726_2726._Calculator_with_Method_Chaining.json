@@ -1,4 +1,0 @@
-{
-    "description": "Design a <code>Calculator</code> class. The class should provide the&nbsp;mathematical operations of&nbsp;addition, subtraction, multiplication, division, and exponentiation. It should also allow consecutive operations to be performed using method chaining.&nbsp;The <code>Calculator</code> class constructor should accept a number&nbsp;which serves as the&nbsp;initial value of <code>result</code>.\n\nYour <font face=\"monospace\"><code>Calculator</code>&nbsp;</font>class should have the following methods:\n\nSolutions within&nbsp;<code>10<sup>-5</sup></code>&nbsp;of the actual result are considered correct.\n\n",
-    "tags": []
-}

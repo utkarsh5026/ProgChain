@@ -1,9 +1,0 @@
-{
-    "description": "You are given a string <code>s</code> consisting only of the characters <code>'0'</code> and <code>'1'</code>. In one operation, you can change any <code>'0'</code> to <code>'1'</code> or vice versa.\n\nThe string is called alternating if no two adjacent characters are equal. For example, the string <code>\"010\"</code> is alternating, while the string <code>\"0100\"</code> is not.\n\nReturn <em>the <strong>minimum</strong> number of operations needed to make</em> <code>s</code> <em>alternating</em>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

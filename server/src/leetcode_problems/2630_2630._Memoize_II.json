@@ -1,4 +1,0 @@
-{
-    "description": "Given a function <code>fn</code>,&nbsp;return&nbsp;a&nbsp;<strong>memoized</strong>&nbsp;version of that function.\n\nA&nbsp;<strong>memoized&nbsp;</strong>function is a function that will never be called twice with&nbsp;the same inputs. Instead it will return&nbsp;a cached value.\n\n<code>fn</code>&nbsp;can be any function and there are no constraints on what type of values it accepts. Inputs are considered identical if they are&nbsp;<code>===</code> to each other.\n\n",
-    "tags": []
-}

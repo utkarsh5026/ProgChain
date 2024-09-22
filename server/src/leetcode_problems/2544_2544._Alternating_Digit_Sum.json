@@ -1,9 +1,0 @@
-{
-    "description": "You are given a positive integer <code>n</code>. Each digit of <code>n</code> has a sign according to the following rules:\n\nReturn <em>the sum of all digits with their corresponding sign</em>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

@@ -1,9 +1,0 @@
-{
-    "description": "You own a <strong>Goal Parser</strong> that can interpret a string <code>command</code>. The <code>command</code> consists of an alphabet of <code>\"G\"</code>, <code>\"()\"</code> and/or <code>\"(al)\"</code> in some order. The Goal Parser will interpret <code>\"G\"</code> as the string <code>\"G\"</code>, <code>\"()\"</code> as the string <code>\"o\"</code>, and <code>\"(al)\"</code> as the string <code>\"al\"</code>. The interpreted strings are then concatenated in the original order.\n\nGiven the string <code>command</code>, return <em>the <strong>Goal Parser</strong>'s interpretation of </em><code>command</code>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

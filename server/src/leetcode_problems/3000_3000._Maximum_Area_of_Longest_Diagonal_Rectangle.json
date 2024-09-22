@@ -1,9 +1,0 @@
-{
-    "description": "You are given a 2D <strong>0-indexed </strong>integer array <code>dimensions</code>.\n\nFor all indices <code>i</code>, <code>0 &lt;= i &lt; dimensions.length</code>, <code>dimensions[i][0]</code> represents the length and <code>dimensions[i][1]</code> represents the width of the rectangle<span style=\"font-size: 13.3333px;\"> <code>i</code></span>.\n\nReturn <em>the <strong>area</strong> of the rectangle having the <strong>longest</strong> diagonal. If there are multiple rectangles with the longest diagonal, return the area of the rectangle having the <strong>maximum</strong> area.</em>\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

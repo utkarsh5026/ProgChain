@@ -1,9 +1,0 @@
-{
-    "description": "You are given a string <code>s</code>, where every <strong>two</strong> consecutive vertical bars <code>'|'</code> are grouped into a <strong>pair</strong>. In other words, the 1<sup>st</sup> and 2<sup>nd</sup> <code>'|'</code> make a pair, the 3<sup>rd</sup> and 4<sup>th</sup> <code>'|'</code> make a pair, and so forth.\n\nReturn <em>the number of </em><code>'*'</code><em> in </em><code>s</code><em>, <strong>excluding</strong> the </em><code>'*'</code><em> between each pair of </em><code>'|'</code>.\n\n<strong>Note</strong> that each <code>'|'</code> will belong to <strong>exactly</strong> one pair.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

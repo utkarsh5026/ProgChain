@@ -1,9 +1,0 @@
-{
-    "description": "Suppose we have a class:\n\nThe same instance of <code>Foo</code> will be passed to three different threads. Thread A will call <code>first()</code>, thread B will call <code>second()</code>, and thread C will call <code>third()</code>. Design a mechanism and modify the program to ensure that <code>second()</code> is executed after <code>first()</code>, and <code>third()</code> is executed after <code>second()</code>.\n\n<strong>Note:</strong>\n\nWe do not know how the threads will be scheduled in the operating system, even though the numbers in the input seem to imply the ordering. The input format you see is mainly to ensure our tests' comprehensiveness.\n\n",
-    "tags": [
-        {
-            "name": "Concurrency",
-            "url": "https://leetcode.com/tag/concurrency/"
-        }
-    ]
-}

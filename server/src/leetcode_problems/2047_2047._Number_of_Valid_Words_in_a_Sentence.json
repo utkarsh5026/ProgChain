@@ -1,9 +1,0 @@
-{
-    "description": "A sentence consists of lowercase letters (<code>'a'</code> to <code>'z'</code>), digits (<code>'0'</code> to <code>'9'</code>), hyphens (<code>'-'</code>), punctuation marks (<code>'!'</code>, <code>'.'</code>, and <code>','</code>), and spaces (<code>' '</code>) only. Each sentence can be broken down into <strong>one or more tokens</strong> separated by one or more spaces <code>' '</code>.\n\nA token is a valid word if <strong>all three</strong> of the following are true:\n\nExamples of valid words include <code>\"a-b.\"</code>, <code>\"afad\"</code>, <code>\"ba-c\"</code>, <code>\"a!\"</code>, and <code>\"!\"</code>.\n\nGiven a string <code>sentence</code>, return <em>the <strong>number</strong> of valid words in </em><code>sentence</code>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

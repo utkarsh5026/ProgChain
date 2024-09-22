@@ -1,4 +1,0 @@
-{
-    "description": "Given an array of&nbsp;asynchronous functions&nbsp;<code>functions</code>, return a new promise <code>promise</code>. Each function in the array accepts no arguments&nbsp;and returns a promise. All the promises should be executed in parallel.\n\n<code>promise</code> resolves:\n\n<code>promise</code> rejects:\n\nPlease solve it without using the built-in&nbsp;<code>Promise.all</code>&nbsp;function.\n\n",
-    "tags": []
-}

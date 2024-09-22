@@ -1,9 +1,0 @@
-{
-    "description": "Given a valid (IPv4) IP <code>address</code>, return a defanged version of that IP address.\n\nA <em>defanged&nbsp;IP address</em>&nbsp;replaces every period <code>\".\"</code> with <code>\"[.]\"</code>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

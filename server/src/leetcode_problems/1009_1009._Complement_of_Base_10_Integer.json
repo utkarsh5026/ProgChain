@@ -1,9 +1,0 @@
-{
-    "description": "The <strong>complement</strong> of an integer is the integer you get when you flip all the <code>0</code>'s to <code>1</code>'s and all the <code>1</code>'s to <code>0</code>'s in its binary representation.\n\nGiven an integer <code>n</code>, return <em>its complement</em>.\n\n",
-    "tags": [
-        {
-            "name": "Bit Manipulation",
-            "url": "https://leetcode.com/tag/bit-manipulation/"
-        }
-    ]
-}

@@ -1,9 +1,0 @@
-{
-    "description": "Given a <code>date</code> string in the form&nbsp;<code>Day Month Year</code>, where:\n\nConvert the date string to the format <code>YYYY-MM-DD</code>, where:\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

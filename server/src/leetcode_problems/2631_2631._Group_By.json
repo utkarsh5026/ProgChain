@@ -1,4 +1,0 @@
-{
-    "description": "Write code that enhances all arrays such that you can call the&nbsp;<code>array.groupBy(fn)</code>&nbsp;method on any array and it will return a <strong>grouped</strong>&nbsp;version of the array.\n\nA <strong>grouped</strong> array is an object where each&nbsp;key&nbsp;is&nbsp;the output of <code>fn(arr[i])</code> and each value is an array containing all items in the original array which generate that key.\n\nThe provided callback&nbsp;<code>fn</code>&nbsp;will accept an item in the array and return a string key.\n\nThe order of each value list should be the order the items appear in the array. Any order of keys is acceptable.\n\nPlease solve it without lodash's&nbsp;<code>_.groupBy</code> function.\n\n",
-    "tags": []
-}

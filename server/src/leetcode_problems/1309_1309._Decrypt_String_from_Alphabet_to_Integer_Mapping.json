@@ -1,9 +1,0 @@
-{
-    "description": "You are given a string <code>s</code> formed by digits and <code>'#'</code>. We want to map <code>s</code> to English lowercase characters as follows:\n\nReturn <em>the string formed after mapping</em>.\n\nThe test cases are generated so that a unique mapping will always exist.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

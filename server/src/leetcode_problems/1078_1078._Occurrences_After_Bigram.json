@@ -1,9 +1,0 @@
-{
-    "description": "Given two strings <code>first</code> and <code>second</code>, consider occurrences in some text of the form <code>\"first second third\"</code>, where <code>second</code> comes immediately after <code>first</code>, and <code>third</code> comes immediately after <code>second</code>.\n\nReturn <em>an array of all the words</em> <code>third</code> <em>for each occurrence of</em> <code>\"first second third\"</code>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

@@ -1,9 +1,0 @@
-{
-    "description": "A web developer needs to know how to design a web page's size. So, given a specific rectangular web page\u2019s area, your job by now is to design a rectangular web page, whose length L and width W satisfy the following requirements:\n\nReturn <em>an array <code>[L, W]</code> where <code>L</code> and <code>W</code> are the length and width of the&nbsp;web page you designed in sequence.</em>\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}
