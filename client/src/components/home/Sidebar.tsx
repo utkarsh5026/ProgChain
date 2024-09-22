@@ -5,8 +5,11 @@ import {
   BookOutlined,
   UsergroupAddOutlined,
   FormOutlined,
+  PullRequestOutlined,
+  CompassOutlined,
 } from "@ant-design/icons";
 import styled from "styled-components";
+import leetcodeIcon from "../../assets/leetcode.png";
 
 const { Sider } = Layout;
 
@@ -26,6 +29,20 @@ const Sidebar: React.FC = () => {
       title: "Interview",
     },
     { key: "/quiz", icon: <FormOutlined />, title: "Quiz" },
+    { key: "/flow", icon: <PullRequestOutlined />, title: "Flow" },
+    { key: "/explore", icon: <CompassOutlined />, title: "Explore" },
+    {
+      key: "/leetcode",
+      className: "custom-icon",
+      icon: (
+        <img
+          src={leetcodeIcon}
+          alt="Leetcode"
+          style={{ width: "16px", height: "16px" }}
+        />
+      ),
+      title: "Leetcode",
+    },
   ];
 
   const handleeMenuItemClick = (key: string) => {
@@ -47,9 +64,9 @@ const Sidebar: React.FC = () => {
 
 const GradientSider = styled(Sider)`
   &&& {
-    background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+    background: linear-gradient(135deg, #0f2029, #203a43, #2c4);
     background-size: 400% 400%;
-    animation: gradient 10s ease infinite;
+    animation: gradient 5s ease infinite;
   }
 
   .ant-menu {

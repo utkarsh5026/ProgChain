@@ -5,6 +5,7 @@ import Quiz from "./components/quiz/Quiz";
 import Layout from "./components/home/Layout";
 import FlowChart from "./components/flow/FlowChart";
 import Explore from "./components/explore/Explore";
+import Leetcode from "./components/leetcode/Leetcode";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "explore",
         element: <Explore />,
+      },
+      {
+        path: "leetcode",
+        element: <Leetcode />,
       },
     ],
   },
