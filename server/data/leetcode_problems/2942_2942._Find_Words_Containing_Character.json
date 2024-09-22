@@ -1,0 +1,13 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array of strings <code>words</code> and a character <code>x</code>.\n\nReturn <em>an <strong>array of indices</strong> representing the words that contain the character </em><code>x</code>.\n\n<strong>Note</strong> that the returned array may be in <strong>any</strong> order.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

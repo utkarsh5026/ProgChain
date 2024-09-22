@@ -1,0 +1,13 @@
+{
+    "description": "You are given <code>m x n</code> grid <code>image</code> which represents a grayscale image, where <code>image[i][j]</code> represents a pixel with intensity in the range <code>[0..255]</code>. You are also given a <strong>non-negative</strong> integer <code>threshold</code>.\n\nTwo pixels are <strong>adjacent</strong> if they share an edge.\n\nA <strong>region</strong> is a <code>3 x 3</code> subgrid where the <strong>absolute difference</strong> in intensity between any two <strong>adjacent</strong> pixels is <strong>less than or equal to</strong> <code>threshold</code>.\n\nAll pixels in a region belong to that region, note that a pixel can belong to <strong>multiple</strong> regions.\n\nYou need to calculate a <code>m x n</code> grid <code>result</code>, where <code>result[i][j]</code> is the <strong>average</strong> intensity of the regions to which <code>image[i][j]</code> belongs, <strong>rounded down</strong> to the nearest integer. If <code>image[i][j]</code> belongs to multiple regions, <code>result[i][j]</code> is the <strong>average </strong>of the<strong> rounded-down average </strong>intensities of these regions, <strong>rounded down</strong> to the nearest integer. If <code>image[i][j]</code> does<strong> not</strong> belong to any region, <code>result[i][j]</code> is <strong>equal to</strong> <code>image[i][j]</code>.\n\nReturn the grid <code>result</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "A <strong>happy string</strong> is a string that:\n\nFor example, strings <strong>\"abc\", \"ac\", \"b\"</strong> and <strong>\"abcbabcbcb\"</strong> are all happy strings and strings <strong>\"aa\", \"baa\"</strong> and <strong>\"ababbc\"</strong> are not happy strings.\n\nGiven two integers <code>n</code> and <code>k</code>, consider a list of all happy strings of length <code>n</code> sorted in lexicographical order.\n\nReturn <em>the kth string</em> of this list or return an <strong>empty string</strong> if there are less than <code>k</code> happy strings of length <code>n</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

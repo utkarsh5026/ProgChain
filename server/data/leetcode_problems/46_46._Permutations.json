@@ -1,0 +1,13 @@
+{
+    "description": "Given an array <code>nums</code> of distinct integers, return all the possible <span data-keyword=\"permutation-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>permutations</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(67px, 204px);\"></div></div></div></span>. You can return the answer in <strong>any order</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

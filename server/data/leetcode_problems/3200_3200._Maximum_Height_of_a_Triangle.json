@@ -1,0 +1,13 @@
+{
+    "description": "You are given two integers <code>red</code> and <code>blue</code> representing the count of red and blue colored balls. You have to arrange these balls to form a triangle such that the 1<sup>st</sup> row will have 1 ball, the 2<sup>nd</sup> row will have 2 balls, the 3<sup>rd</sup> row will have 3 balls, and so on.\n\nAll the balls in a particular row should be the <strong>same</strong> color, and adjacent rows should have <strong>different</strong> colors.\n\nReturn the <strong>maximum</strong><em> height of the triangle</em> that can be achieved.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

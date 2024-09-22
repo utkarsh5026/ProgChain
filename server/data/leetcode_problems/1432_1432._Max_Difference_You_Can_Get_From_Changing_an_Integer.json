@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer <code>num</code>. You will apply the following steps exactly <strong>two</strong> times:\n\nLet <code>a</code> and <code>b</code> be the results of applying the operations to <code>num</code> the first and second times, respectively.\n\nReturn <em>the max difference</em> between <code>a</code> and <code>b</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

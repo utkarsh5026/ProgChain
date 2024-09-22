@@ -1,0 +1,21 @@
+{
+    "description": "Alice and Bob are playing a game on a string.\n\nYou are given a string <code>s</code>, Alice and Bob will take turns playing the following game where Alice starts <strong>first</strong>:\n\nThe first player who cannot make a move on their turn loses the game. We assume that both Alice and Bob play <strong>optimally</strong>.\n\nReturn <code>true</code> if Alice wins the game, and <code>false</code> otherwise.\n\nThe English vowels are: <code>a</code>, <code>e</code>, <code>i</code>, <code>o</code>, and <code>u</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Brainteaser",
+            "url": "https://leetcode.com/tag/brainteaser/"
+        },
+        {
+            "name": "Game Theory",
+            "url": "https://leetcode.com/tag/game-theory/"
+        }
+    ]
+}

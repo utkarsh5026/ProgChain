@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer <code>n</code>, the number of teams in a tournament that has strange rules:\n\nReturn <em>the number of matches played in the tournament until a winner is decided.</em>\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

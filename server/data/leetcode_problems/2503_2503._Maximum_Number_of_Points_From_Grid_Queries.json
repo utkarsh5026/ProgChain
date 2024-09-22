@@ -1,0 +1,4 @@
+{
+    "description": "You are given an <code>m x n</code> integer matrix <code>grid</code> and an array <code>queries</code> of size <code>k</code>.\n\nFind an array <code>answer</code> of size <code>k</code> such that for each integer <code>queries[i]</code> you start in the <strong>top left</strong> cell of the matrix and repeat the following process:\n\nAfter the process, <code>answer[i]</code> is the <strong>maximum</strong> number of points you can get. <strong>Note</strong> that for each query you are allowed to visit the same cell <strong>multiple</strong> times.\n\nReturn <em>the resulting array</em> <code>answer</code>.\n\n",
+    "tags": []
+}

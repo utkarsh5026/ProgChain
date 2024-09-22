@@ -1,0 +1,25 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, each node in the tree has a distinct value.\n\nAfter deleting all nodes with a value in <code>to_delete</code>, we are left with a forest (a disjoint union of trees).\n\nReturn the roots of the trees in the remaining forest. You may return the result in any order.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

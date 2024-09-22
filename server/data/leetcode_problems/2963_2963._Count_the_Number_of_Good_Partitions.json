@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>nums</code> consisting of <strong>positive</strong> integers.\n\nA partition of an array into one or more <strong>contiguous</strong> subarrays is called <strong>good</strong> if no two subarrays contain the same number.\n\nReturn <em>the <strong>total number</strong> of good partitions of </em><code>nums</code>.\n\nSince the answer may be large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        }
+    ]
+}

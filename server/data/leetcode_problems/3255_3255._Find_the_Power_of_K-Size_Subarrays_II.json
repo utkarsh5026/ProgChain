@@ -1,0 +1,13 @@
+{
+    "description": "You are given an array of integers <code>nums</code> of length <code>n</code> and a <em>positive</em> integer <code>k</code>.\n\nThe <strong>power</strong> of an array is defined as:\n\nYou need to find the <strong>power</strong> of all <span data-keyword=\"subarray-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>subarrays</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(264px, 401px);\"></div></div></div></span> of <code>nums</code> of size <code>k</code>.\n\nReturn an integer array <code>results</code> of size <code>n - k + 1</code>, where <code>results[i]</code> is the <em>power</em> of <code>nums[i..(i + k - 1)]</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "description": "You have a function <code>printNumber</code> that can be called with an integer parameter and prints it to the console.\n\nYou are given an instance of the class <code>ZeroEvenOdd</code> that has three functions: <code>zero</code>, <code>even</code>, and <code>odd</code>. The same instance of <code>ZeroEvenOdd</code> will be passed to three different threads:\n\nModify the given class to output the series <code>\"010203040506...\"</code> where the length of the series must be <code>2n</code>.\n\nImplement the <code>ZeroEvenOdd</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Concurrency",
+            "url": "https://leetcode.com/tag/concurrency/"
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+{
+    "description": "You are given an integer <code>n</code> and a <strong>0-indexed</strong>&nbsp;<strong>2D array</strong> <code>queries</code> where <code>queries[i] = [type<sub>i</sub>, index<sub>i</sub>, val<sub>i</sub>]</code>.\n\nInitially, there is a <strong>0-indexed</strong> <code>n x n</code> matrix filled with <code>0</code>'s. For each query, you must apply one of the following changes:\n\nReturn <em>the sum of integers in the matrix after all queries are applied</em>.\n\n",
+    "tags": []
+}

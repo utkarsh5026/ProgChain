@@ -1,0 +1,9 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> binary string <code>s</code> having an even length.\n\nA string is <strong>beautiful</strong> if it's possible to partition it into one or more substrings such that:\n\nYou can change any character in <code>s</code> to <code>0</code> or <code>1</code>.\n\nReturn <em>the <strong>minimum</strong> number of changes required to make the string </em><code>s</code> <em>beautiful</em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

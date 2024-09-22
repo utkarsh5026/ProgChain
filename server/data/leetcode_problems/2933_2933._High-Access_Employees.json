@@ -1,0 +1,21 @@
+{
+    "description": "You are given a 2D <strong>0-indexed</strong> array of strings, <code>access_times</code>, with size <code>n</code>. For each <code>i</code> where <code>0 &lt;= i &lt;= n - 1</code>, <code>access_times[i][0]</code> represents the name of an employee, and <code>access_times[i][1]</code> represents the access time of that employee. All entries in <code>access_times</code> are within the same day.\n\nThe access time is represented as <strong>four digits</strong> using a <strong>24-hour</strong> time format, for example, <code>\"0800\"</code> or <code>\"2250\"</code>.\n\nAn employee is said to be <strong>high-access</strong> if he has accessed the system <strong>three or more</strong> times within a <strong>one-hour period</strong>.\n\nTimes with exactly one hour of difference are <strong>not</strong> considered part of the same one-hour period. For example, <code>\"0815\"</code> and <code>\"0915\"</code> are not part of the same one-hour period.\n\nAccess times at the start and end of the day are <strong>not</strong> counted within the same one-hour period. For example, <code>\"0005\"</code> and <code>\"2350\"</code> are not part of the same one-hour period.\n\nReturn <em>a list that contains the names of <strong>high-access</strong> employees with any order you want.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

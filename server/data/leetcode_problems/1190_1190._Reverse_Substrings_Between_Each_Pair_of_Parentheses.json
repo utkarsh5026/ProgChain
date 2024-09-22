@@ -1,0 +1,13 @@
+{
+    "description": "You are given a string <code>s</code> that consists of lower case English letters and brackets.\n\nReverse the strings in each pair of matching parentheses, starting from the innermost one.\n\nYour result should <strong>not</strong> contain any brackets.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code> and a character <code>c</code>. Return <em>the total number of <span data-keyword=\"substring-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>substrings</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(56px, 236px);\"></div></div></div></span> of </em><code>s</code><em> that start and end with </em><code>c</code><em>.</em>\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

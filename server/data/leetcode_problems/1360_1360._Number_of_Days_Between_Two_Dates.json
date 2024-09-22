@@ -1,0 +1,13 @@
+{
+    "description": "Write a program to count the number of days between two dates.\n\nThe two dates are given as strings, their format is <code>YYYY-MM-DD</code>&nbsp;as shown in the examples.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

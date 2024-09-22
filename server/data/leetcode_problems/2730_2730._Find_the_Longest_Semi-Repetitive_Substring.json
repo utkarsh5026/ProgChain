@@ -1,0 +1,13 @@
+{
+    "description": "You are given a digit string <code>s</code> that consists of digits from 0 to 9.\n\nA string is called <strong>semi-repetitive</strong> if there is <strong>at most</strong> one adjacent pair of the same digit. For example, <code>\"0010\"</code>, <code>\"002020\"</code>, <code>\"0123\"</code>, <code>\"2002\"</code>, and <code>\"54944\"</code> are semi-repetitive while the following are not: <code>\"00101022\"</code> (adjacent same digit pairs are 00 and 22), and <code>\"1101234883\"</code> (adjacent same digit pairs are 11 and 88).\n\nReturn the length of the <strong>longest semi-repetitive <span data-keyword=\"substring-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>substring</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(365px, 373px);\"></div></div></div></span></strong> of <code>s</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

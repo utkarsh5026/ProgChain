@@ -1,0 +1,21 @@
+{
+    "description": "A storekeeper is a game in which the player pushes boxes around in a warehouse trying to get them to target locations.\n\nThe game is represented by an <code>m x n</code> grid of characters <code>grid</code> where each element is a wall, floor, or box.\n\nYour task is to move the box <code>'B'</code> to the target position <code>'T'</code> under the following rules:\n\nReturn <em>the minimum number of <strong>pushes</strong> to move the box to the target</em>. If there is no way to reach the target, return <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

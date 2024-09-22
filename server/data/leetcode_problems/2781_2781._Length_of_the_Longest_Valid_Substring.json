@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string <code>word</code> and an array of strings <code>forbidden</code>.\n\nA string is called <strong>valid</strong> if none of its substrings are present in <code>forbidden</code>.\n\nReturn <em>the length of the <strong>longest valid substring</strong> of the string </em><code>word</code>.\n\nA <strong>substring</strong> is a contiguous sequence of characters in a string, possibly empty.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

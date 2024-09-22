@@ -1,0 +1,21 @@
+{
+    "description": "You may recall that an array <code>arr</code> is a <strong>mountain array</strong> if and only if:\n\nGiven an integer array <code>nums</code>\u200b\u200b\u200b, return <em>the <strong>minimum</strong> number of elements to remove to make </em><code>nums<em>\u200b\u200b\u200b</em></code><em> </em><em>a <strong>mountain array</strong>.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

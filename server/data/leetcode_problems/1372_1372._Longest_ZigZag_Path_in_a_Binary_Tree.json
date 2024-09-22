@@ -1,0 +1,21 @@
+{
+    "description": "You are given the <code>root</code> of a binary tree.\n\nA ZigZag path for a binary tree is defined as follow:\n\nZigzag length is defined as the number of nodes visited - 1. (A single node has a length of 0).\n\nReturn <em>the longest <strong>ZigZag</strong> path contained in that tree</em>.\n\n",
+    "tags": [
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

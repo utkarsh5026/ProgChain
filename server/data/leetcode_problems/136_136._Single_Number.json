@@ -1,0 +1,13 @@
+{
+    "description": "Given a <strong>non-empty</strong>&nbsp;array of integers <code>nums</code>, every element appears <em>twice</em> except for one. Find that single one.\n\nYou must&nbsp;implement a solution with a linear runtime complexity and use&nbsp;only constant&nbsp;extra space.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

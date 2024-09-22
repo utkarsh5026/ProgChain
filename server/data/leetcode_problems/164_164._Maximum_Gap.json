@@ -1,0 +1,21 @@
+{
+    "description": "Given an integer array <code>nums</code>, return <em>the maximum difference between two successive elements in its sorted form</em>. If the array contains less than two elements, return <code>0</code>.\n\nYou must write an algorithm that runs in linear time and uses linear extra space.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Bucket Sort",
+            "url": "https://leetcode.com/tag/bucket-sort/"
+        },
+        {
+            "name": "Radix Sort",
+            "url": "https://leetcode.com/tag/radix-sort/"
+        }
+    ]
+}

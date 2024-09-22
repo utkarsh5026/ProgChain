@@ -1,0 +1,13 @@
+{
+    "description": "Given an array of positive integers <code>arr</code> (not necessarily distinct), return <em>the </em><span data-keyword=\"lexicographically-smaller-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div><em>lexicographically</em></div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(141px, 236px);\"></div></div></div></span><em> largest permutation that is smaller than</em> <code>arr</code>, that can be <strong>made with exactly one swap</strong>. If it cannot be done, then return the same array.\n\n<strong>Note</strong> that a <em>swap</em> exchanges the positions of two numbers <code>arr[i]</code> and <code>arr[j]</code>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

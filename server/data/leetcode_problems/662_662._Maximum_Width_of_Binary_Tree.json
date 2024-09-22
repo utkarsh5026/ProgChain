@@ -1,0 +1,21 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, return <em>the <strong>maximum width</strong> of the given tree</em>.\n\nThe <strong>maximum width</strong> of a tree is the maximum <strong>width</strong> among all levels.\n\nThe <strong>width</strong> of one level is defined as the length between the end-nodes (the leftmost and rightmost non-null nodes), where the null nodes between the end-nodes that would be present in a complete binary tree extending down to that level are also counted into the length calculation.\n\nIt is <strong>guaranteed</strong> that the answer will in the range of a <strong>32-bit</strong> signed integer.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "description": "An&nbsp;integer has <em>sequential digits</em> if and only if each digit in the number is one more than the previous digit.\n\nReturn a <strong>sorted</strong> list of all the integers&nbsp;in the range <code>[low, high]</code>&nbsp;inclusive that have sequential digits.\n\n",
+    "tags": [
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

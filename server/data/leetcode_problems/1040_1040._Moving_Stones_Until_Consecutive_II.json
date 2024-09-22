@@ -1,0 +1,21 @@
+{
+    "description": "There are some stones in different positions on the X-axis. You are given an integer array <code>stones</code>, the positions of the stones.\n\nCall a stone an <strong>endpoint stone</strong> if it has the smallest or largest position. In one move, you pick up an <strong>endpoint stone</strong> and move it to an unoccupied position so that it is no longer an <strong>endpoint stone</strong>.\n\nThe game ends when you cannot make any more moves (i.e., the stones are in three consecutive positions).\n\nReturn <em>an integer array </em><code>answer</code><em> of length </em><code>2</code><em> where</em>:\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

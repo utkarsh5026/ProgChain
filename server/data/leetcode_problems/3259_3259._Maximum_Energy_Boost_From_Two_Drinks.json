@@ -1,0 +1,13 @@
+{
+    "description": "You are given two integer arrays <code>energyDrinkA</code> and <code>energyDrinkB</code> of the same length <code>n</code> by a futuristic sports scientist. These arrays represent the energy boosts per hour provided by two different energy drinks, A and B, respectively.\n\nYou want to <em>maximize</em> your total energy boost by drinking one energy drink <em>per hour</em>. However, if you want to switch from consuming one energy drink to the other, you need to wait for <em>one hour</em> to cleanse your system (meaning you won't get any energy boost in that hour).\n\nReturn the <strong>maximum</strong> total energy boost you can gain in the next <code>n</code> hours.\n\n<strong>Note</strong> that you can start consuming <em>either</em> of the two energy drinks.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

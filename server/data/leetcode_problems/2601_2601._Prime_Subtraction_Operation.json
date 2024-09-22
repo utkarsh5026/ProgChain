@@ -1,0 +1,25 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> of length <code>n</code>.\n\nYou can perform the following operation as many times as you want:\n\nReturn <em>true if you can make <code>nums</code> a strictly increasing array using the above operation and false otherwise.</em>\n\nA <strong>strictly increasing array</strong> is an array whose each element is strictly greater than its preceding element.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

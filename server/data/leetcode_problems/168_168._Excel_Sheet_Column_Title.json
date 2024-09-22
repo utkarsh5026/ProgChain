@@ -1,0 +1,13 @@
+{
+    "description": "Given an integer <code>columnNumber</code>, return <em>its corresponding column title as it appears in an Excel sheet</em>.\n\nFor example:\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

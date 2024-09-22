@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>nums</code> consisting of <code>n</code> positive integers.\n\nThe array <code>nums</code> is called <strong>alternating</strong> if:\n\nIn one <strong>operation</strong>, you can choose an index <code>i</code> and <strong>change</strong> <code>nums[i]</code> into <strong>any</strong> positive integer.\n\nReturn <em>the <strong>minimum number of operations</strong> required to make the array alternating</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

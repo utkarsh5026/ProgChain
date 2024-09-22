@@ -1,0 +1,9 @@
+{
+    "description": "Table: <code>transactions</code>\n\nWrite a solution to find the <strong>sum of amounts</strong> for <strong>odd</strong> and <strong>even</strong> transactions for each day. If there are no odd or even transactions for a specific date, display as <code>0</code>.\n\nReturn <em>the result table ordered by</em> <code>transaction_date</code> <em>in <strong>ascending</strong> order</em>.\n\nThe result format is in the following example.\n\n",
+    "tags": [
+        {
+            "name": "Database",
+            "url": "https://leetcode.com/tag/database/"
+        }
+    ]
+}

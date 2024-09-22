@@ -1,0 +1,17 @@
+{
+    "description": "Given <code>n</code> orders, each order consists of a pickup and a delivery service.\n\nCount all valid pickup/delivery possible sequences such that delivery(i) is always after of&nbsp;pickup(i).&nbsp;\n\nSince the answer&nbsp;may be too large,&nbsp;return it modulo&nbsp;10^9 + 7.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        }
+    ]
+}

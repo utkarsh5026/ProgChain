@@ -1,0 +1,25 @@
+{
+    "description": "You are given a string <code>s</code> that consists of lowercase English letters.\n\nA string is called <strong>special</strong> if it is made up of only a single character. For example, the string <code>\"abc\"</code> is not special, whereas the strings <code>\"ddd\"</code>, <code>\"zz\"</code>, and <code>\"f\"</code> are special.\n\nReturn <em>the length of the <strong>longest special substring</strong> of </em><code>s</code> <em>which occurs <strong>at least thrice</strong></em>, <em>or </em><code>-1</code><em> if no special substring occurs at least thrice</em>.\n\nA <strong>substring</strong> is a contiguous <strong>non-empty</strong> sequence of characters within a string.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

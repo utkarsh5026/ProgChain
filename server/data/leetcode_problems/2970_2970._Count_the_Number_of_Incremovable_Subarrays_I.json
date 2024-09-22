@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array of <strong>positive</strong> integers <code>nums</code>.\n\nA subarray of <code>nums</code> is called <strong>incremovable</strong> if <code>nums</code> becomes <strong>strictly increasing</strong> on removing the subarray. For example, the subarray <code>[3, 4]</code> is an incremovable subarray of <code>[5, 3, 4, 6, 7]</code> because removing this subarray changes the array <code>[5, 3, 4, 6, 7]</code> to <code>[5, 6, 7]</code> which is strictly increasing.\n\nReturn <em>the total number of <strong>incremovable</strong> subarrays of</em> <code>nums</code>.\n\n<strong>Note</strong> that an empty array is considered strictly increasing.\n\nA <strong>subarray</strong> is a contiguous non-empty sequence of elements within an array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

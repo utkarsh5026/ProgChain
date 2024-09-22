@@ -1,0 +1,17 @@
+{
+    "description": "International Morse Code defines a standard encoding where each letter is mapped to a series of dots and dashes, as follows:\n\nFor convenience, the full table for the <code>26</code> letters of the English alphabet is given below:\n\nGiven an array of strings <code>words</code> where each word can be written as a concatenation of the Morse code of each letter.\n\nReturn <em>the number of different <strong>transformations</strong> among all words we have</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

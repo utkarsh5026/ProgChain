@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code> that contains some bracket pairs, with each pair containing a <strong>non-empty</strong> key.\n\nYou know the values of a wide range of keys. This is represented by a 2D string array <code>knowledge</code> where each <code>knowledge[i] = [key<sub>i</sub>, value<sub>i</sub>]</code> indicates that key <code>key<sub>i</sub></code> has a value of <code>value<sub>i</sub></code>.\n\nYou are tasked to evaluate <strong>all</strong> of the bracket pairs. When you evaluate a bracket pair that contains some key <code>key<sub>i</sub></code>, you will:\n\nEach key will appear at most once in your <code>knowledge</code>. There will not be any nested brackets in <code>s</code>.\n\nReturn <em>the resulting string after evaluating <strong>all</strong> of the bracket pairs.</em>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

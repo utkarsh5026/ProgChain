@@ -1,0 +1,17 @@
+{
+    "description": "You are given 2 <strong>positive</strong> integers <code>l</code> and <code>r</code>. For any number <code>x</code>, all positive divisors of <code>x</code> <em>except</em> <code>x</code> are called the <strong>proper divisors</strong> of <code>x</code>.\n\nA number is called <strong>special</strong> if it has exactly 2 <strong>proper divisors</strong>. For example:\n\nReturn the count of numbers in the range <code>[l, r]</code> that are <strong>not</strong> <strong>special</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

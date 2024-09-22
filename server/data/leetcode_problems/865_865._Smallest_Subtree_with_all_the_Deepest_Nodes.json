@@ -1,0 +1,25 @@
+{
+    "description": "Given the <code>root</code> of a binary tree, the depth of each node is <strong>the shortest distance to the root</strong>.\n\nReturn <em>the smallest subtree</em> such that it contains <strong>all the deepest nodes</strong> in the original tree.\n\nA node is called <strong>the deepest</strong> if it has the largest depth possible among any node in the entire tree.\n\nThe <strong>subtree</strong> of a node is a tree consisting of that node, plus the set of all descendants of that node.\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

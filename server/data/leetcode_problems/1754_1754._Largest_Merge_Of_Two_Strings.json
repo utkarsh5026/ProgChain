@@ -1,0 +1,17 @@
+{
+    "description": "You are given two strings <code>word1</code> and <code>word2</code>. You want to construct a string <code>merge</code> in the following way: while either <code>word1</code> or <code>word2</code> are non-empty, choose <strong>one</strong> of the following options:\n\nReturn <em>the lexicographically <strong>largest</strong> </em><code>merge</code><em> you can construct</em>.\n\nA string <code>a</code> is lexicographically larger than a string <code>b</code> (of the same length) if in the first position where <code>a</code> and <code>b</code> differ, <code>a</code> has a character strictly larger than the corresponding character in <code>b</code>. For example, <code>\"abcd\"</code> is lexicographically larger than <code>\"abcc\"</code> because the first position they differ is at the fourth character, and <code>d</code> is greater than <code>c</code>.\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+{
+    "description": "Given a function <code>fn</code>, an array of&nbsp;arguments&nbsp;<code>args</code>, and a timeout&nbsp;<code>t</code>&nbsp;in milliseconds, return a cancel function <code>cancelFn</code>.\n\nAfter a delay of <code>cancelTimeMs</code>, the returned cancel function <code>cancelFn</code> will be invoked.\n\nInitially, the execution of the function <code>fn</code> should be delayed by <code>t</code> milliseconds.\n\nIf, before the delay of <code>t</code> milliseconds, the function <code>cancelFn</code> is invoked, it should cancel the delayed execution of <code>fn</code>. Otherwise, if <code>cancelFn</code> is not invoked within the specified delay <code>t</code>, <code>fn</code> should be executed with the provided <code>args</code> as arguments.\n\n",
+    "tags": []
+}

@@ -1,0 +1,9 @@
+{
+    "description": "You are given three <strong>positive</strong> integers <code>num1</code>, <code>num2</code>, and <code>num3</code>.\n\nThe <code>key</code> of <code>num1</code>, <code>num2</code>, and <code>num3</code> is defined as a four-digit number such that:\n\nReturn the <code>key</code> of the three numbers <strong>without</strong> leading zeros (<em>if any</em>).\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

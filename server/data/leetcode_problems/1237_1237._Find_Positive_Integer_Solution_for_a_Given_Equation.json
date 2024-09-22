@@ -1,0 +1,21 @@
+{
+    "description": "Given a callable function <code>f(x, y)</code> <strong>with a hidden formula</strong> and a value <code>z</code>, reverse engineer the formula and return <em>all positive integer pairs </em><code>x</code><em> and </em><code>y</code><em> where </em><code>f(x,y) == z</code>. You may return the pairs in any order.\n\nWhile the exact formula is hidden, the function is monotonically increasing, i.e.:\n\nThe function interface is defined like this:\n\nWe will judge your solution as follows:\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Interactive",
+            "url": "https://leetcode.com/tag/interactive/"
+        }
+    ]
+}

@@ -1,0 +1,4 @@
+{
+    "description": "Write a solution to list the names of animals that weigh <strong>strictly more than</strong> <code>100</code> kilograms.\n\nReturn the&nbsp;animals sorted by weight in <strong>descending order</strong>.\n\nThe result format is in the following example.\n\n",
+    "tags": []
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given an <strong>empty</strong> set of intervals, implement a data structure that can:\n\nImplement the <code>CountIntervals</code> class:\n\n<strong>Note</strong> that an interval <code>[left, right]</code> denotes all the integers <code>x</code> where <code>left &lt;= x &lt;= right</code>.\n\n",
+    "tags": [
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        },
+        {
+            "name": "Ordered Set",
+            "url": "https://leetcode.com/tag/ordered-set/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "You are given an array of integers <code>nums</code>. Consider the following operation:\n\nYou can perform this operation until <code>nums</code> contains fewer than two elements. Additionally, the <strong>same</strong> <em>score</em> must be achieved in <strong>all</strong> operations.\n\nReturn the <strong>maximum</strong> number of operations you can perform.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

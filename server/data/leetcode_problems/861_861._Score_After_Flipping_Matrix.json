@@ -1,0 +1,21 @@
+{
+    "description": "You are given an <code>m x n</code> binary matrix <code>grid</code>.\n\nA <strong>move</strong> consists of choosing any row or column and toggling each value in that row or column (i.e., changing all <code>0</code>'s to <code>1</code>'s, and all <code>1</code>'s to <code>0</code>'s).\n\nEvery row of the matrix is interpreted as a binary number, and the <strong>score</strong> of the matrix is the sum of these numbers.\n\nReturn <em>the highest possible <strong>score</strong> after making any number of <strong>moves</strong> (including zero moves)</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

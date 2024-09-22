@@ -1,0 +1,9 @@
+{
+    "description": "You are given a string <code>num</code> representing a large integer. An integer is <strong>good</strong> if it meets the following conditions:\n\nReturn <em>the <strong>maximum good </strong>integer as a <strong>string</strong> or an empty string </em><code>\"\"</code><em> if no such integer exists</em>.\n\nNote:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

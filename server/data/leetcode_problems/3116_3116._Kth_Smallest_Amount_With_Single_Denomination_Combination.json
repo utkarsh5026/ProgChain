@@ -1,0 +1,29 @@
+{
+    "description": "You are given an integer array <code>coins</code> representing coins of different denominations and an integer <code>k</code>.\n\nYou have an infinite number of coins of each denomination. However, you are <strong>not allowed</strong> to combine coins of different denominations.\n\nReturn the <code>k<sup>th</sup></code> <strong>smallest</strong> amount that can be made using these coins.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

@@ -1,0 +1,9 @@
+{
+    "description": "You are given a positive integer <code>arrivalTime</code> denoting the arrival time of a train in hours, and another positive integer <code>delayedTime</code> denoting the amount of delay in hours.\n\nReturn <em>the time when the train will arrive at the station.</em>\n\nNote that the time in this problem is in 24-hours format.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

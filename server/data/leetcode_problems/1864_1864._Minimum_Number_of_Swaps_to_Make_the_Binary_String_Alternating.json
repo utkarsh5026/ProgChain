@@ -1,0 +1,13 @@
+{
+    "description": "Given a binary string <code>s</code>, return <em>the <strong>minimum</strong> number of character swaps to make it <strong>alternating</strong>, or </em><code>-1</code><em> if it is impossible.</em>\n\nThe string is called <strong>alternating</strong> if no two adjacent characters are equal. For example, the strings <code>\"010\"</code> and <code>\"1010\"</code> are alternating, while the string <code>\"0100\"</code> is not.\n\nAny two characters may be swapped, even if they are&nbsp;<strong>not adjacent</strong>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

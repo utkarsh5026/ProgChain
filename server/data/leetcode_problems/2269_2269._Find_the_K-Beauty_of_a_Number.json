@@ -1,0 +1,17 @@
+{
+    "description": "The <strong>k-beauty</strong> of an integer <code>num</code> is defined as the number of <strong>substrings</strong> of <code>num</code> when it is read as a string that meet the following conditions:\n\nGiven integers <code>num</code> and <code>k</code>, return <em>the k-beauty of </em><code>num</code>.\n\nNote:\n\nA <strong>substring</strong> is a contiguous sequence of characters in a string.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sliding Window",
+            "url": "https://leetcode.com/tag/sliding-window/"
+        }
+    ]
+}

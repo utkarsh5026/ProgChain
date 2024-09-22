@@ -1,0 +1,13 @@
+{
+    "description": "You are given two strings of the same length <code>s1</code> and <code>s2</code> and a string <code>baseStr</code>.\n\nWe say <code>s1[i]</code> and <code>s2[i]</code> are equivalent characters.\n\nEquivalent characters follow the usual rules of any equivalence relation:\n\nFor example, given the equivalency information from <code>s1 = \"abc\"</code> and <code>s2 = \"cde\"</code>, <code>\"acd\"</code> and <code>\"aab\"</code> are equivalent strings of <code>baseStr = \"eed\"</code>, and <code>\"aab\"</code> is the lexicographically smallest equivalent string of <code>baseStr</code>.\n\nReturn <em>the lexicographically smallest equivalent string of </em><code>baseStr</code><em> by using the equivalency information from </em><code>s1</code><em> and </em><code>s2</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Union Find",
+            "url": "https://leetcode.com/tag/union-find/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "Given a string representing a code snippet, implement a tag validator to parse the code and return whether it is valid.\n\nA code snippet is valid if all the following rules hold:\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        }
+    ]
+}

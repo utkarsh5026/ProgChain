@@ -1,0 +1,13 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> array <code>nums</code> of <code>n</code> integers and an integer <code>target</code>.\n\nYou are initially positioned at index <code>0</code>. In one step, you can jump from index <code>i</code> to any index <code>j</code> such that:\n\nReturn <em>the <strong>maximum number of jumps</strong> you can make to reach index</em> <code>n - 1</code>.\n\nIf there is no way to reach index <code>n - 1</code>, return <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

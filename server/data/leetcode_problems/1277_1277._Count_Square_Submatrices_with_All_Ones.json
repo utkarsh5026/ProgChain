@@ -1,0 +1,17 @@
+{
+    "description": "Given a <code>m * n</code> matrix of ones and zeros, return how many <strong>square</strong> submatrices have all ones.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

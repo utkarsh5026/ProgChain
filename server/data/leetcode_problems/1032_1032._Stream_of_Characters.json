@@ -1,0 +1,25 @@
+{
+    "description": "Design an algorithm that accepts a stream of characters and checks if a suffix of these characters is a string of a given array of strings <code>words</code>.\n\nFor example, if <code>words = [\"abc\", \"xyz\"]</code>&nbsp;and the stream added the four characters (one by one) <code>'a'</code>, <code>'x'</code>, <code>'y'</code>, and <code>'z'</code>, your algorithm should detect that the suffix <code>\"xyz\"</code> of the characters <code>\"axyz\"</code> matches <code>\"xyz\"</code> from <code>words</code>.\n\nImplement the <code>StreamChecker</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        },
+        {
+            "name": "Data Stream",
+            "url": "https://leetcode.com/tag/data-stream/"
+        }
+    ]
+}

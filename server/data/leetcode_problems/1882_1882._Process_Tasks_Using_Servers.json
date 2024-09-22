@@ -1,0 +1,13 @@
+{
+    "description": "You are given two <strong>0-indexed</strong> integer arrays <code>servers</code> and <code>tasks</code> of lengths <code>n</code>\u200b\u200b\u200b\u200b\u200b\u200b and <code>m</code>\u200b\u200b\u200b\u200b\u200b\u200b respectively. <code>servers[i]</code> is the <strong>weight</strong> of the <code>i<sup>\u200b\u200b\u200b\u200b\u200b\u200bth</sup></code>\u200b\u200b\u200b\u200b server, and <code>tasks[j]</code> is the <strong>time needed</strong> to process the <code>j<sup>\u200b\u200b\u200b\u200b\u200b\u200bth</sup></code>\u200b\u200b\u200b\u200b task <strong>in seconds</strong>.\n\nTasks are assigned to the servers using a <strong>task queue</strong>. Initially, all servers are free, and the queue is <strong>empty</strong>.\n\nAt second <code>j</code>, the <code>j<sup>th</sup></code> task is <strong>inserted</strong> into the queue (starting with the <code>0<sup>th</sup></code> task being inserted at second <code>0</code>). As long as there are free servers and the queue is not empty, the task in the front of the queue will be assigned to a free server with the <strong>smallest weight</strong>, and in case of a tie, it is assigned to a free server with the <strong>smallest index</strong>.\n\nIf there are no free servers and the queue is not empty, we wait until a server becomes free and immediately assign the next task. If multiple servers become free at the same time, then multiple tasks from the queue will be assigned <strong>in order of insertion</strong> following the weight and index priorities above.\n\nA server that is assigned task <code>j</code> at second <code>t</code> will be free again at second <code>t + tasks[j]</code>.\n\nBuild an array <code>ans</code>\u200b\u200b\u200b\u200b of length <code>m</code>, where <code>ans[j]</code> is the <strong>index</strong> of the server the <code>j<sup>\u200b\u200b\u200b\u200b\u200b\u200bth</sup></code> task will be assigned to.\n\nReturn <em>the array </em><code>ans</code>\u200b\u200b\u200b\u200b.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        }
+    ]
+}

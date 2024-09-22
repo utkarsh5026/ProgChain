@@ -1,0 +1,9 @@
+{
+    "description": "You are given a string <code>s</code> representing an attendance record for a student where each character signifies whether the student was absent, late, or present on that day. The record only contains the following three characters:\n\nThe student is eligible for an attendance award if they meet <strong>both</strong> of the following criteria:\n\nReturn <code>true</code><em> if the student is eligible for an attendance award, or </em><code>false</code><em> otherwise</em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

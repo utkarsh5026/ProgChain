@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer <code>n</code> and an array <code>sick</code> sorted in increasing order, representing positions of infected people in a line of <code>n</code> people.\n\nAt each step, <strong>one </strong>uninfected person <strong>adjacent</strong> to an infected person gets infected. This process continues until everyone is infected.\n\nAn <strong>infection sequence</strong> is the order in which uninfected people become infected, excluding those initially infected.\n\nReturn the number of different infection sequences possible, modulo <code>10<sup>9</sup>+7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        }
+    ]
+}

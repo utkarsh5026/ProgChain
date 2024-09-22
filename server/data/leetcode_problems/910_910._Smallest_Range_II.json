@@ -1,0 +1,21 @@
+{
+    "description": "You are given an integer array <code>nums</code> and an integer <code>k</code>.\n\nFor each index <code>i</code> where <code>0 &lt;= i &lt; nums.length</code>, change <code>nums[i]</code> to be either <code>nums[i] + k</code> or <code>nums[i] - k</code>.\n\nThe <strong>score</strong> of <code>nums</code> is the difference between the maximum and minimum elements in <code>nums</code>.\n\nReturn <em>the minimum <strong>score</strong> of </em><code>nums</code><em> after changing the values at each index</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

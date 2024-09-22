@@ -1,0 +1,9 @@
+{
+    "description": "There exists an infinitely large two-dimensional grid of uncolored unit cells. You are given a positive integer <code>n</code>, indicating that you must do the following routine for <code>n</code> minutes:\n\nBelow is a pictorial representation of the state of the grid after minutes 1, 2, and 3.\n\nReturn <em>the number of <strong>colored cells</strong> at the end of </em><code>n</code> <em>minutes</em>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

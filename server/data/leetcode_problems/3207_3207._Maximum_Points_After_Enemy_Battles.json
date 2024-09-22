@@ -1,0 +1,13 @@
+{
+    "description": "You are given an integer array <code>enemyEnergies</code> denoting the energy values of various enemies.\n\nYou are also given an integer <code>currentEnergy</code> denoting the amount of energy you have initially.\n\nYou start with 0 points, and all the enemies are unmarked initially.\n\nYou can perform <strong>either</strong> of the following operations <strong>zero </strong>or multiple times to gain points:\n\nReturn an integer denoting the <strong>maximum</strong> points you can get in the end by optimally performing operations.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

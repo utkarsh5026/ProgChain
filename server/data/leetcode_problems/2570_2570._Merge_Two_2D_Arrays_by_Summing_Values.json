@@ -1,0 +1,17 @@
+{
+    "description": "You are given two <strong>2D</strong> integer arrays <code>nums1</code> and <code>nums2.</code>\n\nEach array contains <strong>unique</strong> ids and is sorted in <strong>ascending</strong> order by id.\n\nMerge the two arrays into one array that is sorted in ascending order by id, respecting the following conditions:\n\nReturn <em>the resulting array</em>. The returned array must be sorted in ascending order by id.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        }
+    ]
+}

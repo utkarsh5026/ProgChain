@@ -1,0 +1,17 @@
+{
+    "description": "You are given a positive integer <code>n</code>.\n\nContinuously replace <code>n</code> with the sum of its <strong>prime factors</strong>.\n\nReturn <em>the smallest value </em><code>n</code><em> will take on.</em>\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        },
+        {
+            "name": "Number Theory",
+            "url": "https://leetcode.com/tag/number-theory/"
+        }
+    ]
+}

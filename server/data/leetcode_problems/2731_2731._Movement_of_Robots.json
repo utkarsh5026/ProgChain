@@ -1,0 +1,21 @@
+{
+    "description": "Some robots are standing on an infinite number line with their initial coordinates given by a <strong>0-indexed</strong> integer array <code>nums</code> and will start moving once given the command to move. The robots will move a unit distance each second.\n\nYou are given a string <code>s</code> denoting the direction in which robots will move on command. <code>'L'</code> means the robot will move towards the left side or negative side of the number line, whereas <code>'R'</code> means the robot will move towards the right side or positive side of the number line.\n\nIf two robots collide, they will start moving in opposite directions.\n\nReturn <em>the sum of distances between all the&nbsp;pairs of robots </em><code>d</code> <em>seconds after&nbsp;the command. </em>Since the sum can be very large, return it modulo <code>10<sup>9</sup> + 7</code>.\n\n<b>Note: </b>\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Brainteaser",
+            "url": "https://leetcode.com/tag/brainteaser/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

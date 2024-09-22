@@ -1,0 +1,13 @@
+{
+    "description": "You are given a string <code>s</code> consisting of <code>n</code> characters which are either <code>'X'</code> or <code>'O'</code>.\n\nA <strong>move</strong> is defined as selecting <strong>three</strong> <strong>consecutive characters</strong> of <code>s</code> and converting them to <code>'O'</code>. Note that if a move is applied to the character <code>'O'</code>, it will stay the <strong>same</strong>.\n\nReturn <em>the <strong>minimum</strong> number of moves required so that all the characters of </em><code>s</code><em> are converted to </em><code>'O'</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

@@ -1,0 +1,25 @@
+{
+    "description": "Given the <code>head</code> of a linked list, return <em>the list after sorting it in <strong>ascending order</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Linked List",
+            "url": "https://leetcode.com/tag/linked-list/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Merge Sort",
+            "url": "https://leetcode.com/tag/merge-sort/"
+        }
+    ]
+}

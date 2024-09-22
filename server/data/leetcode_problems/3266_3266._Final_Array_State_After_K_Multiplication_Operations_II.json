@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code>, an integer <code>k</code>, and an integer <code>multiplier</code>.\n\nYou need to perform <code>k</code> operations on <code>nums</code>. In each operation:\n\nAfter the <code>k</code> operations, apply <strong>modulo</strong> <code>10<sup>9</sup> + 7</code> to every value in <code>nums</code>.\n\nReturn an integer array denoting the <em>final state</em> of <code>nums</code> after performing all <code>k</code> operations and then applying the modulo.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

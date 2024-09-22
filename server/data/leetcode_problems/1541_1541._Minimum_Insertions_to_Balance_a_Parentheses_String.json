@@ -1,0 +1,17 @@
+{
+    "description": "Given a parentheses string <code>s</code> containing only the characters <code>'('</code> and <code>')'</code>. A parentheses string is <strong>balanced</strong> if:\n\nIn other words, we treat <code>'('</code> as an opening parenthesis and <code>'))'</code> as a closing parenthesis.\n\nYou can insert the characters <code>'('</code> and <code>')'</code> at any position of the string to balance it if needed.\n\nReturn <em>the minimum number of insertions</em> needed to make <code>s</code> balanced.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

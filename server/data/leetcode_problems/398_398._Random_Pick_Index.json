@@ -1,0 +1,21 @@
+{
+    "description": "Given an integer array <code>nums</code> with possible <strong>duplicates</strong>, randomly output the index of a given <code>target</code> number. You can assume that the given target number must exist in the array.\n\nImplement the <code>Solution</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Reservoir Sampling",
+            "url": "https://leetcode.com/tag/reservoir-sampling/"
+        },
+        {
+            "name": "Randomized",
+            "url": "https://leetcode.com/tag/randomized/"
+        }
+    ]
+}

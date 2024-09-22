@@ -1,0 +1,41 @@
+{
+    "description": "You are given an array of strings <code>words</code> and a string <code>target</code>.\n\nA string <code>x</code> is called <strong>valid</strong> if <code>x</code> is a <span data-keyword=\"string-prefix\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div>prefix</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(253px, 252px);\"></div></div></div></span> of <strong>any</strong> string in <code>words</code>.\n\nReturn the <strong>minimum</strong> number of <strong>valid</strong> strings that can be <em>concatenated</em> to form <code>target</code>. If it is <strong>not</strong> possible to form <code>target</code>, return <code>-1</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        },
+        {
+            "name": "Rolling Hash",
+            "url": "https://leetcode.com/tag/rolling-hash/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "You are given an <code>m x n</code> integer matrix <code>grid</code>.\n\nWe define an <strong>hourglass</strong> as a part of the matrix with the following form:\n\nReturn <em>the <strong>maximum</strong> sum of the elements of an hourglass</em>.\n\n<strong>Note</strong> that an hourglass cannot be rotated and must be entirely contained within the matrix.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

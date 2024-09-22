@@ -1,0 +1,13 @@
+{
+    "description": "You are given two positive integers <code>n</code> and <code>target</code>.\n\nAn integer is considered <strong>beautiful</strong> if the sum of its digits is less than or equal to <code>target</code>.\n\nReturn the <em>minimum <strong>non-negative</strong> integer </em><code>x</code><em> such that </em><code>n + x</code><em> is beautiful</em>. The input will be generated such that it is always possible to make <code>n</code> beautiful.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        }
+    ]
+}

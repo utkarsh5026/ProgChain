@@ -1,0 +1,21 @@
+{
+    "description": "A website domain <code>\"discuss.leetcode.com\"</code> consists of various subdomains. At the top level, we have <code>\"com\"</code>, at the next level, we have <code>\"leetcode.com\"</code>&nbsp;and at the lowest level, <code>\"discuss.leetcode.com\"</code>. When we visit a domain like <code>\"discuss.leetcode.com\"</code>, we will also visit the parent domains <code>\"leetcode.com\"</code> and <code>\"com\"</code> implicitly.\n\nA <strong>count-paired domain</strong> is a domain that has one of the two formats <code>\"rep d1.d2.d3\"</code> or <code>\"rep d1.d2\"</code> where <code>rep</code> is the number of visits to the domain and <code>d1.d2.d3</code> is the domain itself.\n\nGiven an array of <strong>count-paired domains</strong> <code>cpdomains</code>, return <em>an array of the <strong>count-paired domains</strong> of each subdomain in the input</em>. You may return the answer in <strong>any order</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

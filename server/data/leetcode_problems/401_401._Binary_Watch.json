@@ -1,0 +1,13 @@
+{
+    "description": "A binary watch has 4 LEDs on the top to represent the hours (0-11), and 6 LEDs on the bottom to represent&nbsp;the minutes (0-59). Each LED represents a zero or one, with the least significant bit on the right.\n\n<img alt=\"\" src=\"https://assets.leetcode.com/uploads/2021/04/08/binarywatch.jpg\" style=\"width: 500px; height: 500px;\">\n\nGiven an integer <code>turnedOn</code> which represents the number of LEDs that are currently on (ignoring the PM), return <em>all possible times the watch could represent</em>. You may return the answer in <strong>any order</strong>.\n\nThe hour must not contain a leading zero.\n\nThe minute must&nbsp;consist of two digits and may contain a leading zero.\n\n",
+    "tags": [
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}

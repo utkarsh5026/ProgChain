@@ -1,0 +1,9 @@
+{
+    "description": "A cell <code>(r, c)</code> of an excel sheet is represented as a string <code>\"&lt;col&gt;&lt;row&gt;\"</code> where:\n\nYou are given a string <code>s</code>&nbsp;in&nbsp;the format <code>\"&lt;col1&gt;&lt;row1&gt;:&lt;col2&gt;&lt;row2&gt;\"</code>, where <code>&lt;col1&gt;</code> represents the column <code>c1</code>, <code>&lt;row1&gt;</code> represents the row <code>r1</code>, <code>&lt;col2&gt;</code> represents the column <code>c2</code>, and <code>&lt;row2&gt;</code> represents the row <code>r2</code>, such that <code>r1 &lt;= r2</code> and <code>c1 &lt;= c2</code>.\n\nReturn <em>the <strong>list of cells</strong></em> <code>(x, y)</code> <em>such that</em> <code>r1 &lt;= x &lt;= r2</code> <em>and</em> <code>c1 &lt;= y &lt;= c2</code>. The cells should be represented as&nbsp;<strong>strings</strong> in the format mentioned above and be sorted in <strong>non-decreasing</strong> order first by columns and then by rows.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        }
+    ]
+}

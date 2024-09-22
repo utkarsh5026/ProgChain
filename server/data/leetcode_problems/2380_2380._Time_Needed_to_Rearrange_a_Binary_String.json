@@ -1,0 +1,17 @@
+{
+    "description": "You are given a binary string <code>s</code>. In one second, <strong>all</strong> occurrences of <code>\"01\"</code> are <strong>simultaneously</strong> replaced with <code>\"10\"</code>. This process <strong>repeats</strong> until no occurrences of <code>\"01\"</code> exist.\n\nReturn<em> the number of seconds needed to complete this process.</em>\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

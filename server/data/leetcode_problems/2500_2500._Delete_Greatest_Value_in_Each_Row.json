@@ -1,0 +1,25 @@
+{
+    "description": "You are given an <code>m x n</code> matrix <code>grid</code> consisting of positive integers.\n\nPerform the following operation until <code>grid</code> becomes empty:\n\n<strong>Note</strong> that the number of columns decreases by one after each operation.\n\nReturn <em>the answer after performing the operations described above</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

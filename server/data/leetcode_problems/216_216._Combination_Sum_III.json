@@ -1,0 +1,13 @@
+{
+    "description": "Find all valid combinations of <code>k</code> numbers that sum up to <code>n</code> such that the following conditions are true:\n\nReturn <em>a list of all possible valid combinations</em>. The list must not contain the same combination twice, and the combinations may be returned in any order.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

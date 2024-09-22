@@ -1,0 +1,4 @@
+{
+    "description": "Design a food rating system that can do the following:\n\nImplement the <code>FoodRatings</code> class:\n\nNote that a string <code>x</code> is lexicographically smaller than string <code>y</code> if <code>x</code> comes before <code>y</code> in dictionary order, that is, either <code>x</code> is a prefix of <code>y</code>, or if <code>i</code> is the first position such that <code>x[i] != y[i]</code>, then <code>x[i]</code> comes before <code>y[i]</code> in alphabetic order.\n\n",
+    "tags": []
+}

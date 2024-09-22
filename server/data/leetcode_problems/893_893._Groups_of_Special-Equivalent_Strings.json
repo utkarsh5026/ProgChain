@@ -1,0 +1,21 @@
+{
+    "description": "You are given an array of strings of the same length <code>words</code>.\n\nIn one <strong>move</strong>, you can swap any two even indexed characters or any two odd indexed characters of a string <code>words[i]</code>.\n\nTwo strings <code>words[i]</code> and <code>words[j]</code> are <strong>special-equivalent</strong> if after any number of moves, <code>words[i] == words[j]</code>.\n\nA <strong>group of special-equivalent strings</strong> from <code>words</code> is a non-empty subset of words such that:\n\nReturn <em>the number of <strong>groups of special-equivalent strings</strong> from </em><code>words</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

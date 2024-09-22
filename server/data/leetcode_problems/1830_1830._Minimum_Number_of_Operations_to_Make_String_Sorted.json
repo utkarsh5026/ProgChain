@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code> (<strong>0-indexed</strong>)\u200b\u200b\u200b\u200b\u200b\u200b. You are asked to perform the following operation on <code>s</code>\u200b\u200b\u200b\u200b\u200b\u200b until you get a sorted string:\n\nReturn <em>the number of operations needed to make the string sorted.</em> Since the answer can be too large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Combinatorics",
+            "url": "https://leetcode.com/tag/combinatorics/"
+        }
+    ]
+}

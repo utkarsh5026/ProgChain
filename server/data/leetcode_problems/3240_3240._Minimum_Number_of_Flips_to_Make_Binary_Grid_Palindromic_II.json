@@ -1,0 +1,17 @@
+{
+    "description": "You are given an <code>m x n</code> binary matrix <code>grid</code>.\n\nA row or column is considered <strong>palindromic</strong> if its values read the same forward and backward.\n\nYou can <strong>flip</strong> any number of cells in <code>grid</code> from <code>0</code> to <code>1</code>, or from <code>1</code> to <code>0</code>.\n\nReturn the <strong>minimum</strong> number of cells that need to be flipped to make <strong>all</strong> rows and columns <strong>palindromic</strong>, and the total number of <code>1</code>'s in <code>grid</code> <strong>divisible</strong> by <code>4</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

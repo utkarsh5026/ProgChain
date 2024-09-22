@@ -1,0 +1,21 @@
+{
+    "description": "You are given an <code>m x n</code> integer array <code>grid</code> where <code>grid[i][j]</code> could be:\n\nReturn <em>the number of 4-directional walks from the starting square to the ending square, that walk over every non-obstacle square exactly once</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

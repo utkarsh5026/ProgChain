@@ -1,0 +1,21 @@
+{
+    "description": "In English, we have a concept called <strong>root</strong>, which can be followed by some other word to form another longer word - let's call this word <strong>derivative</strong>. For example, when the <strong>root</strong> <code>\"help\"</code> is followed by the word <code>\"ful\"</code>, we can form a derivative <code>\"helpful\"</code>.\n\nGiven a <code>dictionary</code> consisting of many <strong>roots</strong> and a <code>sentence</code> consisting of words separated by spaces, replace all the derivatives in the sentence with the <strong>root</strong> forming it. If a derivative can be replaced by more than one <strong>root</strong>, replace it with the <strong>root</strong> that has <strong>the shortest length</strong>.\n\nReturn <em>the <code>sentence</code></em> after the replacement.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Trie",
+            "url": "https://leetcode.com/tag/trie/"
+        }
+    ]
+}

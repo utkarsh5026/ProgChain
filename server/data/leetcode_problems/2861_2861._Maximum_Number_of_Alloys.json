@@ -1,0 +1,13 @@
+{
+    "description": "You are the owner of a company that creates alloys using various types of metals. There are <code>n</code> different types of metals available, and you have access to <code>k</code> machines that can be used to create alloys. Each machine requires a specific amount of each metal type to create an alloy.\n\nFor the <code>i<sup>th</sup></code> machine to create an alloy, it needs <code>composition[i][j]</code> units of metal of type <code>j</code>. Initially, you have <code>stock[i]</code> units of metal type <code>i</code>, and purchasing one unit of metal type <code>i</code> costs <code>cost[i]</code> coins.\n\nGiven integers <code>n</code>, <code>k</code>, <code>budget</code>, a <strong>1-indexed</strong> 2D array <code>composition</code>, and <strong>1-indexed</strong> arrays <code>stock</code> and <code>cost</code>, your goal is to <strong>maximize</strong> the number of alloys the company can create while staying within the budget of <code>budget</code> coins.\n\n<strong>All alloys must be created with the same machine.</strong>\n\nReturn <em>the maximum number of alloys that the company can create</em>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        }
+    ]
+}

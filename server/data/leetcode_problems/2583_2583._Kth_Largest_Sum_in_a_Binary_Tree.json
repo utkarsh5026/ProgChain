@@ -1,0 +1,21 @@
+{
+    "description": "You are given the <code>root</code> of a binary tree and a positive integer <code>k</code>.\n\nThe <strong>level sum</strong> in the tree is the sum of the values of the nodes that are on the <strong>same</strong> level.\n\nReturn<em> the </em><code>k<sup>th</sup></code><em> <strong>largest</strong> level sum in the tree (not necessarily distinct)</em>. If there are fewer than <code>k</code> levels in the tree, return <code>-1</code>.\n\n<strong>Note</strong> that two nodes are on the same level if they have the same distance from the root.\n\n",
+    "tags": [
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        },
+        {
+            "name": "Binary Tree",
+            "url": "https://leetcode.com/tag/binary-tree/"
+        }
+    ]
+}

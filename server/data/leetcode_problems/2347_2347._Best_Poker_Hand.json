@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>ranks</code> and a character array <code>suits</code>. You have <code>5</code> cards where the <code>i<sup>th</sup></code> card has a rank of <code>ranks[i]</code> and a suit of <code>suits[i]</code>.\n\nThe following are the types of <strong>poker hands</strong> you can make from best to worst:\n\nReturn <em>a string representing the <strong>best</strong> type of <strong>poker hand</strong> you can make with the given cards.</em>\n\n<strong>Note</strong> that the return values are <strong>case-sensitive</strong>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Counting",
+            "url": "https://leetcode.com/tag/counting/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "A generic microwave supports cooking times for:\n\nTo set the cooking time, you push <strong>at most four digits</strong>. The microwave normalizes what you push as four digits by <strong>prepending zeroes</strong>. It interprets the <strong>first</strong> two digits as the minutes and the <strong>last</strong> two digits as the seconds. It then <strong>adds</strong> them up as the cooking time. For example,\n\nYou are given integers <code>startAt</code>, <code>moveCost</code>, <code>pushCost</code>, and <code>targetSeconds</code>. <strong>Initially</strong>, your finger is on the digit <code>startAt</code>. Moving the finger above <strong>any specific digit</strong> costs <code>moveCost</code> units of fatigue. Pushing the digit below the finger <strong>once</strong> costs <code>pushCost</code> units of fatigue.\n\nThere can be multiple ways to set the microwave to cook for <code>targetSeconds</code> seconds but you are interested in the way with the minimum cost.\n\nReturn <em>the <strong>minimum cost</strong> to set</em> <code>targetSeconds</code> <em>seconds of cooking time</em>.\n\nRemember that one minute consists of <code>60</code> seconds.\n\n",
+    "tags": [
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        },
+        {
+            "name": "Enumeration",
+            "url": "https://leetcode.com/tag/enumeration/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "Given the following details of a matrix with <code>n</code> columns and <code>2</code> rows :\n\nYour task is to reconstruct the matrix with <code>upper</code>, <code>lower</code> and <code>colsum</code>.\n\nReturn it as a 2-D integer array.\n\nIf there are more than one valid solution, any of them will be accepted.\n\nIf no valid solution exists, return an empty 2-D array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Matrix",
+            "url": "https://leetcode.com/tag/matrix/"
+        }
+    ]
+}

@@ -1,0 +1,17 @@
+{
+    "description": "You are given a string <code>s</code>.\n\nYour task is to remove <strong>all</strong> digits by doing this operation repeatedly:\n\nReturn the resulting string after removing all digits.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

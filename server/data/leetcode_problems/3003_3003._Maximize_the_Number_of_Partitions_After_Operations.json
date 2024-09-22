@@ -1,0 +1,21 @@
+{
+    "description": "You are given a string <code>s</code> and an integer <code>k</code>.\n\nFirst, you are allowed to change <strong>at most</strong> <strong>one</strong> index in <code>s</code> to another lowercase English letter.\n\nAfter that, do the following partitioning operation until <code>s</code> is <strong>empty</strong>:\n\nReturn an integer denoting the <strong>maximum</strong> number of resulting partitions after the operations by optimally choosing at most one index to change.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        },
+        {
+            "name": "Bitmask",
+            "url": "https://leetcode.com/tag/bitmask/"
+        }
+    ]
+}

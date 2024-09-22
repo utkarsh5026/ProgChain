@@ -1,0 +1,4 @@
+{
+    "description": "You are given an <strong>even</strong> integer <code>n</code>\u200b\u200b\u200b\u200b\u200b\u200b. You initially have a permutation <code>perm</code> of size <code>n</code>\u200b\u200b where <code>perm[i] == i</code>\u200b <strong>(0-indexed)</strong>\u200b\u200b\u200b\u200b.\n\nIn one operation, you will create a new array <code>arr</code>, and for each <code>i</code>:\n\nYou will then assign <code>arr</code>\u200b\u200b\u200b\u200b to <code>perm</code>.\n\nReturn <em>the minimum <strong>non-zero</strong> number of operations you need to perform on </em><code>perm</code><em> to return the permutation to its initial value.</em>\n\n",
+    "tags": []
+}

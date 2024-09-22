@@ -1,0 +1,17 @@
+{
+    "description": "You are given an integer array <code>nums</code>.\n\nReturn the <strong>minimum score</strong> after <strong>changing two elements</strong> of <code>nums</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Greedy",
+            "url": "https://leetcode.com/tag/greedy/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

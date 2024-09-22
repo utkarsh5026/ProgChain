@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> string <code>s</code> that you must perform <code>k</code> replacement operations on. The replacement operations are given as three <strong>0-indexed</strong> parallel arrays, <code>indices</code>, <code>sources</code>, and <code>targets</code>, all of length <code>k</code>.\n\nTo complete the <code>i<sup>th</sup></code> replacement operation:\n\nFor example, if <code>s = \"<u>ab</u>cd\"</code>, <code>indices[i] = 0</code>, <code>sources[i] = \"ab\"</code>, and <code>targets[i] = \"eee\"</code>, then the result of this replacement will be <code>\"<u>eee</u>cd\"</code>.\n\nAll replacement operations must occur <strong>simultaneously</strong>, meaning the replacement operations should not affect the indexing of each other. The testcases will be generated such that the replacements will <strong>not overlap</strong>.\n\nReturn <em>the <strong>resulting string</strong> after performing all replacement operations on </em><code>s</code>.\n\nA <strong>substring</strong> is a contiguous sequence of characters in a string.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Sorting",
+            "url": "https://leetcode.com/tag/sorting/"
+        }
+    ]
+}

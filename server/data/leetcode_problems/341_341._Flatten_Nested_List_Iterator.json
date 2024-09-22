@@ -1,0 +1,29 @@
+{
+    "description": "You are given a nested list of integers <code>nestedList</code>. Each element is either an integer or a list whose elements may also be integers or other lists. Implement an iterator to flatten it.\n\nImplement the <code>NestedIterator</code> class:\n\nYour code will be tested with the following pseudocode:\n\nIf <code>res</code> matches the expected flattened list, then your code will be judged as correct.\n\n",
+    "tags": [
+        {
+            "name": "Stack",
+            "url": "https://leetcode.com/tag/stack/"
+        },
+        {
+            "name": "Tree",
+            "url": "https://leetcode.com/tag/tree/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Iterator",
+            "url": "https://leetcode.com/tag/iterator/"
+        }
+    ]
+}

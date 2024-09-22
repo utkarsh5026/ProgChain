@@ -1,0 +1,17 @@
+{
+    "description": "You have a set which contains all positive integers <code>[1, 2, 3, 4, 5, ...]</code>.\n\nImplement the <code>SmallestInfiniteSet</code> class:\n\n",
+    "tags": [
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "Design",
+            "url": "https://leetcode.com/tag/design/"
+        },
+        {
+            "name": "Heap (Priority Queue)",
+            "url": "https://leetcode.com/tag/heap-priority-queue/"
+        }
+    ]
+}

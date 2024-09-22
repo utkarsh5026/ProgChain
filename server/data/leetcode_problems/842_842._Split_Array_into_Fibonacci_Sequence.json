@@ -1,0 +1,13 @@
+{
+    "description": "You are given a string of digits <code>num</code>, such as <code>\"123456579\"</code>. We can split it into a Fibonacci-like sequence <code>[123, 456, 579]</code>.\n\nFormally, a <strong>Fibonacci-like</strong> sequence is a list <code>f</code> of non-negative integers such that:\n\nNote that when splitting the string into pieces, each piece must not have extra leading zeroes, except if the piece is the number <code>0</code> itself.\n\nReturn any Fibonacci-like sequence split from <code>num</code>, or return <code>[]</code> if it cannot be done.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Backtracking",
+            "url": "https://leetcode.com/tag/backtracking/"
+        }
+    ]
+}

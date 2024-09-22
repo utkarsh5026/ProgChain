@@ -1,0 +1,21 @@
+{
+    "description": "Given an integer array&nbsp;<code>nums</code>, return <em>the number of longest increasing subsequences.</em>\n\n<strong>Notice</strong> that the sequence has to be <strong>strictly</strong> increasing.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        }
+    ]
+}

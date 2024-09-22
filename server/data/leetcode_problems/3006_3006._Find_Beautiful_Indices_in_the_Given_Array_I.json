@@ -1,0 +1,29 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> string <code>s</code>, a string <code>a</code>, a string <code>b</code>, and an integer <code>k</code>.\n\nAn index <code>i</code> is <strong>beautiful</strong> if:\n\nReturn <em>the array that contains beautiful indices in <strong>sorted order from smallest to largest</strong></em>.\n\n",
+    "tags": [
+        {
+            "name": "Two Pointers",
+            "url": "https://leetcode.com/tag/two-pointers/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Binary Search",
+            "url": "https://leetcode.com/tag/binary-search/"
+        },
+        {
+            "name": "Rolling Hash",
+            "url": "https://leetcode.com/tag/rolling-hash/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

@@ -1,0 +1,13 @@
+{
+    "description": "You are given an array of <strong>positive</strong> integers <code>nums</code>.\n\nAlice and Bob are playing a game. In the game, Alice can choose <strong>either</strong> all single-digit numbers or all double-digit numbers from <code>nums</code>, and the rest of the numbers are given to Bob. Alice wins if the sum of her numbers is <strong>strictly greater</strong> than the sum of Bob's numbers.\n\nReturn <code>true</code> if Alice can win this game, otherwise, return <code>false</code>.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Math",
+            "url": "https://leetcode.com/tag/math/"
+        }
+    ]
+}

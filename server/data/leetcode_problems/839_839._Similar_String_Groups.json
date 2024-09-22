@@ -1,0 +1,29 @@
+{
+    "description": "Two strings, <code>X</code> and <code>Y</code>, are considered similar if either they are identical or we can make them equivalent by swapping at most two letters (in distinct positions) within the string <code>X</code>.\n\nFor example, <code>\"tars\"</code>&nbsp;and <code>\"rats\"</code>&nbsp;are similar (swapping at positions <code>0</code> and <code>2</code>), and <code>\"rats\"</code> and <code>\"arts\"</code> are similar, but <code>\"star\"</code> is not similar to <code>\"tars\"</code>, <code>\"rats\"</code>, or <code>\"arts\"</code>.\n\nTogether, these form two connected groups by similarity: <code>{\"tars\", \"rats\", \"arts\"}</code> and <code>{\"star\"}</code>.&nbsp; Notice that <code>\"tars\"</code> and <code>\"arts\"</code> are in the same group even though they are not similar.&nbsp; Formally, each group is such that a word is in the group if and only if it is similar to at least one other word in the group.\n\nWe are given a list <code>strs</code> of strings where every string in <code>strs</code> is an anagram of every other string in <code>strs</code>. How many groups are there?\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Hash Table",
+            "url": "https://leetcode.com/tag/hash-table/"
+        },
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Depth-First Search",
+            "url": "https://leetcode.com/tag/depth-first-search/"
+        },
+        {
+            "name": "Breadth-First Search",
+            "url": "https://leetcode.com/tag/breadth-first-search/"
+        },
+        {
+            "name": "Union Find",
+            "url": "https://leetcode.com/tag/union-find/"
+        }
+    ]
+}

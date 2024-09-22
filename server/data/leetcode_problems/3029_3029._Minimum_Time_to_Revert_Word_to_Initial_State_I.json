@@ -1,0 +1,21 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> string <code>word</code> and an integer <code>k</code>.\n\nAt every second, you must perform the following operations:\n\n<strong>Note</strong> that you do not necessarily need to add the same characters that you removed. However, you must perform <strong>both</strong> operations at every second.\n\nReturn <em>the <strong>minimum</strong> time greater than zero required for</em> <code>word</code> <em>to revert to its <strong>initial</strong> state</em>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Rolling Hash",
+            "url": "https://leetcode.com/tag/rolling-hash/"
+        },
+        {
+            "name": "String Matching",
+            "url": "https://leetcode.com/tag/string-matching/"
+        },
+        {
+            "name": "Hash Function",
+            "url": "https://leetcode.com/tag/hash-function/"
+        }
+    ]
+}

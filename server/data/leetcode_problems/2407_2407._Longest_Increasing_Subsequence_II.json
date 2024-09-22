@@ -1,0 +1,33 @@
+{
+    "description": "You are given an integer array <code>nums</code> and an integer <code>k</code>.\n\nFind the longest subsequence of <code>nums</code> that meets the following requirements:\n\nReturn<em> the length of the <strong>longest</strong> <strong>subsequence</strong> that meets the requirements.</em>\n\nA <strong>subsequence</strong> is an array that can be derived from another array by deleting some or no elements without changing the order of the remaining elements.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Divide and Conquer",
+            "url": "https://leetcode.com/tag/divide-and-conquer/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        },
+        {
+            "name": "Binary Indexed Tree",
+            "url": "https://leetcode.com/tag/binary-indexed-tree/"
+        },
+        {
+            "name": "Segment Tree",
+            "url": "https://leetcode.com/tag/segment-tree/"
+        },
+        {
+            "name": "Queue",
+            "url": "https://leetcode.com/tag/queue/"
+        },
+        {
+            "name": "Monotonic Queue",
+            "url": "https://leetcode.com/tag/monotonic-queue/"
+        }
+    ]
+}

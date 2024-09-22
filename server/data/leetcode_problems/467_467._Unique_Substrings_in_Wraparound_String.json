@@ -1,0 +1,13 @@
+{
+    "description": "We define the string <code>base</code> to be the infinite wraparound string of <code>\"abcdefghijklmnopqrstuvwxyz\"</code>, so <code>base</code> will look like this:\n\nGiven a string <code>s</code>, return <em>the number of <strong>unique non-empty substrings</strong> of </em><code>s</code><em> are present in </em><code>base</code>.\n\n",
+    "tags": [
+        {
+            "name": "String",
+            "url": "https://leetcode.com/tag/string/"
+        },
+        {
+            "name": "Dynamic Programming",
+            "url": "https://leetcode.com/tag/dynamic-programming/"
+        }
+    ]
+}

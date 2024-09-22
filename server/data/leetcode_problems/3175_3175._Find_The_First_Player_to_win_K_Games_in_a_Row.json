@@ -1,0 +1,13 @@
+{
+    "description": "A competition consists of <code>n</code> players numbered from <code>0</code> to <code>n - 1</code>.\n\nYou are given an integer array <code>skills</code> of size <code>n</code> and a <strong>positive</strong> integer <code>k</code>, where <code>skills[i]</code> is the skill level of player <code>i</code>. All integers in <code>skills</code> are <strong>unique</strong>.\n\nAll players are standing in a queue in order from player <code>0</code> to player <code>n - 1</code>.\n\nThe competition process is as follows:\n\nThe winner of the competition is the <strong>first</strong> player who wins <code>k</code> games <strong>in a row</strong>.\n\nReturn the initial index of the <em>winning</em> player.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Simulation",
+            "url": "https://leetcode.com/tag/simulation/"
+        }
+    ]
+}

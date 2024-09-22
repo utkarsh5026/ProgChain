@@ -1,0 +1,13 @@
+{
+    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> and a positive integer <code>k</code>.\n\nYou can apply the following operation on the array <strong>any</strong> number of times:\n\nReturn <code>true</code><em> if you can make all the array elements equal to </em><code>0</code><em>, or </em><code>false</code><em> otherwise</em>.\n\nA <strong>subarray</strong> is a contiguous non-empty part of an array.\n\n",
+    "tags": [
+        {
+            "name": "Array",
+            "url": "https://leetcode.com/tag/array/"
+        },
+        {
+            "name": "Prefix Sum",
+            "url": "https://leetcode.com/tag/prefix-sum/"
+        }
+    ]
+}

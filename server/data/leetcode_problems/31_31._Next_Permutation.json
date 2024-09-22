@@ -1,0 +1,4 @@
+{
+    "description": "A <strong>permutation</strong> of an array of integers is an arrangement of its members into a sequence or linear order.\n\nThe <strong>next permutation</strong> of an array of integers is the next lexicographically greater permutation of its integer. More formally, if all the permutations of the array are sorted in one container according to their lexicographical order, then the <strong>next permutation</strong> of that array is the permutation that follows it in the sorted container. If such arrangement is not possible, the array must be rearranged as the lowest possible order (i.e., sorted in ascending order).\n\nGiven an array of integers <code>nums</code>, <em>find the next permutation of</em> <code>nums</code>.\n\nThe replacement must be <strong><a href=\"http://en.wikipedia.org/wiki/In-place_algorithm\" target=\"_blank\">in place</a></strong> and use only constant extra memory.\n\n",
+    "tags": []
+}

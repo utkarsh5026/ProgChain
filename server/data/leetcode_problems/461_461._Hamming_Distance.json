@@ -1,0 +1,9 @@
+{
+    "description": "The <a href=\"https://en.wikipedia.org/wiki/Hamming_distance\" target=\"_blank\">Hamming distance</a> between two integers is the number of positions at which the corresponding bits are different.\n\nGiven two integers <code>x</code> and <code>y</code>, return <em>the <strong>Hamming distance</strong> between them</em>.\n\n",
+    "tags": [
+        {
+            "name": "Bit Manipulation",
+            "url": "https://leetcode.com/tag/bit-manipulation/"
+        }
+    ]
+}
