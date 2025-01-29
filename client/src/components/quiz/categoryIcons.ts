@@ -1,24 +1,24 @@
 import {
-  BulbOutlined,
-  BarChartOutlined,
-  CodeOutlined,
-  BugOutlined,
-  ToolOutlined,
-  ExperimentOutlined,
-} from "@ant-design/icons";
+  Lightbulb,
+  BarChart,
+  Code2,
+  Bug,
+  Wrench,
+  TestTube,
+} from "lucide-react";
 
 export const categoryIcons = {
-  conceptual: BulbOutlined,
-  analytical: BarChartOutlined,
-  code_comprehension: CodeOutlined,
-  debugging: BugOutlined,
-  best_practices: ToolOutlined,
-  problem_solving: ExperimentOutlined,
+  conceptual: Lightbulb,
+  analytical: BarChart,
+  code_comprehension: Code2,
+  debugging: Bug,
+  best_practices: Wrench,
+  problem_solving: TestTube,
 };
 
 export type CategoryIconType = keyof typeof categoryIcons;
 
 export const getCategoryIcon = (category: string) => {
   category = category.toLowerCase();
-  return categoryIcons[category as CategoryIconType] || BulbOutlined;
+  return categoryIcons[category as CategoryIconType] || Lightbulb;
 };
