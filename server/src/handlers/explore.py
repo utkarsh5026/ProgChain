@@ -13,14 +13,14 @@ def read_test_explore():
 
 @router.post("/")
 async def explore(request: Request):
-    # data = await request.json()
-    # question = data.get("question")
-    # is_prog, question = await process_question(question)
+    data = await request.json()
+    question = data.get("question")
+    is_prog, question = await process_question(question)
 
-    # print(question)
-    # if not is_prog:
-    #     return {"error": "Question is not related to programming"}
+    print(question)
+    if not is_prog:
+        return {"error": "Question is not related to programming"}
 
-    # response = await generate_programming_qa(question)
-    response = read_test_explore()
+    response = await generate_programming_qa(question)
+    # response = read_test_explore()
     return response
