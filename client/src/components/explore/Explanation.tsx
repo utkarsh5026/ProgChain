@@ -1,9 +1,16 @@
 import React from "react";
-import Markdown from "../utils/Markdown";
-import useExplore from "../../store/explore/hook";
+import Markdown from "@/components/utils/Markdown";
+import useExplore from "@/store/explore/hook";
 import { motion } from "framer-motion";
-import ParticleAnimation from "../utils/ParticleAnimation";
-import { Title } from "../ui/title";
+import ParticleAnimation from "@/components/utils/ParticleAnimation";
+import { Card, CardContent } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import {
+  Collapsible,
+  CollapsibleContent,
+  CollapsibleTrigger,
+} from "@/components/ui/collapsible";
+import { ChevronDown } from "lucide-react";
 
 interface ExplanationProps {
   questionID: string;
@@ -33,40 +40,42 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
   };
 
   return (
-    <Card style={{ marginBottom: "16px", padding: "24px" }}>
-      <Title level={1}>{text}</Title>
-      <Divider />
-      {!explanation ? (
-        <ParticleAnimation width="100%" height={200} particleCount={100} />
-      ) : (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, ease: "easeInOut" }}
-          style={{ marginBottom: "20px", fontWeight: "100", fontSize: "20px" }}
-        >
-          <Markdown content={explanation} />
-          <Collapse>
-            <Collapse.Panel header="Related Questions" key="1">
-              <List
-                size="large"
-                bordered
-                dataSource={relatedQuestionIDs}
-                renderItem={(item) => (
-                  <List.Item
-                    style={{
-                      cursor: "pointer",
-                    }}
-                    onClick={() => handleClick(item)}
-                  >
-                    {item}
-                  </List.Item>
-                )}
-              />
-            </Collapse.Panel>
-          </Collapse>
-        </motion.div>
-      )}
+    <Card className="mb-4">
+      <CardContent className="p-6">
+        <h1 className="text-2xl font-bold">{text}</h1>
+        <Separator className="my-4" />
+        {!explanation ? (
+          <ParticleAnimation width="100%" height={200} particleCount={100} />
+        ) : (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
+            className="mb-5 font-light text-xl"
+          >
+            <Markdown content={explanation} />
+            <Collapsible>
+              <CollapsibleTrigger className="flex items-center gap-2 w-full p-4 hover:bg-accent rounded-lg">
+                Related Questions
+                <ChevronDown className="h-4 w-4" />
+              </CollapsibleTrigger>
+              <CollapsibleContent>
+                <ul className="divide-y">
+                  {relatedQuestionIDs.map((item) => (
+                    <li
+                      key={item}
+                      onClick={() => handleClick(item)}
+                      className="p-4 hover:bg-accent cursor-pointer"
+                    >
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </CollapsibleContent>
+            </Collapsible>
+          </motion.div>
+        )}
+      </CardContent>
     </Card>
   );
 };

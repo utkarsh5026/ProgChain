@@ -1,9 +1,9 @@
 import React from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useExplore from "../../store/explore/hook";
-import AskQuestion from "./AskQuestion";
-import Explanation from "./Explanation";
-import { Button } from "../ui/button";
+import useExplore from "@/store/explore/hook";
+import AskQuestion from "@/components/explore/AskQuestion";
+import Explanation from "@/components/explore/Explanation";
+import { Button } from "@/components/ui/button";
 
 /**
  * Explore Component
