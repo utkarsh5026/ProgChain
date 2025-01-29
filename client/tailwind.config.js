@@ -52,7 +52,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ['"Roboto Mono"', "monospace"],
+        sans: ['"Cascadia Code"', "monospace"],
       },
     },
   },
