@@ -1,10 +1,9 @@
 import React from "react";
-import { Card, Typography, Avatar, Space } from "antd";
 import QuizQuestion from "./QuizQuestion";
 import type { Question } from "../../store/quiz/type";
 import { getCategoryIcon } from "./categoryIcons";
-
-const { Title } = Typography;
+import { Card, CardContent } from "@/components/ui/card";
+import { Avatar } from "@/components/ui/avatar";
 
 interface QuizCategoryGroupProps {
   category: string;
@@ -20,17 +19,10 @@ interface QuizCategoryGroupProps {
  */
 const CategoryTitle: React.FC<{ category: string }> = ({ category }) => {
   return (
-    <Space
-      direction="horizontal"
-      size={15}
-      align="center"
-      style={{ marginBottom: "2rem" }}
-    >
-      <Avatar icon={React.createElement(getCategoryIcon(category))} />
-      <Title level={3} style={{ margin: 0 }}>
-        {category}
-      </Title>
-    </Space>
+    <div className="flex items-center gap-4 mb-8">
+      <Avatar>{React.createElement(getCategoryIcon(category))}</Avatar>
+      <h3 className="m-0">{category}</h3>
+    </div>
   );
 };
 
@@ -48,15 +40,17 @@ const QuizCategoryGroup: React.FC<QuizCategoryGroupProps> = ({
   questions,
 }) => {
   return (
-    <Card style={{ marginBottom: "2rem" }} bordered={false}>
-      <CategoryTitle category={category} />
-      {questions.map((question, index) => (
-        <QuizQuestion
-          key={`${question.text}-${index}`}
-          index={index}
-          question={question}
-        />
-      ))}
+    <Card className="mb-8">
+      <CardContent>
+        <CategoryTitle category={category} />
+        {questions.map((question, index) => (
+          <QuizQuestion
+            key={`${question.text}-${index}`}
+            index={index}
+            question={question}
+          />
+        ))}
+      </CardContent>
     </Card>
   );
 };

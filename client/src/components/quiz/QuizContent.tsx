@@ -1,29 +1,17 @@
 import React, { useMemo, useState } from "react";
-import { Space, Segmented, Row, Col, Tooltip } from "antd";
-import {
-  CheckCircleOutlined,
-  ClockCircleOutlined,
-  QuestionCircleOutlined,
-} from "@ant-design/icons";
-import styled from "styled-components";
-import QuizCategoryGroup from "./QuizCategoryGroup";
+import { CheckCircle, Clock, HelpCircle } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import type { Question } from "../../store/quiz/type";
 import { getCategoryIcon } from "./categoryIcons";
 import { parseCategory } from "../../store/quiz/slice";
-
-const StatBox = styled.div`
-  display: flex;
-  align-items: center;
-  padding: 4px 8px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-const StatNumber = styled.span`
-  margin-left: 4px;
-`;
+import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import QuizCategoryGroup from "./QuizCategoryGroup";
 
 interface QuizContentProps {
   questions: Question[];
@@ -57,38 +45,57 @@ const QuizContent: React.FC<QuizContentProps> = ({ questions }) => {
   );
 
   return (
-    <Space direction="vertical" size="large" style={{ width: "100%" }}>
-      <Row justify="space-between" align="middle">
-        <Col>
-          <Space size="small" align="center">
-            <Tooltip title="Completed">
-              <StatBox style={{ backgroundColor: "#e6f7ff", color: "#1890ff" }}>
-                <CheckCircleOutlined style={{ marginRight: 4 }} />
-                <StatNumber>{completedCount}</StatNumber>
-              </StatBox>
+    <div className="flex flex-col space-y-6 w-full">
+      <div className="flex justify-between items-center">
+        <div className="flex items-center gap-2">
+          <TooltipProvider>
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex items-center px-2 py-1 rounded-xl bg-blue-50 text-blue-500 font-semibold text-sm">
+                  <CheckCircle className="w-4 h-4 mr-1" />
+                  <span>{completedCount}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>Completed</TooltipContent>
             </Tooltip>
-            <Tooltip title="Skipped">
-              <StatBox style={{ backgroundColor: "#fff7e6", color: "#faad14" }}>
-                <ClockCircleOutlined style={{ marginRight: 4 }} />
-                <StatNumber>{skippedCount}</StatNumber>
-              </StatBox>
+
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex items-center px-2 py-1 rounded-xl bg-amber-50 text-amber-500 font-semibold text-sm">
+                  <Clock className="w-4 h-4 mr-1" />
+                  <span>{skippedCount}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>Skipped</TooltipContent>
             </Tooltip>
-            <Tooltip title="Remaining">
-              <StatBox style={{ backgroundColor: "#f6ffed", color: "#52c41a" }}>
-                <QuestionCircleOutlined style={{ marginRight: 4 }} />
-                <StatNumber>{remainingCount}</StatNumber>
-              </StatBox>
+
+            <Tooltip>
+              <TooltipTrigger>
+                <div className="flex items-center px-2 py-1 rounded-xl bg-green-50 text-green-500 font-semibold text-sm">
+                  <HelpCircle className="w-4 h-4 mr-1" />
+                  <span>{remainingCount}</span>
+                </div>
+              </TooltipTrigger>
+              <TooltipContent>Remaining</TooltipContent>
             </Tooltip>
-          </Space>
-        </Col>
-        <Col>
-          <Segmented
-            options={categories}
-            value={selectedCategory}
-            onChange={(value) => setSelectedCategory(value as string)}
-          />
-        </Col>
-      </Row>
+          </TooltipProvider>
+        </div>
+
+        <Tabs value={selectedCategory} onValueChange={setSelectedCategory}>
+          <TabsList>
+            {categories.map((category) => (
+              <TabsTrigger
+                key={category.value}
+                value={category.value}
+                className="flex items-center gap-2"
+              >
+                {React.createElement(getCategoryIcon(category.value))}
+                {category.label}
+              </TabsTrigger>
+            ))}
+          </TabsList>
+        </Tabs>
+      </div>
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -106,7 +113,7 @@ const QuizContent: React.FC<QuizContentProps> = ({ questions }) => {
           )}
         </motion.div>
       </AnimatePresence>
-    </Space>
+    </div>
   );
 };
 

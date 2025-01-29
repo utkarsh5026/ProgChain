@@ -1,28 +1,43 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Space, Card, Dropdown, Tag } from "antd";
 import {
-  MoreOutlined,
-  CheckCircleFilled,
-  CloseCircleFilled,
-  ExclamationCircleFilled,
-  PlayCircleFilled,
-} from "@ant-design/icons";
+  MoreVertical,
+  CheckCircle,
+  XCircle,
+  AlertCircle,
+  PlayCircle,
+} from "lucide-react";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import { useQuizQuestion } from "../../store/quiz/hook";
 import type { Question, CompletionStatus } from "../../store/quiz/type";
 import QuizOptions from "./QuizOption";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+
 interface QuizQuestionProps {
   index: number;
   question: Question;
 }
 
 const statusColors: Record<CompletionStatus, string> = {
-  completed: "#4CAF50",
-  not_started: "#9E9E9E",
-  left_for_review: "#FFC107",
-  skip: "#2196F3",
+  completed: "bg-green-100 text-green-800 hover:bg-green-200",
+  not_started: "bg-gray-100 text-gray-800 hover:bg-gray-200",
+  left_for_review: "bg-yellow-100 text-yellow-800 hover:bg-yellow-200",
+  skip: "bg-blue-100 text-blue-800 hover:bg-blue-200",
+};
+
+const statusBorders: Record<CompletionStatus, string> = {
+  completed: "border-r-green-500",
+  not_started: "border-r-gray-500",
+  left_for_review: "border-r-yellow-500",
+  skip: "border-r-blue-500",
 };
 
 /**
@@ -48,63 +63,75 @@ const QuizQuestion: React.FC<QuizQuestionProps> = ({ index, question }) => {
     changeSelectedOptions(answers, questionId);
   };
 
-  const items = [
+  const menuItems = [
     {
       key: "completed",
       label: "Mark as Completed",
-      icon: <CheckCircleFilled />,
+      icon: <CheckCircle className="h-4 w-4" />,
       onClick: () => changeQuestionStatus("completed", questionId),
     },
     {
       key: "not_started",
       label: "Mark as Not Started",
-      icon: <CloseCircleFilled />,
+      icon: <XCircle className="h-4 w-4" />,
       onClick: () => changeQuestionStatus("not_started", questionId),
     },
     {
       key: "left_for_review",
       label: "Left for Review",
-      icon: <ExclamationCircleFilled />,
+      icon: <AlertCircle className="h-4 w-4" />,
       onClick: () => changeQuestionStatus("left_for_review", questionId),
     },
     {
       key: "skip",
       label: "Skip",
-      icon: <PlayCircleFilled />,
+      icon: <PlayCircle className="h-4 w-4" />,
       onClick: () => changeQuestionStatus("skip", questionId),
     },
   ];
 
   return (
-    <Card
-      style={{
-        marginBottom: "1rem",
-        fontSize: "1.2rem",
-        borderRight: `5px solid ${statusColors[question.status]}`,
-      }}
-      extra={
-        <div>
-          <Tag color={statusColors[question.status]}>
+    <Card className={`mb-4 border-r-4 ${statusBorders[question.status]}`}>
+      <div className="px-6 py-4">
+        <div className="flex justify-between items-center mb-4">
+          <Badge variant="secondary" className={statusColors[question.status]}>
             {question.status.replace("_", " ")}
-          </Tag>
-          <Dropdown menu={{ items }} trigger={["click"]}>
-            <MoreOutlined style={{ fontSize: "20px" }} />
-          </Dropdown>
+          </Badge>
+          <DropdownMenu>
+            <DropdownMenuTrigger className="h-8 w-8 flex items-center justify-center rounded-full hover:bg-gray-100">
+              <MoreVertical className="h-5 w-5" />
+            </DropdownMenuTrigger>
+            <DropdownMenuContent align="end">
+              {menuItems.map((item) => (
+                <DropdownMenuItem
+                  key={item.key}
+                  onClick={item.onClick}
+                  className="flex items-center gap-2 cursor-pointer"
+                >
+                  {item.icon}
+                  <span>{item.label}</span>
+                </DropdownMenuItem>
+              ))}
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
-      }
-    >
-      <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
-        {`${index + 1}. ${question.text}`}
-      </ReactMarkdown>
-      <Space direction="vertical" style={{ width: "100%" }}>
-        <QuizOptions
-          correctAnswers={correctAnswers}
-          questionType={questionType}
-          answers={answers}
-          selectedOptions={selectedOptions}
-          onOptionChange={handleOptionChange}
-        />
-      </Space>
+
+        <div className="text-lg">
+          <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
+            {`${index + 1}. ${question.text}`}
+          </ReactMarkdown>
+        </div>
+
+        <div className="mt-4">
+          <QuizOptions
+            correctAnswers={correctAnswers}
+            questionType={questionType}
+            answers={answers}
+            selectedOptions={selectedOptions}
+            onOptionChange={handleOptionChange}
+          />
+        </div>
+      </div>
     </Card>
   );
 };

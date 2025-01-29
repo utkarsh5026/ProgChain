@@ -1,13 +1,15 @@
 import React, { useMemo } from "react";
-import { Modal, Statistic, Card, Row, Col, Space, Typography } from "antd";
 import {
-  CheckCircleOutlined,
-  CloseCircleOutlined,
-  QuestionCircleOutlined,
-} from "@ant-design/icons";
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { CheckCircle, XCircle, HelpCircle } from "lucide-react";
 import type { Question } from "../../store/quiz/type";
-
-const { Title } = Typography;
 
 interface SubmitModalProps {
   visible: boolean;
@@ -16,27 +18,26 @@ interface SubmitModalProps {
   questions: Question[];
 }
 
-interface StatisticWithIconProps {
+interface StatisticProps {
   icon: React.ReactNode;
   title: string;
   value: number;
-  color: string;
+  colorClass: string;
 }
-const StatisticWithIcon: React.FC<StatisticWithIconProps> = ({
+
+const Statistic: React.FC<StatisticProps> = ({
   icon,
   title,
   value,
-  color,
-}): React.ReactElement => (
-  <Statistic
-    title={
-      <Space>
-        {icon} {title}
-      </Space>
-    }
-    value={value}
-    valueStyle={{ color }}
-  />
+  colorClass,
+}) => (
+  <div className="flex flex-col items-center gap-2">
+    <div className="flex items-center gap-2">
+      {icon}
+      <span className="text-sm font-medium">{title}</span>
+    </div>
+    <span className={`text-2xl font-bold ${colorClass}`}>{value}</span>
+  </div>
 );
 
 const SubmitModal: React.FC<SubmitModalProps> = ({
@@ -51,42 +52,51 @@ const SubmitModal: React.FC<SubmitModalProps> = ({
   );
 
   return (
-    <Modal
-      title="Submit Quiz"
-      open={visible}
-      onOk={onSubmit}
-      onCancel={onCancel}
-    >
-      <Title level={5}>Are you sure you want to submit the quiz? 🤔</Title>
-      <Card>
-        <Row gutter={16}>
-          <Col span={8}>
-            <StatisticWithIcon
-              icon={<CheckCircleOutlined style={{ color: "#52c41a" }} />}
-              title="Completed"
-              value={completed}
-              color="#52c41a"
-            />
-          </Col>
-          <Col span={8}>
-            <StatisticWithIcon
-              icon={<CloseCircleOutlined style={{ color: "#ff4d4f" }} />}
-              title="Skipped"
-              value={skipped}
-              color="#ff4d4f"
-            />
-          </Col>
-          <Col span={8}>
-            <StatisticWithIcon
-              icon={<QuestionCircleOutlined style={{ color: "#1890ff" }} />}
-              title="Remaining"
-              value={remaining}
-              color="#1890ff"
-            />
-          </Col>
-        </Row>
-      </Card>
-    </Modal>
+    <Dialog open={visible} onOpenChange={onCancel}>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Submit Quiz</DialogTitle>
+        </DialogHeader>
+
+        <div className="py-4">
+          <h3 className="text-lg font-medium mb-4">
+            Are you sure you want to submit the quiz? 🤔
+          </h3>
+
+          <Card>
+            <CardContent className="pt-6">
+              <div className="grid grid-cols-3 gap-4">
+                <Statistic
+                  icon={<CheckCircle className="h-5 w-5 text-green-500" />}
+                  title="Completed"
+                  value={completed}
+                  colorClass="text-green-500"
+                />
+                <Statistic
+                  icon={<XCircle className="h-5 w-5 text-red-500" />}
+                  title="Skipped"
+                  value={skipped}
+                  colorClass="text-red-500"
+                />
+                <Statistic
+                  icon={<HelpCircle className="h-5 w-5 text-blue-500" />}
+                  title="Remaining"
+                  value={remaining}
+                  colorClass="text-blue-500"
+                />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        <DialogFooter>
+          <Button variant="outline" onClick={onCancel}>
+            Cancel
+          </Button>
+          <Button onClick={onSubmit}>Submit</Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
   );
 };
 

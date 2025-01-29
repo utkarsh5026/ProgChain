@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { Space, Button } from "antd";
-import { CheckCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button } from "@/components/ui/button";
+import { CheckCircle, Plus } from "lucide-react";
 import { useLocation } from "react-router-dom";
 import QuizSetupModal from "./QuizSetupModal";
 import type { QuizSetupValues } from "../../store/quiz/type";
@@ -33,25 +33,19 @@ const Quiz: React.FC = () => {
   if (!quiz) return <QuizSetupModal visible={true} />;
 
   return (
-    <Space direction="vertical" size="large" style={{ width: "70vw" }}>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          marginBottom: "16px",
-        }}
-      >
+    <div className="w-[70vw] flex flex-col gap-8">
+      <div className="flex justify-between items-center mb-4">
         <DownloadDropdown quiz={quiz} />
-        <Button icon={<PlusOutlined />} onClick={handleSetupModal}>
+        <Button onClick={handleSetupModal}>
+          <Plus className="mr-2 h-4 w-4" />
           Generate Another Quiz
         </Button>
         <Button
-          type="primary"
           disabled={quiz.submitted}
           onClick={handleClickSubmit}
-          icon={<CheckCircleOutlined />}
+          variant="default"
         >
+          <CheckCircle className="mr-2 h-4 w-4" />
           Submit Quiz
         </Button>
       </div>
@@ -63,14 +57,8 @@ const Quiz: React.FC = () => {
         onCancel={handleCancel}
         questions={quiz.questions}
       />
-      <QuizSetupModal
-        visible={isSetupModalVisible}
-        extraProps={{
-          closable: true,
-          onCancel: handleSetupModalClose,
-        }}
-      />
-    </Space>
+      <QuizSetupModal visible={isSetupModalVisible} />
+    </div>
   );
 };
 

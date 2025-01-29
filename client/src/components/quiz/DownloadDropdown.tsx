@@ -1,11 +1,12 @@
 import React from "react";
-import { Dropdown, Button } from "antd";
+import { Button } from "@/components/ui/button";
 import {
-  FileExcelFilled,
-  CodepenOutlined,
-  FilePdfFilled,
-  DownloadOutlined,
-} from "@ant-design/icons";
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { FileSpreadsheet, Code2, FileText, Download } from "lucide-react";
 import {
   downloadAsXLSX,
   downloadAsJSON,
@@ -27,34 +28,28 @@ interface DownloadDropdownProps {
  */
 const DownloadDropdown: React.FC<DownloadDropdownProps> = ({ quiz }) => {
   return (
-    <Dropdown
-      menu={{
-        items: [
-          {
-            key: "download_excel",
-            label: "Download as Excel",
-            icon: <FileExcelFilled />,
-            onClick: () => downloadAsXLSX(quiz.questions),
-          },
-          {
-            key: "download_json",
-            label: "Download as JSON",
-            icon: <CodepenOutlined />,
-            onClick: () => downloadAsJSON(quiz.questions),
-          },
-          {
-            key: "download_pdf",
-            label: "Download as PDF",
-            icon: <FilePdfFilled />,
-            onClick: () => downloadAsPdf(quiz.questions),
-          },
-        ],
-      }}
-    >
-      <Button icon={<DownloadOutlined />} type="primary">
-        Download
-      </Button>
-    </Dropdown>
+    <DropdownMenu>
+      <DropdownMenuTrigger asChild>
+        <Button>
+          <Download className="mr-2 h-4 w-4" />
+          Download
+        </Button>
+      </DropdownMenuTrigger>
+      <DropdownMenuContent>
+        <DropdownMenuItem onClick={() => downloadAsXLSX(quiz.questions)}>
+          <FileSpreadsheet className="mr-2 h-4 w-4" />
+          Download as Excel
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => downloadAsJSON(quiz.questions)}>
+          <Code2 className="mr-2 h-4 w-4" />
+          Download as JSON
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => downloadAsPdf(quiz.questions)}>
+          <FileText className="mr-2 h-4 w-4" />
+          Download as PDF
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };
 

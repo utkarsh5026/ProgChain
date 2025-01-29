@@ -1,9 +1,11 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
-import { Checkbox, Radio, Space, RadioChangeEvent } from "antd";
 import rehypeHighlight from "rehype-highlight";
 import "highlight.js/styles/github.css";
 import useQuiz from "../../store/quiz/hook";
+import { Checkbox } from "@/components/ui/checkbox";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
 
 interface QuizOptionsProps {
   questionType: string;
@@ -34,84 +36,91 @@ const QuizOptions: React.FC<QuizOptionsProps> = ({
   onOptionChange,
 }) => {
   const { isSubmitted } = useQuiz();
+
   const getOptionStyle = (index: number) => {
-    if (!isSubmitted) return {};
+    if (!isSubmitted) return "";
 
     const isSelected = selectedOptions.includes(index);
     const isCorrect = correctAnswers.includes(index);
 
     if (isCorrect) {
-      return {
-        backgroundColor: "rgba(0, 255, 0, 0.1)",
-        border: "1px solid green",
-        borderRadius: "10px",
-      };
+      return "bg-green-50 border border-green-500 rounded-lg";
     } else if (isSelected) {
-      return {
-        backgroundColor: "rgba(255, 0, 0, 0.1)",
-        border: "1px solid red",
-        borderRadius: "10px",
-      };
+      return "bg-red-50 border border-red-500 rounded-lg";
     }
-    return {};
+    return "";
   };
 
-  const handleOptionChange = (checkedValues: string[]) => {
-    const indices = checkedValues.map((value) => answers.indexOf(value));
-    onOptionChange(indices);
+  const handleCheckboxChange = (checked: boolean, index: number) => {
+    const newSelected = checked
+      ? [...selectedOptions, index]
+      : selectedOptions.filter((i) => i !== index);
+    onOptionChange(newSelected);
   };
 
-  const handleRadioChange = (e: RadioChangeEvent) => {
-    const index = answers.indexOf(e.target.value);
-    console.log("index", index);
+  const handleRadioChange = (value: string) => {
+    const index = answers.indexOf(value);
     onOptionChange([index]);
   };
 
   return (
-    <Space direction="vertical" style={{ width: "100%" }}>
+    <div className="flex flex-col space-y-4 w-full">
       {questionType.toLowerCase() === "multi_correct" ? (
-        <Checkbox.Group
-          onChange={handleOptionChange}
-          value={selectedOptions.map((option) => answers[option])}
-          disabled={isSubmitted}
-        >
-          <Space direction="vertical" style={{ width: "100%" }}>
-            {answers.map((option, index) => (
-              <div key={keyCreate(option)} style={getOptionStyle(index)}>
+        <div className="flex flex-col space-y-3">
+          {answers.map((option, index) => (
+            <div
+              key={keyCreate(option)}
+              className={`p-2 ${getOptionStyle(index)}`}
+            >
+              <div className="flex items-start space-x-3">
                 <Checkbox
-                  value={option}
-                  style={{ width: "100%", padding: "8px" }}
+                  id={`checkbox-${index}`}
+                  checked={selectedOptions.includes(index)}
+                  disabled={isSubmitted}
+                  onCheckedChange={(checked) =>
+                    handleCheckboxChange(checked as boolean, index)
+                  }
+                />
+                <Label
+                  htmlFor={`checkbox-${index}`}
+                  className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
                 >
                   <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                     {option}
                   </ReactMarkdown>
-                </Checkbox>
+                </Label>
               </div>
-            ))}
-          </Space>
-        </Checkbox.Group>
+            </div>
+          ))}
+        </div>
       ) : (
-        <Radio.Group
-          onChange={handleRadioChange}
-          value={
-            selectedOptions.length > 0 ? answers[selectedOptions[0]] : null
-          }
+        <RadioGroup
           disabled={isSubmitted}
+          value={selectedOptions.length > 0 ? answers[selectedOptions[0]] : ""}
+          onValueChange={handleRadioChange}
+          className="flex flex-col space-y-3"
         >
-          <Space direction="vertical" style={{ width: "100%" }}>
-            {answers.map((option, index) => (
-              <div key={keyCreate(option)} style={getOptionStyle(index)}>
-                <Radio value={option} style={{ width: "100%", padding: "8px" }}>
+          {answers.map((option, index) => (
+            <div
+              key={keyCreate(option)}
+              className={`p-2 ${getOptionStyle(index)}`}
+            >
+              <div className="flex items-start space-x-3">
+                <RadioGroupItem value={option} id={`radio-${index}`} />
+                <Label
+                  htmlFor={`radio-${index}`}
+                  className="text-sm leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70 cursor-pointer"
+                >
                   <ReactMarkdown rehypePlugins={[rehypeHighlight]}>
                     {option}
                   </ReactMarkdown>
-                </Radio>
+                </Label>
               </div>
-            ))}
-          </Space>
-        </Radio.Group>
+            </div>
+          ))}
+        </RadioGroup>
       )}
-    </Space>
+    </div>
   );
 };
 
