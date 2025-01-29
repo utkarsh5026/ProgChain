@@ -1,9 +1,23 @@
 import React, { useEffect } from "react";
 import { motion } from "framer-motion";
-import { Table } from "antd";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuCheckboxItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
+import { Filter } from "lucide-react";
+import { Button } from "@/components/ui/button";
 import ProblemDifficulty from "./ProblemDifficulty";
 import useProblems from "../../store/leetcode/hook";
-import type { ProblemBasic } from "../../store/leetcode/type";
 
 /**
  * ProblemList component for displaying a list of LeetCode problems.
@@ -17,38 +31,23 @@ import type { ProblemBasic } from "../../store/leetcode/type";
  */
 const ProblemList: React.FC = () => {
   const { fetchProblems, problems } = useProblems();
+  const [difficulty, setDifficulty] = React.useState<string | null>(null);
 
   useEffect(() => {
     fetchProblems({ page: 1, limit: 20 });
   }, [fetchProblems]);
 
-  if (problems === null) return <div>Loading...</div>;
+  if (problems === null) {
+    return (
+      <div className="flex items-center justify-center h-48">
+        <div className="animate-spin">Loading...</div>
+      </div>
+    );
+  }
 
-  const columns = [
-    {
-      title: "Problem",
-      dataIndex: "problem",
-      key: "problem",
-    },
-    {
-      title: "Difficulty",
-      dataIndex: "difficulty",
-      key: "difficulty",
-      render: (text: string) => <ProblemDifficulty difficulty={text} />,
-      filters: [
-        { text: "Easy", value: "Easy" },
-        { text: "Medium", value: "Medium" },
-        { text: "Hard", value: "Hard" },
-      ],
-      onFilter: (value: boolean | React.Key, record: ProblemBasic) =>
-        record.difficulty === String(value),
-    },
-    {
-      title: "Acceptance Rate",
-      dataIndex: "acceptance_rate",
-      key: "acceptance_rate",
-    },
-  ];
+  const filteredProblems = difficulty
+    ? problems.problems.filter((problem) => problem.difficulty === difficulty)
+    : problems.problems;
 
   return (
     <motion.div
@@ -61,19 +60,67 @@ const ProblemList: React.FC = () => {
         delay: 0.2,
         type: "spring",
       }}
+      className="p-4"
     >
-      <Table
-        dataSource={problems.problems}
-        columns={columns.map((column) => ({
-          ...column,
-          onFilter: column.onFilter
-            ? (value: boolean | React.Key, record: ProblemBasic) =>
-                column.onFilter(String(value), record)
-            : undefined,
-        }))}
-        pagination={false}
-        size="large"
-      />
+      <div className="rounded-md border">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Problem</TableHead>
+              <TableHead>
+                <div className="flex items-center gap-2">
+                  Difficulty
+                  <DropdownMenu>
+                    <DropdownMenuTrigger asChild>
+                      <Button variant="ghost" size="sm">
+                        <Filter className="h-4 w-4" />
+                      </Button>
+                    </DropdownMenuTrigger>
+                    <DropdownMenuContent>
+                      <DropdownMenuCheckboxItem
+                        checked={difficulty === null}
+                        onCheckedChange={() => setDifficulty(null)}
+                      >
+                        All
+                      </DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem
+                        checked={difficulty === "Easy"}
+                        onCheckedChange={() => setDifficulty("Easy")}
+                      >
+                        Easy
+                      </DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem
+                        checked={difficulty === "Medium"}
+                        onCheckedChange={() => setDifficulty("Medium")}
+                      >
+                        Medium
+                      </DropdownMenuCheckboxItem>
+                      <DropdownMenuCheckboxItem
+                        checked={difficulty === "Hard"}
+                        onCheckedChange={() => setDifficulty("Hard")}
+                      >
+                        Hard
+                      </DropdownMenuCheckboxItem>
+                    </DropdownMenuContent>
+                  </DropdownMenu>
+                </div>
+              </TableHead>
+              <TableHead>Acceptance Rate</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
+            {filteredProblems.map((problem) => (
+              <TableRow key={problem.problem}>
+                <TableCell>{problem.problem}</TableCell>
+                <TableCell>
+                  <ProblemDifficulty difficulty={problem.difficulty} />
+                </TableCell>
+                <TableCell>{problem.acceptance_rate}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
     </motion.div>
   );
 };

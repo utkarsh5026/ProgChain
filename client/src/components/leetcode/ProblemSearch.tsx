@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { AutoComplete, Input } from "antd";
-import { SearchOutlined } from "@ant-design/icons";
-import { searchProblems } from "../../store/leetcode/api";
+import { Search } from "lucide-react";
+import {
+  Command,
+  CommandInput,
+  CommandEmpty,
+  CommandGroup,
+  CommandItem,
+} from "@/components/ui/command";
 
-const { Search } = Input;
+import { searchProblems } from "../../store/leetcode/api";
 
 interface ProblemOption {
   value: string;
@@ -13,8 +18,8 @@ interface ProblemOption {
 /**
  * ProblemSearch component for searching LeetCode problems.
  *
- * This component provides an autocomplete search functionality for LeetCode problems.
- * It uses the Ant Design AutoComplete and Input components to create a search bar
+ * This component provides a command palette-style search functionality for LeetCode problems.
+ * It uses the shadcn/ui Command components to create a modern search experience
  * with autocomplete suggestions.
  *
  * @component
@@ -43,27 +48,40 @@ const ProblemSearch: React.FC = () => {
     }
   };
 
-  const onSelect = (value: string) => {
-    const selectedOption = options.find((option) => option.value === value);
-    if (selectedOption) setSearchText(selectedOption.label);
-  };
-
   return (
-    <AutoComplete
-      options={options}
-      onSelect={onSelect}
-      onSearch={handleSearch}
-      value={searchText}
-      style={{ width: "100%" }}
-    >
-      <Search
-        placeholder="Search LeetCode problems 🫡"
-        enterButton={<SearchOutlined />}
-        size="large"
-        onChange={(e) => setSearchText(e.target.value)}
-        onSearch={handleSearch}
-      />
-    </AutoComplete>
+    <Command className="rounded-lg border shadow-md">
+      <div className="flex items-center border-b px-3">
+        <Search className="h-4 w-4 shrink-0 opacity-50" />
+        <CommandInput
+          value={searchText}
+          onValueChange={(value) => {
+            setSearchText(value);
+            handleSearch(value);
+          }}
+          placeholder="Search LeetCode problems 🫡"
+          className="flex h-11 w-full rounded-md bg-transparent py-3 text-sm outline-none placeholder:text-muted-foreground disabled:cursor-not-allowed disabled:opacity-50"
+        />
+      </div>
+      {options.length > 0 && (
+        <CommandGroup className="max-h-60 overflow-auto">
+          {options.map((option) => (
+            <CommandItem
+              key={option.value}
+              onSelect={() => {
+                setSearchText(option.label);
+                setOptions([]);
+              }}
+              className="cursor-pointer"
+            >
+              {option.label}
+            </CommandItem>
+          ))}
+        </CommandGroup>
+      )}
+      <CommandEmpty className="py-6 text-center text-sm">
+        No problems found.
+      </CommandEmpty>
+    </Command>
   );
 };
 
