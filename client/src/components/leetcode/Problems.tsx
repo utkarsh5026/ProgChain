@@ -5,7 +5,6 @@ import ProblemList from "./ProblemList";
 const Problems: React.FC = () => {
   return (
     <div className="flex flex-col space-y-5 w-full">
-      <ProblemSearch />
       <ProblemList />
     </div>
   );
