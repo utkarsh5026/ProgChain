@@ -47,7 +47,8 @@ const useTopics = (): TopicsHookResult => {
 
       if (useCache && topicKey in memoizedTopicConcepts) {
         dispatch(setCurrentTopic(topicKey));
-      } else {fetchGeneratedTopics(data);
+      } else {
+        dispatch(fetchGeneratedTopics(data));
       }
     },
     [dispatch, memoizedTopicConcepts] // Remove topicConcepts from dependencies

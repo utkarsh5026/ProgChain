@@ -1,15 +1,14 @@
-import React, { useEffect } from "react";
-import { Breadcrumb, Card } from "antd";
-import styled from "styled-components";
+import React from "react";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Breadcrumb,
+  BreadcrumbItem,
+  BreadcrumbLink,
+} from "@/components/ui/breadcrumb";
 import useTopics from "../../store/topics/hook";
 import TopicDisplay from "./TopicExplorer";
 import { DELIMITER } from "../../store/topics/slice";
-const StyledBreadcrumb = styled(Breadcrumb)`
-  padding: 16px;
-  background-color: #f0f2f5;
-  border-radius: 4px;
-  margin-bottom: 16px;
-`;
+import AskTopic from "./AskTopic";
 
 /**
  * TopicChain component displays a breadcrumb navigation and topic explorer for a hierarchical topic structure.
@@ -23,38 +22,37 @@ const TopicChain: React.FC = () => {
     useTopics();
   const pathSegments = computePathSegments(currentTopic);
 
-  useEffect(() => {
-    if (currentTopic) {
-      const { mainTopic, context } = parseTopic(currentTopic);
-      generateConcepts(mainTopic, context, false);
-    }
-  }, []);
-
   const handleSegmentClick = (index: number) => {
     const newPath = pathSegments.slice(0, index + 1).join(DELIMITER);
     const { mainTopic, context } = parseTopic(newPath);
     generateConcepts(mainTopic, context, false);
   };
 
+  if (currentTopic === null) return <AskTopic />;
+
   return (
-    <Card style={{ height: "90vh", width: "80vw" }} bordered={false}>
-      <StyledBreadcrumb separator=">">
-        {pathSegments.map((segment, index) => (
-          <Breadcrumb.Item
-            key={segment}
-            onClick={() => handleSegmentClick(index)}
-          >
-            {segment}
-          </Breadcrumb.Item>
-        ))}
-      </StyledBreadcrumb>
-      {currentTopic && (
-        <TopicDisplay
-          topic={currentTopic}
-          topics={topicConcepts[currentTopic]}
-          isLoading={loading}
-        />
-      )}
+    <Card className="h-[90vh] w-[80vw] border-none">
+      <CardContent>
+        <Breadcrumb className="p-4 bg-muted rounded-md mb-4">
+          {pathSegments.map((segment, index) => (
+            <BreadcrumbItem key={segment}>
+              <BreadcrumbLink
+                onClick={() => handleSegmentClick(index)}
+                className="cursor-pointer hover:text-primary"
+              >
+                {segment}
+              </BreadcrumbLink>
+            </BreadcrumbItem>
+          ))}
+        </Breadcrumb>
+        {currentTopic && (
+          <TopicDisplay
+            topic={currentTopic}
+            topics={topicConcepts[currentTopic]}
+            isLoading={loading}
+          />
+        )}
+      </CardContent>
     </Card>
   );
 };

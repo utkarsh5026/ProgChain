@@ -1,12 +1,11 @@
 import React, { useRef, useState, useCallback } from "react";
-import { Typography, Button, message, Spin } from "antd";
 import { motion, AnimatePresence } from "framer-motion";
 import html2canvas from "html2canvas";
+import { Button } from "@/components/ui/button";
+import { Loader2 } from "lucide-react";
 import type { TopicConcepts, Concept } from "../../store/topics/types";
 import DifficultyCard from "./DifficultyCard";
 import useTopics from "../../store/topics/hook";
-
-const { Title } = Typography;
 
 interface TopicDisplayProps {
   topic: string;
@@ -33,7 +32,7 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
         });
         const paddedCanvas = document.createElement("canvas");
         const ctx = paddedCanvas.getContext("2d");
-        const padding = 20; // Border width
+        const padding = 20;
         paddedCanvas.width = canvas.width + padding * 2;
         paddedCanvas.height = canvas.height + padding * 2;
 
@@ -57,9 +56,6 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
         link.download = `${topic}_topics.png`;
         link.href = paddedCanvas.toDataURL();
         link.click();
-        message.success("Image saved successfully!");
-      } catch {
-        message.error("Failed to save image");
       } finally {
         setIsSaving(false);
       }
@@ -78,57 +74,31 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
 
   if (isLoading) {
     return (
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "300px",
-        }}
-      >
-        <Spin size="large" />
+      <div className="flex justify-center items-center h-[300px]">
+        <Loader2 className="h-8 w-8 animate-spin" />
       </div>
     );
   }
 
   if (!topics) {
-    return <Title level={3}>No topics available</Title>;
+    return <h3 className="text-2xl font-semibold">No topics available</h3>;
   }
 
   return (
     <div>
-      <Button
-        onClick={saveAsPNG}
-        style={{ marginBottom: "20px" }}
-        loading={isSaving}
-      >
+      <Button onClick={saveAsPNG} className="mb-5" disabled={isSaving}>
+        {isSaving && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
         Save as PNG
       </Button>
+
       <motion.div
         ref={containerRef}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        style={{
-          padding: "20px",
-          backgroundColor: "#1f1f1f",
-          borderRadius: "10px",
-        }}
+        className="p-5 bg-zinc-900 rounded-lg"
       >
-        <Title
-          level={2}
-          style={{ textAlign: "center", marginBottom: "20px", color: "white" }}
-        >
-          {topic} Topics
-        </Title>
-        <div
-          style={{
-            display: "flex",
-            flexWrap: "wrap",
-            gap: "20px",
-            justifyContent: "center",
-          }}
-        >
+        <div className="flex flex-wrap gap-5 justify-center">
           {Object.entries(topics).map(([difficulty, conceptList], index) => (
             <motion.div
               key={difficulty}
@@ -145,28 +115,16 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
           ))}
         </div>
       </motion.div>
+
       <AnimatePresence>
         {isSaving && (
           <motion.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            style={{
-              position: "fixed",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              backgroundColor: "rgba(0,0,0,0.5)",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              zIndex: 1000,
-            }}
+            className="fixed inset-0 bg-black/50 flex justify-center items-center z-50"
           >
-            <Typography.Text style={{ color: "white", fontSize: "24px" }}>
-              Saving...
-            </Typography.Text>
+            <p className="text-white text-2xl">Saving...</p>
           </motion.div>
         )}
       </AnimatePresence>

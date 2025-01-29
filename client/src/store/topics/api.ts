@@ -19,6 +19,7 @@ export const generateTopics = async (
   mainTopic: string,
   context: string[] = []
 ) => {
+  console.log(mainTopic, context);
   const response = await axios.post(`${API_BASE_URL}/generate`, {
     main_topic: mainTopic,
     context: context,

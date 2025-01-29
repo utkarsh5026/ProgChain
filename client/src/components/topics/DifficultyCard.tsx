@@ -1,9 +1,7 @@
 import React from "react";
-import { Card, List, Typography } from "antd";
 import { motion } from "framer-motion";
-import { Concept } from "../../store/topics/types";
-
-const { Title } = Typography;
+import type { Concept } from "@/store/topics/types";
+import { Card, CardHeader, CardContent } from "@/components/ui/card";
 
 interface DifficultyCardProps {
   difficulty: string;
@@ -33,56 +31,44 @@ const DifficultyCard: React.FC<DifficultyCardProps> = ({
   onConceptClick,
 }) => {
   return (
-    <Card
-      title={
-        <Title
-          level={4}
+    <Card className="w-[400px] bg-zinc-800 text-white">
+      <CardHeader
+        className="bg-zinc-800 border-b-2"
+        style={{
+          borderColor:
+            difficultyColors[difficulty as keyof typeof difficultyColors],
+        }}
+      >
+        <h3
+          className="capitalize m-0"
           style={{
-            textTransform: "capitalize",
-            margin: 0,
             color:
               difficultyColors[difficulty as keyof typeof difficultyColors],
           }}
         >
           {difficulty}
-        </Title>
-      }
-      style={{
-        width: 300,
-        backgroundColor: "#2a2a2a",
-        color: "white",
-      }}
-      styles={{
-        header: {
-          backgroundColor: "#333333",
-          borderBottom: `2px solid ${
-            difficultyColors[difficulty as keyof typeof difficultyColors]
-          }`,
-        },
-        body: { padding: "12px" },
-      }}
-    >
-      <List
-        itemLayout="horizontal"
-        dataSource={conceptList}
-        renderItem={(item: Concept, idx) => (
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, delay: idx * 0.05 }}
-          >
-            <List.Item
-              onClick={() => onConceptClick(item)}
-              style={{ cursor: "pointer" }}
+        </h3>
+      </CardHeader>
+      <CardContent className="p-3">
+        <div className="flex flex-col gap-2">
+          {conceptList.map((item: Concept, idx) => (
+            <motion.div
+              key={item.topic}
+              initial={{ opacity: 0, x: -20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.3, delay: idx * 0.05 }}
             >
-              <List.Item.Meta
-                avatar={<span style={{ fontSize: "20px" }}>{item.emoji}</span>}
-                title={<span style={{ color: "white" }}>{item.topic}</span>}
-              />
-            </List.Item>
-          </motion.div>
-        )}
-      />
+              <div
+                onClick={() => onConceptClick(item)}
+                className="flex items-center gap-3 cursor-pointer p-2 hover:bg-zinc-700 rounded-md transition-colors"
+              >
+                <span className="text-xl">{item.emoji}</span>
+                <span className="font-thin">{item.topic}</span>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </CardContent>
     </Card>
   );
 };

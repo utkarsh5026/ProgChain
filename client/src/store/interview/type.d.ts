@@ -7,6 +7,7 @@ export type QuestionType =
 export type Difficulty = "easy" | "medium" | "hard";
 
 export interface Question {
+  id: number;
   question: string;
   type: QuestionType;
   difficulty: Difficulty;

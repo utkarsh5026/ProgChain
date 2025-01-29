@@ -3,6 +3,7 @@ import topicsSlice from "./topics/slice";
 import questionSlice from "./interview/slice";
 import quizSlice from "./quiz/slice";
 import exploreSlice from "./explore/slice";
+import problemListSlice from "./leetcode/slice";
 
 export const store = configureStore({
   reducer: {
@@ -10,6 +11,7 @@ export const store = configureStore({
     questions: questionSlice,
     quiz: quizSlice,
     explore: exploreSlice,
+    problemList: problemListSlice,
   },
 });
 

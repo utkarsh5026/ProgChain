@@ -15,7 +15,7 @@ const initialState: TopicState = {
   concepts: {},
   loading: false,
   error: null,
-  currentTopic: "Python",
+  currentTopic: null,
 };
 
 /**
@@ -35,6 +35,7 @@ export const fetchGeneratedTopics = createAsyncThunk(
         mainTopic,
         context
       )) as TopicConcepts;
+      console.log(topics);
       return { mainTopic, topics, context };
     } catch (error) {
       if (error instanceof Error) return rejectWithValue(error.message);

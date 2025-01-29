@@ -1,7 +1,4 @@
 import React from "react";
-import { Typography } from "antd";
-
-const { Title } = Typography;
 
 interface AppTitleProps {
   title: string;
@@ -18,19 +15,12 @@ interface AppTitleProps {
  * @returns {React.ReactElement} A styled Title component with the given text and size.
  */
 const AppTitle: React.FC<AppTitleProps> = ({ title, size }) => {
+  const HeadingTag = `h${size}` as keyof JSX.IntrinsicElements;
+
   return (
-    <Title
-      level={size}
-      style={{
-        background: "linear-gradient(45deg, #2196F3, #FF4081)",
-        WebkitBackgroundClip: "text",
-        WebkitTextFillColor: "transparent",
-        marginBottom: "20px",
-        textAlign: "center",
-      }}
-    >
+    <HeadingTag className="bg-gradient-to-r from-blue-500 to-pink-500 bg-clip-text text-transparent mb-5 text-center">
       {title}
-    </Title>
+    </HeadingTag>
   );
 };
 
