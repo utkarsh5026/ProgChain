@@ -69,6 +69,8 @@ websocket-client = "1.8.0"
 wsproto = "1.2.0"
 yarl = "1.11.1"
 zstandard = "0.23.0"
+langchain-community = "^0.3.16"
+faiss-cpu = "^1.9.0.post1"
 
 [tool.poetry.dev-dependencies]
 
