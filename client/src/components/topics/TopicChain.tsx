@@ -6,7 +6,7 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
-import { ChevronRight, BookOpen, Loader2, Sparkles, Map } from "lucide-react";
+import { ChevronRight, Loader2, Sparkles, Map } from "lucide-react";
 import useTopics from "../../store/topics/hook";
 import TopicDisplay from "./TopicExplorer";
 import { DELIMITER } from "../../store/topics/slice";
