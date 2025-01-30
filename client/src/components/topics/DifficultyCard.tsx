@@ -114,7 +114,9 @@ const DifficultyCard: React.FC<DifficultyCardProps> = ({
                   className="flex items-center justify-between p-3 rounded-lg cursor-pointer group"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{item.emoji}</span>
+                    <span className="text-zinc-500 font-medium min-w-[24px]">
+                      {idx + 1}.
+                    </span>
                     <span className="font-medium text-zinc-300 group-hover:text-white transition-colors">
                       {item.topic}
                     </span>
