@@ -37,6 +37,13 @@ def search_problems_with_name(name: str, limit: int = 10):
         ).limit(limit).all()
 
 
+def get_problem_by_id(id: int):
+    with db_session() as session:
+        return session.query(Problem).filter(Problem.id == id).options(
+            joinedload(Problem.tags)
+        ).first()
+
+
 def get_problems_by_filter(filter: FilterForProblem):
     """
     Get problems by filter.

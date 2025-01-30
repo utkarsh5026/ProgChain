@@ -2,6 +2,7 @@ from fastapi import APIRouter, Query
 from typing import List
 from .vector_store import leetcode_vector_store
 from .db_ops import get_problems_by_filter, FilterForProblem, SortOrder
+from .soution import generate_code_solution, SolutionConfig
 
 router = APIRouter(prefix="/leetcode", tags=["leetcode"])
 
@@ -28,3 +29,8 @@ async def get_problems(
         page=page
     )
     return {"problems": get_problems_by_filter(filter_params)}
+
+
+@router.post("/solution")
+async def generate_solution(config: SolutionConfig):
+    return await generate_code_solution(config)
