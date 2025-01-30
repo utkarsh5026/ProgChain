@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useTopics from "@/store/topics/hook";
-import { SendHorizontal, BookOpen, Brain, Loader2 } from "lucide-react";
-import AppTitle from "@/components/utils/AppTitile";
+import { SendHorizontal, Brain, Loader2, Sparkles, Cloud } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -11,6 +10,7 @@ const AskTopic: React.FC = () => {
   const { generateConcepts } = useTopics();
   const [topic, setTopic] = useState<string>("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleAskQuestion = async () => {
     if (!topic.trim()) return;
@@ -19,7 +19,7 @@ const AskTopic: React.FC = () => {
     try {
       generateConcepts(topic, [], false);
     } finally {
-      console.log("done");
+      setIsLoading(false);
     }
   };
 
@@ -28,17 +28,15 @@ const AskTopic: React.FC = () => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
+        staggerChildren: 0.15,
         delayChildren: 0.2,
       },
     },
-    exit: { opacity: 0 },
   };
 
   const itemVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
   };
 
   return (
@@ -48,70 +46,164 @@ const AskTopic: React.FC = () => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="min-h-screen w-full flex flex-col items-center justify-center p-4 bg-gradient-to-b from-zinc-900 to-zinc-950"
+        className="min-h-screen w-full p-4 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black"
       >
-        <motion.div variants={itemVariants}>
-          <Card className="w-full max-w-2xl mx-auto shadow-lg bg-gradient-to-b from-zinc-900/50 to-black/50 border-zinc-800 backdrop-blur-xl">
-            <CardContent className="p-6">
-              <div className="flex flex-col items-center space-y-8">
-                <motion.div
-                  variants={itemVariants}
-                  className="flex items-center space-x-2 text-primary"
-                >
-                  <Brain className="w-8 h-8" />
-                  <BookOpen className="w-8 h-8" />
-                </motion.div>
+        {/* Animated background elements */}
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.1, 0.2, 0.1],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"
+          />
+        </div>
 
-                <motion.div
-                  variants={itemVariants}
-                  className="text-center space-y-4"
-                >
-                  <AppTitle title="Master Your Interview Topics" size={2} />
-                  <p className="text-slate-600 dark:text-slate-400 text-lg">
-                    Enter any programming concept you'd like to learn for your
-                    interview
-                  </p>
-                </motion.div>
+        <div className="relative container mx-auto max-w-7xl">
+          <motion.div
+            variants={itemVariants}
+            className="text-center mb-12 space-y-4"
+          >
+            <motion.div
+              className="flex justify-center gap-4 mb-6"
+              animate={{
+                scale: [1, 1.05, 1],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <Sparkles className="w-12 h-12 text-primary" />
+              <Cloud className="w-12 h-12 text-primary/80" />
+              <Brain className="w-12 h-12 text-primary/60" />
+            </motion.div>
 
-                <motion.div
-                  variants={itemVariants}
-                  className="w-full space-y-4"
-                >
-                  <div className="relative">
+            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-indigo-400 to-primary">
+              Discover Your Learning Path
+            </h1>
+            <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+              Enter any programming concept to generate a personalized learning
+              journey
+            </p>
+          </motion.div>
+
+          <motion.div
+            variants={itemVariants}
+            className="max-w-3xl mx-auto relative"
+          >
+            <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
+              <CardContent className="p-24">
+                <div className="relative">
+                  <motion.div
+                    animate={
+                      isInputFocused
+                        ? {
+                            boxShadow: [
+                              "0 0 0 0 rgba(255,255,255,0)",
+                              "0 0 20px 2px rgba(255,255,255,0.1)",
+                              "0 0 0 0 rgba(255,255,255,0)",
+                            ],
+                          }
+                        : {}
+                    }
+                    transition={{ duration: 2, repeat: Infinity }}
+                    className="relative"
+                  >
                     <Input
-                      className="w-full p-6 text-lg bg-white dark:bg-slate-900 border-2 focus:ring-2 focus:ring-primary"
+                      className={`w-full p-8 text-lg bg-zinc-900/50 border-2 border-zinc-800 rounded-2xl placeholder:text-zinc-600
+                        focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300
+                        ${
+                          isInputFocused
+                            ? "border-primary shadow-lg shadow-primary/20"
+                            : ""
+                        }
+                      `}
                       placeholder="e.g., React Hooks, System Design, Data Structures..."
                       value={topic}
                       onChange={(e) => setTopic(e.target.value)}
+                      onFocus={() => setIsInputFocused(true)}
+                      onBlur={() => setIsInputFocused(false)}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter" && !isLoading) {
+                        if (e.key === "Enter" && !isLoading && topic.trim()) {
                           handleAskQuestion();
                         }
                       }}
                     />
-                  </div>
+                  </motion.div>
 
                   <Button
                     variant="default"
                     size="lg"
-                    className="w-full py-6 text-lg font-semibold flex items-center justify-center space-x-2 bg-primary hover:bg-primary/90 transition-colors"
                     onClick={handleAskQuestion}
                     disabled={isLoading || !topic.trim()}
+                    className={`w-full mt-4 p-8 text-lg font-medium relative overflow-hidden
+                      ${
+                        isLoading
+                          ? "bg-primary/50"
+                          : "bg-primary hover:bg-primary/90"
+                      }
+                      transition-all duration-300 rounded-xl
+                    `}
                   >
+                    <motion.div
+                      animate={
+                        !isLoading
+                          ? {
+                              background: [
+                                "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
+                                "linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)",
+                                "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
+                              ],
+                            }
+                          : {}
+                      }
+                      transition={{ duration: 2, repeat: Infinity }}
+                      className="absolute inset-0"
+                    />
+
                     {isLoading ? (
-                      <Loader2 className="w-5 h-5 animate-spin" />
+                      <motion.div
+                        animate={{ rotate: 360 }}
+                        transition={{
+                          duration: 2,
+                          repeat: Infinity,
+                          ease: "linear",
+                        }}
+                      >
+                        <Loader2 className="w-6 h-6" />
+                      </motion.div>
                     ) : (
-                      <>
+                      <div className="flex items-center justify-center gap-2">
                         <span>Generate Learning Path</span>
                         <SendHorizontal className="w-5 h-5" />
-                      </>
+                      </div>
                     )}
                   </Button>
-                </motion.div>
-              </div>
-            </CardContent>
-          </Card>
-        </motion.div>
+                </div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
       </motion.div>
     </AnimatePresence>
   );
