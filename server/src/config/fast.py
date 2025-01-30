@@ -1,7 +1,20 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from features.leetcode import initialize_leetcode
+from contextlib import asynccontextmanager
+from models import init_db
+import os
 
-app = FastAPI(debug=True)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    init_db()
+    print(os.getenv("OPENAI_API_KEY"))
+    await initialize_leetcode()
+    yield
+
+
+app = FastAPI(debug=True, lifespan=lifespan)
 
 app.add_middleware(
     CORSMiddleware,
