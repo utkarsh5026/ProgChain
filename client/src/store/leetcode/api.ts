@@ -1,4 +1,5 @@
 import caller from "../../api/caller";
+import { ProblemAdvanced } from "./type";
 
 export const searchProblems = async (query: string) => {
   const response = await caller.get(`/leetcode/search?query=${query}`);
@@ -10,4 +11,19 @@ export const fetchProblems = async (page: number, limit: number) => {
     `/leetcode/problems?page=${page}&limit=${limit}`
   );
   return response.data;
+};
+
+export const fetchTags = async () => {
+  const response = await caller.get("/leetcode/tags");
+  return response.data;
+};
+
+export const fetchInfo = async () => {
+  const response = await caller.get("/leetcode/info");
+  return response.data;
+};
+
+export const fetchProblemInfo = async (problemName: string) => {
+  const response = await caller.get(`/leetcode/problem/${problemName}`);
+  return response.data as ProblemAdvanced;
 };
