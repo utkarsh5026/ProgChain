@@ -13,7 +13,7 @@ interface QuizHook {
   quiz: Quiz | null;
   loading: boolean;
   error: string | null;
-  fecthQuiz: (values: QuizSetupValues) => Promise<void>;
+  fetchQuiz: (values: QuizSetupValues) => Promise<void>;
   submitQuiz: () => Promise<void>;
   isSubmitted: boolean;
 }
@@ -33,7 +33,7 @@ const useQuiz = (): QuizHook => {
   const dispatch = useAppDispatch();
   const { quiz, loading, error } = useAppSelector((state) => state.quiz);
 
-  const fecthQuiz = useCallback(
+  const fetchQuiz = useCallback(
     async (values: QuizSetupValues) => {
       await dispatch(generateQuizThunk(values));
     },
@@ -49,7 +49,7 @@ const useQuiz = (): QuizHook => {
     [quiz?.submitted]
   );
 
-  return { quiz, loading, error, fecthQuiz, submitQuiz, isSubmitted };
+  return { quiz, loading, error, fetchQuiz, submitQuiz, isSubmitted };
 };
 
 interface QuizQuestionHook {
