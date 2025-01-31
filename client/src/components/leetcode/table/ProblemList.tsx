@@ -31,6 +31,7 @@ import {
 import { Input } from "@/components/ui/input";
 import useProblems from "@/store/leetcode/hook";
 import type { ProblemFilters } from "@/store/leetcode/type";
+import ProblemsTable from "./ProblemsTable";
 
 const ProblemList: React.FC = () => {
   // State management
@@ -48,16 +49,17 @@ const ProblemList: React.FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Handle search functionality
   const handleSearch = useCallback(() => {
     const filters: ProblemFilters = {
       page: currentPage,
       limit: pageSize,
       difficulty: difficulties,
       tags: selectedTags,
-      acceptanceSort: sortConfig.key,
+      acceptanceSort:
+        sortConfig.key === "acceptance_rate" ? sortConfig.direction : "asc",
       firstQuery: true,
     };
+
     fetchProblems(filters);
   }, [currentPage, pageSize, difficulties, selectedTags, sortConfig]);
 
@@ -86,7 +88,6 @@ const ProblemList: React.FC = () => {
     return problemList.problems;
   }, [problemList]);
 
-  // Loading state
   if (loading || !problemList) {
     return (
       <Card className="w-full h-[400px] bg-zinc-900/50 border-zinc-800">
@@ -108,168 +109,137 @@ const ProblemList: React.FC = () => {
       transition={{ duration: 0.5, ease: "easeOut" }}
       className="space-y-6"
     >
-      {/* Header Section */}
-      <div className="flex flex-col gap-6">
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <Code2 className="h-6 w-6 text-primary" />
-            <div>
-              <h2 className="text-2xl font-semibold text-white">
-                LeetCode Problems
-              </h2>
-              <p className="text-sm text-zinc-400">
-                {problemCnt} problems available
-              </p>
+      <div className="sticky top-0 z-50 bg-background pb-6 p-4">
+        <div className="flex flex-col gap-6">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <Code2 className="h-6 w-6 text-primary" />
+              <div>
+                <h2 className="text-2xl font-semibold text-white">
+                  LeetCode Problems
+                </h2>
+                <p className="text-sm text-zinc-400">
+                  {problemCnt} problems available
+                </p>
+              </div>
             </div>
+
+            <Badge variant="outline" className="bg-zinc-900">
+              <Activity className="w-4 h-4 mr-1" />
+              <span>Average Success Rate: {averageAcceptanceRate}%</span>
+            </Badge>
           </div>
 
-          <Badge variant="outline" className="bg-zinc-900">
-            <Activity className="w-4 h-4 mr-1" />
-            <span>Average Success Rate: {averageAcceptanceRate}%</span>
-          </Badge>
-        </div>
+          {/* Filters Section */}
+          <div className="flex items-center gap-4 flex-wrap">
+            <div className="flex-1 min-w-[200px]">
+              <Input
+                placeholder="Search problems..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="bg-zinc-900 border-zinc-800"
+              />
+            </div>
 
-        {/* Filters Section */}
-        <div className="flex items-center gap-4 flex-wrap">
-          <div className="flex-1 min-w-[200px]">
-            <Input
-              placeholder="Search problems..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-zinc-900 border-zinc-800"
-            />
+            {/* Difficulty Filter */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Filter className="h-4 w-4" />
+                  <span>
+                    {difficulties.length
+                      ? `${difficulties.length} Difficulties`
+                      : "All Difficulties"}
+                  </span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-zinc-900 border-zinc-800">
+                {["Easy", "Medium", "Hard"].map((diff) => (
+                  <DropdownMenuCheckboxItem
+                    key={diff}
+                    checked={difficulties.includes(diff)}
+                    onCheckedChange={(checked) =>
+                      handleDifficultyChange(diff, checked)
+                    }
+                  >
+                    {diff}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Tags Filter */}
+            <DropdownMenu>
+              <DropdownMenuTrigger asChild>
+                <Button variant="outline" size="sm" className="gap-2">
+                  <Tags className="h-4 w-4" />
+                  <span>Tags ({selectedTags.length})</span>
+                </Button>
+              </DropdownMenuTrigger>
+              <DropdownMenuContent className="bg-zinc-900 border-zinc-800 max-h-[300px] overflow-y-auto">
+                <DropdownMenuLabel>Select Tags</DropdownMenuLabel>
+                <DropdownMenuSeparator />
+                {tags.map((tag) => (
+                  <DropdownMenuCheckboxItem
+                    key={tag}
+                    checked={selectedTags.includes(tag)}
+                    onCheckedChange={(checked) => {
+                      setSelectedTags((prev) =>
+                        checked ? [...prev, tag] : prev.filter((t) => t !== tag)
+                      );
+                    }}
+                  >
+                    {tag}
+                  </DropdownMenuCheckboxItem>
+                ))}
+              </DropdownMenuContent>
+            </DropdownMenu>
+
+            {/* Sort Selection */}
+            <Select
+              value={`${sortConfig.key ?? "none"}-${sortConfig.direction}`}
+              onValueChange={(value) => {
+                const [key, direction] = value.split("-") as [
+                  string,
+                  "asc" | "desc"
+                ];
+                setSortConfig({
+                  key: key === "none" ? null : key,
+                  direction,
+                });
+              }}
+            >
+              <SelectTrigger className="w-[180px]">
+                <SelectValue placeholder="Sort by..." />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="none-asc">No sorting</SelectItem>
+                <SelectItem value="acceptance_rate-asc">
+                  Success Rate (Low to High)
+                </SelectItem>
+                <SelectItem value="acceptance_rate-desc">
+                  Success Rate (High to Low)
+                </SelectItem>
+                <SelectItem value="name-asc">Name (A-Z)</SelectItem>
+                <SelectItem value="name-desc">Name (Z-A)</SelectItem>
+              </SelectContent>
+            </Select>
+
+            <Button
+              variant="default"
+              size="sm"
+              onClick={handleSearch}
+              className="bg-primary hover:bg-primary/90 gap-2"
+            >
+              <Search className="h-4 w-4" />
+              Apply Filters
+            </Button>
           </div>
-
-          {/* Difficulty Filter */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Filter className="h-4 w-4" />
-                <span>
-                  {difficulties.length
-                    ? `${difficulties.length} Difficulties`
-                    : "All Difficulties"}
-                </span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-zinc-900 border-zinc-800">
-              {["Easy", "Medium", "Hard"].map((diff) => (
-                <DropdownMenuCheckboxItem
-                  key={diff}
-                  checked={difficulties.includes(diff)}
-                  onCheckedChange={(checked) =>
-                    handleDifficultyChange(diff, checked)
-                  }
-                >
-                  {diff}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Tags Filter */}
-          <DropdownMenu>
-            <DropdownMenuTrigger asChild>
-              <Button variant="outline" size="sm" className="gap-2">
-                <Tags className="h-4 w-4" />
-                <span>Tags ({selectedTags.length})</span>
-              </Button>
-            </DropdownMenuTrigger>
-            <DropdownMenuContent className="bg-zinc-900 border-zinc-800 max-h-[300px] overflow-y-auto">
-              <DropdownMenuLabel>Select Tags</DropdownMenuLabel>
-              <DropdownMenuSeparator />
-              {tags.map((tag) => (
-                <DropdownMenuCheckboxItem
-                  key={tag}
-                  checked={selectedTags.includes(tag)}
-                  onCheckedChange={(checked) => {
-                    setSelectedTags((prev) =>
-                      checked ? [...prev, tag] : prev.filter((t) => t !== tag)
-                    );
-                  }}
-                >
-                  {tag}
-                </DropdownMenuCheckboxItem>
-              ))}
-            </DropdownMenuContent>
-          </DropdownMenu>
-
-          {/* Sort Selection */}
-          <Select
-            value={`${sortConfig.key ?? "none"}-${sortConfig.direction}`}
-            onValueChange={(value) => {
-              const [key, direction] = value.split("-") as [
-                string,
-                "asc" | "desc"
-              ];
-              setSortConfig({
-                key: key === "none" ? null : key,
-                direction,
-              });
-            }}
-          >
-            <SelectTrigger className="w-[180px]">
-              <SelectValue placeholder="Sort by..." />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="none-asc">No sorting</SelectItem>
-              <SelectItem value="acceptance_rate-asc">
-                Success Rate (Low to High)
-              </SelectItem>
-              <SelectItem value="acceptance_rate-desc">
-                Success Rate (High to Low)
-              </SelectItem>
-              <SelectItem value="name-asc">Name (A-Z)</SelectItem>
-              <SelectItem value="name-desc">Name (Z-A)</SelectItem>
-            </SelectContent>
-          </Select>
-
-          {/* Search Button */}
-          <Button
-            variant="default"
-            size="sm"
-            onClick={handleSearch}
-            className="bg-primary hover:bg-primary/90 gap-2"
-          >
-            <Search className="h-4 w-4" />
-            Apply Filters
-          </Button>
         </div>
       </div>
 
-      <div className="overflow-x-auto">
-        <table className="w-full border-collapse">
-          <thead>
-            <tr>
-              <th className="text-left p-4 bg-zinc-900">Problem</th>
-              <th className="text-left p-4 bg-zinc-900">Difficulty</th>
-              <th className="text-left p-4 bg-zinc-900">Success Rate</th>
-              <th className="text-left p-4 bg-zinc-900">Tags</th>
-            </tr>
-          </thead>
-          <tbody>
-            {problems.map((problem) => (
-              <tr key={problem.id} className="border-t border-zinc-800">
-                <td className="p-4">{problem.name}</td>
-                <td className="p-4">
-                  <Badge variant={problem.difficulty.toLowerCase() as any}>
-                    {problem.difficulty}
-                  </Badge>
-                </td>
-                <td className="p-4">{problem.acceptance_rate}%</td>
-                <td className="p-4">
-                  <div className="flex flex-wrap gap-2">
-                    {problem.tags.map((tag) => (
-                      <Badge key={tag.id} variant="outline">
-                        {tag.name}
-                      </Badge>
-                    ))}
-                  </div>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="pt-4">
+        <ProblemsTable problems={problems} />
       </div>
 
       {/* Pagination */}

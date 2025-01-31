@@ -53,6 +53,7 @@ def get_problems_by_filter(filter: FilterForProblem):
     - total_count: Total count if first_query is True, otherwise -1
     """
     with db_session() as session:
+        print(filter)
         query = session.query(Problem).options(joinedload(Problem.tags))
 
         if filter.tags:

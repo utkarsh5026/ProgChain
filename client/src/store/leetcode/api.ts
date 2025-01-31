@@ -12,8 +12,22 @@ export const searchProblems = async (query: string) => {
 };
 
 export const fetchProblems = async (filters: ProblemFilters) => {
+  const params = new URLSearchParams();
+  params.append("page", filters.page.toString());
+  params.append("limit", filters.limit.toString());
+  params.append("firstQuery", "true");
+  params.append("acceptanceSort", filters.acceptanceSort);
+
+  // Properly append array parameters
+  filters.difficulty.forEach((diff) => {
+    params.append("difficulty", diff);
+  });
+
+  filters.tags.forEach((tag) => {
+    params.append("tags", tag);
+  });
   const response = await caller.get(`/leetcode/problems`, {
-    params: filters,
+    params: params,
   });
   return response.data;
 };

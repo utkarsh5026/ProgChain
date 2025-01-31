@@ -17,18 +17,18 @@ problem_cnt = get_problem_cnt()
 async def get_problems(
     tags: List[str] = Query(default=[]),
     difficulty: List[str] = Query(default=[]),
-    acceptance_sort: SortOrder = Query(default=SortOrder.NONE),
+    acceptanceSort: SortOrder = Query(default=SortOrder.NONE),
     limit: int = Query(default=40, ge=1),
     page: int = Query(default=1, ge=1),
-    first_query: bool = Query(default=False)
+    firstQuery: bool = Query(default=False)
 ):
     filter_params = FilterForProblem(
         tags=tags,
         difficulty=difficulty,
-        acceptance_sort=acceptance_sort,
+        acceptance_sort=acceptanceSort,
         limit=limit,
         page=page,
-        first_query=first_query
+        first_query=firstQuery
     )
     problems, total_count = get_problems_by_filter(filter_params)
     return {"problems": problems, "total_count": total_count}
