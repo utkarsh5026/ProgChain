@@ -1,35 +1,38 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Sidebar from "./Sidebar";
+import Explore from "./components/explore/Explore";
+import Interview from "./components/interview/Interview";
+import Leetcode from "./components/leetcode/Leetcode";
+import Quiz from "./components/quiz/Quiz";
+import TopicChain from "./components/topics/TopicChain";
 
 function App() {
-  const [count, setCount] = useState(0)
+  useEffect(() => {
+    console.log("App mounted");
+    document.body.classList.add("dark");
+  }, []);
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <BrowserRouter>
+      <div className="flex">
+        <Sidebar />
+        <div className="min-h-screen flex-1">
+          <main className="flex flex-col w-full h-full p-4 min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950">
+            <Routes>
+              <Route path="/topics" element={<TopicChain />} />
+              <Route path="/interview" element={<Interview />} />
+              <Route path="/quiz" element={<Quiz />} />
+              <Route path="/flow" element={<div>Flow Page</div>} />
+              <Route path="/explore" element={<Explore />} />
+              <Route path="/leetcode/*" element={<Leetcode />} />
+              <Route path="/" element={<Explore />} />
+            </Routes>
+          </main>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </BrowserRouter>
+  );
 }
 
-export default App
+export default App;
