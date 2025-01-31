@@ -6,7 +6,7 @@ import { fetchProblemInfoThunk, generateSolutionThunk } from "./problemSlice";
 
 const useProblems = () => {
   const dispatch = useAppDispatch();
-  const { problems, loading, error, tags, pageSize, problemCnt } =
+  const { problemList, loading, error, tags, pageSize, problemCnt } =
     useAppSelector((state) => state.problemList);
 
   const fetchProblems = useCallback(
@@ -21,7 +21,7 @@ const useProblems = () => {
   }, [dispatch]);
 
   return {
-    problems,
+    problemList,
     loading,
     error,
     fetchProblems,

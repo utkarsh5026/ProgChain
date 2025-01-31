@@ -3,7 +3,7 @@ import type { ProblemList, ProblemFilters } from "./type";
 import { fetchProblems, fetchInfo } from "./api";
 
 interface ProblemListState {
-  problems: ProblemList | null;
+  problemList: ProblemList | null;
   loading: boolean;
   error: string | null;
   tags: string[];
@@ -12,7 +12,7 @@ interface ProblemListState {
 }
 
 const initialState: ProblemListState = {
-  problems: null,
+  problemList: null,
   loading: false,
   error: null,
   tags: [],
@@ -22,9 +22,18 @@ const initialState: ProblemListState = {
 
 export const fetchProblemsThunk = createAsyncThunk(
   "problemList/fetchProblems",
-  async ({ page, limit }: ProblemFilters) => {
-    const problems = await fetchProblems(page, limit);
-    return problems;
+  async (filters: ProblemFilters) => {
+    const { problems, total_count } = await fetchProblems(filters);
+    const problemsList: ProblemList = {
+      problems,
+      pageCount: Math.ceil(total_count / filters.limit),
+      currentPage: filters.page,
+      currentLimit: filters.limit,
+    };
+    return {
+      problems: problemsList,
+      totalCount: total_count,
+    };
   }
 );
 
@@ -41,7 +50,7 @@ const problemListSlice = createSlice({
   initialState,
   reducers: {
     setProblemList: (state, action: PayloadAction<ProblemList>) => {
-      state.problems = action.payload;
+      state.problemList = action.payload;
     },
   },
   extraReducers: (builder) => {
@@ -50,7 +59,11 @@ const problemListSlice = createSlice({
       state.error = null;
     });
     builder.addCase(fetchProblemsThunk.fulfilled, (state, action) => {
-      state.problems = action.payload;
+      const { problems, totalCount } = action.payload;
+
+      console.log(problems, totalCount);
+      state.problemList = problems;
+      state.problemCnt = totalCount;
       state.loading = false;
       state.error = null;
     });
