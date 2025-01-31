@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Markdown from "@/components/utils/Markdown";
 import useExplore from "@/store/explore/hook";
-import ParticleAnimation from "@/components/utils/ParticleAnimation";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
   Collapsible,
@@ -18,6 +17,7 @@ import {
   RefreshCw,
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import AILoadingAnimation from "./AILoadingAnimation";
 
 interface ExplanationProps {
   questionID: string;
@@ -94,11 +94,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
         <CardContent className="p-6">
           {!explanation ? (
             <div className="space-y-4">
-              <ParticleAnimation
-                width="100%"
-                height={200}
-                particleCount={100}
-              />
+              <AILoadingAnimation />
               <div className="text-center text-zinc-400">
                 <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
                 <p>Generating explanation...</p>
