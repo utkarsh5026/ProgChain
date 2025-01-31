@@ -4,6 +4,7 @@ import questionSlice from "./interview/slice";
 import quizSlice from "./quiz/slice";
 import exploreSlice from "./explore/slice";
 import problemListSlice from "./leetcode/slice";
+import problemSlice from "./leetcode/problemSlice";
 
 export const store = configureStore({
   reducer: {
@@ -12,6 +13,7 @@ export const store = configureStore({
     quiz: quizSlice,
     explore: exploreSlice,
     problemList: problemListSlice,
+    problem: problemSlice,
   },
 });
 

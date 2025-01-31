@@ -46,5 +46,12 @@ export type QuestionDetail = {
     answer: string;
     model: Model;
   }[];
-  solution: Solution[];
+  solution: Record<string, Solution>;
+};
+
+type SolutionRequest = {
+  model: Model;
+  problemId: number;
+  progLang: string;
+  additionalContext: string;
 };
