@@ -14,6 +14,7 @@ import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Bot, Wand2, Sparkles } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Syntax from "./Syntax";
+import { models } from "@/config/config";
 
 interface GenerationPanelProps {
   customPrompt: string;
@@ -77,20 +78,19 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
               </TabsContent>
 
               <TabsContent value="suggestions" className="mt-4 space-y-3">
-                {promptSuggestions.map((suggestion, index) => (
+                {promptSuggestions.map(({ prompt, title, description }) => (
                   <Button
-                    key={index}
+                    key={prompt}
                     variant="outline"
                     className="w-full justify-start text-left h-auto p-4 hover:bg-secondary/50"
                     onClick={() => {
-                      setCustomPrompt(suggestion.prompt);
-                      document.querySelector('[value="prompt"]')?.click();
+                      setCustomPrompt(prompt);
                     }}
                   >
                     <div className="flex flex-col gap-1">
-                      <span className="font-semibold">{suggestion.title}</span>
+                      <span className="font-semibold">{title}</span>
                       <span className="text-sm text-muted-foreground">
-                        {suggestion.description}
+                        {description}
                       </span>
                     </div>
                   </Button>
@@ -104,9 +104,11 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
                   <SelectValue placeholder="Select AI Model" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="gpt-4">GPT-4</SelectItem>
-                  <SelectItem value="gpt-3.5-turbo">GPT-3.5 Turbo</SelectItem>
-                  <SelectItem value="claude-3">Claude 3</SelectItem>
+                  {models.map((model) => (
+                    <SelectItem key={model} value={model}>
+                      {model}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
 

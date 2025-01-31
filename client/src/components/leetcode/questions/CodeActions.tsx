@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { languages } from "@/config/config";
 import {
   Copy,
   Check,
@@ -7,6 +8,14 @@ import {
   Wand2,
   RefreshCcw,
 } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import { type Language } from "@/config/config";
 
 interface CodeActionsProps {
   handleCopyCode: () => void;
@@ -14,6 +23,8 @@ interface CodeActionsProps {
   showCopied: boolean;
   isGenerateOpen: boolean;
   setIsGenerateOpen: (value: boolean) => void;
+  selectedLanguage: Language;
+  setSelectedLanguage: (value: Language) => void;
 }
 
 const CodeActions: React.FC<CodeActionsProps> = ({
@@ -22,6 +33,8 @@ const CodeActions: React.FC<CodeActionsProps> = ({
   showCopied,
   isGenerateOpen,
   setIsGenerateOpen,
+  selectedLanguage,
+  setSelectedLanguage,
 }) => {
   const defaultPrompt =
     "Generate an efficient and well-commented solution with explanation of approach";
@@ -57,6 +70,25 @@ const CodeActions: React.FC<CodeActionsProps> = ({
           <RefreshCcw className="w-4 h-4" />
           <span>Regenerate</span>
         </Button>
+
+        <Select
+          value={selectedLanguage}
+          onValueChange={(value) => setSelectedLanguage(value as Language)}
+        >
+          <SelectTrigger className="w-[140px]">
+            <SelectValue
+              placeholder="Language"
+              className="capitalize text-white"
+            />
+          </SelectTrigger>
+          <SelectContent>
+            {languages.map((language) => (
+              <SelectItem key={language} value={language}>
+                {language}
+              </SelectItem>
+            ))}
+          </SelectContent>
+        </Select>
       </div>
 
       <Button
