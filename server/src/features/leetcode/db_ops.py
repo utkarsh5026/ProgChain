@@ -66,3 +66,30 @@ def get_problems_by_filter(filter: FilterForProblem):
 
         return query.limit(filter.limit).offset(
             (filter.page - 1) * filter.limit).all()
+
+
+def get_all_problems():
+    with db_session() as session:
+        problems = session.query(Problem).options(
+            joinedload(Problem.tags)
+        ).all()
+        for problem in problems:
+            _ = [tag.name for tag in problem.tags]
+        return problems
+
+
+def get_all_tags():
+    with db_session() as session:
+        return session.query(Tag).all()
+
+
+def get_problem_cnt():
+    with db_session() as session:
+        return session.query(Problem).count()
+
+
+def find_problem_by_name(name: str):
+    with db_session() as session:
+        return session.query(Problem).filter(Problem.name == name).options(
+            joinedload(Problem.tags)
+        ).first()

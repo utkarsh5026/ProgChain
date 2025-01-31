@@ -8,6 +8,15 @@ from pydantic import ValidationError
 
 
 class SolutionConfig(BaseModel):
+    """
+    Configuration for generating a code solution.
+
+    Attributes:
+        prog_lang (str): The programming language for the solution (e.g., 'Python', 'Java').
+        model (str): The model to be used for generating the solution.
+        problem_id (str | int): The unique identifier for the LeetCode problem.
+        additional_context (Optional[str]): Any additional context to provide for the solution generation.
+    """
     prog_lang: str
     model: str
     problem_id: str | int
@@ -15,12 +24,33 @@ class SolutionConfig(BaseModel):
 
 
 class SolutionResponse(BaseModel):
+    """
+    Response model for the generated code solution.
+
+    Attributes:
+        code (str): The complete solution code as a string.
+        time_complexity (str): The time complexity of the solution in Big O notation.
+        space_complexity (str): The space complexity of the solution in Big O notation.
+    """
     code: str
     time_complexity: str
     space_complexity: str
 
 
 async def generate_code_solution(config: SolutionConfig):
+    """
+    Generates a code solution for a given LeetCode problem.
+
+    Args:
+        config (SolutionConfig): The configuration containing details about the programming language,
+                                 model, problem ID, and any additional context.
+
+    Returns:
+        SolutionResponse: A response object containing the generated code, time complexity, and space complexity.
+
+    Raises:
+        ValueError: If the problem with the specified ID is not found or if the response cannot be parsed.
+    """
     problem = get_problem_by_id(config.problem_id)
 
     if problem is None:

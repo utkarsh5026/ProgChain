@@ -1,7 +1,7 @@
 from langchain_core.documents import Document
 from langchain_openai import OpenAIEmbeddings
 from langchain_community.vectorstores import FAISS
-from .db_models import get_all_problems
+from .db_ops import get_all_problems
 import os
 from pathlib import Path
 from dotenv import load_dotenv

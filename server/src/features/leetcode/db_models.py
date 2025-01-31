@@ -1,7 +1,6 @@
 from sqlalchemy import Column, Integer, String, Float, ForeignKey, Table, Index
 from sqlalchemy.orm import relationship, joinedload
 from config.db import Base, db_session
-from pydantic import BaseModel
 
 
 problem_tags = Table(

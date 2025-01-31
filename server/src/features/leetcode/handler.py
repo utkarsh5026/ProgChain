@@ -1,16 +1,16 @@
 from fastapi import APIRouter, Query
 from typing import List
-from .vector_store import leetcode_vector_store
-from .db_ops import get_problems_by_filter, FilterForProblem, SortOrder
+from .db_ops import (get_problems_by_filter,
+                     FilterForProblem,
+                     SortOrder,
+                     get_all_tags,
+                     get_problem_cnt,
+                     find_problem_by_name)
 from .soution import generate_code_solution, SolutionConfig
 
 router = APIRouter(prefix="/leetcode", tags=["leetcode"])
-
-
-@router.get("/search")
-async def search_problems(prompt: str):
-    result = await leetcode_vector_store.search_problems(prompt)
-    return {"problems": result}
+tags = get_all_tags()
+problem_cnt = get_problem_cnt()
 
 
 @router.get("/problems")
@@ -34,3 +34,26 @@ async def get_problems(
 @router.post("/solution")
 async def generate_solution(config: SolutionConfig):
     return await generate_code_solution(config)
+
+
+@router.get("/tags")
+async def get_tags():
+    return [tag.name for tag in tags]
+
+
+@router.get("/info")
+async def get_info():
+    return {
+        "problem_cnt": problem_cnt,
+        "tags": [tag.name for tag in tags],
+        "difficulty": ["Easy", "Medium", "Hard"],
+        "page_size": 40,
+    }
+
+
+@router.get("/problem/{problem_name}")
+async def get_problem(problem_name: str):
+    name = " ".join(problem_name.split("_"))
+    prob = find_problem_by_name(name)
+    print(prob)
+    return prob
