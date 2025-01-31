@@ -19,16 +19,19 @@ async def get_problems(
     difficulty: List[str] = Query(default=[]),
     acceptance_sort: SortOrder = Query(default=SortOrder.NONE),
     limit: int = Query(default=40, ge=1),
-    page: int = Query(default=1, ge=1)
+    page: int = Query(default=1, ge=1),
+    first_query: bool = Query(default=False)
 ):
     filter_params = FilterForProblem(
         tags=tags,
         difficulty=difficulty,
         acceptance_sort=acceptance_sort,
         limit=limit,
-        page=page
+        page=page,
+        first_query=first_query
     )
-    return {"problems": get_problems_by_filter(filter_params)}
+    problems, total_count = get_problems_by_filter(filter_params)
+    return {"problems": problems, "total_count": total_count}
 
 
 @router.post("/solution")
@@ -55,5 +58,4 @@ async def get_info():
 async def get_problem(problem_name: str):
     name = " ".join(problem_name.split("_"))
     prob = find_problem_by_name(name)
-    print(prob)
     return prob

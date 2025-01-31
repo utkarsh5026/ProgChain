@@ -18,6 +18,7 @@ class FilterForProblem(BaseModel):
     acceptance_sort: SortOrder = Field(default=SortOrder.NONE)
     limit: int = Field(default=40, ge=1)
     page: int = Field(default=1, ge=1)
+    first_query: bool = Field(default=False)
 
     class Config:
         from_attributes = True
@@ -47,6 +48,9 @@ def get_problem_by_id(id: int):
 def get_problems_by_filter(filter: FilterForProblem):
     """
     Get problems by filter.
+    Returns a tuple of (problems, total_count) where:
+    - problems: List of problems for the current page
+    - total_count: Total count if first_query is True, otherwise -1
     """
     with db_session() as session:
         query = session.query(Problem).options(joinedload(Problem.tags))
@@ -64,8 +68,14 @@ def get_problems_by_filter(filter: FilterForProblem):
             else:  # DESCENDING
                 query = query.order_by(Problem.acceptance_rate.desc())
 
-        return query.limit(filter.limit).offset(
+        # Get total count only on first query
+        total_count = query.count()
+
+        # Get paginated results
+        problems = query.limit(filter.limit).offset(
             (filter.page - 1) * filter.limit).all()
+
+        return problems, total_count
 
 
 def get_all_problems():
