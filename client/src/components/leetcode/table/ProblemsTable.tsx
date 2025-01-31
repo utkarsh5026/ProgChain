@@ -34,7 +34,7 @@ const ProblemsTable: React.FC<ProblemsTableProps> = ({ problems }) => {
             </TableHead>
           </TableRow>
         </TableHeader>
-        <TableBody>
+        <TableBody className="border-zinc-800 text-lg">
           {problems.map((problem, index) => (
             <TableRow
               key={`${problem.name}-${index}`}
