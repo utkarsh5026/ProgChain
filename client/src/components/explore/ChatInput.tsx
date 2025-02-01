@@ -14,6 +14,7 @@ import {
 } from "@/components/ui/select";
 import { modelDescriptions, type Model } from "@/config/config";
 import PastedContent, { type Content } from "./PastedContent";
+import ModelSelect from "../utils/ModelSelect";
 
 // Define interfaces for better type safety
 interface ChatInputProps {
@@ -142,47 +143,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
         <div className="relative flex flex-col gap-3">
           {/* Model and Learning Mode Selectors */}
           <div className="flex items-center justify-end gap-3">
-            {/* Model Selector */}
-            <Select
-              value={selectedModel}
-              onValueChange={(value: Model) => setSelectedModel(value)}
-            >
-              <SelectTrigger
-                className="h-9 w-[180px] bg-zinc-800/90 border-zinc-700/50 hover:bg-zinc-800 
-                          text-zinc-300 hover:text-zinc-200 shadow-lg hover:shadow-xl transition-all
-                          hover:border-zinc-700"
-              >
-                <div className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-primary/70" />
-                  <SelectValue defaultValue={selectedModel}>
-                    {currentModel.name}
-                  </SelectValue>
-                </div>
-              </SelectTrigger>
-              <SelectContent align="end" className="w-[280px]">
-                <SelectGroup>
-                  <SelectLabel className="text-xs font-medium text-zinc-500">
-                    Available Models
-                  </SelectLabel>
-                  {modelDescriptions.map((model) => (
-                    <SelectItem
-                      key={model.name}
-                      value={model.name}
-                      className="flex items-center py-2"
-                    >
-                      <div className="flex flex-col">
-                        <span className="font-medium text-sm text-zinc-300">
-                          {model.name}
-                        </span>
-                        <span className="text-xs text-zinc-400">
-                          {model.description}
-                        </span>
-                      </div>
-                    </SelectItem>
-                  ))}
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <ModelSelect onModelSelect={setSelectedModel} />
 
             {/* Learning Mode Selector */}
             <Select
