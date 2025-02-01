@@ -2,43 +2,44 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Textarea } from "@/components/ui/textarea";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import { Bot, Wand2, Sparkles } from "lucide-react";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import Syntax from "./Syntax";
-import { models } from "@/config/config";
+import { Language, Model, models } from "@/config/config";
+import { useState } from "react";
+import { useProblem } from "@/store/leetcode/hook";
+import ModelSelect from "@/components/utils/ModelSelect";
 
 interface GenerationPanelProps {
-  customPrompt: string;
-  setCustomPrompt: (value: string) => void;
-  selectedModel: string;
-  setSelectedModel: (value: string) => void;
-  isGenerating: boolean;
-  handleGenerateCode: (prompt?: string) => void;
   generationError: string;
   generatedCode: string;
-  selectedLanguage: string;
+  selectedLanguage: Language;
+  closePanel: () => void;
 }
 
 const GenerationPanel: React.FC<GenerationPanelProps> = ({
-  customPrompt,
-  setCustomPrompt,
-  selectedModel,
-  setSelectedModel,
-  isGenerating,
-  handleGenerateCode,
   generationError,
   generatedCode,
   selectedLanguage,
+  closePanel,
 }) => {
+  const [model, setModel] = useState<Model>(models[0]);
+  const [customPrompt, setCustomPrompt] = useState("");
+  const { generateSolution, problemInfo, solutionLoading } = useProblem();
+
+  const generateCode = async () => {
+    if (!problemInfo?.problem.id) return;
+    closePanel();
+    await generateSolution({
+      model,
+      additionalContext: customPrompt,
+      progLang: selectedLanguage,
+      problemId: problemInfo?.problem.id,
+    });
+  };
+
   return (
     <motion.div
       initial={{ height: 0, opacity: 0 }}
@@ -56,9 +57,12 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
       >
         <Card className="border-dashed bg-secondary/20">
           <CardHeader>
-            <CardTitle className="text-lg flex items-center gap-2">
-              <Sparkles className="w-5 h-5" />
-              Customize Code Generation
+            <CardTitle className="text-lg flex items-center gap-2 justify-between">
+              <div className="flex items-center gap-2">
+                <Sparkles className="w-5 h-5" />
+                Customize Code Generation
+              </div>
+              <ModelSelect onModelSelect={setModel} />
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-6">
@@ -85,6 +89,7 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
                     className="w-full justify-start text-left h-auto p-4 hover:bg-secondary/50"
                     onClick={() => {
                       setCustomPrompt(prompt);
+                      generateCode();
                     }}
                   >
                     <div className="flex flex-col gap-1">
@@ -98,26 +103,13 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
               </TabsContent>
             </Tabs>
 
-            <div className="flex justify-between items-center gap-4">
-              <Select value={selectedModel} onValueChange={setSelectedModel}>
-                <SelectTrigger className="w-[200px]">
-                  <SelectValue placeholder="Select AI Model" />
-                </SelectTrigger>
-                <SelectContent>
-                  {models.map((model) => (
-                    <SelectItem key={model} value={model}>
-                      {model}
-                    </SelectItem>
-                  ))}
-                </SelectContent>
-              </Select>
-
+            <div className="flex justify-end items-center gap-4">
               <Button
-                onClick={() => handleGenerateCode()}
-                disabled={isGenerating}
+                onClick={generateCode}
+                disabled={solutionLoading}
                 className="flex items-center gap-2"
               >
-                {isGenerating ? (
+                {solutionLoading ? (
                   <>
                     <Bot className="w-4 h-4 animate-spin" />
                     <span>Generating...</span>
@@ -125,7 +117,11 @@ const GenerationPanel: React.FC<GenerationPanelProps> = ({
                 ) : (
                   <>
                     <Wand2 className="w-4 h-4" />
-                    <span>Generate</span>
+                    <span>
+                      {customPrompt.length > 0
+                        ? "Generate"
+                        : "Generate Without Prompt"}
+                    </span>
                   </>
                 )}
               </Button>

@@ -5,19 +5,12 @@ import { ScrollArea } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectItem,
-  SelectContent,
-} from "@/components/ui/select";
-import { MessageSquare, Bot, Send, CheckCheck, Sparkles } from "lucide-react";
-import { type Model, models } from "@/config/config";
+import { MessageSquare, Bot, Send, CheckCheck } from "lucide-react";
+import { type Model } from "@/config/config";
+import ModelSelect from "@/components/utils/ModelSelect";
 
 interface ChatInterfaceProps {
   itemVariants: any;
-  models: Model[];
   selectedModel: Model;
   setSelectedModel: (model: Model) => void;
   chat: any[];
@@ -85,25 +78,7 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
                 </p>
               </div>
             </div>
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
-              <SelectTrigger className="w-[200px] bg-background/60">
-                <div className="flex items-center gap-2">
-                  <Sparkles className="w-4 h-4 text-primary" />
-                  <SelectValue placeholder="Select Model" />
-                </div>
-              </SelectTrigger>
-              <SelectContent>
-                {models.map((model) => (
-                  <SelectItem
-                    key={model}
-                    value={model}
-                    className="flex items-center gap-2"
-                  >
-                    {model}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <ModelSelect onModelSelect={setSelectedModel} />
           </div>
 
           {/* Enhanced Chat Messages */}
