@@ -4,6 +4,9 @@ from features.leetcode import initialize_leetcode
 from contextlib import asynccontextmanager
 from models import init_db
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 
 @asynccontextmanager

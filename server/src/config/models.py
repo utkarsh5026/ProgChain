@@ -5,7 +5,6 @@ from enum import Enum
 
 load_dotenv()
 
-# Initialize the GPT-4o-mini model with specified parameters.
 gpt_4o_mini = ChatOpenAI(
     api_key=os.getenv("OPENAI_API_KEY"),
     model_name="gpt-4o-mini",
