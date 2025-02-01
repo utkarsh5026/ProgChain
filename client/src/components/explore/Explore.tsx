@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useExplore from "@/store/explore/hook";
 import AskQuestion from "@/components/explore/AskQuestion";
@@ -8,7 +8,23 @@ import { Button } from "@/components/ui/button";
 import MinimapDrawer from "@/components/explore/MiniMapDrawer";
 import { BookOpen, GraduationCap } from "lucide-react";
 
-// MinimapItem component remains the same as before
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+      delayChildren: 0.2,
+    },
+  },
+  exit: { opacity: 0 },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -20 },
+};
 
 const Explore: React.FC = () => {
   const {
@@ -31,30 +47,27 @@ const Explore: React.FC = () => {
     }
   }, []);
 
-  // Update active question based on scroll position
-  useEffect(() => {
-    const handleScroll = () => {
-      const scrollPosition = window.scrollY + window.innerHeight / 3;
+  const handleScroll = useCallback(() => {
+    let closest = null;
+    let closestDistance = Infinity;
 
-      let closest = null;
-      let closestDistance = Infinity;
-
-      Object.entries(explanationsRef.current).forEach(([id, element]) => {
-        if (element) {
-          const distance = Math.abs(element.getBoundingClientRect().top);
-          if (distance < closestDistance) {
-            closestDistance = distance;
-            closest = id;
-          }
+    Object.entries(explanationsRef.current).forEach(([id, element]) => {
+      if (element) {
+        const distance = Math.abs(element.getBoundingClientRect().top);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = id;
         }
-      });
+      }
+    });
 
-      setActiveQuestion(closest);
-    };
+    setActiveQuestion(closest);
+  }, [explanationsRef]);
 
+  useEffect(() => {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [handleScroll]);
 
   const handleReset = async () => {
     setIsResetting(true);
@@ -81,7 +94,6 @@ const Explore: React.FC = () => {
 
   const toggleMinimap = () => {
     setIsMinimapOpen((prev) => !prev);
-    // Store the preference in localStorage
     localStorage.setItem("minimapOpen", (!isMinimapOpen).toString());
   };
 
@@ -96,28 +108,10 @@ const Explore: React.FC = () => {
   const handleChatSubmit = async (message: string) => {
     setIsLoading(true);
     try {
-      const questionId = await fetchQuestion(message);
+      await fetchQuestion(message);
     } finally {
       setIsLoading(false);
     }
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-    exit: { opacity: 0 },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-    exit: { opacity: 0, y: -20 },
   };
 
   if (rootQuestion === null) return <AskQuestion />;

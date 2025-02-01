@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Send, Sparkles, BookOpen, X, FileText } from "lucide-react";
+import { Send, Sparkles, BookOpen } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -12,7 +12,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { modelDescriptions } from "@/config/config";
+import { modelDescriptions, type Model } from "@/config/config";
 import PastedContent, { type Content } from "./PastedContent";
 
 // Define interfaces for better type safety
@@ -63,8 +63,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   onSubmit,
   isLoading = false,
 }) => {
-  // Initialize state with defaults
-  const [selectedModel, setSelectedModel] = useState<string>(
+  const [selectedModel, setSelectedModel] = useState<Model>(
     modelDescriptions[0].name
   );
   const [selectedPromptType, setSelectedPromptType] =
@@ -144,7 +143,10 @@ const ChatInput: React.FC<ChatInputProps> = ({
           {/* Model and Learning Mode Selectors */}
           <div className="flex items-center justify-end gap-3">
             {/* Model Selector */}
-            <Select value={selectedModel} onValueChange={setSelectedModel}>
+            <Select
+              value={selectedModel}
+              onValueChange={(value: Model) => setSelectedModel(value)}
+            >
               <SelectTrigger
                 className="h-9 w-[180px] bg-zinc-800/90 border-zinc-700/50 hover:bg-zinc-800 
                           text-zinc-300 hover:text-zinc-200 shadow-lg hover:shadow-xl transition-all
