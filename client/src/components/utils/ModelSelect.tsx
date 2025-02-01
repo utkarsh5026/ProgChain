@@ -15,6 +15,20 @@ interface ModelSelectProps {
   onModelSelect: (model: Model) => void;
 }
 
+/**
+ * ModelSelect Component
+ *
+ * This component renders a dropdown selection for choosing a model from a list of available models.
+ * It allows users to select a model, which will then trigger a callback function to update the selected model.
+ *
+ * Props:
+ * - onModelSelect: A function that is called when a model is selected. It receives the selected model as an argument.
+ *
+ * State:
+ * - selectedModel: The currently selected model, initialized to the first model in the modelDescriptions array.
+ *
+ * Where handleModelChange is a function defined in the parent component to handle the model selection.
+ */
 const ModelSelect: React.FC<ModelSelectProps> = ({ onModelSelect }) => {
   const [selectedModel, setSelectedModel] = useState<Model>(
     modelDescriptions[0].name
