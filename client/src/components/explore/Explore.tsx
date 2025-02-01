@@ -1,30 +1,104 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useExplore from "@/store/explore/hook";
 import AskQuestion from "@/components/explore/AskQuestion";
 import Explanation from "@/components/explore/Explanation";
+import ChatInput from "@/components/explore/ChatInput";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import {
-  ArrowLeft,
-  Home,
-  BookOpen,
-  ChevronRight,
-  RefreshCw,
-  GraduationCap,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import MinimapDrawer from "@/components/explore/MiniMapDrawer";
+import { BookOpen, GraduationCap } from "lucide-react";
+
+// MinimapItem component remains the same as before
 
 const Explore: React.FC = () => {
-  const { rootQuestion, currentPath, resetExplore } = useExplore();
+  const {
+    rootQuestion,
+    currentPath,
+    resetExplore,
+    fetchQuestion,
+    getQuestion,
+  } = useExplore();
   const [isResetting, setIsResetting] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [activeQuestion, setActiveQuestion] = useState<string | null>(null);
+  const explanationsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
+  const [isMinimapOpen, setIsMinimapOpen] = useState(false);
+
+  useEffect(() => {
+    const savedPreference = localStorage.getItem("minimapOpen");
+    if (savedPreference !== null) {
+      setIsMinimapOpen(savedPreference === "true");
+    }
+  }, []);
+
+  // Update active question based on scroll position
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY + window.innerHeight / 3;
+
+      let closest = null;
+      let closestDistance = Infinity;
+
+      Object.entries(explanationsRef.current).forEach(([id, element]) => {
+        if (element) {
+          const distance = Math.abs(element.getBoundingClientRect().top);
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closest = id;
+          }
+        }
+      });
+
+      setActiveQuestion(closest);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
 
   const handleReset = async () => {
     setIsResetting(true);
     try {
-      await resetExplore();
+      resetExplore();
     } finally {
       setIsResetting(false);
+    }
+  };
+
+  const scrollToQuestion = (questionId: string) => {
+    const element = explanationsRef.current[questionId];
+    if (element) {
+      const headerOffset = 20;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.scrollY - headerOffset;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "instant",
+      });
+    }
+  };
+
+  const toggleMinimap = () => {
+    setIsMinimapOpen((prev) => !prev);
+    // Store the preference in localStorage
+    localStorage.setItem("minimapOpen", (!isMinimapOpen).toString());
+  };
+
+  useEffect(() => {
+    if (currentPath.length > 0) {
+      const lastQuestionId = currentPath[currentPath.length - 1];
+      scrollToQuestion(lastQuestionId);
+      setActiveQuestion(lastQuestionId);
+    }
+  }, [currentPath]);
+
+  const handleChatSubmit = async (message: string) => {
+    setIsLoading(true);
+    try {
+      const questionId = await fetchQuestion(message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -55,67 +129,21 @@ const Explore: React.FC = () => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 p-6"
+        className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 pb-32"
       >
+        <MinimapDrawer
+          isOpen={isMinimapOpen}
+          onToggle={toggleMinimap}
+          currentPath={currentPath}
+          activeQuestion={activeQuestion}
+          onQuestionClick={scrollToQuestion}
+          getQuestion={getQuestion}
+          onReset={handleReset}
+          isResetting={isResetting}
+        />
+
         <div className="max-w-4xl mx-auto space-y-6">
-          <motion.div
-            variants={itemVariants}
-            className="sticky top-4 z-10 mb-6"
-          >
-            <Card className="bg-zinc-900/80 border-zinc-800 backdrop-blur-sm shadow-xl">
-              <CardContent className="p-4">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-4">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      onClick={handleReset}
-                      disabled={isResetting}
-                      className="text-zinc-400 hover:text-white"
-                    >
-                      {isResetting ? (
-                        <RefreshCw className="h-5 w-5 animate-spin" />
-                      ) : (
-                        <Home className="h-5 w-5" />
-                      )}
-                    </Button>
-
-                    <div className="flex items-center gap-2 text-sm text-zinc-400">
-                      {currentPath.map((id, index) => (
-                        <React.Fragment key={id}>
-                          {index > 0 && (
-                            <ChevronRight className="h-4 w-4 text-zinc-600" />
-                          )}
-                          <Badge
-                            variant="outline"
-                            className={`${
-                              index === currentPath.length - 1
-                                ? "bg-primary/10 text-primary border-primary/20"
-                                : "bg-zinc-900"
-                            }`}
-                          >
-                            Question {index + 1}
-                          </Badge>
-                        </React.Fragment>
-                      ))}
-                    </div>
-                  </div>
-
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleReset}
-                    disabled={isResetting}
-                    className="gap-2"
-                  >
-                    <ArrowLeft className="h-4 w-4" />
-                    New Question
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
+          {/* Questions Content */}
           <motion.div variants={itemVariants} className="space-y-8">
             {currentPath.length === 0 ? (
               <div className="text-center py-12">
@@ -133,12 +161,16 @@ const Explore: React.FC = () => {
                   key={questionID}
                   variants={itemVariants}
                   transition={{ delay: index * 0.1 }}
+                  ref={(el) => (explanationsRef.current[questionID] = el)}
                 >
                   <div className="relative">
                     {index > 0 && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-px h-8 bg-gradient-to-b from-transparent to-primary/20" />
                     )}
-                    <Explanation questionID={questionID} />
+                    <Explanation
+                      questionID={questionID}
+                      onRelatedQuestionClick={scrollToQuestion}
+                    />
                   </div>
                 </motion.div>
               ))
@@ -163,6 +195,9 @@ const Explore: React.FC = () => {
             </motion.div>
           )}
         </div>
+
+        {/* Chat Input */}
+        <ChatInput onSubmit={handleChatSubmit} isLoading={isLoading} />
       </motion.div>
     </AnimatePresence>
   );

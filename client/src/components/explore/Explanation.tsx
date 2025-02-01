@@ -18,12 +18,17 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AILoadingAnimation from "./AILoadingAnimation";
+import ReactMarkdown from "react-markdown";
 
 interface ExplanationProps {
   questionID: string;
+  onRelatedQuestionClick: (questionID: string) => void;
 }
 
-const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
+const Explanation: React.FC<ExplanationProps> = ({
+  questionID,
+  onRelatedQuestionClick,
+}) => {
   const { getQuestion, fetchQuestion } = useExplore();
   const [isOpen, setIsOpen] = useState(false);
   const [loadingQuestion, setLoadingQuestion] = useState<string | null>(null);
@@ -37,6 +42,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
   const handleClick = async (questionId: string) => {
     setLoadingQuestion(questionId);
     try {
+      onRelatedQuestionClick(questionId);
       await fetchQuestion(questionId);
     } finally {
       setLoadingQuestion(null);
@@ -87,7 +93,20 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
             </Badge>
           </div>
           <CardTitle className="text-2xl font-bold leading-tight">
-            {text}
+            <ReactMarkdown
+              components={{
+                code: ({ node, ...props }) => (
+                  <code
+                    {...props}
+                    className="bg-zinc-800 rounded-md p-1 border border-zinc-700"
+                  >
+                    {props.children}
+                  </code>
+                ),
+              }}
+            >
+              {text}
+            </ReactMarkdown>
           </CardTitle>
         </CardHeader>
 
@@ -115,6 +134,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
                 <Markdown content={explanation} />
               </div>
 
+              {/* Related Questions */}
               <Collapsible open={isOpen} onOpenChange={setIsOpen}>
                 <CollapsibleTrigger className="flex items-center justify-between w-full p-4 hover:bg-zinc-800/50 rounded-lg transition-colors group">
                   <div className="flex items-center gap-2">

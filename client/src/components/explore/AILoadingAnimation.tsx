@@ -90,13 +90,6 @@ const AILoadingAnimation: React.FC = () => {
 
       <svg className="w-full h-full" preserveAspectRatio="xMidYMid meet">
         <defs>
-          {/* Enhanced gradients for the flow effect */}
-          <linearGradient id="flowGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-            <stop offset="0%" stopColor="#4F46E5" stopOpacity="0.2" />
-            <stop offset="50%" stopColor="#7C3AED" stopOpacity="0.4" />
-            <stop offset="100%" stopColor="#4F46E5" stopOpacity="0.2" />
-          </linearGradient>
-
           {/* Radial gradient for nodes */}
           <radialGradient id="nodeGradient">
             <stop offset="0%" stopColor="#818CF8" stopOpacity="1" />
