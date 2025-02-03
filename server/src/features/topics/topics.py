@@ -6,6 +6,7 @@ import json
 from typing import AsyncGenerator
 
 manager = TopicsManager()
+DIFFICULTY_DELIMITER = "###DIFFICULTY_END###"
 
 topic_generator_template = ChatPromptTemplate.from_messages([
     ("system", """You are an expert at creating comprehensive programming topic hierarchies.
@@ -19,43 +20,53 @@ topic_generator_template = ChatPromptTemplate.from_messages([
     3. Provide a natural progression in complexity
     4. Include both breadth and depth of knowledge
 
-    For each topic, provide:
-    - The difficulty level (Beginner, Intermediate, Advanced)
-    - A short description of the topic
+    For each difficulty level, output a JSON object followed by "###DIFFICULTY_END###" delimiter.
+    Generate at least 6 topics for each difficulty level in this format:
 
-    Format the response as a json object with the following structure, Generate at least 6 topics for each difficulty level:
-    {{
-        "Beginner": [
-            {{"topic": "Topic Name", "description": "Topic Description"}},
-            ...
-        ],
-        "Intermediate": [
-            {{"topic": "Topic Name", "description": "Topic Description"}},
-            ...
-        ],
-        "Advanced": [
-            {{"topic": "Topic Name", "description": "Topic Description"}},
-            ...
-        ]
-    }}
+    {{"difficulty": "Beginner", "topics": [
+        {{"topic": "Topic Name", "description": "Topic Description"}},
+        ...
+    ]}}###DIFFICULTY_END###
 
-    Focus on discovering novel but relevant subtopics that expand the learner's understanding. Don't add anything extra content"""),
+    {{"difficulty": "Intermediate", "topics": [
+        {{"topic": "Topic Name", "description": "Topic Description"}},
+        ...
+    ]}}###DIFFICULTY_END###
+
+    {{"difficulty": "Advanced", "topics": [
+        {{"topic": "Topic Name", "description": "Topic Description"}},
+        ...
+    ]}}###DIFFICULTY_END###
+
+    Focus on discovering novel but relevant subtopics that expand the learner's understanding. 
+    Ensure each JSON object is valid and complete before the delimiter."""),
     ("human", "Generate topics for {current_topic}")
 ])
 
 
-def parse_topic_response(response: str) -> dict[str, list[dict[str, str]]]:
+def parse_json(chunk: str) -> dict | None:
+    start = chunk.find('{')
+    end = chunk.rfind('}')
+    if start == -1 or end == -1:
+        raise ValueError("Invalid JSON")
+    json_str = chunk[start:end + 1]
+    return json.loads(json_str)
+
+
+async def parse_chunk(chunk: str) -> dict | None:
     try:
-        return json.loads(response)
-    except json.JSONDecodeError:
-        start = response.find('{')
-        end = response.rfind('}')
+        if DIFFICULTY_DELIMITER not in chunk:
+            return None
+        json_str = chunk.split(DIFFICULTY_DELIMITER)[0].strip()
+        parsed = parse_json(json_str)
+        difficulty, topics = parsed["difficulty"], parsed["topics"]
 
-        if start == -1 or end == -1:
-            raise ValueError("No valid JSON object found in response")
-
-        json_str = response[start:end + 1]
-        return json.loads(json_str)
+        return {
+            difficulty: topics
+        }
+    except ValueError:
+        print(chunk)
+        return None
 
 
 async def generate_topics(path: list[str], model_name: Model = Model.GPT_4O_MINI) -> AsyncGenerator[dict, None]:
@@ -67,8 +78,23 @@ async def generate_topics(path: list[str], model_name: Model = Model.GPT_4O_MINI
     current_topic = path[-1]
     explored = ""
 
-    chain = topic_generator_template | llm | JsonOutputParser()
-    result = await chain.ainvoke({"current_topic": current_topic,
-                                 "context": context,
-                                  "explored_topics": explored})
-    return result
+    chain = topic_generator_template | llm
+    with open("topics.json", "w") as f:
+        f.write("")
+
+    buffer = ""
+    async for chunk in chain.astream({"current_topic": current_topic,
+                                      "context": context,
+                                      "explored_topics": explored}):
+
+        buffer += chunk.content
+        with open("topics.txt", "a") as f:
+            f.write(chunk.content)
+        if parsed := await parse_chunk(buffer):
+            with open("topics.json", "a") as f:
+                f.write(json.dumps(parsed))
+                f.write("\n")
+            difficulty_end_pos = buffer.find(
+                DIFFICULTY_DELIMITER) + len(DIFFICULTY_DELIMITER)
+            buffer = buffer[difficulty_end_pos:] if difficulty_end_pos > -1 else buffer
+            yield parsed
