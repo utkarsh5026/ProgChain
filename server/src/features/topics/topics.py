@@ -58,11 +58,11 @@ def parse_topic_response(response: str) -> dict[str, list[dict[str, str]]]:
         return json.loads(json_str)
 
 
-async def generate_topics(path: list[str], model: Model = Model.GPT_4O_MINI) -> AsyncGenerator[dict, None]:
+async def generate_topics(path: list[str], model_name: Model = Model.GPT_4O_MINI) -> AsyncGenerator[dict, None]:
     if path is None or len(path) == 0:
         raise ValueError("Path is required")
 
-    llm = get_model(model)
+    llm = get_model(model_name)
     context = '>'.join(path)
     current_topic = path[-1]
     explored = ""
