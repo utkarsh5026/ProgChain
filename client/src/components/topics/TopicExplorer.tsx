@@ -8,6 +8,9 @@ import DifficultyCard from "./DifficultyCard";
 import useTopics from "../../store/topics/hook";
 import { Card, CardContent } from "@/components/ui/card";
 import { Alert, AlertDescription } from "@/components/ui/alert";
+import { DELIMITER } from "@/store/topics/slice";
+import LoadingAnimation from "./LoadingAnimation";
+import ImageSavingAnimation from "./ImageSavingAnimation";
 
 interface TopicDisplayProps {
   topic: string;
@@ -23,82 +26,13 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
-  const { generateConcepts } = useTopics();
+  const { fetchTopics } = useTopics();
 
   const saveAsPNG = useCallback(async () => {
     if (containerRef.current) {
-      setIsSaving(true);
       try {
-        const canvas = await html2canvas(containerRef.current, {
-          backgroundColor: null,
-          scale: 2,
-          logging: false,
-        });
-
-        const paddedCanvas = document.createElement("canvas");
-        const ctx = paddedCanvas.getContext("2d");
-        const padding = 48;
-        paddedCanvas.width = canvas.width + padding * 2;
-        paddedCanvas.height = canvas.height + padding * 2;
-
-        if (ctx) {
-          // Create sophisticated gradient background
-          const gradient = ctx.createRadialGradient(
-            paddedCanvas.width / 2,
-            paddedCanvas.height / 2,
-            0,
-            paddedCanvas.width / 2,
-            paddedCanvas.height / 2,
-            paddedCanvas.width / 2
-          );
-          gradient.addColorStop(0, "#1a1b1e");
-          gradient.addColorStop(1, "#141517");
-          ctx.fillStyle = gradient;
-          ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
-
-          // Add decorative border with gradient
-          const borderGradient = ctx.createLinearGradient(
-            0,
-            0,
-            paddedCanvas.width,
-            paddedCanvas.height
-          );
-          borderGradient.addColorStop(0, "rgba(59, 130, 246, 0.2)");
-          borderGradient.addColorStop(0.5, "rgba(147, 51, 234, 0.2)");
-          borderGradient.addColorStop(1, "rgba(59, 130, 246, 0.2)");
-          ctx.strokeStyle = borderGradient;
-          ctx.lineWidth = 3;
-          ctx.strokeRect(
-            padding - 8,
-            padding - 8,
-            canvas.width + 16,
-            canvas.height + 16
-          );
-
-          // Draw main content
-          ctx.drawImage(canvas, padding, padding);
-
-          // Add sophisticated watermark
-          ctx.save();
-          ctx.font = "bold 32px system-ui";
-          ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
-          ctx.textAlign = "center";
-          ctx.textBaseline = "middle";
-          ctx.translate(paddedCanvas.width / 2, paddedCanvas.height / 2);
-          ctx.rotate(-Math.PI / 8);
-          ctx.fillText("ProgChain Learning Path", 0, 0);
-
-          // Add timestamp
-          ctx.font = "16px system-ui";
-          ctx.fillText(new Date().toLocaleDateString(), 0, 30);
-          ctx.restore();
-        }
-
-        const link = document.createElement("a");
-        link.download = `${topic.replace(/\//g, "-")}_learning_path.png`;
-        link.href = paddedCanvas.toDataURL();
-        link.click();
-
+        setIsSaving(true);
+        await saveImage(containerRef.current, topic);
         setShowSuccess(true);
         setTimeout(() => setShowSuccess(false), 3000);
       } finally {
@@ -109,37 +43,16 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
 
   const handleConceptClick = useCallback(
     (concept: Concept) => {
-      const parts = topic.split("/");
-      const mainTopic = parts[0];
-      const context = parts.length > 1 ? parts.slice(1) : [];
-      context.push(concept.topic);
-      generateConcepts(mainTopic, context, false);
+      const parts = topic.split(DELIMITER);
+      parts.push(concept.topic);
+      const topicPath = parts.join(">");
+      fetchTopics(topicPath, "gpt-4o-mini");
     },
-    [topic, generateConcepts]
+    [topic, fetchTopics]
   );
 
   if (isLoading) {
-    return (
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        className="flex flex-col items-center justify-center h-[400px] space-y-6"
-      >
-        <div className="relative">
-          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-          <Loader2 className="h-12 w-12 animate-spin text-primary relative z-10" />
-        </div>
-        <div className="text-center space-y-2">
-          <p className="text-lg font-medium text-zinc-300 animate-pulse">
-            Generating your learning path...
-          </p>
-          <p className="text-sm text-zinc-500">
-            Tailoring content to your skill level
-          </p>
-        </div>
-      </motion.div>
-    );
+    return <LoadingAnimation topicPath={topic} />;
   }
 
   if (!topics) {
@@ -246,40 +159,77 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
         </div>
       </motion.div>
 
-      <AnimatePresence>
-        {isSaving && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 backdrop-blur-md bg-black/60 flex items-center justify-center z-50"
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="bg-zinc-900 p-8 rounded-2xl border border-zinc-800 shadow-xl"
-            >
-              <div className="flex flex-col items-center gap-4">
-                <div className="relative">
-                  <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-                  <Loader2 className="h-10 w-10 animate-spin text-primary relative z-10" />
-                </div>
-                <div className="text-center space-y-2">
-                  <p className="text-lg font-medium text-white">
-                    Capturing your learning path
-                  </p>
-                  <p className="text-sm text-zinc-400">
-                    Creating a high-quality snapshot...
-                  </p>
-                </div>
-              </div>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {isSaving && <ImageSavingAnimation />}
     </div>
   );
+};
+
+const saveImage = async (element: HTMLElement, topic: string) => {
+  const canvas = await html2canvas(element, {
+    backgroundColor: null,
+    scale: 2,
+    logging: false,
+  });
+
+  const paddedCanvas = document.createElement("canvas");
+  const ctx = paddedCanvas.getContext("2d");
+  const padding = 48;
+  paddedCanvas.width = canvas.width + padding * 2;
+  paddedCanvas.height = canvas.height + padding * 2;
+
+  if (ctx) {
+    // Create sophisticated gradient background
+    const gradient = ctx.createRadialGradient(
+      paddedCanvas.width / 2,
+      paddedCanvas.height / 2,
+      0,
+      paddedCanvas.width / 2,
+      paddedCanvas.height / 2,
+      paddedCanvas.width / 2
+    );
+    gradient.addColorStop(0, "#1a1b1e");
+    gradient.addColorStop(1, "#141517");
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
+
+    // Add decorative border with gradient
+    const borderGradient = ctx.createLinearGradient(
+      0,
+      0,
+      paddedCanvas.width,
+      paddedCanvas.height
+    );
+    borderGradient.addColorStop(0, "rgba(59, 130, 246, 0.2)");
+    borderGradient.addColorStop(0.5, "rgba(147, 51, 234, 0.2)");
+    borderGradient.addColorStop(1, "rgba(59, 130, 246, 0.2)");
+    ctx.strokeStyle = borderGradient;
+    ctx.lineWidth = 3;
+    ctx.strokeRect(
+      padding - 8,
+      padding - 8,
+      canvas.width + 16,
+      canvas.height + 16
+    );
+
+    // Draw main content
+    ctx.drawImage(canvas, padding, padding);
+
+    // Add timestamp
+    ctx.font = "16px system-ui";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    ctx.fillText(
+      new Date().toLocaleDateString(),
+      paddedCanvas.width / 2,
+      paddedCanvas.height - padding / 2
+    );
+  }
+
+  const link = document.createElement("a");
+  link.download = `${topic.replace(/\//g, "-")}_learning_path.png`;
+  link.href = paddedCanvas.toDataURL();
+  link.click();
 };
 
 export default TopicDisplay;

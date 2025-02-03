@@ -1,23 +1,14 @@
 import { useCallback, useMemo } from "react";
-import {
-  fetchGeneratedTopics,
-  createTopicKey,
-  setCurrentTopic,
-  DELIMITER,
-} from "./slice";
+import { fetchGeneratedTopics, setCurrentTopic, setSuccess } from "./slice";
 import { useAppSelector, useAppDispatch } from "../hooks";
-import type { TopicConcepts, ConceptsRetrieve } from "./types";
+import type { TopicConcepts } from "./types";
+import type { Model } from "@/config/config";
 
 interface TopicsHookResult {
   currentTopic: string | null;
   topicConcepts: Record<string, TopicConcepts>;
   loading: boolean;
-  generateConcepts: (
-    mainTopic: string,
-    context: string[],
-    useCache: boolean
-  ) => void;
-  parseTopic: (topic: string) => ConceptsRetrieve;
+  fetchTopics: (topicPath: string, model: Model) => Promise<void>;
 }
 
 /**
@@ -35,38 +26,33 @@ const useTopics = (): TopicsHookResult => {
   const dispatch = useAppDispatch();
   const topics = useAppSelector((state) => state.topics);
 
-  const { currentTopic, concepts: topicConcepts, loading } = topics;
+  const {
+    currentTopic,
+    topics: topicConcepts,
+    loading,
+    conversationId,
+  } = topics;
 
   const memoizedTopicConcepts = useMemo(() => topicConcepts, [topicConcepts]);
 
-  const generateConcepts = useCallback(
-    (mainTopic: string, context: string[], useCache: boolean) => {
-      if (context === undefined || !Array.isArray(context)) context = [];
-      const data = { mainTopic, context };
-      const topicKey = createTopicKey(mainTopic, context);
-
-      if (useCache && topicKey in memoizedTopicConcepts) {
-        dispatch(setCurrentTopic(topicKey));
-      } else {
-        dispatch(fetchGeneratedTopics(data));
+  const fetchTopics = useCallback(
+    async (topicPath: string, model: Model) => {
+      if (topicPath in topicConcepts) {
+        dispatch(setCurrentTopic(topicPath));
+        dispatch(setSuccess());
       }
+      const data = { conversationId, topicPath, model };
+      dispatch(setCurrentTopic(topicPath));
+      await dispatch(fetchGeneratedTopics(data));
     },
-    [dispatch, memoizedTopicConcepts] // Remove topicConcepts from dependencies
+    [conversationId]
   );
-
-  const parseTopic = useCallback((topic: string): ConceptsRetrieve => {
-    const pathSegments = topic.split(DELIMITER);
-    const mainTopic = pathSegments[0];
-    const context = pathSegments.slice(1);
-    return { mainTopic, context };
-  }, []);
 
   return {
     currentTopic,
     topicConcepts: memoizedTopicConcepts,
     loading,
-    generateConcepts,
-    parseTopic,
+    fetchTopics,
   };
 };
 

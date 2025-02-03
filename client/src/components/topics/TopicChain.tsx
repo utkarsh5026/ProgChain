@@ -6,22 +6,20 @@ import {
   BreadcrumbItem,
   BreadcrumbLink,
 } from "@/components/ui/breadcrumb";
-import { ChevronRight, Loader2, Sparkles, Map } from "lucide-react";
+import { ChevronRight, Sparkles, Map } from "lucide-react";
 import useTopics from "../../store/topics/hook";
 import TopicDisplay from "./TopicExplorer";
 import { DELIMITER } from "../../store/topics/slice";
 import AskTopic from "./AskTopic";
+import LoadingAnimation from "./LoadingAnimation";
 
 const TopicChain: React.FC = () => {
-  const { currentTopic, generateConcepts, loading, topicConcepts, parseTopic } =
-    useTopics();
+  const { currentTopic, loading, topicConcepts, fetchTopics } = useTopics();
 
   const pathSegments = computePathSegments(currentTopic);
-
   const handleSegmentClick = (index: number) => {
     const newPath = pathSegments.slice(0, index + 1).join(DELIMITER);
-    const { mainTopic, context } = parseTopic(newPath);
-    generateConcepts(mainTopic, context, false);
+    fetchTopics(newPath, "gpt-4o-mini");
   };
 
   const containerVariants = {
@@ -130,22 +128,7 @@ const TopicChain: React.FC = () => {
 
             <AnimatePresence mode="wait">
               {loading ? (
-                <motion.div
-                  key="loader"
-                  variants={itemVariants}
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  className="flex flex-col items-center justify-center h-64 gap-4"
-                >
-                  <div className="relative">
-                    <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full" />
-                    <Loader2 className="w-12 h-12 text-primary animate-spin relative z-10" />
-                  </div>
-                  <p className="text-zinc-400 animate-pulse">
-                    Generating learning path...
-                  </p>
-                </motion.div>
+                <LoadingAnimation topicPath={currentTopic} />
               ) : (
                 currentTopic && (
                   <motion.div

@@ -7,20 +7,13 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 
 const AskTopic: React.FC = () => {
-  const { generateConcepts } = useTopics();
+  const { fetchTopics, loading } = useTopics();
   const [topic, setTopic] = useState<string>("");
-  const [isLoading, setIsLoading] = useState(false);
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleAskQuestion = async () => {
     if (!topic.trim()) return;
-
-    setIsLoading(true);
-    try {
-      generateConcepts(topic, [], false);
-    } finally {
-      setIsLoading(false);
-    }
+    await fetchTopics(topic, "gpt-4o-mini");
   };
 
   const containerVariants = {
@@ -144,7 +137,7 @@ const AskTopic: React.FC = () => {
                       onFocus={() => setIsInputFocused(true)}
                       onBlur={() => setIsInputFocused(false)}
                       onKeyDown={(e) => {
-                        if (e.key === "Enter" && !isLoading && topic.trim()) {
+                        if (e.key === "Enter" && !loading && topic.trim()) {
                           handleAskQuestion();
                         }
                       }}
@@ -155,22 +148,24 @@ const AskTopic: React.FC = () => {
                     variant="default"
                     size="lg"
                     onClick={handleAskQuestion}
-                    disabled={isLoading || !topic.trim()}
+                    disabled={loading || !topic.trim()}
                     className={`w-full mt-4 p-8 text-lg font-medium relative overflow-hidden
                       ${
-                        isLoading
+                        loading
                           ? "bg-primary/50"
                           : "bg-primary hover:bg-primary/90"
                       }
+
                       transition-all duration-300 rounded-xl
                     `}
                   >
                     <motion.div
                       animate={
-                        !isLoading
+                        !loading
                           ? {
                               background: [
                                 "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
+
                                 "linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)",
                                 "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
                               ],
@@ -181,7 +176,7 @@ const AskTopic: React.FC = () => {
                       className="absolute inset-0"
                     />
 
-                    {isLoading ? (
+                    {loading ? (
                       <motion.div
                         animate={{ rotate: 360 }}
                         transition={{

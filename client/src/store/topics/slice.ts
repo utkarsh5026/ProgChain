@@ -1,18 +1,20 @@
 import { createSlice, PayloadAction, createAsyncThunk } from "@reduxjs/toolkit";
 import { generateTopics } from "./api";
-import type { TopicConcepts } from "./types";
+import type { TopicConcepts, TopicsRequest } from "./types";
 
-export const DELIMITER = "||";
+export const DELIMITER = ">";
 
 interface TopicState {
-  concepts: Record<string, TopicConcepts>;
+  conversationId: string | null;
+  topics: Record<string, TopicConcepts>;
   loading: boolean;
   error: string | null;
   currentTopic: string | null;
 }
 
 const initialState: TopicState = {
-  concepts: {},
+  conversationId: null,
+  topics: {},
   loading: false,
   error: null,
   currentTopic: null,
@@ -27,16 +29,41 @@ const initialState: TopicState = {
 export const fetchGeneratedTopics = createAsyncThunk(
   "topics/fetchGeneratedTopics",
   async (
-    { mainTopic, context }: { mainTopic: string; context: string[] },
-    { rejectWithValue }
+    { conversationId, topicPath, model }: TopicsRequest,
+    { dispatch, rejectWithValue }
   ) => {
     try {
-      const topics = (await generateTopics(
-        mainTopic,
-        context
-      )) as TopicConcepts;
-      console.log(topics);
-      return { mainTopic, topics, context };
+      const topicsGenerator = generateTopics(model, topicPath, conversationId);
+      let firstResponse = true;
+      let lastResponse;
+
+      for await (const response of topicsGenerator) {
+        if (firstResponse) {
+          dispatch(
+            topicsSlice.actions.setInitialTopicState({
+              conversationId: response.conversation_id,
+              topicPath,
+              topics: response.available_topics,
+            })
+          );
+          firstResponse = false;
+        } else {
+          // Update topics with streaming data
+          dispatch(
+            topicsSlice.actions.updateTopics({
+              topicPath,
+              topics: response.available_topics,
+            })
+          );
+        }
+        lastResponse = response;
+      }
+
+      return {
+        conversationId: lastResponse.conversation_id,
+        topicPath,
+        topics: lastResponse.available_topics,
+      };
     } catch (error) {
       if (error instanceof Error) return rejectWithValue(error.message);
       return rejectWithValue("An unknown error occurred");
@@ -63,22 +90,54 @@ const topicsSlice = createSlice({
       action: PayloadAction<{ topic: string; concepts: TopicConcepts }>
     ) => {
       const { topic, concepts } = action.payload;
-      state.concepts[topic] = concepts;
+      state.topics[topic] = concepts;
     },
     setCurrentTopic: (state, action: PayloadAction<string>) => {
       state.currentTopic = action.payload;
+    },
+    setInitialTopicState: (
+      state,
+      action: PayloadAction<{
+        conversationId: string;
+        topicPath: string;
+        topics: TopicConcepts;
+      }>
+    ) => {
+      const { conversationId, topicPath, topics } = action.payload;
+      state.loading = true;
+      state.topics[topicPath] = topics;
+      state.currentTopic = topicPath;
+      state.conversationId = conversationId;
+    },
+    updateTopics: (
+      state,
+      action: PayloadAction<{
+        topicPath: string;
+        topics: TopicConcepts;
+      }>
+    ) => {
+      const { topicPath, topics } = action.payload;
+      state.topics[topicPath] = {
+        ...state.topics[topicPath],
+        ...topics,
+      };
+    },
+    setSuccess: (state) => {
+      state.loading = false;
+      state.error = null;
+    },
+    setError: (state, action: PayloadAction<string>) => {
+      state.loading = false;
+      state.error = action.payload;
     },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchGeneratedTopics.pending, (state) => {
       state.loading = true;
+      state.error = null;
     });
-    builder.addCase(fetchGeneratedTopics.fulfilled, (state, action) => {
-      const { mainTopic, topics, context } = action.payload;
+    builder.addCase(fetchGeneratedTopics.fulfilled, (state) => {
       state.loading = false;
-      const topicKey = createTopicKey(mainTopic, context);
-      state.concepts[topicKey] = topics;
-      state.currentTopic = topicKey;
     });
     builder.addCase(fetchGeneratedTopics.rejected, (state, action) => {
       state.loading = false;
@@ -87,6 +146,13 @@ const topicsSlice = createSlice({
   },
 });
 
-export const { addTopic, setCurrentTopic } = topicsSlice.actions;
+export const {
+  addTopic,
+  setCurrentTopic,
+  setInitialTopicState,
+  updateTopics,
+  setSuccess,
+  setError,
+} = topicsSlice.actions;
 
 export default topicsSlice.reducer;

@@ -1,15 +1,22 @@
-export interface Concept {
-  emoji: string;
+export type Concept = {
   topic: string;
-}
+  description: string;
+};
 
-export interface TopicConcepts {
+export type TopicConcepts = {
   beginner: Concept[];
   intermediate: Concept[];
   advanced: Concept[];
-}
+};
 
-export interface ConceptsRetrieve {
-  mainTopic: string;
-  context: string[];
-}
+export type TopicsRequest = {
+  conversationId: string | null;
+  topicPath: string;
+  model: Model;
+};
+
+export type TopicsResponse = {
+  conversationId: string | null;
+  topicPath: string;
+  topics: TopicConcepts;
+};

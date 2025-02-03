@@ -1,7 +1,6 @@
-import axios from "axios";
+import type { Model } from "@/config/config";
 
-const API_BASE_URL = "http://localhost:8000/topics"; // Replace with your actual backend URL
-
+const API_BASE_URL = "http://localhost:8000/topics";
 /**
  * Generates topics based on a main topic and optional context.
  *
@@ -15,16 +14,46 @@ const API_BASE_URL = "http://localhost:8000/topics"; // Replace with your actual
  * @example
  * const topics = await generateTopics('JavaScript', ['Web Development', 'Frontend']);
  */
-export const generateTopics = async (
-  mainTopic: string,
-  context: string[] = []
-) => {
-  console.log(mainTopic, context);
-  const response = await axios.post(`${API_BASE_URL}/generate`, {
-    main_topic: mainTopic,
-    context: context,
+export const generateTopics = async function* (
+  model: Model,
+  topicPath: string,
+  conversationId: string | null
+) {
+  const response = await fetch(`${API_BASE_URL}/generate`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Accept: "text/event-stream",
+    },
+    body: JSON.stringify({
+      topic_path: topicPath,
+      model: model,
+      conversation_id: conversationId,
+    }),
   });
 
-  console.log(response.data);
-  return response.data.topics;
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  const reader = response.body?.getReader();
+  if (!reader) throw new Error("No reader available");
+  const decoder = new TextDecoder();
+
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+
+    let chunk = decoder.decode(value);
+    if (chunk.startsWith("data:")) chunk = chunk.slice(5);
+
+    chunk = chunk.trim();
+    console.log(chunk);
+    try {
+      const json = JSON.parse(chunk);
+      yield json;
+    } catch (e) {
+      console.error("Failed to parse SSE data:", e);
+    }
+  }
 };
