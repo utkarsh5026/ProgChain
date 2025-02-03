@@ -19,6 +19,10 @@ export const languages = [
 
 export const modelDescriptions: { name: Model; description: string }[] = [
   {
+    name: "gpt-4o-mini",
+    description: "Smallest model for quick learning tasks",
+  },
+  {
     name: "gpt-4o",
     description: "Advanced model for complex learning tasks",
   },
@@ -30,10 +34,6 @@ export const modelDescriptions: { name: Model; description: string }[] = [
     name: "claude-3-5-sonnet",
     description:
       "Advanced model for complex learning tasks provided by Anthropic",
-  },
-  {
-    name: "gpt-4o-mini",
-    description: "Smallest model for quick learning tasks",
   },
 ];
 
