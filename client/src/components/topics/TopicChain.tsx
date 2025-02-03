@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import {
@@ -12,15 +12,29 @@ import TopicDisplay from "./TopicExplorer";
 import { DELIMITER } from "../../store/topics/slice";
 import AskTopic from "./AskTopic";
 import LoadingAnimation from "./LoadingAnimation";
+import { useToast } from "@/hooks/use-toast";
 
 const TopicChain: React.FC = () => {
-  const { currentTopic, loading, topicConcepts, fetchTopics } = useTopics();
+  const { toast } = useToast();
+  const { currentTopic, loading, generating, topicConcepts, fetchTopics } =
+    useTopics();
 
   const pathSegments = computePathSegments(currentTopic);
   const handleSegmentClick = (index: number) => {
     const newPath = pathSegments.slice(0, index + 1).join(DELIMITER);
     fetchTopics(newPath, "gpt-4o-mini");
   };
+
+  useEffect(() => {
+    if (!generating) {
+      toast({
+        title: "Success!",
+        description: "Topics have been generated successfully.",
+        variant: "default",
+        className: "bg-green-500/10 border-green-500/20 text-green-400",
+      });
+    }
+  }, [generating, toast]);
 
   const containerVariants = {
     hidden: { opacity: 0, scale: 0.98 },
