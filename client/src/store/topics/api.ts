@@ -1,59 +1,40 @@
 import type { Model } from "@/config/config";
-
+import { postStream } from "@/api/stream";
 const API_BASE_URL = "http://localhost:8000/topics";
+
 /**
- * Generates topics based on a main topic and optional context.
+ * Streams generated topics from the server.
  *
- * @async
- * @function generateTopics
- * @param {string} mainTopic - The primary topic for which to generate related topics.
- * @param {string[]} [context=[]] - Optional array of context strings to provide additional information for topic generation.
- * @returns {Promise<Object>} A promise that resolves to the generated topics.
- * @throws {Error} If the API request fails.
+ * This async generator function sends a POST request to the topics generation API
+ * using the provided model, topic path, and optional conversation ID. It utilizes
+ * the postStream helper to connect to a server-sent events stream and yields topics
+ * as they are received.
+ *
+ * @param {Model} model - The identifier of the model to be used for generating topics.
+ * @param {string} topicPath - The topic path that specifies which topics to generate.
+ * @param {string | null} conversationId - An optional identifier for the conversation, allowing
+ *                                         requests to be correlated.
+ * @returns {AsyncGenerator<any, void, unknown>} An async generator yielding topics from the stream.
  *
  * @example
- * const topics = await generateTopics('JavaScript', ['Web Development', 'Frontend']);
+ * // Usage example:
+ * for await (const topic of generateTopics(model, "technology", "conv123")) {
+ *   console.log("Received topic:", topic);
+ * }
  */
 export const generateTopics = async function* (
   model: Model,
   topicPath: string,
   conversationId: string | null
 ) {
-  const response = await fetch(`${API_BASE_URL}/generate`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Accept: "text/event-stream",
-    },
-    body: JSON.stringify({
-      topic_path: topicPath,
-      model: model,
-      conversation_id: conversationId,
-    }),
-  });
+  const url = `${API_BASE_URL}/generate`;
+  const postBody = {
+    topic_path: topicPath,
+    model: model,
+    conversation_id: conversationId,
+  };
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
-
-  const reader = response.body?.getReader();
-  if (!reader) throw new Error("No reader available");
-  const decoder = new TextDecoder();
-
-  while (true) {
-    const { done, value } = await reader.read();
-    if (done) break;
-
-    let chunk = decoder.decode(value);
-    if (chunk.startsWith("data:")) chunk = chunk.slice(5);
-
-    chunk = chunk.trim();
-    console.log(chunk);
-    try {
-      const json = JSON.parse(chunk);
-      yield json;
-    } catch (e) {
-      console.error("Failed to parse SSE data:", e);
-    }
+  for await (const topic of postStream(url, postBody)) {
+    yield topic;
   }
 };
