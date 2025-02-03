@@ -52,7 +52,7 @@ const TopicDisplay: React.FC<TopicDisplayProps> = ({
   );
 
   if (isLoading) {
-    return <LoadingAnimation topicPath={topic} />;
+    return <LoadingAnimation topicPath={topic.split(DELIMITER)[0]} />;
   }
 
   if (!topics) {

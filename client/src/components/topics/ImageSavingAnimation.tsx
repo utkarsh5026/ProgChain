@@ -1,7 +1,8 @@
 import { motion, AnimatePresence } from "framer-motion";
 import { Loader2 } from "lucide-react";
+import React from "react";
 
-const ImageSavingAnimation = () => {
+const ImageSavingAnimationComponent: React.FC = () => {
   return (
     <AnimatePresence>
       <motion.div
@@ -35,5 +36,7 @@ const ImageSavingAnimation = () => {
     </AnimatePresence>
   );
 };
+
+const ImageSavingAnimation = React.memo(ImageSavingAnimationComponent);
 
 export default ImageSavingAnimation;

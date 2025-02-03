@@ -95,7 +95,10 @@ const TopicChain: React.FC = () => {
 
                 <Breadcrumb className="flex flex-wrap gap-2">
                   {pathSegments.map((segment, index) => (
-                    <BreadcrumbItem key={segment} className="flex items-center">
+                    <BreadcrumbItem
+                      key={segment}
+                      className="flex items-center cursor-pointer"
+                    >
                       <motion.div
                         whileHover={{ scale: 1.02 }}
                         whileTap={{ scale: 0.98 }}
