@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import type { Question, ResponseQuestion } from "./type";
-import caller from "../../api/caller";
+import { exploreTopic } from "./api";
 
 interface ExploreState {
   rootQuestion: Question | null;
@@ -22,11 +22,17 @@ const initialState: ExploreState = {
 
 export const fetchQuestionThunk = createAsyncThunk(
   "explore/fetchQuestion",
-  async (question: string): Promise<ResponseQuestion> => {
-    const response = await caller.post("/explore", { question });
-    const data = response.data;
-    console.log(data);
-    return data;
+  async (question: string, { dispatch }) => {
+    const generator = exploreTopic(question);
+    let accumulatedText = "";
+
+    for await (const chunk of generator) {
+      accumulatedText += chunk;
+      dispatch(updateCurrentExplanation(accumulatedText));
+    }
+
+    const response: ResponseQuestion = JSON.parse(accumulatedText);
+    return response;
   }
 );
 
@@ -61,6 +67,12 @@ const exploreSlice = createSlice({
       state.questMap = {};
       state.currentQuestion = null;
     },
+    updateCurrentExplanation: (state, action: PayloadAction<string>) => {
+      if (state.currentQuestion) {
+        state.currentQuestion.explanation = action.payload;
+        state.questMap[state.currentQuestion.id] = state.currentQuestion;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuestionThunk.pending, (state) => {
@@ -90,5 +102,6 @@ const exploreSlice = createSlice({
   },
 });
 
-export const { fetchQuestionStart, resetExplore } = exploreSlice.actions;
+export const { fetchQuestionStart, resetExplore, updateCurrentExplanation } =
+  exploreSlice.actions;
 export default exploreSlice.reducer;
