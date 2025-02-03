@@ -175,10 +175,9 @@ const saveImage = async (element: HTMLElement, topic: string) => {
   const ctx = paddedCanvas.getContext("2d");
   const padding = 48;
   paddedCanvas.width = canvas.width + padding * 2;
-  paddedCanvas.height = canvas.height + padding * 2;
+  paddedCanvas.height = canvas.height + padding * 2 + 80;
 
   if (ctx) {
-    // Create sophisticated gradient background
     const gradient = ctx.createRadialGradient(
       paddedCanvas.width / 2,
       paddedCanvas.height / 2,
@@ -192,7 +191,36 @@ const saveImage = async (element: HTMLElement, topic: string) => {
     ctx.fillStyle = gradient;
     ctx.fillRect(0, 0, paddedCanvas.width, paddedCanvas.height);
 
-    // Add decorative border with gradient
+    const headingWidth = canvas.width + 16;
+    const headingHeight = 60;
+    const headingX = padding - 8;
+    const headingY = padding - 8;
+
+    const headingGradient = ctx.createLinearGradient(
+      headingX,
+      headingY,
+      headingX + headingWidth,
+      headingY + headingHeight
+    );
+    headingGradient.addColorStop(0, "rgba(59, 130, 246, 0.1)");
+    headingGradient.addColorStop(1, "rgba(147, 51, 234, 0.1)");
+
+    ctx.beginPath();
+    ctx.roundRect(headingX, headingY, headingWidth, headingHeight, 12);
+    ctx.fillStyle = "rgba(24, 24, 27, 0.7)";
+    ctx.fill();
+
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.1)";
+    ctx.lineWidth = 1;
+    ctx.stroke();
+
+    ctx.font = "bold 24px system-ui";
+    ctx.fillStyle = "rgba(255, 255, 255, 0.9)";
+    ctx.textAlign = "center";
+    ctx.textBaseline = "middle";
+    const topicName = topic.split(DELIMITER).pop() ?? topic;
+    ctx.fillText(topicName, paddedCanvas.width / 2, padding + 22);
+
     const borderGradient = ctx.createLinearGradient(
       0,
       0,
@@ -206,15 +234,13 @@ const saveImage = async (element: HTMLElement, topic: string) => {
     ctx.lineWidth = 3;
     ctx.strokeRect(
       padding - 8,
-      padding - 8,
+      padding - 8 + 80,
       canvas.width + 16,
       canvas.height + 16
     );
 
-    // Draw main content
-    ctx.drawImage(canvas, padding, padding);
+    ctx.drawImage(canvas, padding, padding + 80);
 
-    // Add timestamp
     ctx.font = "16px system-ui";
     ctx.fillStyle = "rgba(255, 255, 255, 0.08)";
     ctx.textAlign = "center";
