@@ -1,180 +1,276 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useExplore from "../../store/explore/hook";
-
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
 import {
   BrainCircuit,
   Send,
   GraduationCap,
   Blocks,
-  ArrowRight,
+  Code,
+  Terminal,
 } from "lucide-react";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
+import { Card, CardContent } from "../ui/card";
 import { cn } from "@/lib/utils";
+import ModelSelect from "@/components/utils/ModelSelect";
+import type { Model } from "@/config/config";
 
-const AskQuestion: React.FC = () => {
-  const [inputQuestion, setInputQuestion] = useState<string>("");
+const suggestedQuestions = [
+  {
+    text: "How does React's Virtual DOM work?",
+    icon: Code,
+    category: "React",
+  },
+  {
+    text: "Explain JavaScript closures",
+    icon: Terminal,
+    category: "JavaScript",
+  },
+];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.15,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
+
+const AskQuestion = () => {
+  const [inputQuestion, setInputQuestion] = useState("");
   const [isTyping, setIsTyping] = useState(false);
+  const [showSuggestions, setShowSuggestions] = useState(true);
+  const [selectedModel, setSelectedModel] = useState<Model>("gpt-4o-mini");
   const { fetchQuestion } = useExplore();
 
-  const examples = [
-    "How does React's Virtual DOM work?",
-    "Explain JavaScript closures",
-    "What are TypeScript generics?",
-  ];
+  useEffect(() => {
+    if (inputQuestion.trim()) {
+      setShowSuggestions(false);
+    } else {
+      setShowSuggestions(true);
+    }
+  }, [inputQuestion]);
 
-  const handleAskQuestion = (question: string = inputQuestion) => {
+  const handleAskQuestion = (question = inputQuestion) => {
     if (question.trim()) {
+      setShowSuggestions(false);
       fetchQuestion(question);
     }
   };
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
-    <motion.div
-      variants={containerVariants}
-      initial="hidden"
-      animate="visible"
-      className="min-h-screen w-full p-6 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black"
-    >
-      <div className="max-w-4xl mx-auto">
-        <Card className="border-zinc-800/50 bg-black/50 shadow-2xl backdrop-blur-xl overflow-hidden">
-          <CardContent className="p-8">
-            {/* Header Section */}
-            <motion.div
-              variants={itemVariants}
-              className="text-center space-y-6 mb-12"
-            >
-              <div className="flex justify-center gap-6">
-                <motion.div
-                  animate={{
-                    scale: [1, 1.1, 1],
-                    rotate: [0, 5, -5, 0],
-                  }}
-                  transition={{
-                    duration: 5,
-                    repeat: Infinity,
-                    ease: "easeInOut",
-                  }}
-                  className="flex gap-4"
-                >
-                  <GraduationCap className="w-12 h-12 text-primary" />
-                  <Blocks className="w-12 h-12 text-primary/80" />
-                  <BrainCircuit className="w-12 h-12 text-primary/60" />
-                </motion.div>
-              </div>
+    <AnimatePresence mode="wait">
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        exit="exit"
+        className="min-h-screen w-full p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
+          from-zinc-900 via-zinc-950 to-black"
+      >
+        <div className="fixed inset-0 overflow-hidden pointer-events-none">
+          <motion.div
+            animate={{
+              scale: [1, 1.2, 1],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [0, 45, 0],
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br 
+              from-primary/20 to-indigo-500/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [45, 0, 45],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br 
+              from-purple-500/20 to-primary/20 rounded-full blur-3xl"
+          />
+        </div>
 
-              <div>
-                <h1 className="text-4xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-primary/80 to-primary mb-3">
-                  Explore Programming Concepts
-                </h1>
-                <p className="text-lg text-zinc-400 max-w-2xl mx-auto">
-                  Ask anything about programming and discover connected concepts
-                  through interactive learning
-                </p>
-              </div>
+        <div className="relative container mx-auto max-w-4xl">
+          <motion.div
+            variants={itemVariants}
+            className="text-center mb-12 space-y-6"
+          >
+            <motion.div
+              className="flex justify-center gap-6 mb-8"
+              animate={{
+                scale: [1, 1.05, 1],
+                rotate: [0, 5, -5, 0],
+              }}
+              transition={{
+                duration: 5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            >
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <GraduationCap className="w-14 h-14 text-primary" />
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: -10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Blocks className="w-14 h-14 text-primary/80" />
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <BrainCircuit className="w-14 h-14 text-primary/60" />
+              </motion.div>
             </motion.div>
 
-            {/* Search Section */}
-            <motion.div variants={itemVariants} className="space-y-6 mb-12">
-              <div className="relative">
-                <div
-                  className={cn(
-                    "relative rounded-2xl transition-all duration-300",
-                    "bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5",
-                    "p-[1px] group",
-                    isTyping && "from-primary/20 via-primary/30 to-primary/20"
-                  )}
-                >
-                  <div className="relative bg-zinc-900 rounded-2xl">
-                    <Input
-                      placeholder="What would you like to understand better?"
-                      value={inputQuestion}
-                      onChange={(e) => {
-                        setInputQuestion(e.target.value);
-                        setIsTyping(true);
-                      }}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && inputQuestion.trim()) {
-                          handleAskQuestion();
-                        }
-                      }}
-                      onBlur={() => setIsTyping(false)}
+            <h1
+              className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent 
+              bg-gradient-to-r from-primary via-indigo-400 to-primary animate-gradient"
+            >
+              Explore Programming Concepts
+            </h1>
+            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light">
+              Ask anything about programming and discover connected concepts
+              through interactive learning
+            </p>
+          </motion.div>
+
+          <motion.div variants={itemVariants} className="relative">
+            <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
+              <CardContent className="p-8 md:p-12">
+                <div className="space-y-6">
+                  <div className="flex justify-start mb-4">
+                    <ModelSelect onModelSelect={setSelectedModel} />
+                  </div>
+
+                  {/* Question Input */}
+                  <div className="relative">
+                    <div
                       className={cn(
-                        "w-full p-6 text-lg bg-transparent border-0",
-                        "focus:ring-0 placeholder:text-zinc-500",
-                        "transition-all duration-300"
-                      )}
-                    />
-                    <Button
-                      onClick={() => handleAskQuestion()}
-                      disabled={!inputQuestion.trim()}
-                      className={cn(
-                        "absolute right-2 top-1/2 -translate-y-1/2",
-                        "bg-primary hover:bg-primary/90",
-                        "transition-all duration-300"
+                        "relative rounded-2xl transition-all duration-300",
+                        "bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5",
+                        "p-[1px] group",
+                        isTyping &&
+                          "from-primary/20 via-primary/30 to-primary/20"
                       )}
                     >
-                      <Send className="w-5 h-5" />
-                    </Button>
+                      <div className="relative bg-zinc-900/50 rounded-2xl overflow-hidden">
+                        <Input
+                          placeholder="What would you like to understand better?"
+                          value={inputQuestion}
+                          onChange={(e) => {
+                            setInputQuestion(e.target.value);
+                            setIsTyping(true);
+                          }}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && inputQuestion.trim()) {
+                              handleAskQuestion();
+                            }
+                          }}
+                          onBlur={() => setIsTyping(false)}
+                          className={cn(
+                            "w-full p-6 text-lg bg-transparent border-0",
+                            "focus:ring-0 placeholder:text-zinc-500",
+                            "transition-all duration-300"
+                          )}
+                        />
+                        <Button
+                          onClick={() => handleAskQuestion()}
+                          disabled={!inputQuestion.trim()}
+                          className={cn(
+                            "absolute right-2 top-1/2 -translate-y-1/2",
+                            "bg-primary hover:bg-primary/90 p-6",
+                            "transition-all duration-300 group"
+                          )}
+                        >
+                          <motion.div
+                            animate={{ x: [0, 5, 0] }}
+                            transition={{
+                              duration: 1.5,
+                              repeat: Infinity,
+                              ease: "easeInOut",
+                            }}
+                          >
+                            <Send
+                              className="w-5 h-5 group-hover:transform group-hover:translate-x-1 
+                              transition-transform"
+                            />
+                          </motion.div>
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Suggestions Popup */}
+                    <AnimatePresence>
+                      {showSuggestions && !inputQuestion && (
+                        <motion.div
+                          initial={{ opacity: 0, y: 10 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: -10 }}
+                          transition={{ duration: 0.2 }}
+                          className="absolute left-0 right-0 mt-4 p-4 bg-zinc-900/95 backdrop-blur-xl 
+                            border border-zinc-800/50 rounded-xl shadow-xl z-10 max-h-[300px] overflow-y-auto"
+                        >
+                          <div className="text-sm text-zinc-500 px-2 pb-2">
+                            Popular questions
+                          </div>
+                          <div className="grid grid-cols-1 gap-3">
+                            {suggestedQuestions.map((question, index) => (
+                              <motion.button
+                                key={index}
+                                whileHover={{ scale: 1.02 }}
+                                whileTap={{ scale: 0.98 }}
+                                onClick={() => handleAskQuestion(question.text)}
+                                className="flex items-center gap-3 p-3 rounded-lg bg-zinc-800/30 
+                                  hover:bg-zinc-800/50 transition-colors duration-200 text-left w-full"
+                              >
+                                {React.createElement(question.icon, {
+                                  className: "w-5 h-5 text-primary shrink-0",
+                                })}
+                                <div className="flex flex-col">
+                                  <span className="text-sm text-zinc-300">
+                                    {question.text}
+                                  </span>
+                                  <span className="text-xs text-zinc-500">
+                                    {question.category}
+                                  </span>
+                                </div>
+                              </motion.button>
+                            ))}
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
                   </div>
                 </div>
-
-                <AnimatePresence>
-                  {isTyping && (
-                    <motion.div
-                      initial={{ opacity: 0, y: 10 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      className="absolute -bottom-8 left-4 text-sm text-zinc-500"
-                    >
-                      Press Enter to explore this concept
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </div>
-
-              <div className="flex flex-wrap gap-2 justify-center">
-                {examples.map((example) => (
-                  <motion.div
-                    key={example}
-                    variants={itemVariants}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                  >
-                    <Button
-                      variant="outline"
-                      onClick={() => handleAskQuestion(example)}
-                      className="bg-zinc-900/50 border-zinc-800 hover:bg-zinc-800 gap-2"
-                    >
-                      <ArrowRight className="w-4 h-4" />
-                      {example}
-                    </Button>
-                  </motion.div>
-                ))}
-              </div>
-            </motion.div>
-          </CardContent>
-        </Card>
-      </div>
-    </motion.div>
+              </CardContent>
+            </Card>
+          </motion.div>
+        </div>
+      </motion.div>
+    </AnimatePresence>
   );
 };
 

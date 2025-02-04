@@ -1,6 +1,7 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import type { Question, ResponseQuestion } from "./type";
 import { exploreTopic } from "./api";
+import type { Model } from "@/config/config";
 
 interface ExploreState {
   rootQuestion: Question | null;
@@ -22,8 +23,19 @@ const initialState: ExploreState = {
 
 export const fetchQuestionThunk = createAsyncThunk(
   "explore/fetchQuestion",
-  async (question: string, { dispatch }) => {
-    const generator = exploreTopic(question);
+  async (
+    {
+      question,
+      model,
+      extraInstructions,
+    }: {
+      question: string;
+      model: Model;
+      extraInstructions?: string;
+    },
+    { dispatch }
+  ) => {
+    const generator = exploreTopic(question, model, extraInstructions);
     let accumulatedText = "";
 
     for await (const chunk of generator) {
@@ -97,7 +109,7 @@ const exploreSlice = createSlice({
     );
     builder.addCase(fetchQuestionThunk.rejected, (state, action) => {
       state.loading = false;
-      state.error = action.error.message || "Failed to fetch question";
+      state.error = action.error.message ?? "Failed to fetch question";
     });
   },
 });

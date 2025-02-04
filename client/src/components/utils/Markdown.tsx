@@ -1,6 +1,9 @@
 import React from "react";
-import ReactMarkdown from "react-markdown";
+import ReactMarkdown, { Components } from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
+import rehypeKatex from "rehype-katex";
+import remarkMath from "remark-math";
+import "katex/dist/katex.min.css";
 import "highlight.js/styles/github-dark.css";
 import { Card } from "@/components/ui/card";
 
@@ -8,10 +11,17 @@ interface MarkdownProps {
   content: string;
 }
 
+type MarkdownComponents = Components & {
+  math: React.ComponentType<any>;
+  inlineMath: React.ComponentType<any>;
+};
+
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
   return (
     <div className="w-full max-w-none prose prose-invert prose-zinc">
       <ReactMarkdown
+        remarkPlugins={[remarkMath]}
+        rehypePlugins={[rehypeHighlight, rehypeKatex]}
         components={{
           // Headers
           h1: ({ node, ...props }) => (
@@ -37,6 +47,13 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
               {...props}
               className="scroll-m-20 text-xl font-semibold tracking-tight text-white mt-6 mb-3"
             />
+          ),
+
+          math: ({ node, ...props }) => (
+            <div {...props} className="my-4 text-white" />
+          ),
+          inlineMath: ({ node, ...props }) => (
+            <span {...props} className="text-white" />
           ),
 
           // Paragraphs and text
@@ -81,6 +98,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
 
           // Code blocks and inline code
           pre: ({ node, ...props }) => {
+            console.log(props);
             const codeText = props.children?.[0]?.props?.children?.[0] || "";
             return (
               <Card className="my-6 overflow-x-auto bg-zinc-900 border-zinc-200 border-2 relative group">
@@ -135,7 +153,6 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
             <hr {...props} className="my-8 border-zinc-800" />
           ),
         }}
-        rehypePlugins={[rehypeHighlight]}
       >
         {content}
       </ReactMarkdown>

@@ -6,6 +6,7 @@ import {
   resetExplore as resetExploreAction,
 } from "./slice";
 import { Question } from "./type";
+import type { Model } from "@/config/config";
 
 interface UseExploreHook {
   rootQuestion: Question | null;
@@ -13,7 +14,11 @@ interface UseExploreHook {
   error: string | null;
   currentPath: string[];
   currentQuestion: Question | null;
-  fetchQuestion: (question: string) => Promise<void>;
+  fetchQuestion: (
+    question: string,
+    model: Model,
+    extraInstructions?: string
+  ) => Promise<void>;
   startQuestionFetching: (question: string) => void;
   getQuestion: (id: string) => Question | null;
   resetExplore: () => void;
@@ -31,9 +36,15 @@ const useExplore = (): UseExploreHook => {
   } = useAppSelector((state) => state.explore);
 
   const fetchQuestion = useCallback(
-    async (question: string) => {
+    async (question: string, model: Model, extraInstructions?: string) => {
       dispatch(fetchQuestionStart(question));
-      await dispatch(fetchQuestionThunk(question));
+      await dispatch(
+        fetchQuestionThunk({
+          question,
+          model,
+          extraInstructions,
+        })
+      );
     },
     [dispatch]
   );
