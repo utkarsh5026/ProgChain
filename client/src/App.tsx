@@ -5,6 +5,7 @@ import Explore from "@/components/explore/Explore";
 import Interview from "@/components/interview/Interview";
 import Leetcode from "@/components/leetcode/Leetcode";
 import TopicChain from "@/components/topics/TopicChain";
+import Projects from "@/components/projects/Projects";
 import { Toaster } from "@/components/ui/toaster";
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
               <Route path="/interview" element={<Interview />} />
               <Route path="/explore" element={<Explore />} />
               <Route path="/leetcode/*" element={<Leetcode />} />
+              <Route path="/projects" element={<Projects />} />
               <Route path="/" element={<Explore />} />
             </Routes>
             <Toaster />
