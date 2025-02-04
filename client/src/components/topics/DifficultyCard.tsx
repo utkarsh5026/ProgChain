@@ -104,7 +104,11 @@ const DifficultyCard: React.FC<DifficultyCardProps> = ({
             variants={containerVariants}
           >
             {conceptList.map((item: Concept, idx) => (
-              <ConceptContextMenu key={item.topic} topicName={item.topic}>
+              <ConceptContextMenu
+                key={item.topic}
+                topicName={item.topic}
+                topicDescription={item.description}
+              >
                 <motion.div
                   variants={itemVariants}
                   whileHover="hover"
