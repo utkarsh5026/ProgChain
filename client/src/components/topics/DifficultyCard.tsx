@@ -4,6 +4,7 @@ import type { Concept } from "@/store/topics/types";
 import { Card, CardHeader, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { ChevronRight } from "lucide-react";
+import ConceptContextMenu from "./ConceptContextMenu";
 
 interface DifficultyCardProps {
   difficulty: string;
@@ -103,33 +104,34 @@ const DifficultyCard: React.FC<DifficultyCardProps> = ({
             variants={containerVariants}
           >
             {conceptList.map((item: Concept, idx) => (
-              <motion.div
-                key={item.topic}
-                variants={itemVariants}
-                whileHover="hover"
-                custom={idx}
-              >
+              <ConceptContextMenu key={item.topic} topicName={item.topic}>
                 <motion.div
-                  variants={hoverVariants}
-                  onClick={() => onConceptClick(item)}
-                  className="flex items-center justify-between p-3 rounded-lg cursor-pointer group"
+                  variants={itemVariants}
+                  whileHover="hover"
+                  custom={idx}
                 >
-                  <div className="flex flex-col gap-1">
-                    <div className="flex items-center gap-3">
-                      <span className="text-zinc-500 font-medium min-w-[24px]">
-                        {idx + 1}.
-                      </span>
-                      <span className="font-medium text-zinc-300 group-hover:text-white transition-colors">
-                        {item.topic}
-                      </span>
+                  <motion.div
+                    variants={hoverVariants}
+                    onClick={() => onConceptClick(item)}
+                    className="flex items-center justify-between p-3 rounded-lg cursor-pointer group"
+                  >
+                    <div className="flex flex-col gap-1">
+                      <div className="flex items-center gap-3">
+                        <span className="text-zinc-500 font-medium min-w-[24px]">
+                          {idx + 1}.
+                        </span>
+                        <span className="font-medium text-zinc-300 group-hover:text-white transition-colors">
+                          {item.topic}
+                        </span>
+                      </div>
+                      <p className="text-sm text-zinc-500 pl-9">
+                        {item.description}
+                      </p>
                     </div>
-                    <p className="text-sm text-zinc-500 pl-9">
-                      {item.description}
-                    </p>
-                  </div>
-                  <ChevronRight className="w-5 h-5 text-zinc-600 group-hover:text-white transition-colors" />
+                    <ChevronRight className="w-5 h-5 text-zinc-600 group-hover:text-white transition-colors" />
+                  </motion.div>
                 </motion.div>
-              </motion.div>
+              </ConceptContextMenu>
             ))}
           </motion.div>
         </CardContent>
