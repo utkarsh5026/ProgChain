@@ -1,81 +1,77 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useTopics from "@/store/topics/hook";
-import { SendHorizontal, Brain, Loader2, Sparkles, Cloud } from "lucide-react";
+import {
+  SendHorizontal,
+  Loader2,
+  Sparkles,
+  Command,
+  Brain,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import ModelSelect from "@/components/utils/ModelSelect";
+import { type Model } from "@/config/config";
 
-const AskTopic: React.FC = () => {
+const AskTopicComponent: React.FC = () => {
   const { fetchTopics, loading } = useTopics();
-  const [topic, setTopic] = useState<string>("");
+  const [topic, setTopic] = useState("");
+  const [selectedModel, setSelectedModel] = useState("gpt-4o-mini");
   const [isInputFocused, setIsInputFocused] = useState(false);
 
   const handleAskQuestion = async () => {
     if (!topic.trim()) return;
-    await fetchTopics(topic, "gpt-4o-mini");
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
+    await fetchTopics(topic, selectedModel as Model);
   };
 
   return (
     <AnimatePresence mode="wait">
       <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-        exit="exit"
-        className="min-h-screen w-full p-4 bg-gradient-to-b from-zinc-900 via-zinc-950 to-black"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+        className="min-h-screen w-full p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-black"
       >
-        {/* Animated background elements */}
+        {/* Enhanced animated background elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <motion.div
             animate={{
               scale: [1, 1.2, 1],
               opacity: [0.1, 0.2, 0.1],
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut",
-            }}
-            className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-3xl"
-          />
-          <motion.div
-            animate={{
-              scale: [1.2, 1, 1.2],
-              opacity: [0.1, 0.2, 0.1],
+              rotate: [0, 45, 0],
             }}
             transition={{
               duration: 10,
               repeat: Infinity,
               ease: "easeInOut",
             }}
-            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-indigo-500/20 rounded-full blur-3xl"
+            className="absolute top-1/4 left-1/4 w-96 h-96 bg-gradient-to-br from-primary/20 to-indigo-500/20 rounded-full blur-3xl"
+          />
+          <motion.div
+            animate={{
+              scale: [1.2, 1, 1.2],
+              opacity: [0.1, 0.2, 0.1],
+              rotate: [45, 0, 45],
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gradient-to-br from-purple-500/20 to-primary/20 rounded-full blur-3xl"
           />
         </div>
 
         <div className="relative container mx-auto max-w-7xl">
           <motion.div
-            variants={itemVariants}
-            className="text-center mb-12 space-y-4"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-12 space-y-6"
           >
             <motion.div
-              className="flex justify-center gap-4 mb-6"
+              className="flex justify-center gap-4 mb-8"
               animate={{
                 scale: [1, 1.05, 1],
                 rotate: [0, 5, -5, 0],
@@ -86,77 +82,97 @@ const AskTopic: React.FC = () => {
                 ease: "easeInOut",
               }}
             >
-              <Sparkles className="w-12 h-12 text-primary" />
-              <Cloud className="w-12 h-12 text-primary/80" />
-              <Brain className="w-12 h-12 text-primary/60" />
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Sparkles className="w-14 h-14 text-primary" />
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: -10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Brain className="w-14 h-14 text-primary/80" />
+              </motion.div>
+              <motion.div
+                whileHover={{ scale: 1.1, rotate: 10 }}
+                transition={{ type: "spring", stiffness: 400, damping: 10 }}
+              >
+                <Command className="w-14 h-14 text-primary/60" />
+              </motion.div>
             </motion.div>
 
-            <h1 className="text-4xl md:text-5xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-indigo-400 to-primary">
+            <h1 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-indigo-400 to-primary animate-gradient">
               Discover Your Learning Path
             </h1>
-            <p className="text-xl text-zinc-400 max-w-2xl mx-auto">
+            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light">
               Enter any programming concept to generate a personalized learning
               journey
             </p>
           </motion.div>
 
           <motion.div
-            variants={itemVariants}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
             className="max-w-3xl mx-auto relative"
           >
             <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
-              <CardContent className="p-24">
-                <div className="relative">
-                  <motion.div
-                    animate={
-                      isInputFocused
-                        ? {
-                            boxShadow: [
-                              "0 0 0 0 rgba(255,255,255,0)",
-                              "0 0 20px 2px rgba(255,255,255,0.1)",
-                              "0 0 0 0 rgba(255,255,255,0)",
-                            ],
+              <CardContent className="p-8 md:p-12">
+                <div className="space-y-6">
+                  <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+                    <ModelSelect onModelSelect={setSelectedModel} />
+                  </div>
+
+                  <div className="relative">
+                    <motion.div
+                      animate={
+                        isInputFocused
+                          ? {
+                              boxShadow: [
+                                "0 0 0 0 rgba(255,255,255,0)",
+                                "0 0 20px 2px rgba(255,255,255,0.1)",
+                                "0 0 0 0 rgba(255,255,255,0)",
+                              ],
+                            }
+                          : {}
+                      }
+                      transition={{ duration: 2, repeat: Infinity }}
+                    >
+                      <Input
+                        className={`w-full p-6 text-lg bg-zinc-900/50 border-2 border-zinc-800 rounded-2xl 
+                          placeholder:text-zinc-600 focus:ring-2 focus:ring-primary focus:border-transparent 
+                          transition-all duration-300 ${
+                            isInputFocused
+                              ? "border-primary shadow-lg shadow-primary/20"
+                              : ""
+                          }`}
+                        placeholder="e.g., React Hooks, System Design, Data Structures..."
+                        value={topic}
+                        onChange={(e) => setTopic(e.target.value)}
+                        onFocus={() => setIsInputFocused(true)}
+                        onBlur={() => setIsInputFocused(false)}
+                        onKeyDown={(e) => {
+                          if (e.key === "Enter" && !loading && topic.trim()) {
+                            handleAskQuestion();
                           }
-                        : {}
-                    }
-                    transition={{ duration: 2, repeat: Infinity }}
-                    className="relative"
-                  >
-                    <Input
-                      className={`w-full p-8 text-lg bg-zinc-900/50 border-2 border-zinc-800 rounded-2xl placeholder:text-zinc-600
-                        focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300
-                        ${
-                          isInputFocused
-                            ? "border-primary shadow-lg shadow-primary/20"
-                            : ""
-                        }
-                      `}
-                      placeholder="e.g., React Hooks, System Design, Data Structures..."
-                      value={topic}
-                      onChange={(e) => setTopic(e.target.value)}
-                      onFocus={() => setIsInputFocused(true)}
-                      onBlur={() => setIsInputFocused(false)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !loading && topic.trim()) {
-                          handleAskQuestion();
-                        }
-                      }}
-                    />
-                  </motion.div>
+                        }}
+                      />
+                    </motion.div>
+                  </div>
 
                   <Button
                     variant="default"
                     size="lg"
                     onClick={handleAskQuestion}
                     disabled={loading || !topic.trim()}
-                    className={`w-full mt-4 p-8 text-lg font-medium relative overflow-hidden
+                    className={`w-full p-6 text-lg font-medium relative overflow-hidden
                       ${
                         loading
                           ? "bg-primary/50"
                           : "bg-primary hover:bg-primary/90"
                       }
-
-                      transition-all duration-300 rounded-xl
+                      transition-all duration-300 rounded-xl group
                     `}
                   >
                     <motion.div
@@ -165,7 +181,6 @@ const AskTopic: React.FC = () => {
                           ? {
                               background: [
                                 "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
-
                                 "linear-gradient(0deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 100%)",
                                 "linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0) 100%)",
                               ],
@@ -188,15 +203,29 @@ const AskTopic: React.FC = () => {
                         <Loader2 className="w-6 h-6" />
                       </motion.div>
                     ) : (
-                      <div className="flex items-center justify-center gap-2">
+                      <div className="flex items-center justify-center gap-2 group">
                         <span>Generate Learning Path</span>
-                        <SendHorizontal className="w-5 h-5" />
+                        <motion.div
+                          animate={{ x: [0, 5, 0] }}
+                          transition={{
+                            duration: 1.5,
+                            repeat: Infinity,
+                            ease: "easeInOut",
+                          }}
+                        >
+                          <SendHorizontal className="w-5 h-5 group-hover:transform group-hover:translate-x-1 transition-transform" />
+                        </motion.div>
                       </div>
                     )}
                   </Button>
                 </div>
               </CardContent>
             </Card>
+
+            {/* Decorative elements */}
+            <div className="absolute -z-10 inset-0 blur-3xl opacity-30">
+              <div className="absolute inset-0 bg-gradient-to-r from-primary/20 via-indigo-500/20 to-purple-500/20 transform rotate-12" />
+            </div>
           </motion.div>
         </div>
       </motion.div>
@@ -204,4 +233,5 @@ const AskTopic: React.FC = () => {
   );
 };
 
+const AskTopic = React.memo(AskTopicComponent);
 export default AskTopic;

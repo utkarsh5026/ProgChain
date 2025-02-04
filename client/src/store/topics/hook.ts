@@ -8,6 +8,8 @@ interface TopicsHookResult {
   currentTopic: string | null;
   topicConcepts: Record<string, TopicConcepts>;
   loading: boolean;
+  generating: boolean;
+  error: string | null;
   fetchTopics: (topicPath: string, model: Model) => Promise<void>;
 }
 
@@ -31,6 +33,8 @@ const useTopics = (): TopicsHookResult => {
     topics: topicConcepts,
     loading,
     conversationId,
+    generating,
+    error,
   } = topics;
 
   const memoizedTopicConcepts = useMemo(() => topicConcepts, [topicConcepts]);
@@ -53,6 +57,8 @@ const useTopics = (): TopicsHookResult => {
     topicConcepts: memoizedTopicConcepts,
     loading,
     fetchTopics,
+    generating,
+    error,
   };
 };
 

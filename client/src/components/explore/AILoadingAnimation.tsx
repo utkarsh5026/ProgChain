@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, memo } from "react";
 
 type Node = {
   id: number;
@@ -15,7 +15,7 @@ type Link = {
   strength: number;
 };
 
-const AILoadingAnimation: React.FC = () => {
+const AILoadingAnimationComponent: React.FC = () => {
   const [nodes, setNodes] = useState<Node[]>([]);
   const [links, setLinks] = useState<Link[]>([]);
   const [activeNodeIndex, setActiveNodeIndex] = useState(0);
@@ -212,4 +212,5 @@ const AILoadingAnimation: React.FC = () => {
   );
 };
 
+const AILoadingAnimation = memo(AILoadingAnimationComponent);
 export default AILoadingAnimation;

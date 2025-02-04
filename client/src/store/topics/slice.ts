@@ -10,6 +10,7 @@ interface TopicState {
   loading: boolean;
   error: string | null;
   currentTopic: string | null;
+  generating: boolean;
 }
 
 const initialState: TopicState = {
@@ -18,6 +19,7 @@ const initialState: TopicState = {
   loading: false,
   error: null,
   currentTopic: null,
+  generating: false,
 };
 
 /**
@@ -48,7 +50,6 @@ export const fetchGeneratedTopics = createAsyncThunk(
           );
           firstResponse = false;
         } else {
-          // Update topics with streaming data
           dispatch(
             topicsSlice.actions.updateTopics({
               topicPath,
@@ -104,7 +105,7 @@ const topicsSlice = createSlice({
       }>
     ) => {
       const { conversationId, topicPath, topics } = action.payload;
-      state.loading = true;
+      state.loading = false;
       state.topics[topicPath] = topics;
       state.currentTopic = topicPath;
       state.conversationId = conversationId;
@@ -121,6 +122,7 @@ const topicsSlice = createSlice({
         ...state.topics[topicPath],
         ...topics,
       };
+      state.loading = false;
     },
     setSuccess: (state) => {
       state.loading = false;
@@ -134,14 +136,17 @@ const topicsSlice = createSlice({
   extraReducers: (builder) => {
     builder.addCase(fetchGeneratedTopics.pending, (state) => {
       state.loading = true;
+      state.generating = true;
       state.error = null;
     });
+
     builder.addCase(fetchGeneratedTopics.fulfilled, (state) => {
       state.loading = false;
     });
     builder.addCase(fetchGeneratedTopics.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "Unknown error";
+      state.generating = false;
     });
   },
 });
