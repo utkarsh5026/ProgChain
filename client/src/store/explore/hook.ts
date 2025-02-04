@@ -2,10 +2,11 @@ import { useCallback } from "react";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import {
   fetchQuestionThunk,
+  askQuestionThunk,
   fetchQuestionStart,
   resetExplore as resetExploreAction,
 } from "./slice";
-import { Question } from "./type";
+import type { Question } from "./type";
 import type { Model } from "@/config/config";
 
 interface UseExploreHook {
@@ -15,6 +16,11 @@ interface UseExploreHook {
   currentPath: string[];
   currentQuestion: Question | null;
   fetchQuestion: (
+    question: string,
+    model: Model,
+    extraInstructions?: string
+  ) => Promise<void>;
+  askQuestion: (
     question: string,
     model: Model,
     extraInstructions?: string
@@ -33,6 +39,7 @@ const useExplore = (): UseExploreHook => {
     currentPath,
     questMap,
     currentQuestion,
+    currentChatId,
   } = useAppSelector((state) => state.explore);
 
   const fetchQuestion = useCallback(
@@ -47,6 +54,22 @@ const useExplore = (): UseExploreHook => {
       );
     },
     [dispatch]
+  );
+
+  const askQuestion = useCallback(
+    async (question: string, model: Model, extraInstructions?: string) => {
+      if (!currentChatId) return;
+      dispatch(fetchQuestionStart(question));
+      await dispatch(
+        askQuestionThunk({
+          question,
+          model,
+          extraInstructions,
+          chat_id: currentChatId,
+        })
+      );
+    },
+    [dispatch, currentChatId]
   );
 
   const startQuestionFetching = useCallback(
@@ -74,6 +97,7 @@ const useExplore = (): UseExploreHook => {
     currentPath,
     currentQuestion,
     fetchQuestion,
+    askQuestion,
     startQuestionFetching,
     getQuestion,
     resetExplore,

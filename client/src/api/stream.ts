@@ -12,7 +12,7 @@ export const postStream = async function* <T extends Record<string, any>>(
   const generator = streamText(url, body);
   for await (const chunk of generator) {
     try {
-      const json = JSON.parse(chunk);
+      const json = JSON.parse(chunk.trim());
       yield json;
     } catch (e) {
       console.error("Failed to parse SSE data:", e);
@@ -37,7 +37,6 @@ export const streamText = async function* <Rq extends Record<string, any>>(
   url: string,
   body: Rq
 ): AsyncGenerator<string> {
-  // Ensure required parameters are provided
   if (!url) throw new Error("URL is required");
   if (!body) throw new Error("Request body is required");
 
@@ -57,7 +56,9 @@ export const streamText = async function* <Rq extends Record<string, any>>(
   }
 
   const reader = response.body.getReader();
-  if (!reader) throw new Error("No reader available");
+  if (!reader) {
+    throw new Error("No reader available");
+  }
 
   const decoder = new TextDecoder("utf-8");
 

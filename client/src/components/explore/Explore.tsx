@@ -7,6 +7,7 @@ import ChatInput from "@/components/explore/ChatInput";
 import { Button } from "@/components/ui/button";
 import MinimapDrawer from "@/components/explore/MiniMapDrawer";
 import { BookOpen, GraduationCap } from "lucide-react";
+import { Model } from "@/store/leetcode/type";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -32,6 +33,7 @@ const Explore: React.FC = () => {
     currentPath,
     resetExplore,
     fetchQuestion,
+    askQuestion,
     getQuestion,
   } = useExplore();
   const [isResetting, setIsResetting] = useState(false);
@@ -108,7 +110,7 @@ const Explore: React.FC = () => {
   const handleChatSubmit = async (message: string) => {
     setIsLoading(true);
     try {
-      await fetchQuestion(message);
+      await askQuestion(message, "gpt-4o-mini");
     } finally {
       setIsLoading(false);
     }
@@ -190,7 +192,6 @@ const Explore: React.FC = () => {
           )}
         </div>
 
-        {/* Chat Input */}
         <ChatInput onSubmit={handleChatSubmit} isLoading={isLoading} />
       </motion.div>
     </AnimatePresence>

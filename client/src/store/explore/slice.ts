@@ -1,9 +1,9 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import type { Question, ResponseQuestion } from "./type";
-import { exploreTopic } from "./api";
-import type { Model } from "@/config/config";
+import type { Question, QuestionRequest, TopicRequest } from "./type";
+import { exploreTopic, askQuestion } from "./api";
 
 interface ExploreState {
+  currentChatId: number | null;
   rootQuestion: Question | null;
   loading: boolean;
   error: string | null;
@@ -19,32 +19,40 @@ const initialState: ExploreState = {
   currentPath: [],
   questMap: {},
   currentQuestion: null,
+  currentChatId: null,
 };
 
 export const fetchQuestionThunk = createAsyncThunk(
   "explore/fetchQuestion",
   async (
-    {
-      question,
-      model,
-      extraInstructions,
-    }: {
-      question: string;
-      model: Model;
-      extraInstructions?: string;
-    },
+    { question, model, extraInstructions }: TopicRequest,
     { dispatch }
   ) => {
     const generator = exploreTopic(question, model, extraInstructions);
     let accumulatedText = "";
 
     for await (const chunk of generator) {
+      if (chunk.startsWith("chatID:")) {
+        const chatId = chunk.split(":")[1];
+        dispatch(setCurrentChatId(parseInt(chatId)));
+        continue;
+      }
       accumulatedText += chunk;
       dispatch(updateCurrentExplanation(accumulatedText));
     }
+  }
+);
 
-    const response: ResponseQuestion = JSON.parse(accumulatedText);
-    return response;
+export const askQuestionThunk = createAsyncThunk(
+  "explore/askQuestion",
+  async (questionRequest: QuestionRequest, { dispatch }) => {
+    const generator = askQuestion(questionRequest);
+    let accumulatedText = "";
+
+    for await (const chunk of generator) {
+      accumulatedText += chunk;
+      dispatch(updateCurrentExplanation(accumulatedText));
+    }
   }
 );
 
@@ -85,28 +93,17 @@ const exploreSlice = createSlice({
         state.questMap[state.currentQuestion.id] = state.currentQuestion;
       }
     },
+    setCurrentChatId: (state, action: PayloadAction<number>) => {
+      state.currentChatId = action.payload;
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuestionThunk.pending, (state) => {
       state.loading = true;
     });
-    builder.addCase(
-      fetchQuestionThunk.fulfilled,
-      (state, action: PayloadAction<ResponseQuestion>) => {
-        const { explanation, follow_up_questions } = action.payload;
-        state.loading = false;
-
-        if (state.currentQuestion !== null) {
-          state.currentQuestion = {
-            ...state.currentQuestion,
-            explanation,
-            relatedQuestionIDs: follow_up_questions,
-          };
-          const id = state.currentQuestion.id;
-          state.questMap[id] = state.currentQuestion;
-        }
-      }
-    );
+    builder.addCase(fetchQuestionThunk.fulfilled, (state) => {
+      state.loading = false;
+    });
     builder.addCase(fetchQuestionThunk.rejected, (state, action) => {
       state.loading = false;
       state.error = action.error.message ?? "Failed to fetch question";
@@ -114,6 +111,10 @@ const exploreSlice = createSlice({
   },
 });
 
-export const { fetchQuestionStart, resetExplore, updateCurrentExplanation } =
-  exploreSlice.actions;
+export const {
+  fetchQuestionStart,
+  resetExplore,
+  updateCurrentExplanation,
+  setCurrentChatId,
+} = exploreSlice.actions;
 export default exploreSlice.reducer;
