@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useExplore from "@/store/explore/hook";
-import { BrainCircuit, Send, GraduationCap, Blocks } from "lucide-react";
+import { BrainCircuit, Send, Blocks } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,6 +10,7 @@ import { cn } from "@/lib/utils";
 import ModelSelect from "@/components/utils/ModelSelect";
 import type { Model } from "@/config/config";
 import RecentConversations from "./RecentConversations";
+import PageHeader from "../utils/PageHeader";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -79,53 +80,15 @@ const AskQuestion: React.FC = () => {
         </div>
 
         <div className="relative container mx-auto max-w-4xl">
-          <motion.div
-            variants={itemVariants}
-            className="text-center mb-12 space-y-6"
-          >
-            <motion.div
-              className="flex justify-center gap-6 mb-8"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 5, -5, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <GraduationCap className="w-14 h-14 text-primary" />
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: -10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Blocks className="w-14 h-14 text-primary/80" />
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <BrainCircuit className="w-14 h-14 text-primary/60" />
-              </motion.div>
-            </motion.div>
-
-            <h1
-              className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent 
-              bg-gradient-to-r from-primary via-indigo-400 to-primary animate-gradient"
-            >
-              Explore Programming Concepts
-            </h1>
-            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light">
-              Ask anything about programming and discover connected concepts
-              through interactive learning
-            </p>
-          </motion.div>
+          <PageHeader
+            title="Explore Programming Concepts"
+            description="Ask anything about programming and discover connected concepts through interactive learning"
+            icons={[
+              <BrainCircuit className="w-14 h-14 text-primary" key="brain" />,
+              <Blocks className="w-14 h-14 text-primary/80" key="blocks" />,
+              <Send className="w-14 h-14 text-primary/60" key="send" />,
+            ]}
+          />
 
           <motion.div variants={itemVariants} className="relative space-y-6">
             <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">

@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import useTopics from "@/store/topics/hook";
-import {
-  SendHorizontal,
-  Loader2,
-  Sparkles,
-  Command,
-  Brain,
-} from "lucide-react";
+import { SendHorizontal, Loader2, Command, Brain, Blocks } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import ModelSelect from "@/components/utils/ModelSelect";
+import PageHeader from "../utils/PageHeader";
+
 import { type Model } from "@/config/config";
 
 const AskTopicComponent: React.FC = () => {
@@ -33,7 +29,6 @@ const AskTopicComponent: React.FC = () => {
         exit={{ opacity: 0 }}
         className="min-h-screen w-full p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-black"
       >
-        {/* Enhanced animated background elements */}
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <motion.div
             animate={{
@@ -64,52 +59,15 @@ const AskTopicComponent: React.FC = () => {
         </div>
 
         <div className="relative container mx-auto max-w-7xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            className="text-center mb-12 space-y-6"
-          >
-            <motion.div
-              className="flex justify-center gap-4 mb-8"
-              animate={{
-                scale: [1, 1.05, 1],
-                rotate: [0, 5, -5, 0],
-              }}
-              transition={{
-                duration: 5,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
-            >
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Sparkles className="w-14 h-14 text-primary" />
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: -10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Brain className="w-14 h-14 text-primary/80" />
-              </motion.div>
-              <motion.div
-                whileHover={{ scale: 1.1, rotate: 10 }}
-                transition={{ type: "spring", stiffness: 400, damping: 10 }}
-              >
-                <Command className="w-14 h-14 text-primary/60" />
-              </motion.div>
-            </motion.div>
-
-            <h1 className="text-5xl md:text-6xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-primary via-indigo-400 to-primary animate-gradient">
-              Discover Your Learning Path
-            </h1>
-            <p className="text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto font-light">
-              Enter any programming concept to generate a personalized learning
-              journey
-            </p>
-          </motion.div>
+          <PageHeader
+            title="Discover Your Learning Path"
+            description="Enter any programming concept to generate a personalized learning journey"
+            icons={[
+              <Brain className="w-14 h-14 text-primary" key="brain" />,
+              <Blocks className="w-14 h-14 text-primary/80" key="blocks" />,
+              <Command className="w-14 h-14 text-primary/60" key="command" />,
+            ]}
+          />
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
