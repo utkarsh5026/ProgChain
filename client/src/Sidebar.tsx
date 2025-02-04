@@ -1,14 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  Book,
-  Users,
-  FormInput,
-  GitPullRequest,
-  Compass,
-  GraduationCap,
-} from "lucide-react";
+import { Book, Users, Compass, GraduationCap } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -38,18 +31,6 @@ const Sidebar: React.FC = () => {
       icon: <Users className="h-5 w-5" />,
       title: "Interview",
       description: "Practice interview questions",
-    },
-    {
-      key: "/quiz",
-      icon: <FormInput className="h-5 w-5" />,
-      title: "Quiz",
-      description: "Test your knowledge",
-    },
-    {
-      key: "/flow",
-      icon: <GitPullRequest className="h-5 w-5" />,
-      title: "Flow",
-      description: "Visual learning paths",
     },
     {
       key: "/explore",
