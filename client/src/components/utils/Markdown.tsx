@@ -1,24 +1,49 @@
-import React from "react";
-import ReactMarkdown, { Components } from "react-markdown";
+import React, { useCallback } from "react";
+import ReactMarkdown from "react-markdown";
 import rehypeHighlight from "rehype-highlight";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 import "katex/dist/katex.min.css";
 import "highlight.js/styles/github-dark.css";
 import { Card } from "@/components/ui/card";
+import { useToast } from "@/hooks/use-toast";
 
 interface MarkdownProps {
   content: string;
 }
 
-type MarkdownComponents = Components & {
-  math: React.ComponentType<any>;
-  inlineMath: React.ComponentType<any>;
-};
-
 const Markdown: React.FC<MarkdownProps> = ({ content }) => {
+  const { toast } = useToast();
+
+  const handleSelection = useCallback(() => {
+    const selection = window.getSelection();
+    const selectedText = selection?.toString().trim();
+    if (selectedText) {
+      navigator.clipboard
+        .writeText(selectedText)
+        .then(() => {
+          toast({
+            title: "Copied to clipboard",
+            description: selectedText,
+            duration: 500,
+          });
+        })
+        .catch(() => {
+          toast({
+            title: "Failed to copy",
+            description: "Please try again",
+            variant: "destructive",
+            duration: 500,
+          });
+        });
+    }
+  }, [toast]);
+
   return (
-    <div className="w-full max-w-none prose prose-invert prose-zinc">
+    <div
+      className="w-full max-w-none prose prose-invert prose-zinc"
+      onMouseUp={handleSelection}
+    >
       <ReactMarkdown
         remarkPlugins={[remarkMath]}
         rehypePlugins={[rehypeHighlight, rehypeKatex]}
@@ -108,7 +133,10 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
                 >
                   Copy
                 </button>
-                <pre {...props} className="p-4 rounded-lg text-sm" />
+                <pre
+                  {...props}
+                  className="p-4 rounded-lg font-mono font-light"
+                />
               </Card>
             );
           },

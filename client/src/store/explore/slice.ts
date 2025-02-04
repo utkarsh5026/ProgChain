@@ -30,6 +30,8 @@ export const fetchQuestionThunk = createAsyncThunk(
   ) => {
     const generator = exploreTopic(question, model, extraInstructions);
     let accumulatedText = "";
+    let lastUpdateTime = Date.now();
+    const UPDATE_INTERVAL = 100; // Update every 100ms
 
     for await (const chunk of generator) {
       if (chunk.startsWith("chatID:")) {
@@ -38,8 +40,15 @@ export const fetchQuestionThunk = createAsyncThunk(
         continue;
       }
       accumulatedText += chunk;
-      dispatch(updateCurrentExplanation(accumulatedText));
+
+      const currentTime = Date.now();
+      if (currentTime - lastUpdateTime >= UPDATE_INTERVAL) {
+        dispatch(updateCurrentExplanation(accumulatedText));
+        lastUpdateTime = currentTime;
+      }
     }
+    // Final update to ensure we don't miss the last chunks
+    dispatch(updateCurrentExplanation(accumulatedText));
   }
 );
 
@@ -48,11 +57,20 @@ export const askQuestionThunk = createAsyncThunk(
   async (questionRequest: QuestionRequest, { dispatch }) => {
     const generator = askQuestion(questionRequest);
     let accumulatedText = "";
+    let lastUpdateTime = Date.now();
+    const UPDATE_INTERVAL = 100; // Update every 100ms
 
     for await (const chunk of generator) {
       accumulatedText += chunk;
-      dispatch(updateCurrentExplanation(accumulatedText));
+
+      const currentTime = Date.now();
+      if (currentTime - lastUpdateTime >= UPDATE_INTERVAL) {
+        dispatch(updateCurrentExplanation(accumulatedText));
+        lastUpdateTime = currentTime;
+      }
     }
+    // Final update to ensure we don't miss the last chunks
+    dispatch(updateCurrentExplanation(accumulatedText));
   }
 );
 
