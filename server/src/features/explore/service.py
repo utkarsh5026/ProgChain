@@ -127,7 +127,7 @@ class ResearchAssistantService:
             del self.assistants[chat_id]
         return deleted
 
-    async def get_all_chats(self):
+    async def get_all_chats(self, limit: int = 10, page: int = 1):
         """
         Retrieve all existing chat sessions.
 

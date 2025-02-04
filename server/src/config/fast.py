@@ -2,7 +2,7 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from features.leetcode import initialize_leetcode
 from contextlib import asynccontextmanager
-from models import init_db
+from .db import init_db
 import os
 from dotenv import load_dotenv
 
