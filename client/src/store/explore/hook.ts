@@ -8,6 +8,7 @@ import {
 } from "./slice";
 import type { Question } from "./type";
 import type { Model } from "@/config/config";
+import { fetchChatHistoryThunk } from "./chatsSlice";
 
 interface UseExploreHook {
   rootQuestion: Question | null;
@@ -101,6 +102,27 @@ const useExplore = (): UseExploreHook => {
     startQuestionFetching,
     getQuestion,
     resetExplore,
+  };
+};
+
+export const useExploreChats = () => {
+  const dispatch = useAppDispatch();
+  const { chats, loading, error } = useAppSelector(
+    (state) => state.exploreChats
+  );
+
+  const fetchChatHistory = useCallback(
+    async (limit: number, page: number) => {
+      await dispatch(fetchChatHistoryThunk({ limit, page }));
+    },
+    [dispatch]
+  );
+
+  return {
+    chats,
+    loading,
+    error,
+    fetchChatHistory,
   };
 };
 

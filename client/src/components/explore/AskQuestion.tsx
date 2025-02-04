@@ -197,7 +197,7 @@ const AskQuestion: React.FC = () => {
           </motion.div>
 
           <div className="mt-12">
-            <RecentConversations chatHistory={[]} />
+            <RecentConversations />
           </div>
         </div>
       </motion.div>

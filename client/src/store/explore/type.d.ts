@@ -22,3 +22,10 @@ export type TopicRequest = {
 export type QuestionRequest = TopicRequest & {
   chat_id: number;
 };
+
+export type ChatBasic = {
+  topic: string;
+  createdAt: string;
+  updatedAt: string;
+  id: number;
+};

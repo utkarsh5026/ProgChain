@@ -7,7 +7,6 @@ import ChatInput from "@/components/explore/ChatInput";
 import { Button } from "@/components/ui/button";
 import MinimapDrawer from "@/components/explore/MiniMapDrawer";
 import { BookOpen, GraduationCap } from "lucide-react";
-import { Model } from "@/store/leetcode/type";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -28,14 +27,8 @@ const itemVariants = {
 };
 
 const Explore: React.FC = () => {
-  const {
-    rootQuestion,
-    currentPath,
-    resetExplore,
-    fetchQuestion,
-    askQuestion,
-    getQuestion,
-  } = useExplore();
+  const { rootQuestion, currentPath, resetExplore, askQuestion, getQuestion } =
+    useExplore();
   const [isResetting, setIsResetting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [activeQuestion, setActiveQuestion] = useState<string | null>(null);

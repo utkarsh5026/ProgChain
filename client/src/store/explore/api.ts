@@ -1,5 +1,5 @@
 import { streamText } from "@/api/stream";
-import { API_BASE_URL } from "@/api/caller";
+import caller, { API_BASE_URL } from "@/api/caller";
 import type { Model } from "@/config/config";
 import type { QuestionRequest } from "./type";
 
@@ -33,4 +33,14 @@ export const askQuestion = async function* (questionRequest: QuestionRequest) {
   for await (const chunk of streamText(url, postBody)) {
     yield chunk;
   }
+};
+
+export const getChatHistory = async (limit: number = 10, page: number = 1) => {
+  const url = `${API_BASE_URL}/explore/chats`;
+  const postBody = {
+    limit: limit,
+    page: page,
+  };
+  const response = await caller.get(url, { params: postBody });
+  return response.data;
 };
