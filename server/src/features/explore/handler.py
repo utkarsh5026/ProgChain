@@ -4,7 +4,6 @@ from fastapi import status, APIRouter, HTTPException
 from fastapi.responses import StreamingResponse
 
 from pydantic import BaseModel, Field
-from .llm import explore_topic as explore_topic_llm
 from config.models import Model
 from .service import ResearchAssistantService, TopicQuestion
 

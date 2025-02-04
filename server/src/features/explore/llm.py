@@ -2,7 +2,6 @@ from typing import AsyncGenerator
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from config.models import Model, get_model
 from langchain_core.output_parsers import StrOutputParser
-from pydantic import BaseModel
 from .vector import VectorStoreManager
 
 
@@ -54,33 +53,3 @@ At the end of your response, always include:
 
     async def clear_history(self):
         await self.vector_store.clear()
-
-
-assistant = ResearchAssistant()
-
-
-async def explore_topic(
-    topic: str,
-    depth: str = "comprehensive",
-    focus_areas: str = "all",
-    model_name: str = Model.GPT_4O.value
-):
-    """
-    Explore a topic in depth with the research assistant, with streaming support
-
-    Args:
-        topic (str): The main topic or question to explore
-        depth (str): Desired depth of exploration
-        focus_areas (str): Specific aspects or areas to focus on
-        model_name (str): The model to use for generation
-
-    Returns:
-        AsyncGenerator: Yields chunks of the response as they become available
-    """
-
-    async for chunk in assistant.generate_answer(
-        message=topic,
-        model=model_name,
-        extra_instructions=f"Depth: {depth}\nFocus Areas: {focus_areas}"
-    ):
-        yield chunk
