@@ -118,7 +118,7 @@ const Explore: React.FC = () => {
         initial="hidden"
         animate="visible"
         exit="exit"
-        className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 pb-32"
+        className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 pb-32 rounded-lg"
       >
         <MinimapDrawer
           isOpen={isMinimapOpen}

@@ -1,7 +1,7 @@
 import React, { useState, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Send, Sparkles, BookOpen } from "lucide-react";
+import { Send, BookOpen } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
 import {
   Select,
@@ -15,6 +15,8 @@ import {
 import { modelDescriptions, type Model } from "@/config/config";
 import PastedContent, { type Content } from "./PastedContent";
 import ModelSelect from "../utils/ModelSelect";
+
+const MAX_INPUT_LENGTH = 1000;
 
 // Define interfaces for better type safety
 interface ChatInputProps {
@@ -119,8 +121,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   const handlePaste = (e: React.ClipboardEvent) => {
     const pastedText = e.clipboardData.getData("text");
-    if (pastedText.length > 100) {
-      // Only create chip for longer content
+    if (pastedText.length > MAX_INPUT_LENGTH) {
       e.preventDefault();
       setPastedContents((prev) => [
         ...prev,

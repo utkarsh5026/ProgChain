@@ -45,7 +45,7 @@ const AskQuestion: React.FC = () => {
         animate="visible"
         exit="exit"
         className="min-h-screen w-full p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] 
-          from-zinc-900 via-zinc-950 to-black"
+          from-zinc-900 via-zinc-950 to-black rounded-lg"
       >
         <div className="fixed inset-0 overflow-hidden pointer-events-none">
           <motion.div
@@ -131,7 +131,6 @@ const AskQuestion: React.FC = () => {
             <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-8 md:p-12">
                 <div className="space-y-6">
-                  {/* Question Input */}
                   <div className="relative">
                     <div className="flex justify-start mb-4">
                       <ModelSelect onModelSelect={setSelectedModel} />
@@ -195,7 +194,6 @@ const AskQuestion: React.FC = () => {
               </CardContent>
             </Card>
           </motion.div>
-
           <div className="mt-12">
             <RecentConversations />
           </div>
