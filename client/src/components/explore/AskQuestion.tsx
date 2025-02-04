@@ -1,33 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useExplore from "../../store/explore/hook";
-import {
-  BrainCircuit,
-  Send,
-  GraduationCap,
-  Blocks,
-  Code,
-  Terminal,
-} from "lucide-react";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { Card, CardContent } from "../ui/card";
+import useExplore from "@/store/explore/hook";
+import { BrainCircuit, Send, GraduationCap, Blocks } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+
 import { cn } from "@/lib/utils";
 import ModelSelect from "@/components/utils/ModelSelect";
 import type { Model } from "@/config/config";
-
-const suggestedQuestions = [
-  {
-    text: "How does React's Virtual DOM work?",
-    icon: Code,
-    category: "React",
-  },
-  {
-    text: "Explain JavaScript closures",
-    icon: Terminal,
-    category: "JavaScript",
-  },
-];
+import RecentConversations from "./RecentConversations";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -45,26 +27,14 @@ const itemVariants = {
   visible: { opacity: 1, y: 0 },
 };
 
-const AskQuestion = () => {
+const AskQuestion: React.FC = () => {
   const [inputQuestion, setInputQuestion] = useState("");
   const [isTyping, setIsTyping] = useState(false);
-  const [showSuggestions, setShowSuggestions] = useState(true);
   const [selectedModel, setSelectedModel] = useState<Model>("gpt-4o-mini");
   const { fetchQuestion } = useExplore();
 
-  useEffect(() => {
-    if (inputQuestion.trim()) {
-      setShowSuggestions(false);
-    } else {
-      setShowSuggestions(true);
-    }
-  }, [inputQuestion]);
-
   const handleAskQuestion = (question = inputQuestion) => {
-    if (question.trim()) {
-      setShowSuggestions(false);
-      fetchQuestion(question);
-    }
+    if (question.trim()) fetchQuestion(question, selectedModel);
   };
 
   return (
@@ -157,16 +127,15 @@ const AskQuestion = () => {
             </p>
           </motion.div>
 
-          <motion.div variants={itemVariants} className="relative">
+          <motion.div variants={itemVariants} className="relative space-y-6">
             <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
               <CardContent className="p-8 md:p-12">
                 <div className="space-y-6">
-                  <div className="flex justify-start mb-4">
-                    <ModelSelect onModelSelect={setSelectedModel} />
-                  </div>
-
                   {/* Question Input */}
                   <div className="relative">
+                    <div className="flex justify-start mb-4">
+                      <ModelSelect onModelSelect={setSelectedModel} />
+                    </div>
                     <div
                       className={cn(
                         "relative rounded-2xl transition-all duration-300",
@@ -221,53 +190,15 @@ const AskQuestion = () => {
                         </Button>
                       </div>
                     </div>
-
-                    {/* Suggestions Popup */}
-                    <AnimatePresence>
-                      {showSuggestions && !inputQuestion && (
-                        <motion.div
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          exit={{ opacity: 0, y: -10 }}
-                          transition={{ duration: 0.2 }}
-                          className="absolute left-0 right-0 mt-4 p-4 bg-zinc-900/95 backdrop-blur-xl 
-                            border border-zinc-800/50 rounded-xl shadow-xl z-10 max-h-[300px] overflow-y-auto"
-                        >
-                          <div className="text-sm text-zinc-500 px-2 pb-2">
-                            Popular questions
-                          </div>
-                          <div className="grid grid-cols-1 gap-3">
-                            {suggestedQuestions.map((question, index) => (
-                              <motion.button
-                                key={index}
-                                whileHover={{ scale: 1.02 }}
-                                whileTap={{ scale: 0.98 }}
-                                onClick={() => handleAskQuestion(question.text)}
-                                className="flex items-center gap-3 p-3 rounded-lg bg-zinc-800/30 
-                                  hover:bg-zinc-800/50 transition-colors duration-200 text-left w-full"
-                              >
-                                {React.createElement(question.icon, {
-                                  className: "w-5 h-5 text-primary shrink-0",
-                                })}
-                                <div className="flex flex-col">
-                                  <span className="text-sm text-zinc-300">
-                                    {question.text}
-                                  </span>
-                                  <span className="text-xs text-zinc-500">
-                                    {question.category}
-                                  </span>
-                                </div>
-                              </motion.button>
-                            ))}
-                          </div>
-                        </motion.div>
-                      )}
-                    </AnimatePresence>
                   </div>
                 </div>
               </CardContent>
             </Card>
           </motion.div>
+
+          <div className="mt-12">
+            <RecentConversations chatHistory={[]} />
+          </div>
         </div>
       </motion.div>
     </AnimatePresence>
