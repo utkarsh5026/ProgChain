@@ -41,13 +41,16 @@ const Sidebar: React.FC = () => {
     {
       key: "/leetcode",
       icon: (
-        <div className="relative w-5 h-5 flex items-center justify-center">
-          <img
-            src="/leetcode.png"
-            alt="Leetcode"
-            className="w-full h-full object-contain"
-          />
-        </div>
+        <img
+          src="https://www.svgrepo.com/show/306328/leetcode.svg"
+          alt="Leetcode"
+          className={cn(
+            "h-5 w-5",
+            location.pathname === "/leetcode"
+              ? "text-primary [&]:brightness-100 [&]:invert-[0.85]"
+              : "text-zinc-400 [&]:brightness-100 [&]:invert-[0.6]"
+          )}
+        />
       ),
       title: "LeetCode",
       description: "Practice coding problems",
