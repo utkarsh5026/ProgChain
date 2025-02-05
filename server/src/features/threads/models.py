@@ -1,7 +1,8 @@
 from config.db import Base, db_session
 from sqlalchemy import Column, String, Integer, ForeignKey, DateTime
 from sqlalchemy.sql import func
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, selectinload
+from sqlalchemy.future import select
 
 
 class Thread(Base):
@@ -102,3 +103,22 @@ async def delete_thread(thread_id: int) -> None:
             await session.flush()
         else:
             raise ValueError(f"Thread with id {thread_id} not found")
+
+
+async def load_thread_with_topics(thread_id: int) -> tuple[str, list]:
+    """
+    Load a thread from the database along with its topics.
+    Returns tuple of (thread_topic, contents)
+    """
+    async with db_session() as session:
+        # Use select with selectinload to eagerly load contents
+        result = await session.execute(
+            select(Thread)
+            .options(selectinload(Thread.contents))
+            .filter(Thread.id == thread_id)
+        )
+        thread = result.scalar_one_or_none()
+        if not thread:
+            raise ValueError(f"Thread with id {thread_id} not found")
+
+        return thread.topic, [content.thread_topic for content in thread.contents]

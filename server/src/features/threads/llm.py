@@ -19,15 +19,25 @@ class ContentGenerator:
     Generates progressive, non-repetitive learning content for any topic.
     """
 
-    def __init__(self, topic: str, batch_size: int = 3) -> None:
+    def __init__(self, topic: str, batch_size: int = 3, previous_concepts: list[str] = []) -> None:
+        """
+        Initialize the ContentGenerator with a topic and previous concepts.
+
+        Args:
+            topic (str): The topic to generate content for.
+            batch_size (int): The number of content chunks to generate at a time.
+            previous_concepts (list[str]): A list of previously generated concepts.
+        """
         self.topic = topic
         self.batch_size = batch_size
-        self.previous_concepts: set[str] = set()
+        self.previous_concepts: list[str] = previous_concepts
+
         self.content_prompt = ChatPromptTemplate.from_template("""
         You are an expert educator creating engaging learning content about {topic}.
         Previous concepts covered: {previous_concepts}
         Current exploration depth: {depth_level}
         Focus area: {focus_area}
+
 
         Generate new, unique content that builds upon previous knowledge while introducing fresh concepts.
         Ensure the content:
@@ -116,11 +126,12 @@ class ContentGenerator:
 
         for i in range(self.batch_size):
             try:
+                print(f"Loaded previous concepts: {self.previous_concepts}")
                 chain = self.content_prompt | get_model(
                     model) | StrOutputParser()
                 content = await chain.ainvoke({
                     "topic": self.topic,
-                    "previous_concepts": list(self.previous_concepts),
+                    "previous_concepts": self.previous_concepts,
                     "depth_level": depth_level,
                     "focus_area": focus_area
                 }, callbacks=[callback_handler] if callback_handler else None)
@@ -132,7 +143,7 @@ class ContentGenerator:
                     topic_content=content,
                     current_idx=current_idx + i
                 )
-                self.previous_concepts.add(concept)
+                self.previous_concepts.append(concept)
 
             except Exception as e:
                 print(f"Error generating content batch {i}: {str(e)}")

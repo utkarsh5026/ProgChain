@@ -48,9 +48,6 @@ async def create_thread_and_generate_content(request: ThreadCreateRequest):
 async def generate_content(request: ThreadGetRequest):
     thread_id, model, extra_instructions = request.thread_id, request.model, request.extra_instructions
 
-    if thread_id not in ts.threads:
-        raise HTTPException(status_code=404, detail="Thread not found")
-
     async def stream_content():
         async for content in ts.generate_content(ThreadGenerate(thread_id=thread_id,
                                                                 model=model, extra_instructions=extra_instructions)):
