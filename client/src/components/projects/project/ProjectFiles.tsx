@@ -75,7 +75,7 @@ const ProjectFiles: React.FC = () => {
   );
 
   return (
-    <Card className="w-96 bg-gradient-to-b from-black/40 to-black/60 border-zinc-800/50 backdrop-blur-2xl overflow-hidden shadow-2xl">
+    <Card className="w-full bg-gradient-to-b from-black/40 to-black/60 border-zinc-800/50 backdrop-blur-2xl overflow-hidden shadow-2xl">
       <CardContent className="p-6 h-[480px] flex flex-col">
         {/* Header Section */}
         <div className="flex items-center justify-between mb-6">
