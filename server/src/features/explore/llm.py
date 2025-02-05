@@ -8,10 +8,10 @@ from .vector import VectorStoreManager
 class ResearchAssistant:
     """
     ResearchAssistant is an advanced tool for deep technical exploration.
-    
+
     It helps users understand complex technical topics by providing clear, detailed, and accurate explanations,
     along with thought-provoking follow-up questions to deepen understanding.
-    
+
     The assistant uses a chat prompt template combined with contextual history from its vector store to generate
     informative and well-structured responses.
     """
@@ -36,12 +36,12 @@ At the end of your response, always include:
     def __init__(self) -> None:
         """
         Initialize the ResearchAssistant instance.
-        
+
         Sets up the chat prompt template, which includes:
           - A system message defining the assistant's behavior.
           - A placeholder for the user's input.
           - A placeholder for relevant conversation history.
-          
+
         Also initializes the vector store manager to handle historical interactions.
         """
         self.chat_prompt = ChatPromptTemplate.from_messages([
@@ -54,27 +54,25 @@ At the end of your response, always include:
     async def generate_answer(self, message: str, model: str = Model.GPT_4O.value, extra_instructions: str = "") -> AsyncGenerator[str, None]:
         """
         Generate an answer for a given question with optional extra instructions.
-        
+
         This method performs the following steps:
           1. Composes a formatted input by combining the question and any extra instructions.
           2. Retrieves relevant conversation history from the vector store.
           3. Constructs a chain by combining the chat prompt, the selected model, and an output parser.
           4. Streams response chunks asynchronously while accumulating the full response.
           5. Saves the complete interaction to the vector store.
-        
+
         Parameters:
           message: The user's question or prompt.
           model: The language model to use for generating the answer (defaults to GPT_4O).
           extra_instructions: Additional instructions to tailor the response.
-          
+
         Returns:
           An asynchronous generator that yields parts of the generated answer as they are produced.
         """
         chain = self.chat_prompt | get_model(model) | StrOutputParser()
         formatted_input = f"Question: {message}\n{extra_instructions}"
         relevant_history = await self.vector_store.get_relevant_history(formatted_input)
-
-        print("relevant_history", relevant_history)
 
         response_chunks = []
 
@@ -91,7 +89,7 @@ At the end of your response, always include:
     async def clear_history(self):
         """
         Clear all stored conversation history.
-        
+
         This method deletes all previous interactions from the vector store,
         effectively resetting the assistant's memory.
         """
