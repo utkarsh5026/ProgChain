@@ -124,7 +124,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
               animate="visible"
               className="space-y-6"
             >
-              <div className="bg-zinc-800/20 backdrop-blur-sm rounded-lg p-6 border border-zinc-800/50 shadow-inner">
+              <div className="bg-zinc-900 backdrop-blur-sm rounded-lg p-6shadow-inner">
                 <div className="flex items-center justify-between mb-4">
                   <div className="flex items-center gap-2">
                     <Lightbulb className="h-5 w-5 text-primary" />

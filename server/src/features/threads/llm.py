@@ -1,35 +1,14 @@
 from pydantic import BaseModel, Field
 from config.models import get_model, Model
 from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import PydanticOutputParser
-from datetime import datetime
+from langchain_core.output_parsers import StrOutputParser
 from typing import AsyncGenerator
 
 
-class LearningContent(BaseModel):
-    """
-    Universal structure for learning content, adaptable to any topic.
-    """
-    content_id: str = Field(
-        description="Unique identifier for this content piece")
-    title: str = Field(
-        description="Specific concept or topic being covered")
-
-    depth_level: str = Field(
-        description="Current depth of exploration in the topic")
-    core_concept: str = Field(
-        description="The fundamental idea being explored")
-    detailed_explanation: str = Field(
-        description="Comprehensive explanation of the concept")
-
-    practical_example: str = Field(
-        description="Real-world example or demonstration")
-    deeper_insights: list[str] = Field(
-        description="Advanced observations and connections")
-    practical_applications: list[str] = Field(
-        description="Ways to apply this knowledge")
-    next_concepts: list[str] = Field(
-        description="Related concepts to explore next")
+class TopicGenerate(BaseModel):
+    topic_content: str = Field(
+        description="The topic content to generate content for")
+    current_idx: int = Field(description="The current index of the content")
 
 
 class ContentGenerator:
@@ -59,18 +38,28 @@ class ContentGenerator:
         - Application: Focus on practical usage and real-world applications
         - Innovation: Explore advanced applications and creative combinations
 
-        Provide your response in this JSON format:
-        {{
-            "content_id": "unique_identifier_string",
-            "title": "Specific concept being covered",
-            "depth_level": "{depth_level}",
-            "core_concept": "Central idea being explored",
-            "detailed_explanation": "Comprehensive explanation in user friendly manner in absolute detail (keep it technical and detailed)",
-            "practical_example": "Concrete example or demonstration",
-            "deeper_insights": ["Key insights and observations"],
-            "practical_applications": ["Real-world applications"],
-            "next_concepts": ["Related concepts to explore"]
-        }}
+        Structure your response in markdown format with the following sections:
+        # [Title: Specific concept being covered]
+        ## Core Concept
+        [Central idea being explored]
+        
+        ## Detailed Explanation
+        [Comprehensive technical explanation with detailed insights]
+        
+        ## Practical Example
+        [Concrete example or demonstration]
+        
+        ## Key Insights
+        - [Important observation 1]
+        - [Important observation 2]
+        
+        ## Practical Applications
+        - [Real-world application 1]
+        - [Real-world application 2]
+        
+        ## Related Concepts to Explore
+        - [Next concept 1]
+        - [Next concept 2]
 
         Ensure all content is fresh and builds naturally from what's been covered.
         """)
@@ -95,14 +84,15 @@ class ContentGenerator:
             return "practical_usage"
         return "advanced_applications"
 
-    def generate_content(self, topic: str, depth_level: str, model: str = Model.GPT_4O_MINI.value) -> LearningContent:
+    def generate_content(self, topic: str, depth_level: str, model: str = Model.GPT_4O_MINI.value) -> str:
         print(f"Generating content for {topic} at depth {depth_level}")
         print(f"Previous concepts: {self.previous_concepts}")
         try:
 
             focus_area = self.__get_focus_area(depth_level)
-            parser = PydanticOutputParser(pydantic_object=LearningContent)
+            parser = StrOutputParser()
             chain = self.content_prompt | get_model(model) | parser
+
             content = chain.invoke(
                 {"topic": topic,
                  "previous_concepts": self.previous_concepts,
@@ -112,10 +102,12 @@ class ContentGenerator:
         except Exception as e:
             raise e
 
-    async def generate_content_stream(self, topic: str, current_idx: int, model: str = Model.GPT_4O_MINI.value) -> AsyncGenerator[LearningContent, None]:
+    async def generate_content_stream(self, topic: str, current_idx: int, model: str = Model.GPT_4O_MINI.value) -> AsyncGenerator[TopicGenerate, None]:
         batch_size = 3
         depth_level = self.determine_depth_level(current_idx)
-        for _ in range(batch_size):
+        for i in range(batch_size):
             content = self.generate_content(topic, depth_level, model)
-            self.previous_concepts.add(content.core_concept)
-            yield content
+            core_concept = content.split("## Core Concept")[
+                1].split("##")[0].strip()
+            self.previous_concepts.add(core_concept)
+            yield TopicGenerate(topic_content=content, current_idx=current_idx + i)
