@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Book, Users, Compass, GraduationCap, Code } from "lucide-react";
+import { Book, Users, Compass, GraduationCap, Code, Dna } from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -60,6 +60,12 @@ const Sidebar: React.FC = () => {
       icon: <Code className="h-5 w-5" />,
       title: "Projects",
       description: "Showcase your projects",
+    },
+    {
+      key: "/threads",
+      icon: <Dna className="h-5 w-5" />,
+      title: "Threads",
+      description: "Share your thoughts",
     },
   ];
 
