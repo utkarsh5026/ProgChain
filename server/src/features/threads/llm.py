@@ -2,10 +2,13 @@ from pydantic import BaseModel, Field
 from config.models import get_model, Model
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from typing import AsyncGenerator
+from typing import AsyncGenerator, Optional
+from functools import lru_cache
+from langchain_core.callbacks import AsyncCallbackHandler
 
 
 class TopicGenerate(BaseModel):
+    topic: str = Field(description="The topic to generate content for")
     topic_content: str = Field(
         description="The topic content to generate content for")
     current_idx: int = Field(description="The current index of the content")
@@ -16,7 +19,9 @@ class ContentGenerator:
     Generates progressive, non-repetitive learning content for any topic.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, topic: str, batch_size: int = 3) -> None:
+        self.topic = topic
+        self.batch_size = batch_size
         self.previous_concepts: set[str] = set()
         self.content_prompt = ChatPromptTemplate.from_template("""
         You are an expert educator creating engaging learning content about {topic}.
@@ -38,6 +43,7 @@ class ContentGenerator:
         - Application: Focus on practical usage and real-world applications
         - Innovation: Explore advanced applications and creative combinations
 
+        Use Proper and correct markdown format for the content
         Structure your response in markdown format with the following sections:
         # [Title: Specific concept being covered]
         ## Core Concept
@@ -64,8 +70,9 @@ class ContentGenerator:
         Ensure all content is fresh and builds naturally from what's been covered.
         """)
 
+    @lru_cache(maxsize=32)
     def determine_depth_level(self, index: int) -> str:
-        """Maps content index to appropriate depth level."""
+        """Cache depth level calculations since they're deterministic"""
         if index < 10:
             return "Foundation"
         elif index < 20:
@@ -84,30 +91,49 @@ class ContentGenerator:
             return "practical_usage"
         return "advanced_applications"
 
-    def generate_content(self, topic: str, depth_level: str, model: str = Model.GPT_4O_MINI.value) -> str:
-        print(f"Generating content for {topic} at depth {depth_level}")
-        print(f"Previous concepts: {self.previous_concepts}")
+    def _extract_concept(self, content: str) -> str:
+        """Extract concept title from content more reliably"""
         try:
+            lines = content.split('\n')
+            for line in lines:
+                if line.startswith('# '):
+                    return line.replace('# ', '').strip()
+            return "Untitled Concept"
+        except Exception:
+            return "Untitled Concept"
 
-            focus_area = self.__get_focus_area(depth_level)
-            parser = StrOutputParser()
-            chain = self.content_prompt | get_model(model) | parser
-
-            content = chain.invoke(
-                {"topic": topic,
-                 "previous_concepts": self.previous_concepts,
-                 "depth_level": depth_level,
-                 "focus_area": focus_area})
-            return content
-        except Exception as e:
-            raise e
-
-    async def generate_content_stream(self, topic: str, current_idx: int, model: str = Model.GPT_4O_MINI.value) -> AsyncGenerator[TopicGenerate, None]:
-        batch_size = 3
+    async def generate_content_stream(
+        self,
+        current_idx: int,
+        model: str = Model.GPT_4O_MINI.value,
+        callback_handler: Optional[AsyncCallbackHandler] = None
+    ) -> AsyncGenerator[TopicGenerate, None]:
+        """
+        Generate content stream with improved error handling and optional callback
+        """
         depth_level = self.determine_depth_level(current_idx)
-        for i in range(batch_size):
-            content = self.generate_content(topic, depth_level, model)
-            core_concept = content.split("## Core Concept")[
-                1].split("##")[0].strip()
-            self.previous_concepts.add(core_concept)
-            yield TopicGenerate(topic_content=content, current_idx=current_idx + i)
+        focus_area = self.__get_focus_area(depth_level)
+
+        for i in range(self.batch_size):
+            try:
+                chain = self.content_prompt | get_model(
+                    model) | StrOutputParser()
+                content = await chain.ainvoke({
+                    "topic": self.topic,
+                    "previous_concepts": list(self.previous_concepts),
+                    "depth_level": depth_level,
+                    "focus_area": focus_area
+                }, callbacks=[callback_handler] if callback_handler else None)
+
+                concept = self._extract_concept(content)
+
+                yield TopicGenerate(
+                    topic=concept,
+                    topic_content=content,
+                    current_idx=current_idx + i
+                )
+                self.previous_concepts.add(concept)
+
+            except Exception as e:
+                print(f"Error generating content batch {i}: {str(e)}")
+                continue

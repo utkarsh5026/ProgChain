@@ -72,6 +72,7 @@ zstandard = "0.23.0"
 langchain-community = "^0.3.16"
 faiss-cpu = "^1.9.0.post1"
 langgraph = "^0.2.69"
+aiosqlite = "^0.21.0"
 
 [tool.poetry.dev-dependencies]
 
