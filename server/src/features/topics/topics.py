@@ -1,12 +1,20 @@
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import JsonOutputParser
-from config.models import Model, get_model
-from .lang import TopicsManager
 import json
-from typing import AsyncGenerator
+import logging
+from typing import AsyncGenerator, Optional
+
+from langchain_core.prompts import ChatPromptTemplate
+from config.models import Model, get_model
+from decode import decode_json
+from .lang import TopicsManager
+
+# Configure logging
+logger = logging.getLogger(__name__)
+
+# Constants
+DIFFICULTY_DELIMITER = "###DIFFICULTY_END###"
+VALID_DIFFICULTIES = {"Beginner", "Intermediate", "Advanced"}
 
 manager = TopicsManager()
-DIFFICULTY_DELIMITER = "###DIFFICULTY_END###"
 
 topic_generator_template = ChatPromptTemplate.from_messages([
     ("system", """You are an expert at creating comprehensive programming topic hierarchies.
@@ -21,7 +29,7 @@ topic_generator_template = ChatPromptTemplate.from_messages([
     4. Include both breadth and depth of knowledge
 
     For each difficulty level, output a JSON object followed by "###DIFFICULTY_END###" delimiter.
-    Generate at least 6 topics for each difficulty level in this format:
+    Generate at least 1 topics for each difficulty level in this format:
 
     {{"difficulty": "Beginner", "topics": [
         {{"topic": "Topic Name", "description": "Topic Description"}},
@@ -44,57 +52,93 @@ topic_generator_template = ChatPromptTemplate.from_messages([
 ])
 
 
-def parse_json(chunk: str) -> dict | None:
-    start = chunk.find('{')
-    end = chunk.rfind('}')
-    if start == -1 or end == -1:
-        raise ValueError("Invalid JSON")
-    json_str = chunk[start:end + 1]
-    return json.loads(json_str)
+async def parse_chunk(chunk: str) -> Optional[dict]:
+    """
+    Parse a chunk of text containing topic information in JSON format.
 
+    Args:
+        chunk (str): Raw text chunk containing JSON data and difficulty delimiter
 
-async def parse_chunk(chunk: str) -> dict | None:
+    Returns:
+        Optional[dict]: Parsed topics dictionary in format {difficulty: [topics]} or None if parsing fails
+    """
     try:
         if DIFFICULTY_DELIMITER not in chunk:
             return None
+
         json_str = chunk.split(DIFFICULTY_DELIMITER)[0].strip()
-        parsed = parse_json(json_str)
+        parsed = decode_json(json_str)
+
+        if not all(key in parsed for key in ["difficulty", "topics"]):
+            logger.warning(f"Missing required fields in parsed JSON: {parsed}")
+            return None
+
         difficulty, topics = parsed["difficulty"], parsed["topics"]
 
-        return {
-            difficulty: topics
-        }
-    except ValueError:
-        print(chunk)
+        if difficulty not in VALID_DIFFICULTIES:
+            logger.warning(f"Invalid difficulty level: {difficulty}")
+            return None
+
+        for topic in topics:
+            if not all(key in topic for key in ["topic", "description"]):
+                logger.warning(f"Invalid topic structure: {topic}")
+                return None
+
+        return {difficulty: topics}
+
+    except ValueError as e:
+        logger.error(f"Failed to parse chunk: {e}\nChunk content: {chunk}")
+        return None
+    except Exception as e:
+        logger.error(f"Unexpected error parsing chunk: {e}")
         return None
 
 
-async def generate_topics(path: list[str], model_name: Model = Model.GPT_4O_MINI) -> AsyncGenerator[dict, None]:
-    if path is None or len(path) == 0:
-        raise ValueError("Path is required")
+async def generate_topics(
+    path: list[str],
+    model_name: Model = Model.GPT_4O_MINI,
+) -> AsyncGenerator[dict, None]:
+    """
+    Generate programming topics based on the given path hierarchy.
 
-    llm = get_model(model_name)
-    context = '>'.join(path)
-    current_topic = path[-1]
-    explored = ""
+    Args:
+        path (list[str]): Hierarchical path of topics
+        model_name (Model): Language model to use for generation
+        output_file (str): Path to save the generated topics JSON
+        debug_file (str): Path to save raw model output for debugging
 
-    chain = topic_generator_template | llm
-    with open("topics.json", "w") as f:
-        f.write("")
+    Yields:
+        dict: Generated topics grouped by difficulty level
 
-    buffer = ""
-    async for chunk in chain.astream({"current_topic": current_topic,
-                                      "context": context,
-                                      "explored_topics": explored}):
+    Raises:
+        ValueError: If path is empty or invalid
+    """
+    # Validate input
+    if not path:
+        raise ValueError("Path cannot be empty")
 
-        buffer += chunk.content
-        with open("topics.txt", "a") as f:
-            f.write(chunk.content)
-        if parsed := await parse_chunk(buffer):
-            with open("topics.json", "a") as f:
-                f.write(json.dumps(parsed))
-                f.write("\n")
-            difficulty_end_pos = buffer.find(
-                DIFFICULTY_DELIMITER) + len(DIFFICULTY_DELIMITER)
-            buffer = buffer[difficulty_end_pos:] if difficulty_end_pos > -1 else buffer
-            yield parsed
+    try:
+        llm = get_model(model_name)
+        context = '>'.join(path)
+        current_topic = path[-1]
+        explored = ""  # TODO: Implement explored topics tracking
+
+        chain = topic_generator_template | llm
+
+        buffer = ""
+        async for chunk in chain.astream({
+            "current_topic": current_topic,
+            "context": context,
+            "explored_topics": explored
+        }):
+            buffer += chunk.content
+            if parsed := await parse_chunk(buffer):
+                difficulty_end_pos = buffer.find(
+                    DIFFICULTY_DELIMITER) + len(DIFFICULTY_DELIMITER)
+                buffer = buffer[difficulty_end_pos:] if difficulty_end_pos > -1 else buffer
+
+                yield parsed
+
+    except Exception as e:
+        logger.error(f"Error generating topics: {e}")
+        raise
