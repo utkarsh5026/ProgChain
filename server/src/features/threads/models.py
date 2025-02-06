@@ -122,3 +122,45 @@ async def load_thread_with_topics(thread_id: int) -> tuple[str, list]:
             raise ValueError(f"Thread with id {thread_id} not found")
 
         return thread.topic, [content.thread_topic for content in thread.contents]
+
+
+async def get_all_threads() -> list[dict]:
+    """
+    Get all threads from the database.
+
+    Returns:
+        list[dict]: A list of dictionaries containing thread information (id, topic, contents_cnt)
+    """
+    async with db_session() as session:
+        result = await session.execute(select(Thread))
+        threads = result.scalars().all()
+        return [
+            {
+                "id": thread.id,
+                "topic": thread.topic,
+                "contents_cnt": thread.contents_cnt
+            }
+            for thread in threads
+        ]
+
+
+async def get_thread_contents(thread_id: int) -> list[dict]:
+    """
+    Get all contents for a given thread.
+    """
+    async with db_session() as session:
+        result = await session.execute(
+            select(ThreadContent)
+            .options(selectinload(ThreadContent.thread))
+            .filter(ThreadContent.thread_id == thread_id)
+        )
+        contents = result.scalars().all()
+        return [
+            {
+                "id": content.id,
+                "content": content.content,
+                "created_at": content.created_at,
+                "thread_topic": content.thread_topic
+            }
+            for content in contents
+        ]

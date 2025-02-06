@@ -3,9 +3,10 @@ from typing import Optional, AsyncGenerator
 from pydantic import BaseModel, Field
 from config.models import Model
 from asyncio import Queue, Lock
-from .models import create_thread, create_content, load_thread_with_topics
-from sqlalchemy.orm import selectinload
-from sqlalchemy.future import select
+from .models import (create_thread, create_content,
+                     load_thread_with_topics,
+                     get_all_threads, get_thread_contents
+                     )
 
 
 class ThreadGenerate(BaseModel):
@@ -195,3 +196,15 @@ class ThreadService:
         )
         async for content in self.generate_content(thread_generate):
             yield content
+
+    async def get_all_threads(self) -> list[Thread]:
+        """
+        Get all threads from the database.
+        """
+        return await get_all_threads()
+
+    async def get_thread_contents(self, thread_id: int) -> list[dict]:
+        """
+        Get all contents for a given thread.
+        """
+        return await get_thread_contents(thread_id)

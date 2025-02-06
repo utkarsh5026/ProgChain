@@ -1,4 +1,4 @@
-from fastapi import APIRouter, HTTPException
+from fastapi import APIRouter, HTTPException, status
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
 from typing import Optional
@@ -34,8 +34,27 @@ class ThreadGetRequest(BaseThreadRequest):
     )
 
 
+@router.get("/")
+async def get_all_threads():
+    try:
+        return await ts.get_all_threads()
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@router.get("/{thread_id}")
+async def get_thread_contents(thread_id: int):
+    try:
+        return await ts.get_thread_contents(thread_id)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
 @router.post("/create")
 async def create_thread_and_generate_content(request: ThreadCreateRequest):
+
     topic, model, extra_instructions = request.topic, request.model, request.extra_instructions
 
     async def stream_content():
