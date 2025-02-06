@@ -1,6 +1,11 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { createThreadThunk, generateThreadThunk, resetThread } from "./slice";
+import {
+  createThreadThunk,
+  fetchThreadThunk,
+  generateThreadThunk,
+  resetThread,
+} from "./slice";
 import type { BaseLLMRequest } from "@/base";
 
 const useThreads = () => {
@@ -30,11 +35,19 @@ const useThreads = () => {
     dispatch(resetThread());
   }, [dispatch]);
 
+  const fetchThread = useCallback(
+    (threadID: number) => {
+      dispatch(fetchThreadThunk(threadID));
+    },
+    [dispatch]
+  );
+
   return {
     thread,
     creating,
     generating,
     createThread,
+    fetchThread,
     fetchMoreContent,
     reset,
   };

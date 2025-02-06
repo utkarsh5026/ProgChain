@@ -58,3 +58,27 @@ export const generateThread = async function* (
     yield parseContent(content);
   }
 };
+
+export const fetchThread = async (
+  threadID: number
+): Promise<{
+  threadID: number;
+  contents: LearningContent[];
+}> => {
+  const response = await fetch(`${BASE_THREAD_URL}/${threadID}`);
+  const data = await response.json();
+  console.log(data);
+  return {
+    threadID,
+    contents: data.map((content: any) => ({
+      id: content.id,
+      topic: content.topic,
+      content: content.content,
+    })),
+  };
+};
+
+export const getAllThreads = async () => {
+  const response = await fetch(`${BASE_THREAD_URL}`);
+  return response.json();
+};

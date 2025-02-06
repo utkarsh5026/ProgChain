@@ -6,6 +6,7 @@ import problemListSlice from "./leetcode/slice";
 import problemSlice from "./leetcode/problemSlice";
 import chatsSlice from "./explore/chatsSlice";
 import threadsSlice from "./threads/slice";
+import chatInputSlice from "./chat-input/slice";
 
 export const store = configureStore({
   reducer: {
@@ -16,6 +17,7 @@ export const store = configureStore({
     problem: problemSlice,
     exploreChats: chatsSlice,
     threads: threadsSlice,
+    chatInput: chatInputSlice,
   },
 });
 

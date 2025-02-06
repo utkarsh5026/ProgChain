@@ -3,6 +3,7 @@ import type { Thread, LearningContent } from "./types";
 import {
   createThread,
   generateThread,
+  fetchThread,
   type ThreadCreateRequest,
   type ThreadGenerateRequest,
 } from "./api";
@@ -47,6 +48,22 @@ export const generateThreadThunk = createAsyncThunk(
   }
 );
 
+export const fetchThreadThunk = createAsyncThunk(
+  "threads/fetchThread",
+  async (threadID: number, { dispatch }) => {
+    const thread = await fetchThread(threadID);
+    const { contents } = thread;
+    dispatch(
+      initThread({
+        threadID,
+        mainTopic: contents[0].topic,
+        currentIdx: 0,
+        content: contents,
+      })
+    );
+  }
+);
+
 const initialState: ThreadState = {
   thread: null,
   creating: op(null),
@@ -85,6 +102,7 @@ const threadsSlice = createSlice({
     builder.addCase(createThreadThunk.rejected, (state, action) => {
       state.creating = op("rejected", action.error.message ?? null);
     });
+
     builder.addCase(generateThreadThunk.pending, (state) => {
       state.generating = op("pending");
     });
@@ -92,6 +110,19 @@ const threadsSlice = createSlice({
       state.generating = op("fulfilled");
     });
     builder.addCase(generateThreadThunk.rejected, (state, action) => {
+      state.generating = op("rejected", action.error.message ?? null);
+    });
+
+    builder.addCase(fetchThreadThunk.pending, (state) => {
+      state.creating = op("pending");
+      state.generating = op("pending");
+    });
+    builder.addCase(fetchThreadThunk.fulfilled, (state) => {
+      state.creating = op("fulfilled");
+      state.generating = op("fulfilled");
+    });
+    builder.addCase(fetchThreadThunk.rejected, (state, action) => {
+      state.creating = op("rejected", action.error.message ?? null);
       state.generating = op("rejected", action.error.message ?? null);
     });
   },
