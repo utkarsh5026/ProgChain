@@ -6,11 +6,11 @@ import remarkMath from "remark-math";
 import remarkGfm from "remark-gfm";
 import "katex/dist/katex.min.css";
 import "highlight.js/styles/github-dark.css";
-import { Card } from "@/components/ui/card";
 import { useToast } from "@/hooks/use-toast";
 
 import MarkDownTable from "./Table";
 import CodeSegment from "./CodeSegment";
+import HoverableContentWrapper from "./HoverableContentWrapper";
 
 interface MarkdownProps {
   content: string;
@@ -55,34 +55,47 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
         components={{
           // Headers with softer contrast and better spacing
           h1: ({ node, ...props }) => (
-            <h1
-              {...props}
-              className="scroll-m-20 text-4xl font-bold tracking-tight text-zinc-100 mt-8 mb-6"
-            />
-          ),
-          h2: ({ node, ...props }) => (
-            <h2
-              {...props}
-              className="scroll-m-20 text-3xl font-semibold tracking-tight text-zinc-200 mt-12 mb-6"
-            />
-          ),
-          h3: ({ node, ...props }) => (
-            <h3
-              {...props}
-              className="scroll-m-20 text-2xl font-semibold tracking-tight text-zinc-300 mt-6 mb-4"
-            />
-          ),
-          h4: ({ node, ...props }) => (
-            <h4
-              {...props}
-              className="scroll-m-20 text-xl font-medium tracking-tight text-zinc-300 mt-6 mb-4"
-            />
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <h1
+                {...props}
+                className="scroll-m-20 text-4xl font-bold tracking-tight text-zinc-100 mt-8 mb-6"
+              />
+            </HoverableContentWrapper>
           ),
 
-          // Paragraphs and text with gentler colors
-          p: ({ node, ...props }) => (
-            <p {...props} className="leading-7 text-zinc-400 mb-6" />
+          h2: ({ node, ...props }) => (
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <h2
+                {...props}
+                className="scroll-m-20 text-3xl font-semibold tracking-tight text-zinc-200 mt-12 mb-6"
+              />
+            </HoverableContentWrapper>
           ),
+
+          h3: ({ node, ...props }) => (
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <h3
+                {...props}
+                className="scroll-m-20 text-2xl font-semibold tracking-tight text-zinc-300 mt-6 mb-4"
+              />
+            </HoverableContentWrapper>
+          ),
+
+          h4: ({ node, ...props }) => (
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <h4
+                {...props}
+                className="scroll-m-20 text-xl font-medium tracking-tight text-zinc-300 mt-6 mb-4"
+              />
+            </HoverableContentWrapper>
+          ),
+
+          p: ({ node, ...props }) => (
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <p {...props} className="leading-7 text-zinc-400 mb-6" />
+            </HoverableContentWrapper>
+          ),
+
           strong: ({ node, ...props }) => (
             <strong {...props} className="font-medium text-zinc-200" />
           ),
@@ -93,17 +106,20 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
           ul: ({ node, ...props }) => (
             <ul
               {...props}
-              className="my-6 ml-6 list-disc space-y-3 text-zinc-400"
+              className="my-8 ml-6 list-disc space-y-3 text-zinc-400"
             />
           ),
+
           ol: ({ node, ...props }) => (
             <ol
               {...props}
-              className="my-6 ml-6 list-decimal space-y-3 text-zinc-400"
+              className="my-8 ml-6 list-decimal space-y-3 text-zinc-400"
             />
           ),
           li: ({ node, ...props }) => (
-            <li {...props} className="leading-7 text-zinc-400" />
+            <HoverableContentWrapper content={extractText(props.children)}>
+              <li {...props} className="leading-7 text-zinc-400" />
+            </HoverableContentWrapper>
           ),
 
           // Links and blockquotes with gentler styling
