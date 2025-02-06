@@ -1,63 +1,102 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import type { Thread, ThreadTopicRequest, LearningContent } from "./types";
-import { getThreadContent } from "./api";
+import type { Thread, LearningContent } from "./types";
+import {
+  createThread,
+  generateThread,
+  type ThreadCreateRequest,
+  type ThreadGenerateRequest,
+} from "./api";
+import { type Operation, op } from "@/base";
 
 interface ThreadState {
   thread: Thread | null;
-  loading: boolean;
-  error: string | null;
+  creating: Operation;
+  generating: Operation;
 }
 
-export const fetchThreadContentThunk = createAsyncThunk(
-  "threads/fetchThreadContent",
-  async (request: ThreadTopicRequest, { dispatch }) => {
-    const generator = getThreadContent(request);
-    for await (const content of generator) {
-      console.log(content);
+export const createThreadThunk = createAsyncThunk(
+  "threads/createThread",
+  async (request: ThreadCreateRequest, { dispatch }) => {
+    const generator = createThread(request);
+    let threadCreated = false;
+    for await (const threadContent of generator) {
+      const { threadID, content } = threadContent;
+      if (!threadCreated) {
+        dispatch(
+          initThread({
+            threadID,
+            mainTopic: content.topic,
+            currentIdx: 0,
+            content: [],
+          })
+        );
+        threadCreated = true;
+      }
       dispatch(appendContent(content));
+    }
+  }
+);
+
+export const generateThreadThunk = createAsyncThunk(
+  "threads/generateThread",
+  async (request: ThreadGenerateRequest, { dispatch }) => {
+    const generator = generateThread(request);
+    for await (const content of generator) {
+      dispatch(appendContent(content.content));
     }
   }
 );
 
 const initialState: ThreadState = {
   thread: null,
-  loading: false,
-  error: null,
+  creating: op(null),
+  generating: op(null),
 };
 
 const threadsSlice = createSlice({
   name: "threads",
   initialState,
   reducers: {
-    intiThread(state, action: PayloadAction<string>) {
-      state.thread = {
-        mainTopic: action.payload,
-        currentIdx: 0,
-        content: [],
-      };
+    initThread(state, action: PayloadAction<Thread>) {
+      state.thread = action.payload;
+      state.creating = op("fulfilled");
     },
     appendContent(state, action: PayloadAction<LearningContent>) {
       if (state.thread) {
-        state.loading = false;
         state.thread.content.push(action.payload);
         state.thread.currentIdx += 1;
       }
     },
+    resetThread(state) {
+      state.thread = null;
+      state.creating = op(null);
+      state.generating = op(null);
+    },
   },
   extraReducers: (builder) => {
-    builder.addCase(fetchThreadContentThunk.pending, (state) => {
-      state.loading = true;
+    builder.addCase(createThreadThunk.pending, (state) => {
+      state.creating = op("pending");
+      state.generating = op("pending");
     });
-    builder.addCase(fetchThreadContentThunk.fulfilled, (state) => {
-      state.loading = false;
+    builder.addCase(createThreadThunk.fulfilled, (state) => {
+      state.creating = op("fulfilled");
+      state.generating = op("fulfilled");
     });
-    builder.addCase(fetchThreadContentThunk.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? null;
+    builder.addCase(createThreadThunk.rejected, (state, action) => {
+      state.creating = op("rejected", action.error.message ?? null);
+    });
+    builder.addCase(generateThreadThunk.pending, (state) => {
+      state.generating = op("pending");
+    });
+    builder.addCase(generateThreadThunk.fulfilled, (state) => {
+      state.generating = op("fulfilled");
+    });
+    builder.addCase(generateThreadThunk.rejected, (state, action) => {
+      state.generating = op("rejected", action.error.message ?? null);
     });
   },
 });
 
-export const { intiThread, appendContent } = threadsSlice.actions;
+export const { initThread, appendContent, resetThread } = threadsSlice.actions;
 
 export default threadsSlice.reducer;

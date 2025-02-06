@@ -1,27 +1,43 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
-import { fetchThreadContentThunk, intiThread } from "./slice";
+import { createThreadThunk, generateThreadThunk, resetThread } from "./slice";
+import type { BaseLLMRequest } from "@/base";
 
 const useThreads = () => {
   const dispatch = useAppDispatch();
-  const { thread, loading, error } = useAppSelector((state) => state.threads);
-
-  const fetchThreadContent = useCallback(
-    (topic: string) => {
-      const idx = thread?.content.length ?? 0;
-      dispatch(fetchThreadContentThunk({ topic, currentIdx: idx }));
-    },
-    [dispatch, thread?.content]
+  const { thread, creating, generating } = useAppSelector(
+    (state) => state.threads
   );
 
-  const initThread = useCallback(
-    (topic: string) => {
-      dispatch(intiThread(topic));
+  const createThread = useCallback(
+    (topic: string, options: Partial<BaseLLMRequest>) => {
+      dispatch(createThreadThunk({ topic, ...options }));
     },
     [dispatch]
   );
 
-  return { thread, loading, error, fetchThreadContent, initThread };
+  const fetchMoreContent = useCallback(
+    (options: Partial<BaseLLMRequest>) => {
+      if (!thread) return;
+
+      const threadID = thread.threadID;
+      dispatch(generateThreadThunk({ threadID, ...options }));
+    },
+    [dispatch]
+  );
+
+  const reset = useCallback(() => {
+    dispatch(resetThread());
+  }, [dispatch]);
+
+  return {
+    thread,
+    creating,
+    generating,
+    createThread,
+    fetchMoreContent,
+    reset,
+  };
 };
 
 export default useThreads;

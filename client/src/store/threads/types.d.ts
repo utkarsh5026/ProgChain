@@ -1,15 +1,12 @@
 type LearningContent = {
   id: string;
+  topic: string;
   content: string;
 };
 
 export type Thread = {
+  threadID: number;
   mainTopic: string;
   currentIdx: number;
   content: LearningContent[];
-};
-
-export type ThreadTopicRequest = {
-  topic: string;
-  currentIdx: number;
 };

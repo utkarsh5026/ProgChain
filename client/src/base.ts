@@ -23,3 +23,7 @@ export function loading(op: Operation): boolean {
 export function not(op: Operation): boolean {
   return op.loading === null;
 }
+
+export function done(op: Operation): boolean {
+  return op.loading === "fulfilled";
+}
