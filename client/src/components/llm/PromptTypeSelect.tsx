@@ -44,7 +44,13 @@ const promptTypes: PromptType[] = [
   },
 ];
 
-const PromptTypeSelect: React.FC = () => {
+interface PromptTypeSelectProps {
+  onPromptTypeChange?: (promptType: string) => void;
+}
+
+const PromptTypeSelect: React.FC<PromptTypeSelectProps> = ({
+  onPromptTypeChange,
+}) => {
   const [selectedPromptType, setSelectedPromptType] = useState<string>(
     promptTypes[0].id
   );
@@ -53,8 +59,13 @@ const PromptTypeSelect: React.FC = () => {
     (type) => type.id === selectedPromptType
   );
 
+  const handlePromptTypeChange = (promptType: string) => {
+    setSelectedPromptType(promptType);
+    onPromptTypeChange?.(promptType);
+  };
+
   return (
-    <Select value={selectedPromptType} onValueChange={setSelectedPromptType}>
+    <Select value={selectedPromptType} onValueChange={handlePromptTypeChange}>
       <SelectTrigger
         className="h-10 w-[200px] bg-zinc-800/90 border-zinc-700/50 
                    hover:bg-zinc-800 text-zinc-300 hover:text-zinc-200 
