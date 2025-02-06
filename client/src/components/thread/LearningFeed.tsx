@@ -4,7 +4,7 @@ import { Home, ChevronLeft, ChevronRight } from "lucide-react";
 import LearningContentDisplay from "./ThreadContentItem";
 import useThreads from "@/store/threads/hook";
 import SideNavigationButton from "./SideNavigationButton";
-import { done, loading, not } from "@/base";
+import { loading } from "@/base";
 import ProgressIndicator from "./ProgressIndicator";
 import { useToast } from "@/hooks/use-toast";
 

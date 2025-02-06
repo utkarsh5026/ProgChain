@@ -1,8 +1,16 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { DnaIcon, Brain, Sparkles } from "lucide-react";
+import {
+  DnaIcon,
+  Brain,
+  Sparkles,
+  PlusCircle,
+  MessageCircle,
+} from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import PastThreads from "./PastThreads";
 
 import ModelSelect from "@/components/utils/ModelSelect";
 import PageHeader from "../utils/PageHeader";
@@ -35,8 +43,8 @@ const ThreadsComponent = () => {
         className="min-h-screen w-full p-4 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-zinc-900 via-zinc-950 to-black"
       >
         <PageHeader
-          title="Start a Learning Thread"
-          description="Begin your journey by entering a topic. Each thread weaves together concepts, examples, and exercises into a personalized learning experience."
+          title="Learning Threads"
+          description="Start a new learning journey or continue from your past threads."
           icons={[
             <DnaIcon className="w-16 h-16 text-primary" key="dna" />,
             <Brain className="w-16 h-16 text-primary/80" key="brain" />,
@@ -50,69 +58,96 @@ const ThreadsComponent = () => {
           transition={{ duration: 0.6, delay: 0.2 }}
           className="max-w-3xl mx-auto relative"
         >
-          <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
-            <CardContent className="p-8 md:p-12">
-              <div className="space-y-6">
-                <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
-                  <ModelSelect onModelSelect={setSelectedModel} />
-                  <PromptTypeSelect />
-                </div>
-                <div className="relative">
-                  <motion.div
-                    animate={
-                      isInputFocused
-                        ? {
-                            boxShadow: [
-                              "0 0 0 0 rgba(255,255,255,0)",
-                              "0 0 20px 2px rgba(255,255,255,0.1)",
-                              "0 0 0 0 rgba(255,255,255,0)",
-                            ],
-                          }
-                        : {}
-                    }
-                    transition={{ duration: 2, repeat: Infinity }}
-                  >
-                    <Input
-                      className={`w-full p-6 text-lg bg-zinc-900/50 border-2 border-zinc-800 rounded-2xl 
-                          placeholder:text-zinc-600 focus:ring-2 focus:ring-primary focus:border-transparent 
-                          transition-all duration-300 ${
-                            isInputFocused
-                              ? "border-primary shadow-lg shadow-primary/20"
-                              : ""
-                          }`}
-                      placeholder="What would you like to learn about? (e.g., React Hooks, Machine Learning, Algorithms...)"
-                      value={topic}
-                      onChange={(e) => setTopic(e.target.value)}
-                      onFocus={() => setIsInputFocused(true)}
-                      onBlur={() => setIsInputFocused(false)}
-                      onKeyDown={(e) => {
-                        if (e.key === "Enter" && !loading && topic.trim()) {
-                          handleFetchThreadContent();
+          <Tabs defaultValue="new" className="w-full">
+            <TabsList className="grid w-full grid-cols-2 mb-6">
+              <TabsTrigger
+                value="new"
+                className="flex items-center justify-center"
+              >
+                <PlusCircle className="w-4 h-4 mr-2" />
+                New Thread
+              </TabsTrigger>
+              <TabsTrigger
+                value="past"
+                className="flex items-center justify-center"
+              >
+                <MessageCircle className="w-4 h-4 mr-2" />
+                Past Threads
+              </TabsTrigger>
+            </TabsList>
+
+            <TabsContent value="new">
+              <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
+                <CardContent className="p-8 md:p-12">
+                  <div className="space-y-6">
+                    <div className="flex flex-col md:flex-row gap-4 items-stretch md:items-center">
+                      <ModelSelect onModelSelect={setSelectedModel} />
+                      <PromptTypeSelect />
+                    </div>
+                    <div className="relative">
+                      <motion.div
+                        animate={
+                          isInputFocused
+                            ? {
+                                boxShadow: [
+                                  "0 0 0 0 rgba(255,255,255,0)",
+                                  "0 0 20px 2px rgba(255,255,255,0.1)",
+                                  "0 0 0 0 rgba(255,255,255,0)",
+                                ],
+                              }
+                            : {}
                         }
-                      }}
+                        transition={{ duration: 2, repeat: Infinity }}
+                      >
+                        <Input
+                          className={`w-full p-6 text-lg bg-zinc-900/50 border-2 border-zinc-800 rounded-2xl 
+                            placeholder:text-zinc-600 focus:ring-2 focus:ring-primary focus:border-transparent 
+                            transition-all duration-300 ${
+                              isInputFocused
+                                ? "border-primary shadow-lg shadow-primary/20"
+                                : ""
+                            }`}
+                          placeholder="What would you like to learn about? (e.g., React Hooks, Machine Learning, Algorithms...)"
+                          value={topic}
+                          onChange={(e) => setTopic(e.target.value)}
+                          onFocus={() => setIsInputFocused(true)}
+                          onBlur={() => setIsInputFocused(false)}
+                          onKeyDown={(e) => {
+                            if (e.key === "Enter" && !loading && topic.trim()) {
+                              handleFetchThreadContent();
+                            }
+                          }}
+                        />
+                      </motion.div>
+
+                      {/* Input decoration */}
+                      <motion.div
+                        animate={{
+                          opacity: isInputFocused ? 1 : 0,
+                          scale: isInputFocused ? 1 : 0.8,
+                        }}
+                        className="absolute -right-4 -top-4 w-8 h-8 bg-primary/20 rounded-full blur-xl"
+                      />
+                    </div>
+
+                    <LoadingButton
+                      buttonText="Start Learning Thread"
+                      loadingText="Starting..."
+                      loading={false}
+                      onClick={handleFetchThreadContent}
+                      disabled={loading || !topic.trim()}
                     />
-                  </motion.div>
+                  </div>
+                </CardContent>
+              </Card>
+            </TabsContent>
 
-                  {/* Input decoration */}
-                  <motion.div
-                    animate={{
-                      opacity: isInputFocused ? 1 : 0,
-                      scale: isInputFocused ? 1 : 0.8,
-                    }}
-                    className="absolute -right-4 -top-4 w-8 h-8 bg-primary/20 rounded-full blur-xl"
-                  />
-                </div>
-
-                <LoadingButton
-                  buttonText="Start Learning Thread"
-                  loadingText="Starting..."
-                  loading={false}
-                  onClick={handleFetchThreadContent}
-                  disabled={loading || !topic.trim()}
-                />
-              </div>
-            </CardContent>
-          </Card>
+            <TabsContent value="past">
+              <Card className="bg-black/40 border-zinc-800/50 backdrop-blur-xl shadow-2xl">
+                <PastThreads />
+              </Card>
+            </TabsContent>
+          </Tabs>
 
           {/* Card decoration */}
           <div className="absolute -z-10 inset-0 blur-3xl opacity-30">
