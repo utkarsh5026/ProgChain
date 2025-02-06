@@ -1,9 +1,11 @@
 import React, { useState, useRef } from "react";
+
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { Send } from "lucide-react";
 import { Textarea } from "@/components/ui/textarea";
+import { Send, PlusIcon } from "lucide-react";
 import { modelDescriptions, type Model } from "@/config/config";
+
 import PastedContent, { type Content } from "./PastedContent";
 import ModelSelect from "./ModelSelect";
 import PromptTypeSelect from "./PromptTypeSelect";
@@ -14,7 +16,8 @@ interface ChatInputProps {
   onSubmit: (
     message: string,
     modelType: Model,
-    promptType: string
+    promptType: string,
+    attachments: File[]
   ) => Promise<void>;
   isLoading?: boolean;
 }
@@ -65,14 +68,22 @@ const ChatInput: React.FC<ChatInputProps> = ({
   const [message, setMessage] = useState("");
   const [isFocused, setIsFocused] = useState(false);
   const [pastedContents, setPastedContents] = useState<Content[]>([]);
+  const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
   const currentPrompt =
     promptTypes.find((p) => p.id === selectedPromptType) || promptTypes[0];
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if ((!message.trim() && pastedContents.length === 0) || isLoading) return;
+    if (
+      (!message.trim() &&
+        pastedContents.length === 0 &&
+        attachedFiles.length === 0) ||
+      isLoading
+    )
+      return;
 
     try {
       const fullMessage = [
@@ -82,9 +93,15 @@ const ChatInput: React.FC<ChatInputProps> = ({
         .filter(Boolean)
         .join("\n\n");
 
-      await onSubmit(fullMessage, selectedModel, selectedPromptType);
+      await onSubmit(
+        fullMessage,
+        selectedModel,
+        selectedPromptType,
+        attachedFiles
+      );
       setMessage("");
       setPastedContents([]);
+      setAttachedFiles([]);
       if (textareaRef.current) textareaRef.current.style.height = "auto";
     } catch (error) {
       console.error("Error submitting message:", error);
@@ -125,16 +142,43 @@ const ChatInput: React.FC<ChatInputProps> = ({
     setPastedContents((prev) => prev.filter((content) => content.id !== id));
   };
 
+  const handleFileUploadClick = () => {
+    if (fileInputRef.current) {
+      fileInputRef.current.click();
+    }
+  };
+
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const files = e.target.files;
+    if (!files) return;
+    setAttachedFiles((prev) => [...prev, ...Array.from(files)]);
+  };
+
+  const removeFile = (index: number) => {
+    setAttachedFiles((prev) => prev.filter((_, i) => i !== index));
+  };
+
   return (
     <Card className=" bg-zinc-900/95 border-t border-zinc-800/50 backdrop-blur-xl">
       <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4">
-        <div className="relative flex flex-col gap-3">
-          {/* Model and Learning Mode Selectors */}
-          <div className="flex items-center justify-end gap-3">
+        <div className="flex items-center justify-between mb-3">
+          <Button
+            type="button"
+            onClick={handleFileUploadClick}
+            disabled={isLoading}
+            size="sm"
+            className="h-8 px-2 bg-zinc-800/90 hover:bg-zinc-700"
+          >
+            <PlusIcon className="h-4 w-4 text-indigo-400/70" />
+          </Button>
+
+          <div className="flex items-center gap-3">
             <ModelSelect onModelSelect={setSelectedModel} />
             <PromptTypeSelect onPromptTypeChange={setSelectedPromptType} />
           </div>
+        </div>
 
+        <div className="relative flex flex-col gap-3">
           <div
             className={`relative rounded-lg transition-all duration-200 ${
               isFocused ? "shadow-lg ring-1 ring-primary/20" : ""
@@ -165,10 +209,15 @@ const ChatInput: React.FC<ChatInputProps> = ({
                 type="submit"
                 size="sm"
                 disabled={
-                  (!message.trim() && pastedContents.length === 0) || isLoading
+                  (!message.trim() &&
+                    pastedContents.length === 0 &&
+                    attachedFiles.length === 0) ||
+                  isLoading
                 }
                 className={`h-8 px-3 transition-all duration-200 ${
-                  message.trim() || pastedContents.length > 0
+                  message.trim() ||
+                  pastedContents.length > 0 ||
+                  attachedFiles.length > 0
                     ? "bg-primary hover:bg-primary/90"
                     : "bg-zinc-700 hover:bg-zinc-600"
                 }`}
@@ -181,6 +230,40 @@ const ChatInput: React.FC<ChatInputProps> = ({
           <PastedContent
             pastedContents={pastedContents}
             removePastedContent={removePastedContent}
+          />
+
+          {attachedFiles.length > 0 && (
+            <div className="mt-4">
+              <h4 className="text-sm font-medium text-zinc-400 mb-2">
+                Attached Files
+              </h4>
+              <div className="flex flex-wrap gap-2">
+                {attachedFiles.map((file, index) => (
+                  <div
+                    key={index}
+                    className="flex items-center gap-2 bg-zinc-800 px-3 py-2 rounded"
+                  >
+                    <span className="text-xs text-white">{file.name}</span>
+                    <button
+                      type="button"
+                      onClick={() => removeFile(index)}
+                      className="text-red-400 hover:text-red-500 text-xs"
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <input
+            type="file"
+            ref={fileInputRef}
+            onChange={handleFileChange}
+            className="hidden"
+            multiple
+            aria-label="Upload files"
           />
         </div>
       </form>
