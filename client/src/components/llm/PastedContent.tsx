@@ -1,3 +1,4 @@
+import React from "react";
 import { FileText, X } from "lucide-react";
 import {
   Tooltip,
@@ -5,27 +6,13 @@ import {
   TooltipTrigger,
   TooltipProvider,
 } from "@/components/ui/tooltip";
+import useChatInput from "@/store/chat-input/hook";
 
-export type Content = {
-  id: string;
-  text: string;
-  timestamp: number;
-};
+const PastedContent: React.FC = () => {
+  const { pastedContents, removePastedContent } = useChatInput();
 
-const truncateText = (text: string, maxLength: number = 100): string => {
-  const lines = text.split("\n");
-  const firstLine = lines[0].trim();
-  if (firstLine.length <= maxLength) return firstLine;
-  return firstLine.substring(0, maxLength) + "...";
-};
+  if (pastedContents.length === 0) return null;
 
-const PastedContent = ({
-  pastedContents,
-  removePastedContent,
-}: {
-  pastedContents: Content[];
-  removePastedContent: (id: string) => void;
-}) => {
   if (pastedContents.length === 0) return null;
 
   return (
@@ -41,7 +28,7 @@ const PastedContent = ({
               >
                 <FileText className="h-5 w-5 text-primary/80" />
                 <span className="truncate max-w-[250px] text-sm">
-                  {truncateText(content.text, 40)}
+                  {truncateText(content.content, 40)}
                 </span>
                 <button
                   onClick={() => removePastedContent(content.id)}
@@ -62,7 +49,7 @@ const PastedContent = ({
                 Pasted content preview:
               </p>
               <p className="text-sm text-zinc-400 whitespace-pre-wrap line-clamp-4">
-                {content.text}
+                {content.content}
               </p>
             </TooltipContent>
           </Tooltip>
@@ -70,6 +57,13 @@ const PastedContent = ({
       ))}
     </div>
   );
+};
+
+const truncateText = (text: string, maxLength: number = 100): string => {
+  const lines = text.split("\n");
+  const firstLine = lines[0].trim();
+  if (firstLine.length <= maxLength) return firstLine;
+  return firstLine.substring(0, maxLength) + "...";
 };
 
 export default PastedContent;

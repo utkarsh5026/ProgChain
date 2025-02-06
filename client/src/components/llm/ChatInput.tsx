@@ -4,11 +4,13 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Textarea } from "@/components/ui/textarea";
 import { Send, PlusIcon } from "lucide-react";
-import { modelDescriptions, type Model } from "@/config/config";
+import { type Model } from "@/config/config";
+import { type PromptType } from "@/config/prompt";
 
-import PastedContent, { type Content } from "./PastedContent";
+import PastedContent from "./PastedContent";
 import ModelSelect from "./ModelSelect";
 import PromptTypeSelect from "./PromptTypeSelect";
+import useChatInput from "@/store/chat-input/hook";
 
 const MAX_INPUT_LENGTH = 1000;
 
@@ -16,69 +18,35 @@ interface ChatInputProps {
   onSubmit: (
     message: string,
     modelType: Model,
-    promptType: string,
+    promptType: PromptType,
     attachments: File[]
   ) => Promise<void>;
   isLoading?: boolean;
 }
 
-interface PromptType {
-  id: string;
-  name: string;
-  description: string;
-  placeholder: string;
-}
-
-const promptTypes: PromptType[] = [
-  {
-    id: "teacher",
-    name: "Step-by-Step Guide",
-    description: "Detailed explanations broken down into steps",
-    placeholder: "Ask for a detailed explanation of any concept...",
-  },
-  {
-    id: "interviewer",
-    name: "Interview Prep",
-    description: "Technical interview preparation and practice",
-    placeholder: "Practice interview questions or coding challenges...",
-  },
-  {
-    id: "concept",
-    name: "Deep Dive",
-    description: "Comprehensive concept exploration",
-    placeholder: "Explore complex topics in detail...",
-  },
-  {
-    id: "coding",
-    name: "Code Analysis",
-    description: "Code review and optimization guidance",
-    placeholder: "Share code for review or ask coding questions...",
-  },
-];
-
 const ChatInput: React.FC<ChatInputProps> = ({
   onSubmit,
   isLoading = false,
 }) => {
-  const [selectedModel, setSelectedModel] = useState<Model>(
-    modelDescriptions[0].name
-  );
-  const [selectedPromptType, setSelectedPromptType] =
-    useState<string>("teacher");
-  const [message, setMessage] = useState("");
+  const {
+    text,
+    pastedContents,
+    model,
+    promptType,
+    setText,
+    addPastedContent,
+    reset,
+  } = useChatInput();
+
   const [isFocused, setIsFocused] = useState(false);
-  const [pastedContents, setPastedContents] = useState<Content[]>([]);
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
 
-  const currentPrompt =
-    promptTypes.find((p) => p.id === selectedPromptType) || promptTypes[0];
-
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (
-      (!message.trim() &&
+      (!text.trim() &&
         pastedContents.length === 0 &&
         attachedFiles.length === 0) ||
       isLoading
@@ -87,21 +55,15 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
     try {
       const fullMessage = [
-        message.trim(),
-        ...pastedContents.map((content) => content.text),
+        text.trim(),
+        ...pastedContents.map((content) => content.content),
       ]
         .filter(Boolean)
         .join("\n\n");
 
-      await onSubmit(
-        fullMessage,
-        selectedModel,
-        selectedPromptType,
-        attachedFiles
-      );
-      setMessage("");
-      setPastedContents([]);
-      setAttachedFiles([]);
+      console.log("fullMessage", fullMessage, model, promptType);
+      await onSubmit(fullMessage, model, promptType, attachedFiles);
+      reset();
       if (textareaRef.current) textareaRef.current.style.height = "auto";
     } catch (error) {
       console.error("Error submitting message:", error);
@@ -116,7 +78,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   const handleTextareaChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setMessage(e.target.value);
+    setText(e.target.value);
     if (textareaRef.current) {
       textareaRef.current.style.height = "auto";
       textareaRef.current.style.height = `${textareaRef.current.scrollHeight}px`;
@@ -127,19 +89,8 @@ const ChatInput: React.FC<ChatInputProps> = ({
     const pastedText = e.clipboardData.getData("text");
     if (pastedText.length > MAX_INPUT_LENGTH) {
       e.preventDefault();
-      setPastedContents((prev) => [
-        ...prev,
-        {
-          id: crypto.randomUUID(),
-          text: pastedText,
-          timestamp: Date.now(),
-        },
-      ]);
+      addPastedContent(pastedText);
     }
-  };
-
-  const removePastedContent = (id: string) => {
-    setPastedContents((prev) => prev.filter((content) => content.id !== id));
   };
 
   const handleFileUploadClick = () => {
@@ -173,8 +124,8 @@ const ChatInput: React.FC<ChatInputProps> = ({
           </Button>
 
           <div className="flex items-center gap-3">
-            <ModelSelect onModelSelect={setSelectedModel} />
-            <PromptTypeSelect onPromptTypeChange={setSelectedPromptType} />
+            <ModelSelect />
+            <PromptTypeSelect />
           </div>
         </div>
 
@@ -186,13 +137,13 @@ const ChatInput: React.FC<ChatInputProps> = ({
           >
             <Textarea
               ref={textareaRef}
-              value={message}
+              value={text}
               onChange={handleTextareaChange}
               onKeyDown={handleKeyDown}
               onPaste={handlePaste}
               onFocus={() => setIsFocused(true)}
               onBlur={() => setIsFocused(false)}
-              placeholder={currentPrompt.placeholder}
+              placeholder={"Type your message here..."}
               className="flex-1 min-h-[56px] max-h-[200px] pr-24
                        bg-zinc-800/50 hover:bg-zinc-800/70 border-zinc-700/50
                        focus:border-primary/20 focus:ring-primary/20 resize-none
@@ -200,22 +151,23 @@ const ChatInput: React.FC<ChatInputProps> = ({
               disabled={isLoading}
             />
             <div className="absolute right-3 bottom-3 flex items-center gap-2">
-              {message.length > 100 && (
+              {text.length > 100 && (
                 <span className="text-xs px-2 py-1 rounded-full bg-zinc-800 text-zinc-400 border border-zinc-700">
-                  {message.length} chars
+                  {text.length} chars
                 </span>
               )}
+
               <Button
                 type="submit"
                 size="sm"
                 disabled={
-                  (!message.trim() &&
+                  (!text.trim() &&
                     pastedContents.length === 0 &&
                     attachedFiles.length === 0) ||
                   isLoading
                 }
                 className={`h-8 px-3 transition-all duration-200 ${
-                  message.trim() ||
+                  text.trim() ||
                   pastedContents.length > 0 ||
                   attachedFiles.length > 0
                     ? "bg-primary hover:bg-primary/90"
@@ -227,10 +179,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
             </div>
           </div>
 
-          <PastedContent
-            pastedContents={pastedContents}
-            removePastedContent={removePastedContent}
-          />
+          <PastedContent />
 
           {attachedFiles.length > 0 && (
             <div className="mt-4">
@@ -240,7 +189,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
               <div className="flex flex-wrap gap-2">
                 {attachedFiles.map((file, index) => (
                   <div
-                    key={index}
+                    key={`${file.name}-${index}`}
                     className="flex items-center gap-2 bg-zinc-800 px-3 py-2 rounded"
                   >
                     <span className="text-xs text-white">{file.name}</span>

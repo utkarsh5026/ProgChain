@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Select,
   SelectTrigger,
@@ -10,9 +10,10 @@ import {
 } from "@/components/ui/select";
 import { modelDescriptions, type Model } from "@/config/config";
 import { Sparkles } from "lucide-react";
+import useChatInput from "@/store/chat-input/hook";
 
 interface ModelSelectProps {
-  onModelSelect: (model: Model) => void;
+  onModelSelect?: (model: Model) => void;
 }
 
 /**
@@ -30,17 +31,15 @@ interface ModelSelectProps {
  * Where handleModelChange is a function defined in the parent component to handle the model selection.
  */
 const ModelSelect: React.FC<ModelSelectProps> = ({ onModelSelect }) => {
-  const [selectedModel, setSelectedModel] = useState<Model>(
-    modelDescriptions[0].name
-  );
+  const { model, selectModel } = useChatInput();
 
   const handleModelSelect = (model: Model) => {
-    setSelectedModel(model);
-    onModelSelect(model);
+    selectModel(model);
+    onModelSelect?.(model);
   };
 
   return (
-    <Select value={selectedModel} onValueChange={handleModelSelect}>
+    <Select value={model} onValueChange={handleModelSelect}>
       <SelectTrigger
         className="h-9 w-[180px] bg-zinc-800/90 border-zinc-700/50 hover:bg-zinc-800 
                           text-zinc-300 hover:text-zinc-200 shadow-lg hover:shadow-xl transition-all
@@ -48,9 +47,7 @@ const ModelSelect: React.FC<ModelSelectProps> = ({ onModelSelect }) => {
       >
         <div className="flex items-center gap-2">
           <Sparkles className="h-4 w-4 text-primary/70" />
-          <SelectValue defaultValue={selectedModel}>
-            {selectedModel}
-          </SelectValue>
+          <SelectValue defaultValue={model}>{model}</SelectValue>
         </div>
       </SelectTrigger>
       <SelectContent align="end" className="w-[280px]">
