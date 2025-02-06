@@ -9,8 +9,8 @@ from .db_ops import (get_problems_by_filter,
 from .soution import generate_code_solution, SolutionConfig
 
 router = APIRouter(prefix="/leetcode", tags=["leetcode"])
-tags = get_all_tags()
-problem_cnt = get_problem_cnt()
+# tags = get_all_tags()
+# problem_cnt = get_problem_cnt()
 
 
 @router.get("/problems")

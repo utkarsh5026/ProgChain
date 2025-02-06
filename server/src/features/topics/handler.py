@@ -1,7 +1,9 @@
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from typing import Optional
+
+
 from config.models import Model
 from .lang import TopicNode
 from .topics import generate_topics as generate_topics_lang
@@ -14,9 +16,11 @@ router = APIRouter(
 
 
 class TopicRequest(BaseModel):
-    topic_path: str
-    conversation_id: Optional[str] = None
-    model: Optional[str] = Model.GPT_4O_MINI.value
+    topic_path: str = Field(description="The path of the topic to generate")
+    conversation_id: Optional[str] = Field(
+        description="The id of the conversation to generate topics for")
+    model: Optional[str] = Field(
+        description="The model to use to generate topics", default=Model.GPT_4O_MINI.value)
 
 
 class TopicResponse(BaseModel):

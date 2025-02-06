@@ -103,9 +103,21 @@ Return your response in this exact format:
         result = result.content
 
     try:
-        solution = SolutionResponse.model_validate_json(result)
+        # Clean the response - remove markdown code block formatting
+        cleaned_result = result.strip()
+        if cleaned_result.startswith('```json'):
+            cleaned_result = cleaned_result[7:]  # Remove ```json
+        if cleaned_result.startswith('```'):
+            cleaned_result = cleaned_result[3:]  # Remove ```
+        if cleaned_result.endswith('```'):
+            cleaned_result = cleaned_result[:-3]  # Remove trailing ```
+
+        # Parse the cleaned JSON
+        solution = SolutionResponse.model_validate_json(cleaned_result.strip())
         return solution
+
     except ValidationError as e:
         raise ValueError(
-            f"Failed to parse LLM response into expected format: {e}"
-        )
+            f"Failed to parse LLM response into expected format: {str(e)}")
+    except Exception as e:
+        raise ValueError(f"Error generating solution: {str(e)}")

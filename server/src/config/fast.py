@@ -11,9 +11,8 @@ load_dotenv()
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    await init_db()
     print(os.getenv("OPENAI_API_KEY"))
-    await initialize_leetcode()
     yield
 
 

@@ -1,28 +1,32 @@
-export type QuestionType =
-  | "multiple-choice"
-  | "coding-challenge"
-  | "open-ended"
-  | "scenario-based";
+import { z } from "zod";
+import type { Model } from "@/config/config";
 
-export type Difficulty = "easy" | "medium" | "hard";
+const DifficultySchema = z.enum(["Beginner", "Intermediate", "Advanced"]);
 
-export interface Question {
+export type Difficulty = z.infer<typeof DifficultySchema>;
+export type DifficultyMap = Map<Difficulty, Question[]>;
+
+export type Question = {
   id: number;
   question: string;
-  type: QuestionType;
-  difficulty: Difficulty;
+  type: string;
   assessment: string;
-  options?: string[]; // Only for multiple-choice questions
-}
+};
 
-export interface RequestQuestion {
+export type RequestQuestion = {
   topic: string;
   context: string;
   extraInstructions: string;
-}
+  model: Model;
+};
 
-export interface ResponseQuestion {
+export type ResponseQuestion = {
+  topic: string;
+  questions: DifficultyMap;
+};
+
+export type TopicQuestions = {
   topic: string;
   context: string;
-  questions: Question[];
-}
+  questions: DifficultyMap;
+};
