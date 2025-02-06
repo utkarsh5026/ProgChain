@@ -7,7 +7,7 @@ import Leetcode from "@/components/leetcode/Leetcode";
 import TopicChain from "@/components/topics/TopicChain";
 import Projects from "@/components/projects/Projects";
 import { Toaster } from "@/components/ui/toaster";
-import LearningFeed from "@/components/thread/LearningFeed";
+import Thread from "@/components/thread/Thread";
 
 function App() {
   useEffect(() => {
@@ -27,7 +27,7 @@ function App() {
               <Route path="/explore" element={<Explore />} />
               <Route path="/leetcode/*" element={<Leetcode />} />
               <Route path="/projects" element={<Projects />} />
-              <Route path="/threads" element={<LearningFeed />} />
+              <Route path="/threads" element={<Thread />} />
               <Route path="/" element={<Explore />} />
             </Routes>
             <Toaster />
