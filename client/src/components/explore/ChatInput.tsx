@@ -14,7 +14,7 @@ import {
 } from "@/components/ui/select";
 import { modelDescriptions, type Model } from "@/config/config";
 import PastedContent, { type Content } from "./PastedContent";
-import ModelSelect from "../utils/ModelSelect";
+import ModelSelect from "../llm/ModelSelect";
 
 const MAX_INPUT_LENGTH = 1000;
 
