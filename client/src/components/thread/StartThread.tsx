@@ -12,10 +12,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import PastThreads from "./PastThreads";
 
-import ModelSelect from "@/components/utils/ModelSelect";
+import ModelSelect from "@/components/llm/ModelSelect";
 import PageHeader from "../utils/PageHeader";
 import useThreads from "@/store/threads/hook";
-import PromptTypeSelect from "../utils/PromptTypeSelect";
+import PromptTypeSelect from "../llm/PromptTypeSelect";
 import LoadingButton from "../utils/LoadingButton";
 
 import type { Model } from "@/config/config";

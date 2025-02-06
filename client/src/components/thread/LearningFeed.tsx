@@ -1,36 +1,15 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { Button } from "@/components/ui/button";
-import { Home, ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import LearningContentDisplay from "./ThreadContentItem";
 import useThreads from "@/store/threads/hook";
 import SideNavigationButton from "./SideNavigationButton";
 import { loading } from "@/base";
 import ProgressIndicator from "./ProgressIndicator";
+import ChatInput from "../explore/ChatInput";
 import { useToast } from "@/hooks/use-toast";
 
-const NavigationHeader = ({
-  onNavigateHome,
-}: {
-  onNavigateHome: () => void;
-}) => (
-  <div className="fixed top-0 left-0 right-0 p-4 z-50 bg-gradient-to-b from-zinc-950/80 to-transparent">
-    <Button
-      variant="ghost"
-      size="sm"
-      className="bg-zinc-900/90 border border-zinc-700/50 backdrop-blur-xl
-        text-zinc-300 hover:text-white hover:bg-zinc-800/90 transition-all
-        duration-300 shadow-lg shadow-zinc-950/20 hover:shadow-xl
-        hover:shadow-zinc-950/30 hover:border-zinc-600/50"
-      onClick={onNavigateHome}
-    >
-      <Home className="w-4 h-4 mr-2" />
-      Back to Home
-    </Button>
-  </div>
-);
-
 const LearningFeed: React.FC = () => {
-  const { fetchMoreContent, thread, reset, generating } = useThreads();
+  const { fetchMoreContent, thread, generating } = useThreads();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const { toast } = useToast();
@@ -39,12 +18,9 @@ const LearningFeed: React.FC = () => {
   );
   const content = useMemo(() => thread?.content ?? [], [thread]);
 
-  console.log(activeIndex);
-
   useEffect(() => {
     if (!thread) return;
     if (activeIndex === content.length - 2 && !loading(generating)) {
-      console.log("Fetching more content");
       try {
         fetchMoreContent({});
       } catch (error) {
@@ -97,10 +73,7 @@ const LearningFeed: React.FC = () => {
   }, [activeIndex, content.length, isTransitioning]);
 
   return (
-    <div className="w-full relative bg-gradient-to-b from-zinc-950 to-zinc-900">
-      <NavigationHeader onNavigateHome={reset} />
-      wh
-      {/* Enhanced content area with slide transitions */}
+    <div className="w-full relative bg-gradient-to-b from-zinc-950 to-zinc-900 flex justify-center">
       <div className="flex items-center justify-center px-32">
         <div
           className={`transform transition-all duration-300 ease-in-out

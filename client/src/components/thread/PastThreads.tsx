@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { MessageCircle, Search } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
+import useThreads from "@/store/threads/hook";
 
 interface Thread {
   id: number;
@@ -13,6 +14,7 @@ interface Thread {
 const PastThreads: React.FC = () => {
   const [threads, setThreads] = useState<Thread[]>([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const { fetchThread } = useThreads();
 
   useEffect(() => {
     const fetchThreads = async () => {
@@ -53,7 +55,10 @@ const PastThreads: React.FC = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.2 }}
           >
-            <Card className="p-4 hover:bg-zinc-900/50 transition-all duration-200 border border-zinc-800/50 group cursor-pointer">
+            <Card
+              className="p-4 hover:bg-zinc-900/50 transition-all duration-200 border border-zinc-800/50 group cursor-pointer"
+              onClick={() => fetchThread(thread.id)}
+            >
               <div className="flex items-center justify-between">
                 <h3 className="text-zinc-100 font-medium group-hover:text-white transition-colors">
                   {thread.topic}
