@@ -36,7 +36,7 @@ def get_models_available():
     return [Model.GPT_4O_MINI.value, Model.GPT_4O.value]
 
 
-def get_model(model: str):
+def get_model(model: str | None = None):
     """Retrieves the ChatOpenAI model instance based on the provided model name.
 
     Args:
@@ -52,5 +52,4 @@ def get_model(model: str):
         return gpt_4o_mini
     elif model == Model.GPT_4O.value:
         return gpt_4o
-    else:
-        raise ValueError(f"Invalid model: {model}")
+    return gpt_4o

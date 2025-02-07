@@ -21,23 +21,6 @@ AsyncSessionLocal = sessionmaker(
 Base = declarative_base()
 
 
-@contextmanager
-def db_session():
-    """
-    Context manager for database session.
-    """
-    session = SessionLocal()
-    try:
-        yield session
-        session.expunge_all()
-        session.commit()
-    except Exception as e:
-        session.rollback()
-        raise e
-    finally:
-        session.close()
-
-
 @asynccontextmanager
 async def db_session():
     """
@@ -45,11 +28,15 @@ async def db_session():
 
     This function yields an AsyncSession and ensures that the session is
     properly committed if everything goes well, or rolled back if an error occurs.
-    Additionally, it logs any exceptions encountered for debugging purposes.
+    Additionally, it automatically refreshes and detaches objects before commit
+    to ensure they're usable outside the session.
     """
     async with AsyncSessionLocal() as session:
         try:
             yield session
+            for obj in session.identity_map.values():
+                await session.refresh(obj)
+            session.expunge_all()
             await session.commit()
         except Exception as error:
             logger.exception("Error during DB session; rolling back.")

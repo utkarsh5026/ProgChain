@@ -37,6 +37,27 @@ class ThreadContent(Base):
                         index=True)
     thread = relationship("Thread", back_populates="contents")
 
+    chats = relationship(
+        "ThreadContentChat",
+        back_populates="start_point",
+        cascade="all, delete-orphan",
+        lazy="selectin"
+    )
+
+
+class ThreadContentChat(Base):
+    __tablename__ = "thread_content_chat"
+
+    id = Column(Integer, primary_key=True)
+    user_question = Column(String, nullable=False)
+    ai_answer = Column(String, nullable=False)
+    created_at = Column(DateTime(timezone=True),
+                        server_default=func.now(), nullable=False,
+                        index=True)
+    content_id = Column(Integer, ForeignKey(
+        "thread_content.id"), nullable=False)
+    start_point = relationship("ThreadContent", back_populates="chats")
+
 
 async def create_thread(topic: str) -> int:
     """
@@ -164,3 +185,50 @@ async def get_thread_contents(thread_id: int) -> list[dict]:
             }
             for content in contents
         ]
+
+
+async def create_chat(content_id: int, user_question: str, ai_answer: str) -> int:
+    """
+    Create a new chat entry associated with a given content.
+
+    Args:
+        content_id (int): The ID of the content to associate with the chat.
+        user_question (str): The user's question.
+        ai_answer (str): The AI's answer.
+
+    Returns:
+        int: The ID of the newly created chat record.
+    """
+    async with db_session() as session:
+        new_chat = ThreadContentChat(
+            content_id=content_id,
+            user_question=user_question,
+            ai_answer=ai_answer
+        )
+        session.add(new_chat)
+        await session.flush()
+        return new_chat.id
+
+
+async def get_thread_content(content_id: int) -> ThreadContent:
+    """
+    Get a thread content by its ID.
+
+    Args:
+        content_id (int): The ID of the thread content to retrieve.
+
+    Returns:
+        ThreadContent: The thread content object with all attributes loaded.
+
+    Raises:
+        ValueError: If no thread content exists with the specified content_id.
+    """
+    async with db_session() as session:
+        thread_content = await session.get(ThreadContent, content_id)
+        if not thread_content:
+            raise ValueError(f"Thread content with id {content_id} not found")
+        # Ensure the content is loaded before session closes
+        await session.refresh(thread_content)
+        # Create a detached copy of the object
+        session.expunge(thread_content)
+        return thread_content

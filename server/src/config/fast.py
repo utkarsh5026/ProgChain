@@ -1,6 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from features.leetcode import initialize_leetcode
+from typing import AsyncGenerator, Callable
 from contextlib import asynccontextmanager
 from .db import init_db
 import os
@@ -17,6 +18,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(debug=True, lifespan=lifespan)
+
 
 app.add_middleware(
     CORSMiddleware,

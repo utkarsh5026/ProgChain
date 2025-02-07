@@ -7,6 +7,8 @@ from .models import (create_thread, create_content,
                      load_thread_with_topics,
                      get_all_threads, get_thread_contents
                      )
+from .chat import ThreadIDChat
+from core import ChatGenerateOpions
 
 
 class ThreadGenerate(BaseModel):
@@ -208,3 +210,38 @@ class ThreadService:
         Get all contents for a given thread.
         """
         return await get_thread_contents(thread_id)
+
+
+class ThreadContentChatService:
+    """
+    Service class for managing thread content operations, including creation and chat.
+    """
+
+    buffer_size = 20
+
+    def __init__(self) -> None:
+        self.thred_content_chats: dict[int, ThreadIDChat] = {}
+
+    def stop_chat(self, thread_content_id: int) -> None:
+        if thread_content_id in self.thred_content_chats:
+            self.thred_content_chats[thread_content_id].stop_generation()
+
+    async def __get_chat_generator(self, thread_content_id: int) -> ThreadIDChat:
+        if thread_content_id not in self.thred_content_chats:
+            new_chat = await ThreadIDChat.create(thread_content_id)
+            self.thred_content_chats[thread_content_id] = new_chat
+        return self.thred_content_chats[thread_content_id]
+
+    async def create_chat_stream(self, thread_content_id: int, question: str, options: ChatGenerateOpions):
+        chat_generator = await self.__get_chat_generator(thread_content_id)
+
+        async def stream_chat():
+            buffer = []
+            async for chunk in chat_generator.stream_chat(question, options):
+                buffer.append(chunk)
+                if len(buffer) >= self.buffer_size:
+                    yield "".join(buffer)
+                    buffer = []
+            yield "".join(buffer)
+
+        return stream_chat

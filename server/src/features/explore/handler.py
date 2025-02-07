@@ -5,6 +5,7 @@ from fastapi.responses import StreamingResponse
 
 from pydantic import BaseModel, Field
 from config.models import Model
+from config.stream import stream_response, BaseContentGenerateRequest
 from .service import ResearchAssistantService, TopicQuestion
 
 service = ResearchAssistantService()
@@ -18,13 +19,9 @@ class TopicExploreRequest(BaseModel):
     focus_areas: str = "all"
 
 
-class AskQuestionRequest(BaseModel):
+class AskQuestionRequest(BaseContentGenerateRequest):
     question: str = Field(description="The question to ask the model")
     chat_id: int = Field(description="The chat id to add the question to")
-    model: Optional[str] = Field(description="The model to use",
-                                 default=Model.GPT_4O.value)
-    extra_instructions: Optional[str] = Field(
-        description="Extra instructions to pass to the model", default="")
 
 
 class ChatNotFoundError(HTTPException):
@@ -35,17 +32,14 @@ class ChatNotFoundError(HTTPException):
 
 @router.post("/topic")
 async def explore_topic(request: TopicExploreRequest):
-    async def stream_response():
+    async def stream_func():
         async for chunk in service.start_exploration(request.topic):
             if (isinstance(chunk, int)):
                 yield f"chatID: {chunk}\n\n"
             else:
                 yield chunk
 
-    return StreamingResponse(stream_response(), media_type="text/event-stream", headers={
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-    })
+    return stream_response(stream_func)
 
 
 @router.post("/question")
@@ -57,14 +51,11 @@ async def ask_question(question_request: AskQuestionRequest):
         extra_instructions=extra_instructions
     )
 
-    async def stream_response():
+    async def stream_func():
         async for chunk in service.ask_question(question_request.chat_id, tq):
             yield chunk
 
-    return StreamingResponse(stream_response(), media_type="text/event-stream", headers={
-        "Cache-Control": "no-cache",
-        "Connection": "keep-alive",
-    })
+    return stream_response(stream_func)
 
 
 @router.get("/chats")

@@ -5,12 +5,12 @@ from pydantic import BaseModel
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
 
-from .db_ops import (create_chat, add_chat_message,
-                     delete_chat, get_chats, get_chat_messages)
+from .db_models import (create_chat, add_chat_message,
+                        delete_chat, get_chats, get_chat_messages)
 from .db_models import ExploreChatMessage
-from .llm import ResearchAssistant
+from .chat import ResearchAssistant
 from config.models import Model, get_model
-from .vector import VectorStoreManager
+from core import ChatGenerateOpions
 
 
 class ChatNotExistsError(Exception):
@@ -48,8 +48,6 @@ class ResearchAssistantService:
             lock: An asyncio Lock to synchronize operations that modify shared resources.
         """
         self.assistants: dict[int, ResearchAssistant] = {}
-        self.small_model = get_model(Model.GPT_4O_MINI.value)
-        self.lock = Lock()
 
     async def start_exploration(self, question: str, model_name: str = Model.GPT_4O.value, extra_instructions: str = "") -> AsyncGenerator[str | int, None]:
         """
@@ -67,21 +65,15 @@ class ResearchAssistantService:
         Yields:
             AsyncGenerator[str, None]: Chunks of the generated answer.
         """
-        assistant = ResearchAssistant()
-        chunks = []
-        async for chunk in assistant.generate_answer(question, model_name, extra_instructions):
-            chunks.append(chunk)
+        assistant = await ResearchAssistant.create()
+        options = ChatGenerateOpions(
+            model_name=model_name,
+            extra_instructions=extra_instructions
+        )
+        async for chunk in assistant.generate_answer(question, options):
             yield chunk
 
-        async with self.lock:
-            chat_topic = await self._determine_chat_topic(question)
-            chat_id = create_chat(chat_topic)
-            add_chat_message(chat_id,
-                             user_question=question,
-                             assistant_answer="".join(chunks))
-            self.assistants[chat_id] = assistant
-
-            yield chat_id
+        yield assistant.chat_id
 
     async def ask_question(self, chat_id: int, question: TopicQuestion) -> AsyncGenerator[str, None]:
         """
@@ -100,17 +92,14 @@ class ResearchAssistantService:
         await self._load_chat_messages(chat_id)
         assistant = self.assistants[chat_id]
 
-        chunks = []
-        async for chunk in assistant.generate_answer(question.question, question.model_name, question.extra_instructions):
-            chunks.append(chunk)
+        options = ChatGenerateOpions(
+            model_name=question.model_name,
+            extra_instructions=question.extra_instructions
+        )
+        async for chunk in assistant.generate_answer(question.question, options):
             yield chunk
 
-        async with self.lock:
-            add_chat_message(chat_id,
-                             user_question=question.question,
-                             assistant_answer="".join(chunks))
-
-    async def delete_chat(self, chat_id: int):
+    async def delete_chat(self, chat_id: int) -> bool:
         """
         Delete a chat session.
 
@@ -120,9 +109,9 @@ class ResearchAssistantService:
             chat_id (int): The ID of the chat session to delete.
 
         Returns:
-            The result of the delete operation.
+            bool: True if the chat was deleted, False if it does not exist.
         """
-        deleted = delete_chat(chat_id)
+        deleted = await delete_chat(chat_id)
         if chat_id in self.assistants:
             del self.assistants[chat_id]
         return deleted
@@ -134,7 +123,7 @@ class ResearchAssistantService:
         Returns:
             A list of all chat records.
         """
-        return get_chats()
+        return await get_chats()
 
     async def get_chat(self, chat_id: int) -> list[ExploreChatMessage]:
         """
@@ -152,34 +141,8 @@ class ResearchAssistantService:
         Raises:
             ChatNotExistsError: If the chat session does not exist.
         """
-        messages = get_chat_messages(chat_id)
-        if not messages:
-            raise ChatNotExistsError(chat_id)
-
-        # Initiate background loading of chat messages into the vector store.
         create_task(self._load_chat_messages(chat_id))
-
-        return messages
-
-    async def _determine_chat_topic(self, question: str) -> str:
-        """
-        Determine the chat topic based on the provided question.
-
-        Uses a system prompt and a lightweight model to extract a concise topic from the question.
-
-        Args:
-            question (str): The user's question.
-
-        Returns:
-            str: The determined chat topic.
-        """
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", "You are a helpful assistant that determines the topic of a question. Only give the topic, no other text."),
-            ("human", "Question: {question}"),
-        ])
-
-        chain = prompt | self.small_model | StrOutputParser()
-        return await chain.ainvoke({"question": question})
+        return await get_chat_messages(chat_id)
 
     async def _load_chat_messages(self, chat_id: int):
         """
@@ -196,18 +159,5 @@ class ResearchAssistantService:
         """
         if chat_id in self.assistants:
             return
-
-        messages = get_chat_messages(chat_id)
-        if not messages:
-            raise ChatNotExistsError(chat_id)
-
-        assistant = ResearchAssistant()
-        assistant.vector_store = VectorStoreManager()
-
-        for message in messages:
-            await assistant.vector_store.add_interaction(
-                human_msg=message.user_question,
-                ai_msg=message.assistant_answer
-            )
-
+        assistant = await ResearchAssistant.create(chat_id)
         self.assistants[chat_id] = assistant
