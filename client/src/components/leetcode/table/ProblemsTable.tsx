@@ -20,6 +20,7 @@ interface ProblemsTableProps {
 }
 
 const ProblemsTable: React.FC<ProblemsTableProps> = ({ problems }) => {
+  console.log(problems);
   const navigate = useNavigate();
   return (
     <Card className="bg-zinc-900/50 border-zinc-800 overflow-hidden">

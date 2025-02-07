@@ -10,7 +10,7 @@ import Syntax from "./Syntax";
 import { Language, Model, models } from "@/config/config";
 import { useState } from "react";
 import { useProblem } from "@/store/leetcode/hook";
-import ModelSelect from "@/components/utils/ModelSelect";
+import ModelSelect from "@/components/llm/ModelSelect";
 
 interface GenerationPanelProps {
   generationError: string;

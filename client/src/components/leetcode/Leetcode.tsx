@@ -11,10 +11,11 @@ const Leetcode: React.FC = () => {
   const { fetchInfo } = useProblems();
   const location = useLocation();
 
-  const problemName = useMemo(
-    () => location.pathname.split("/").pop(),
-    [location.pathname]
-  );
+  const problemName = useMemo(() => {
+    const parts = location.pathname.split("/");
+    return parts.length > 2 ? parts[parts.length - 1] : "";
+  }, [location.pathname]);
+
   const [showProblems, setShowProblems] = useState<boolean>(!problemName);
 
   useEffect(() => {
@@ -25,8 +26,6 @@ const Leetcode: React.FC = () => {
     fetchInfo();
   }, [fetchInfo]);
 
-  console.log(problemName);
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -34,7 +33,7 @@ const Leetcode: React.FC = () => {
       exit={{ opacity: 0 }}
       transition={{ duration: 0.5, ease: "easeInOut", delay: 0.2 }}
     >
-      <div className="flex items-center justify-center my-4">
+      <div className="flex items-center justify-center my-4 scrollbar-none">
         <Button onClick={() => setShowProblems(true)}>Problems</Button>
         <LeetCodeSearch />
       </div>

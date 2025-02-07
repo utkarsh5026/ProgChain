@@ -1,51 +1,43 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { AnimatePresence } from "framer-motion";
 import CodeActions from "./CodeActions";
 import GenerationPanel from "./GenerationPanel";
 import CodeDisplay from "./CodeDisplay";
-import type { Solution } from "@/store/leetcode/type";
+import { languages, models, type Language, type Model } from "@/config/config";
+import { useProblem } from "@/store/leetcode/hook";
 
-interface CodeSegmentProps {
-  solution: Solution[];
-  selectedLanguage: string;
-}
-
-const CodeSegment: React.FC<CodeSegmentProps> = ({
-  solution,
-  selectedLanguage,
-}) => {
+const CodeSegment: React.FC = () => {
   const [isGenerating, setIsGenerating] = useState(false);
   const [showCopied, setShowCopied] = useState(false);
   const [customPrompt, setCustomPrompt] = useState("");
   const [generatedCode, setGeneratedCode] = useState("");
-  const [selectedModel, setSelectedModel] = useState("gpt-4");
+  const [selectedModel, setSelectedModel] = useState<Model>(models[0]);
   const [isGenerateOpen, setIsGenerateOpen] = useState(false);
   const [generationError, setGenerationError] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState<Language>(
+    languages[0]
+  );
+  const { problemInfo, generateSolution } = useProblem();
+
+  const solutionsMap = useMemo(() => {
+    return problemInfo?.solution || {};
+  }, [problemInfo]);
 
   const defaultPrompt =
     "Generate an efficient and well-commented solution with explanation of approach";
 
   const handleGenerateCode = async (promptText = customPrompt) => {
+    if (!problemInfo) return;
+
     setIsGenerating(true);
     setGenerationError("");
-
     try {
-      const response = await fetch("/api/generate-code", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          prompt: promptText || defaultPrompt,
-          model: selectedModel,
-          language: selectedLanguage,
-        }),
+      await generateSolution({
+        model: selectedModel,
+        problemId: problemInfo.problem.id,
+        progLang: selectedLanguage,
+        additionalContext: promptText || defaultPrompt,
       });
-
-      if (!response.ok) throw new Error("Failed to generate code");
-
-      const data = await response.json();
-      setGeneratedCode(data.code);
     } catch (error) {
       console.error("Error generating code:", error);
       setGenerationError("Failed to generate code. Please try again.");
@@ -54,16 +46,13 @@ const CodeSegment: React.FC<CodeSegmentProps> = ({
     }
   };
 
-  // Auto-generate code when component mounts
   useEffect(() => {
     handleGenerateCode(defaultPrompt);
   }, [selectedLanguage]);
 
   const handleCopyCode = async () => {
     const codeToCopy =
-      generatedCode ||
-      solution.find((s) => s.language === selectedLanguage)?.code ||
-      "";
+      generatedCode || solutionsMap[selectedLanguage]?.code || "";
     await navigator.clipboard.writeText(codeToCopy);
     setShowCopied(true);
     setTimeout(() => setShowCopied(false), 2000);
@@ -77,27 +66,24 @@ const CodeSegment: React.FC<CodeSegmentProps> = ({
         showCopied={showCopied}
         isGenerateOpen={isGenerateOpen}
         setIsGenerateOpen={setIsGenerateOpen}
+        selectedLanguage={selectedLanguage}
+        setSelectedLanguage={setSelectedLanguage}
       />
 
       <AnimatePresence>
         {isGenerateOpen && (
           <GenerationPanel
-            customPrompt={customPrompt}
-            setCustomPrompt={setCustomPrompt}
-            selectedModel={selectedModel}
-            setSelectedModel={setSelectedModel}
-            isGenerating={isGenerating}
-            handleGenerateCode={handleGenerateCode}
             generationError={generationError}
             generatedCode={generatedCode}
             selectedLanguage={selectedLanguage}
+            closePanel={() => setIsGenerateOpen(false)}
           />
         )}
       </AnimatePresence>
 
       <CodeDisplay
         selectedLanguage={selectedLanguage}
-        generatedCode={generatedCode}
+        generatedCode={solutionsMap[selectedLanguage]?.code || ""}
       />
     </div>
   );

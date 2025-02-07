@@ -34,7 +34,6 @@ import type { ProblemFilters } from "@/store/leetcode/type";
 import ProblemsTable from "./ProblemsTable";
 
 const ProblemList: React.FC = () => {
-  // State management
   const { fetchProblems, problemList, tags, pageSize, loading, problemCnt } =
     useProblems();
   const [difficulties, setDifficulties] = useState<string[]>([]);

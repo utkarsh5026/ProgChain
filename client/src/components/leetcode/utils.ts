@@ -1,6 +1,6 @@
 export const parseLeetcodeQuestionName = (name: string) => {
   if (name) {
-    return name.toLowerCase().split(" ").join("_");
+    return name.split(" ").join("_");
   }
   return "";
 };

@@ -7,7 +7,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { MessageSquare, Bot, Send, CheckCheck } from "lucide-react";
 import { type Model } from "@/config/config";
-import ModelSelect from "@/components/utils/ModelSelect";
+import ModelSelect from "@/components/llm/ModelSelect";
 
 interface ChatInterfaceProps {
   itemVariants: any;
@@ -84,9 +84,9 @@ const ChatInterface: React.FC<ChatInterfaceProps> = ({
           {/* Enhanced Chat Messages */}
           <ScrollArea className="flex-1 px-4 py-6" ref={scrollAreaRef}>
             <AnimatePresence mode="popLayout">
-              {chat.map((message, index) => (
+              {chat.map((message) => (
                 <motion.div
-                  key={index}
+                  key={message.id}
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: -20 }}
