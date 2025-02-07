@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import useExplore from "@/store/explore/hook";
 import AskQuestion from "@/components/explore/AskQuestion";
 import Explanation from "@/components/explore/Explanation";
-import ChatInput from "@/components/explore/ChatInput";
+import ChatInput from "../llm/ChatInput";
 import { Button } from "@/components/ui/button";
 import MinimapDrawer from "@/components/explore/MiniMapDrawer";
 import { BookOpen, GraduationCap } from "lucide-react";
@@ -156,10 +156,7 @@ const Explore: React.FC = () => {
                     {index > 0 && (
                       <div className="absolute -top-4 left-1/2 -translate-x-1/2 w-px h-8 bg-gradient-to-b from-transparent to-primary/20" />
                     )}
-                    <Explanation
-                      questionID={questionID}
-                      onRelatedQuestionClick={scrollToQuestion}
-                    />
+                    <Explanation questionID={questionID} />
                   </div>
                 </motion.div>
               ))
@@ -185,7 +182,9 @@ const Explore: React.FC = () => {
           )}
         </div>
 
-        <ChatInput onSubmit={handleChatSubmit} isLoading={isLoading} />
+        <div className="max-w-6xl mx-auto fixed bottom-0 left-0 right-0 z-10">
+          <ChatInput onSubmit={handleChatSubmit} isLoading={isLoading} />
+        </div>
       </motion.div>
     </AnimatePresence>
   );

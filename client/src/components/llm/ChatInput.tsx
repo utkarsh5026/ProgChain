@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -42,6 +42,12 @@ const ChatInput: React.FC<ChatInputProps> = ({
   const [attachedFiles, setAttachedFiles] = useState<File[]>([]);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
+
+  useEffect(() => {
+    return () => {
+      reset();
+    };
+  }, [reset]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -111,7 +117,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
 
   return (
     <Card className=" bg-zinc-900/95 border-t border-zinc-800/50 backdrop-blur-xl">
-      <form onSubmit={handleSubmit} className="max-w-4xl mx-auto p-4">
+      <form onSubmit={handleSubmit} className="mx-auto p-4">
         <div className="flex items-center justify-between mb-3">
           <Button
             type="button"

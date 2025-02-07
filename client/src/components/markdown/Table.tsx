@@ -48,16 +48,16 @@ const MarkDownTable: React.FC<MarkDownTableProps> = ({ props }) => {
           </SelectContent>
         </Select>
       </div>
-      <ScrollArea className="max-w-full">
-        <div className="inline-block min-w-full align-middle">
-          <table
-            {...props}
-            ref={tableRef}
-            className="divide-y divide-zinc-800 border border-zinc-800"
-          />
-        </div>
-        <ScrollBar orientation="horizontal" />
-      </ScrollArea>
+      {/* <ScrollArea className="max-w-full"> */}
+      <div className="inline-block min-w-full align-middle">
+        <table
+          {...props}
+          ref={tableRef}
+          className="divide-y divide-zinc-800 border border-zinc-800 max-w-full"
+        />
+      </div>
+      {/* <ScrollBar orientation="horizontal" /> */}
+      {/* </ScrollArea> */}
     </div>
   );
 };

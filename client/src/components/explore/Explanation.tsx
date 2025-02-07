@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Markdown from "@/components/utils/Markdown";
+import Markdown from "../markdown/MarkdownContent";
 import useExplore from "@/store/explore/hook";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -12,16 +12,14 @@ import {
 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import AILoadingAnimation from "./AILoadingAnimation";
-import ReactMarkdown from "react-markdown";
 import { cn } from "@/lib/utils";
 
 interface ExplanationProps {
   questionID: string;
-  onRelatedQuestionClick: (questionID: string) => void;
 }
 
 const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
-  const { getQuestion } = useExplore();
+  const { getQuestion, loading } = useExplore();
   const question = getQuestion(questionID);
   const [copied, setCopied] = useState(false);
 
@@ -33,36 +31,6 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
     await navigator.clipboard.writeText(explanation);
     setCopied(true);
     setTimeout(() => setCopied(false), 1000);
-  };
-
-  const containerVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
-    exit: {
-      opacity: 0,
-      y: -20,
-      transition: { duration: 0.4 },
-    },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: 0, scale: 0.95 },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        delay: 0.2,
-        duration: 0.5,
-        ease: [0.22, 1, 0.36, 1],
-      },
-    },
   };
 
   return (
@@ -91,20 +59,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
             </Badge>
           </div>
           <CardTitle className="text-2xl font-bold leading-tight text-zinc-100">
-            <ReactMarkdown
-              components={{
-                code: ({ node, ...props }) => (
-                  <code
-                    {...props}
-                    className="bg-zinc-800/80 rounded-md px-1.5 py-0.5 border border-zinc-700/50 font-mono text-sm"
-                  >
-                    {props.children}
-                  </code>
-                ),
-              }}
-            >
-              {text}
-            </ReactMarkdown>
+            {text}
           </CardTitle>
         </CardHeader>
 
@@ -168,7 +123,7 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
                   </button>
                 </div>
                 <div className="prose prose-invert max-w-none">
-                  <Markdown content={explanation} />
+                  <Markdown content={explanation} operation={loading} />
                 </div>
               </div>
             </motion.div>
@@ -177,6 +132,36 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
       </Card>
     </motion.div>
   );
+};
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.6,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
+  exit: {
+    opacity: 0,
+    y: -20,
+    transition: { duration: 0.4 },
+  },
+};
+
+const contentVariants = {
+  hidden: { opacity: 0, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: {
+      delay: 0.2,
+      duration: 0.5,
+      ease: [0.22, 1, 0.36, 1],
+    },
+  },
 };
 
 export default Explanation;

@@ -6,32 +6,10 @@ import {
   fetchQuestionStart,
   resetExplore as resetExploreAction,
 } from "./slice";
-import type { Question } from "./type";
 import type { Model } from "@/config/config";
 import { fetchChatHistoryThunk } from "./chatsSlice";
 
-interface UseExploreHook {
-  rootQuestion: Question | null;
-  loading: boolean;
-  error: string | null;
-  currentPath: string[];
-  currentQuestion: Question | null;
-  fetchQuestion: (
-    question: string,
-    model: Model,
-    extraInstructions?: string
-  ) => Promise<void>;
-  askQuestion: (
-    question: string,
-    model: Model,
-    extraInstructions?: string
-  ) => Promise<void>;
-  startQuestionFetching: (question: string) => void;
-  getQuestion: (id: string) => Question | null;
-  resetExplore: () => void;
-}
-
-const useExplore = (): UseExploreHook => {
+const useExplore = () => {
   const dispatch = useAppDispatch();
   const {
     rootQuestion,

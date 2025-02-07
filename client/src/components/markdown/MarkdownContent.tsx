@@ -11,12 +11,14 @@ import { useToast } from "@/hooks/use-toast";
 import MarkDownTable from "./Table";
 import CodeSegment from "./CodeSegment";
 import HoverableContentWrapper from "./HoverableContentWrapper";
+import type { Operation } from "@/base";
 
 interface MarkdownProps {
   content: string;
+  operation?: Operation;
 }
 
-const Markdown: React.FC<MarkdownProps> = ({ content }) => {
+const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
   const { toast } = useToast();
   console.log("Content", content);
 
@@ -253,6 +255,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content }) => {
       >
         {content}
       </ReactMarkdown>
+      {operation && <StatusIndicator operation={operation} />}
     </div>
   );
 };
@@ -306,4 +309,24 @@ const wrapTextWithMarkdownSyntax = (
     default:
       return text;
   }
+};
+
+const StatusIndicator: React.FC<{ operation: Operation }> = ({ operation }) => {
+  if (operation.loading === "pending") {
+    return (
+      <div className="mt-4 flex items-center space-x-2">
+        <span className="animate-spin h-4 w-4 border-2 border-t-transparent border-zinc-400 rounded-full"></span>
+        <span className="text-sm text-zinc-400">Generating...</span>
+      </div>
+    );
+  } else if (operation.loading === "fulfilled") {
+    return (
+      <div className="mt-4 text-sm text-green-400">Generation complete</div>
+    );
+  } else if (operation.loading === "rejected") {
+    return (
+      <div className="mt-4 text-sm text-red-500">Error: {operation.error}</div>
+    );
+  }
+  return null;
 };

@@ -1,11 +1,12 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import type { Question, QuestionRequest, TopicRequest } from "./type";
 import { exploreTopic, askQuestion } from "./api";
+import { type Operation, op } from "@/base";
 
 interface ExploreState {
   currentChatId: number | null;
   rootQuestion: Question | null;
-  loading: boolean;
+  loading: Operation;
   error: string | null;
   currentPath: string[];
   questMap: Record<string, Question>;
@@ -14,7 +15,7 @@ interface ExploreState {
 
 const initialState: ExploreState = {
   rootQuestion: null,
-  loading: false,
+  loading: op(null),
   error: null,
   currentPath: [],
   questMap: {},
@@ -79,7 +80,7 @@ const exploreSlice = createSlice({
   initialState,
   reducers: {
     fetchQuestionStart: (state, action: PayloadAction<string>) => {
-      state.loading = true;
+      state.loading = op("pending");
       const currId = Date.now().toPrecision().toString();
 
       if (state.currentQuestion !== null) {
@@ -117,14 +118,17 @@ const exploreSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(fetchQuestionThunk.pending, (state) => {
-      state.loading = true;
+      state.loading = op("pending");
     });
     builder.addCase(fetchQuestionThunk.fulfilled, (state) => {
-      state.loading = false;
+      state.loading = op("fulfilled");
     });
+
     builder.addCase(fetchQuestionThunk.rejected, (state, action) => {
-      state.loading = false;
-      state.error = action.error.message ?? "Failed to fetch question";
+      state.loading = op(
+        "rejected",
+        action.error.message ?? "Failed to fetch question"
+      );
     });
   },
 });
