@@ -10,12 +10,14 @@ interface ContentHeaderProps {
   onRegenerate: (model: Model) => void;
   onCapture?: () => void;
   onExplore?: () => void;
+  isExploring?: boolean;
 }
 
 const ContentHeader: React.FC<ContentHeaderProps> = ({
   onRegenerate,
   onCapture,
   onExplore,
+  isExploring,
 }: ContentHeaderProps) => {
   const [selectedModel, setSelectedModel] = useState<Model>("gpt-4o-mini");
 
@@ -40,32 +42,34 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
           </div>
         </div>
 
-        {/* Center - Enhanced Explore button */}
-        <div>
-          <Button
-            className="bg-black text-white hover:bg-zinc-800"
-            onClick={onExplore}
-          >
-            <motion.span
-              whileHover={{ rotate: 360 }}
-              transition={{ type: "spring", stiffness: 300 }}
-              className="inline-block mr-2"
+        {/* Center - Enhanced Explore button (only show if not already exploring) */}
+        {!isExploring && onExplore && (
+          <div>
+            <Button
+              className="bg-black text-white hover:bg-zinc-800"
+              onClick={onExplore}
             >
-              <Compass className="w-5 h-5" />
-            </motion.span>
-            <motion.span
-              animate={{ scale: [1, 1.1, 1] }}
-              transition={{
-                duration: 1000,
-                ease: "easeInOut",
-                repeat: Infinity,
-              }}
-              className="inline-block"
-            >
-              Explore
-            </motion.span>
-          </Button>
-        </div>
+              <motion.span
+                whileHover={{ rotate: 360 }}
+                transition={{ type: "spring", stiffness: 300 }}
+                className="inline-block mr-2"
+              >
+                <Compass className="w-5 h-5" />
+              </motion.span>
+              <motion.span
+                animate={{ scale: [1, 1.1, 1] }}
+                transition={{
+                  duration: 1,
+                  ease: "easeInOut",
+                  repeat: Infinity,
+                }}
+                className="inline-block"
+              >
+                Explore
+              </motion.span>
+            </Button>
+          </div>
+        )}
 
         {/* Right side - Capture button and customization options */}
         <div className="flex flex-1 justify-end">
@@ -85,13 +89,15 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
         </div>
       </div>
 
-      {/* Mobile model info */}
-      <div className="sm:hidden">
-        <p className="text-zinc-400 text-sm">
-          <Sparkles className="w-4 h-4 inline-block mr-2 text-indigo-400/70" />
-          Generated using {selectedModel}
-        </p>
-      </div>
+      {/* Mobile model info (topic indicator) – only show if not exploring */}
+      {!isExploring && (
+        <div className="sm:hidden">
+          <p className="text-zinc-400 text-sm">
+            <Sparkles className="w-4 h-4 inline-block mr-2 text-indigo-400/70" />
+            Generated using {selectedModel}
+          </p>
+        </div>
+      )}
     </div>
   );
 };

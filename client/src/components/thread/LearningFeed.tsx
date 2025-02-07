@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, X } from "lucide-react";
 import LearningContentDisplay from "./ThreadContentItem";
 import useThreads from "@/store/threads/hook";
 import SideNavigationButton from "./SideNavigationButton";
 import { loading } from "@/base";
-import ProgressIndicator from "./ProgressIndicator";
-import ChatInput from "../explore/ChatInput";
+import ChatInput from "../llm/ChatInput";
 import { useToast } from "@/hooks/use-toast";
 
 const LearningFeed: React.FC = () => {
@@ -16,38 +15,8 @@ const LearningFeed: React.FC = () => {
   const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(
     null
   );
+  const [isExploring, setIsExploring] = useState(false);
   const content = useMemo(() => thread?.content ?? [], [thread]);
-
-  useEffect(() => {
-    if (!thread) return;
-    if (activeIndex === content.length - 2 && !loading(generating)) {
-      try {
-        fetchMoreContent({});
-      } catch (error) {
-        toast({
-          title: "Error fetching more content",
-          description: generating.error,
-          variant: "destructive",
-        });
-      }
-    }
-  }, [thread, fetchMoreContent, activeIndex, generating]);
-
-  useEffect(() => {
-    const handleKeyPress = (event: KeyboardEvent) => {
-      if (event.key === "ArrowLeft") {
-        console.log("ArrowLeft");
-        handlePrevious();
-      } else if (event.key === "ArrowRight") {
-        console.log("ArrowRight");
-        handleNext();
-      }
-    };
-
-    window.addEventListener("keydown", handleKeyPress);
-    return () => window.removeEventListener("keydown", handleKeyPress);
-  }, [activeIndex]);
-
   const handlePrevious = useCallback(() => {
     if (activeIndex > 0 && !isTransitioning) {
       setIsTransitioning(true);
@@ -72,6 +41,48 @@ const LearningFeed: React.FC = () => {
     }
   }, [activeIndex, content.length, isTransitioning]);
 
+  useEffect(() => {
+    if (!thread) return;
+    if (activeIndex === content.length - 2 && !loading(generating)) {
+      try {
+        fetchMoreContent({});
+      } catch (error) {
+        toast({
+          title: "Error fetching more content",
+          description: generating.error,
+          variant: "destructive",
+        });
+      }
+    }
+  }, [
+    thread,
+    fetchMoreContent,
+    activeIndex,
+    generating,
+    content.length,
+    toast,
+  ]);
+
+  useEffect(() => {
+    const handleKeyPress = (event: KeyboardEvent) => {
+      if (event.key === "ArrowLeft") {
+        console.log("ArrowLeft");
+        handlePrevious();
+      } else if (event.key === "ArrowRight") {
+        console.log("ArrowRight");
+        handleNext();
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
+  }, [activeIndex, handlePrevious, handleNext]);
+
+  // When the user clicks "Explore" from the header.
+  const handleExplore = useCallback(() => {
+    setIsExploring(true);
+  }, []);
+
   return (
     <div className="w-full relative bg-gradient-to-b from-zinc-950 to-zinc-900 flex justify-center">
       <div className="flex items-center justify-center px-32">
@@ -81,7 +92,11 @@ const LearningFeed: React.FC = () => {
             ${slideDirection === "left" ? "-translate-x-4" : ""}
             ${slideDirection === "right" ? "translate-x-4" : ""}`}
         >
-          <LearningContentDisplay content={content[activeIndex]} />
+          <LearningContentDisplay
+            content={content[activeIndex]}
+            onExplore={handleExplore}
+            isExploring={isExploring}
+          />
         </div>
       </div>
       <SideNavigationButton
@@ -105,12 +120,18 @@ const LearningFeed: React.FC = () => {
           group-hover:translate-x-1 group-hover:scale-110"
         />
       </SideNavigationButton>
-      {/* Enhanced progress indicator */}
-      <ProgressIndicator
-        current={activeIndex}
-        total={content.length}
-        onItemSelect={(index) => setActiveIndex(index)}
-      />
+
+      {isExploring && (
+        <div className="absolute bottom-4 left-0 right-0 px-32">
+          <div className="flex items-center justify-end bg-zinc-900/50 p-2 rounded-t-xl">
+            <X
+              className="w-4 h-4 cursor-pointer hover:text-red-500"
+              onClick={() => setIsExploring(false)}
+            />
+          </div>
+          <ChatInput onSubmit={() => setIsExploring(false)} />
+        </div>
+      )}
     </div>
   );
 };

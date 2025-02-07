@@ -12,11 +12,15 @@ import { useToast } from "@/hooks/use-toast";
 interface LearningContentProps {
   content: LearningContent;
   onRegenerate?: (model: Model) => void;
+  onExplore?: () => void;
+  isExploring?: boolean;
 }
 
 const LearningContentDisplay: React.FC<LearningContentProps> = ({
   content,
   onRegenerate,
+  onExplore,
+  isExploring,
 }) => {
   const markdownRef = useRef<HTMLDivElement>(null);
   const capture = useCapture();
@@ -76,6 +80,8 @@ const LearningContentDisplay: React.FC<LearningContentProps> = ({
             <ContentHeader
               onRegenerate={onRegenerate}
               onCapture={handleCapture}
+              onExplore={onExplore}
+              isExploring={isExploring}
             />
             {/* Bind the ref to the container that we want to capture */}
             <CardContent
