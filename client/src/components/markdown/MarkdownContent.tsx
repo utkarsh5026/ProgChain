@@ -278,15 +278,31 @@ const wrapTextWithMarkdownSyntax = (
     | React.ReactPortal
     | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
 ) => {
-  if (element === undefined) return text;
-  switch (true) {
-    case element?.props?.node?.tagName === "code":
-      return `\`${text}\``;
+  const getElementName = (element: any) => {
+    return element?.props?.node?.tagName;
+  };
 
-    case element?.props?.node?.tagName === "strong":
+  if (element === undefined) return text;
+
+  switch (true) {
+    case getElementName(element) === "code":
+      return `\`${text}\``;
+    case getElementName(element) === "strong":
       return `**${text}**`;
-    case element?.props?.node?.tagName === "em":
+    case getElementName(element) === "em":
       return `*${text}*`;
+    case getElementName(element) === "h1":
+      return `# ${text}`;
+    case getElementName(element) === "h2":
+      return `## ${text}`;
+    case getElementName(element) === "h3":
+      return `### ${text}`;
+    case getElementName(element) === "h4":
+      return `#### ${text}`;
+    case getElementName(element) === "p":
+      return text;
+    case getElementName(element) === "li":
+      return `- ${text}`;
     default:
       return text;
   }
