@@ -28,7 +28,6 @@ const Message: React.FC<MessageProps> = ({
   const [isOpen, setIsOpen] = useState(true);
   const messageRef = useRef<HTMLDivElement>(null);
 
-  // Handle initial scroll when message opens
   useEffect(() => {
     if (isOpen && messageRef.current) {
       messageRef.current.scrollIntoView({

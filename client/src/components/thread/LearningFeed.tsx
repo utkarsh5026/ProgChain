@@ -1,5 +1,13 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import { ChevronLeft, ChevronRight, Sparkles, X } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
+
+import { Button } from "../ui/button";
 import LearningContentDisplay from "./ThreadContentItem";
 import useThreads from "@/store/threads/hook";
 import SideNavigationButton from "./SideNavigationButton";
@@ -78,22 +86,51 @@ const LearningFeed: React.FC = () => {
 
   return (
     <div className="w-full relative flex justify-center items-center">
-      <SideNavigationButton
-        direction="left"
-        onClick={handlePrevious}
-        disabled={activeIndex === 0}
-      >
-        <ChevronLeft
-          className="w-8 h-8 transition-transform duration-300 
+      <TooltipProvider>
+        <div className="fixed top-0 right-0 p-4">
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                size="icon"
+                variant="ghost"
+                onClick={() => setIsExploring((prev) => !prev)}
+                className={`rounded-full border-2 ${
+                  isExploring ? "border-red-800" : "border-green-800"
+                }`}
+              >
+                {isExploring ? (
+                  <X className="text-red-500" />
+                ) : (
+                  <Sparkles className="text-green-500" />
+                )}
+              </Button>
+            </TooltipTrigger>
+            <TooltipContent className="text-xs dark:text-white dark:bg-black">
+              {isExploring
+                ? "Close Exploration"
+                : "Explore the current content"}
+            </TooltipContent>
+          </Tooltip>
+        </div>
+      </TooltipProvider>
+
+      {!isExploring && (
+        <SideNavigationButton
+          direction="left"
+          onClick={handlePrevious}
+          disabled={activeIndex === 0}
+        >
+          <ChevronLeft
+            className="w-8 h-8 transition-transform duration-300 
           group-hover:-translate-x-1 group-hover:scale-110"
-        />
-      </SideNavigationButton>
+          />
+        </SideNavigationButton>
+      )}
       <div className="flex items-center justify-center">
         {isExploring ? (
           <ThreadMessages
             threadContent={content[activeIndex]}
             exploring={isExploring}
-            closeExploring={() => setIsExploring(false)}
           />
         ) : (
           <LearningContentDisplay
@@ -103,17 +140,20 @@ const LearningFeed: React.FC = () => {
           />
         )}
       </div>
-      <SideNavigationButton
-        direction="right"
-        onClick={handleNext}
-        disabled={activeIndex === content.length - 1}
-        loading={loading(generating)}
-      >
-        <ChevronRight
-          className="w-8 h-8 transition-transform duration-300 
-          group-hover:translate-x-1 group-hover:scale-110"
-        />
-      </SideNavigationButton>
+
+      {!isExploring && (
+        <SideNavigationButton
+          direction="right"
+          onClick={handleNext}
+          disabled={activeIndex === content.length - 1}
+          loading={loading(generating)}
+        >
+          <ChevronRight
+            className="w-8 h-8 transition-transform duration-300 
+            group-hover:translate-x-1 group-hover:scale-110"
+          />
+        </SideNavigationButton>
+      )}
     </div>
   );
 };

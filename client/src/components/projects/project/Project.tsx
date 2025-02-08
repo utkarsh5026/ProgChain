@@ -4,7 +4,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { History, BookOpen } from "lucide-react";
 import ProjectKnowledge from "./ProjectKnowledge";
 import ChatHistory from "./ChatHistory";
-import ChatInput from "./ChatInput";
+import ChatInput from "@/components/llm/ChatInput";
 import ProjectHeader from "./ProjectHeader";
 
 const Project: React.FC = () => {
@@ -14,7 +14,7 @@ const Project: React.FC = () => {
         <div className="flex gap-6 h-full">
           {/* Left Section - Chat Area */}
           <div className="flex-1 flex flex-col min-w-0">
-            <ChatInput />
+            <ChatInput onSubmit={() => {}} />
 
             {/* Chat History with Tabs */}
             <div className="flex-1 overflow-hidden mb-4">
