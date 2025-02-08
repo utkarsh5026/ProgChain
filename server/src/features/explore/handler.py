@@ -71,7 +71,7 @@ async def get_all_chats():
 @router.delete("/chat/{chat_id}")
 async def delete_chat(chat_id: int):
     try:
-        deleted = service.delete_chat(chat_id)
+        deleted = await service.delete_chat(chat_id)
         if not deleted:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail="Chat not found")

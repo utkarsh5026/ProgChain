@@ -3,6 +3,8 @@ import caller, { API_BASE_URL } from "@/api/caller";
 import type { Model } from "@/config/config";
 import type { QuestionRequest } from "./type";
 
+const EXPLORE_URL = `${API_BASE_URL}/explore`;
+
 export const exploreTopic = async function* (
   topic: string,
   model: Model = "gpt-4o-mini",
@@ -42,5 +44,11 @@ export const getChatHistory = async (limit: number = 10, page: number = 1) => {
     page: page,
   };
   const response = await caller.get(url, { params: postBody });
+  return response.data;
+};
+
+export const deleteChat = async (chat_id: number) => {
+  const url = `${EXPLORE_URL}/chat/${chat_id}`;
+  const response = await caller.delete(url);
   return response.data;
 };

@@ -7,7 +7,11 @@ import {
   resetExplore as resetExploreAction,
 } from "./slice";
 import type { Model } from "@/config/config";
-import { fetchChatHistoryThunk } from "./chatsSlice";
+import {
+  fetchChatHistoryThunk,
+  deleteChat as deleteChatAction,
+} from "./chatsSlice";
+import { deleteChat as deleteChatApi } from "./api";
 
 const useExplore = () => {
   const dispatch = useAppDispatch();
@@ -96,11 +100,20 @@ export const useExploreChats = () => {
     [dispatch]
   );
 
+  const deleteChat = useCallback(
+    async (chatId: number) => {
+      dispatch(deleteChatAction(chatId));
+      await deleteChatApi(chatId);
+    },
+    [dispatch]
+  );
+
   return {
     chats,
     loading,
     error,
     fetchChatHistory,
+    deleteChat,
   };
 };
 

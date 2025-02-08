@@ -36,7 +36,12 @@ const initialState: ChatsState = {
 const chatsSlice = createSlice({
   name: "chats",
   initialState,
-  reducers: {},
+  reducers: {
+    deleteChat: (state, action: PayloadAction<number>) => {
+      state.chats = state.chats.filter((chat) => chat.id !== action.payload);
+    },
+  },
+
   extraReducers: (builder) => {
     builder.addCase(fetchChatHistoryThunk.pending, (state) => {
       state.loading = true;
@@ -58,4 +63,5 @@ const chatsSlice = createSlice({
   },
 });
 
+export const { deleteChat } = chatsSlice.actions;
 export default chatsSlice.reducer;
