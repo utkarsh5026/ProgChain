@@ -1,22 +1,20 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
 import type { Question, QuestionRequest, TopicRequest } from "./type";
-import { exploreTopic, askQuestion } from "./api";
+import { exploreTopic, askQuestion, loadChat } from "./api";
 import { type Operation, op } from "@/base";
 
 interface ExploreState {
   currentChatId: number | null;
   rootQuestion: Question | null;
   loading: Operation;
-  error: string | null;
-  currentPath: string[];
-  questMap: Record<string, Question>;
+  currentPath: number[];
+  questMap: Record<number, Question>;
   currentQuestion: Question | null;
 }
 
 const initialState: ExploreState = {
   rootQuestion: null,
   loading: op(null),
-  error: null,
   currentPath: [],
   questMap: {},
   currentQuestion: null,
@@ -35,21 +33,31 @@ export const fetchQuestionThunk = createAsyncThunk(
     const UPDATE_INTERVAL = 100; // Update every 100ms
 
     for await (const chunk of generator) {
-      if (chunk.startsWith("chatID:")) {
+      if (chunk.includes("chat_message_id:")) {
+        console.log(chunk);
         const chatId = chunk.split(":")[1];
-        dispatch(setCurrentChatId(parseInt(chatId)));
+        dispatch(updateCurrentMessageId(parseInt(chatId.trim())));
         continue;
       }
       accumulatedText += chunk;
 
       const currentTime = Date.now();
       if (currentTime - lastUpdateTime >= UPDATE_INTERVAL) {
-        dispatch(updateCurrentExplanation(accumulatedText));
+        dispatch(
+          updateCurrentExplanation({
+            text: accumulatedText,
+            generating: op("pending"),
+          })
+        );
         lastUpdateTime = currentTime;
       }
     }
-    // Final update to ensure we don't miss the last chunks
-    dispatch(updateCurrentExplanation(accumulatedText));
+    dispatch(
+      updateCurrentExplanation({
+        text: accumulatedText,
+        generating: op("fulfilled"),
+      })
+    );
   }
 );
 
@@ -62,16 +70,44 @@ export const askQuestionThunk = createAsyncThunk(
     const UPDATE_INTERVAL = 100; // Update every 100ms
 
     for await (const chunk of generator) {
+      if (chunk.includes("chat_message_id:")) {
+        console.log(chunk);
+        const chatId = chunk.split(":")[1];
+        dispatch(updateCurrentMessageId(parseInt(chatId.trim())));
+        continue;
+      }
       accumulatedText += chunk;
 
       const currentTime = Date.now();
       if (currentTime - lastUpdateTime >= UPDATE_INTERVAL) {
-        dispatch(updateCurrentExplanation(accumulatedText));
+        dispatch(
+          updateCurrentExplanation({
+            text: accumulatedText,
+            generating: op("pending"),
+          })
+        );
         lastUpdateTime = currentTime;
       }
     }
     // Final update to ensure we don't miss the last chunks
-    dispatch(updateCurrentExplanation(accumulatedText));
+    dispatch(
+      updateCurrentExplanation({
+        text: accumulatedText,
+        generating: op("fulfilled"),
+      })
+    );
+  }
+);
+
+export const loadChatThunk = createAsyncThunk(
+  "explore/loadChat",
+  async (chatId: number) => {
+    const chat = await loadChat(chatId);
+    console.log(chat);
+    return {
+      chatId,
+      questions: chat,
+    };
   }
 );
 
@@ -81,18 +117,13 @@ const exploreSlice = createSlice({
   reducers: {
     fetchQuestionStart: (state, action: PayloadAction<string>) => {
       state.loading = op("pending");
-      const currId = Date.now().toPrecision().toString();
-
-      if (state.currentQuestion !== null) {
-        state.currentQuestion.followUpQuestionIDs.push(currId);
-      }
+      const currId = Date.now();
 
       state.currentQuestion = {
         id: currId,
         text: action.payload,
         explanation: "",
-        relatedQuestionIDs: [],
-        followUpQuestionIDs: [],
+        generating: op("pending"),
       };
 
       if (state.rootQuestion === null)
@@ -105,17 +136,44 @@ const exploreSlice = createSlice({
       state.currentPath = [];
       state.questMap = {};
       state.currentQuestion = null;
+      state.loading = op(null);
     },
-    updateCurrentExplanation: (state, action: PayloadAction<string>) => {
+    updateCurrentExplanation: (
+      state,
+      action: PayloadAction<{
+        text: string;
+        generating: Operation;
+      }>
+    ) => {
       if (state.currentQuestion) {
-        state.currentQuestion.explanation = action.payload;
+        state.currentQuestion.explanation = action.payload.text;
+        state.currentQuestion.generating = action.payload.generating;
         state.questMap[state.currentQuestion.id] = state.currentQuestion;
       }
     },
-    setCurrentChatId: (state, action: PayloadAction<number>) => {
-      state.currentChatId = action.payload;
+
+    updateCurrentMessageId: (state, action: PayloadAction<number>) => {
+      if (!state.currentQuestion) return;
+      const newMsgId = action.payload;
+      const currentMsgId = state.currentQuestion.id;
+      if (currentMsgId === newMsgId) return;
+
+      state.questMap[newMsgId] = {
+        ...state.questMap[currentMsgId],
+        id: newMsgId,
+      };
+
+      delete state.questMap[currentMsgId];
+      const oldIdx = state.currentPath.indexOf(currentMsgId);
+      state.currentPath[oldIdx] = newMsgId;
+
+      if (state.rootQuestion?.id === currentMsgId) {
+        state.rootQuestion = state.questMap[newMsgId];
+      }
+      state.currentQuestion = state.questMap[newMsgId];
     },
   },
+
   extraReducers: (builder) => {
     builder.addCase(fetchQuestionThunk.pending, (state) => {
       state.loading = op("pending");
@@ -130,6 +188,25 @@ const exploreSlice = createSlice({
         action.error.message ?? "Failed to fetch question"
       );
     });
+    builder.addCase(loadChatThunk.pending, (state) => {
+      state.loading = op("pending");
+    });
+    builder.addCase(loadChatThunk.fulfilled, (state, action) => {
+      state.loading = op("fulfilled");
+      const { chatId, questions } = action.payload;
+      state.questMap = questions.reduce((acc, question) => {
+        acc[question.id] = question;
+        return acc;
+      }, {} as Record<number, Question>);
+      state.currentChatId = chatId;
+      state.currentPath = questions.map((question) => question.id);
+
+      const questionCnt = questions.length;
+      const rootQuestion = questions[0];
+      const currentQuestion = questions[questionCnt - 1];
+      state.rootQuestion = rootQuestion;
+      state.currentQuestion = currentQuestion;
+    });
   },
 });
 
@@ -137,6 +214,6 @@ export const {
   fetchQuestionStart,
   resetExplore,
   updateCurrentExplanation,
-  setCurrentChatId,
+  updateCurrentMessageId,
 } = exploreSlice.actions;
 export default exploreSlice.reducer;

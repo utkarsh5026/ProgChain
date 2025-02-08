@@ -1,7 +1,7 @@
 import { streamText } from "@/api/stream";
 import caller, { API_BASE_URL } from "@/api/caller";
 import type { Model } from "@/config/config";
-import type { QuestionRequest } from "./type";
+import type { QuestionRequest, Question } from "./type";
 
 const EXPLORE_URL = `${API_BASE_URL}/explore`;
 
@@ -51,4 +51,18 @@ export const deleteChat = async (chat_id: number) => {
   const url = `${EXPLORE_URL}/chat/${chat_id}`;
   const response = await caller.delete(url);
   return response.data;
+};
+
+export const loadChat = async (chat_id: number): Promise<Question[]> => {
+  const url = `${EXPLORE_URL}/chat/${chat_id}`;
+  const response = await caller.get(url);
+  const chat = response.data.chat;
+
+  return chat.map((message: any) => {
+    return {
+      id: message.chat_id,
+      text: message.user_question,
+      explanation: message.assistant_answer,
+    };
+  });
 };

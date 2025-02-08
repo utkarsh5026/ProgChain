@@ -1,12 +1,9 @@
-from typing import Optional
-
 from fastapi import status, APIRouter, HTTPException
-from fastapi.responses import StreamingResponse
 
 from pydantic import BaseModel, Field
-from config.models import Model
 from config.stream import stream_response, BaseContentGenerateRequest
-from .service import ResearchAssistantService, TopicQuestion
+from .service import ResearchAssistantService
+
 
 service = ResearchAssistantService()
 
@@ -20,7 +17,6 @@ class TopicExploreRequest(BaseModel):
 
 
 class AskQuestionRequest(BaseContentGenerateRequest):
-    question: str = Field(description="The question to ask the model")
     chat_id: int = Field(description="The chat id to add the question to")
 
 
@@ -34,25 +30,18 @@ class ChatNotFoundError(HTTPException):
 async def explore_topic(request: TopicExploreRequest):
     async def stream_func():
         async for chunk in service.start_exploration(request.topic):
-            if (isinstance(chunk, int)):
-                yield f"chatID: {chunk}\n\n"
-            else:
-                yield chunk
+            yield chunk
 
     return stream_response(stream_func)
 
 
 @router.post("/question")
 async def ask_question(question_request: AskQuestionRequest):
-    question, model_name, extra_instructions = question_request.question, question_request.model, question_request.extra_instructions
-    tq = TopicQuestion(
-        question=question,
-        model_name=model_name,
-        extra_instructions=extra_instructions
-    )
+    chat_id = question_request.chat_id
+    print(question_request)
 
     async def stream_func():
-        async for chunk in service.ask_question(question_request.chat_id, tq):
+        async for chunk in service.ask_question(chat_id, question_request):
             yield chunk
 
     return stream_response(stream_func)
@@ -80,14 +69,17 @@ async def delete_chat(chat_id: int):
         raise HTTPException(status_code=500, detail=str(e))
 
 
-@router.get("/chats/{chat_id}")
+@router.get("/chat/{chat_id}")
 async def get_chat_for_id(chat_id: int):
     try:
-        chat = get_chat_messages(chat_id)
+        chat = await service.get_chat(chat_id)
         if chat is None:
             raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
                                 detail="Chat not found")
-        return chat
+
+        return {
+            "chat": chat,
+        }
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
                             detail=str(e))

@@ -1,7 +1,15 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Book, Users, Compass, GraduationCap, Code, Dna } from "lucide-react";
+import {
+  Book,
+  Users,
+  Compass,
+  GraduationCap,
+  Code,
+  Dna,
+  History,
+} from "lucide-react";
 import { cn } from "@/lib/utils";
 import {
   NavigationMenu,
@@ -66,6 +74,12 @@ const Sidebar: React.FC = () => {
       icon: <Dna className="h-5 w-5" />,
       title: "Threads",
       description: "Share your thoughts",
+    },
+    {
+      key: "/history",
+      icon: <History className="h-5 w-5" />,
+      title: "History",
+      description: "View your chat history",
     },
   ];
 

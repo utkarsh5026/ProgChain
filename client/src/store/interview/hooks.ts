@@ -1,10 +1,14 @@
 import { useCallback } from "react";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { fetchQuestionsThunk } from "./slice";
-import type { ResponseQuestion, RequestQuestion } from "./type";
+import type { TopicQuestions, RequestQuestion, ResponseQuestion } from "./type";
 
 interface InterviewQuestionsHook {
-  topicQuestions: Record<string, ResponseQuestion[]>;
+  topicQuestions: Record<string, TopicQuestions>;
+  currentTopic: string | null;
+  generating: boolean;
+  loading: boolean;
+  error: string | null;
   fetchQuestions: (request: RequestQuestion) => Promise<void>;
   getCachedQuestions: (
     topic: string,
@@ -17,7 +21,8 @@ interface InterviewQuestionsHook {
  * @returns {InterviewQuestionsHook} An object containing functions to fetch and retrieve cached questions.
  */
 export const useInterviewQuestions = (): InterviewQuestionsHook => {
-  const { topicQuestions } = useAppSelector((state) => state.questions);
+  const { topicQuestions, currentTopic, generating, loading, error } =
+    useAppSelector((state) => state.questions);
   const dispatch = useAppDispatch();
 
   const fetchQuestions = useCallback(
@@ -40,5 +45,13 @@ export const useInterviewQuestions = (): InterviewQuestionsHook => {
     [topicQuestions]
   );
 
-  return { topicQuestions, fetchQuestions, getCachedQuestions };
+  return {
+    topicQuestions,
+    fetchQuestions,
+    getCachedQuestions,
+    loading,
+    error,
+    generating,
+    currentTopic,
+  };
 };

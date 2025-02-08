@@ -17,10 +17,10 @@ interface Question {
 interface MinimapProps {
   questions: Question[];
   onQuestionClick: (id: number) => void;
-  activeQuestionId?: number;
+  activeQuestionId?: number | null;
 }
 
-const QuestionMinimap: React.FC<MinimapProps> = ({
+const Minimap: React.FC<MinimapProps> = ({
   questions,
   onQuestionClick,
   activeQuestionId,
@@ -97,4 +97,4 @@ const QuestionMinimap: React.FC<MinimapProps> = ({
   );
 };
 
-export default QuestionMinimap;
+export default Minimap;

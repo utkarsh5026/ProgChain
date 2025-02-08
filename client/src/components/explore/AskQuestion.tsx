@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useExplore from "@/store/explore/hook";
+import useExplore from "@/store/explore/hooks/use-explore";
 import { BrainCircuit, Send, Blocks } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";

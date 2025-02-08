@@ -1,4 +1,4 @@
-from asyncio import Lock, create_task
+from asyncio import create_task, get_running_loop
 from typing import AsyncGenerator
 from pydantic import BaseModel
 
@@ -11,6 +11,7 @@ from .db_models import ExploreChatMessage
 from .chat import ResearchAssistant
 from config.models import Model, get_model
 from core import ChatGenerateOpions
+from config.stream import BaseContentGenerateRequest
 
 
 class ChatNotExistsError(Exception):
@@ -29,7 +30,7 @@ class TopicQuestion(BaseModel):
     """
     question: str
     model_name: str = Model.GPT_4O.value
-    extra_instructions: str = ""
+    extra_instructions: str
 
 
 class ResearchAssistantService:
@@ -75,7 +76,7 @@ class ResearchAssistantService:
 
         yield assistant.chat_id
 
-    async def ask_question(self, chat_id: int, question: TopicQuestion) -> AsyncGenerator[str, None]:
+    async def ask_question(self, chat_id: int, question: BaseContentGenerateRequest) -> AsyncGenerator[str, None]:
         """
 
         Ask a follow-up question within an existing chat session.
@@ -93,7 +94,7 @@ class ResearchAssistantService:
         assistant = self.assistants[chat_id]
 
         options = ChatGenerateOpions(
-            model_name=question.model_name,
+            model_name=question.model,
             extra_instructions=question.extra_instructions
         )
         async for chunk in assistant.generate_answer(question.question, options):
@@ -141,8 +142,9 @@ class ResearchAssistantService:
         Raises:
             ChatNotExistsError: If the chat session does not exist.
         """
+        messages = await get_chat_messages(chat_id)
         create_task(self._load_chat_messages(chat_id))
-        return await get_chat_messages(chat_id)
+        return messages
 
     async def _load_chat_messages(self, chat_id: int):
         """
@@ -161,3 +163,4 @@ class ResearchAssistantService:
             return
         assistant = await ResearchAssistant.create(chat_id)
         self.assistants[chat_id] = assistant
+        print(f"Loaded assistant for chat {chat_id}")

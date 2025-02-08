@@ -1,24 +1,20 @@
 import { useCallback } from "react";
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { useAppSelector, useAppDispatch } from "@/store/hooks";
 import {
   fetchQuestionThunk,
   askQuestionThunk,
+  loadChatThunk,
   fetchQuestionStart,
   resetExplore as resetExploreAction,
-} from "./slice";
+} from "../slice";
+
 import type { Model } from "@/config/config";
-import {
-  fetchChatHistoryThunk,
-  deleteChat as deleteChatAction,
-} from "./chatsSlice";
-import { deleteChat as deleteChatApi } from "./api";
 
 const useExplore = () => {
   const dispatch = useAppDispatch();
   const {
     rootQuestion,
     loading,
-    error,
     currentPath,
     questMap,
     currentQuestion,
@@ -63,10 +59,17 @@ const useExplore = () => {
   );
 
   const getQuestion = useCallback(
-    (id: string) => {
+    (id: number) => {
       return questMap[id];
     },
     [questMap]
+  );
+
+  const loadChat = useCallback(
+    (chatId: number) => {
+      dispatch(loadChatThunk(chatId));
+    },
+    [dispatch]
   );
 
   const resetExplore = useCallback(() => {
@@ -76,44 +79,15 @@ const useExplore = () => {
   return {
     rootQuestion,
     loading,
-    error,
     currentPath,
     currentQuestion,
+    questMap,
     fetchQuestion,
     askQuestion,
     startQuestionFetching,
     getQuestion,
+    loadChat,
     resetExplore,
-  };
-};
-
-export const useExploreChats = () => {
-  const dispatch = useAppDispatch();
-  const { chats, loading, error } = useAppSelector(
-    (state) => state.exploreChats
-  );
-
-  const fetchChatHistory = useCallback(
-    async (limit: number, page: number) => {
-      await dispatch(fetchChatHistoryThunk({ limit, page }));
-    },
-    [dispatch]
-  );
-
-  const deleteChat = useCallback(
-    async (chatId: number) => {
-      dispatch(deleteChatAction(chatId));
-      await deleteChatApi(chatId);
-    },
-    [dispatch]
-  );
-
-  return {
-    chats,
-    loading,
-    error,
-    fetchChatHistory,
-    deleteChat,
   };
 };
 

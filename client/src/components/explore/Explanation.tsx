@@ -1,14 +1,17 @@
 import React from "react";
-import useExplore from "@/store/explore/hook";
+import useExplore from "@/store/explore/hooks/use-explore";
 import Message from "../llm/Message";
 
 interface ExplanationProps {
-  questionID: string;
+  questionID: number;
 }
 
 const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
-  const { getQuestion, loading } = useExplore();
+  const { getQuestion, currentQuestion, rootQuestion, questMap } = useExplore();
   const question = getQuestion(questionID);
+
+  console.log("question", question, questionID, rootQuestion, currentQuestion);
+  console.dir(questMap, { depth: null });
 
   if (question === null) return null;
 
@@ -17,8 +20,8 @@ const Explanation: React.FC<ExplanationProps> = ({ questionID }) => {
     <Message
       userQuestion={text}
       aiResponse={explanation}
-      chatId={parseInt(questionID)}
-      loading={loading}
+      chatId={questionID}
+      loading={question.generating}
     />
   );
 };

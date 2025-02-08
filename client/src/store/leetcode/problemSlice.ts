@@ -22,7 +22,10 @@ export const generateSolutionThunk = createAsyncThunk(
   "problem/generateSolution",
   async (request: SolutionRequest) => {
     const response = await generateSolution(request);
-    return response;
+    return {
+      ...response,
+      language: request.progLang,
+    };
   }
 );
 
@@ -76,7 +79,5 @@ export const problemSlice = createSlice({
     });
   },
 });
-
-export const {} = problemSlice.actions;
 
 export default problemSlice.reducer;

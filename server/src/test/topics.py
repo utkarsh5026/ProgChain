@@ -6,8 +6,8 @@ SERVER_URL = "http://localhost:8000"
 
 # Test data
 test_data = {
-    "main_topic": "Python Object-Oriented Programming",
-    "context": ["For beginners to advanced learners", "Focus on practical applications"]
+    "topic_path": "Python Object-Oriented Programming",
+    "model": "gpt-4o-mini"
 }
 
 

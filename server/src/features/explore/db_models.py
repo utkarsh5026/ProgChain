@@ -194,3 +194,30 @@ async def update_chat_topic(chat_id: int, chat_topic: str) -> None:
             .values(chat_topic=chat_topic)
         )
         await session.commit()
+
+
+async def create_empty_chat_message(chat_id: int) -> int:
+    """
+    Create a new empty chat message.
+    """
+    async with db_session() as session:
+        message = ExploreChatMessage(
+            chat_id=chat_id, user_question="", assistant_answer="")
+        session.add(message)
+        await session.flush()
+        message_id = message.id
+        await session.commit()
+        return message_id
+
+
+async def update_chat_message(chat_id: int, user_question: str, assistant_answer: str) -> None:
+    """
+    Update a chat message.
+    """
+    async with db_session() as session:
+        await session.execute(
+            update(ExploreChatMessage)
+            .where(ExploreChatMessage.chat_id == chat_id)
+            .values(user_question=user_question, assistant_answer=assistant_answer)
+        )
+        await session.commit()

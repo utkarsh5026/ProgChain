@@ -7,12 +7,14 @@ import {
   CollapsibleContent,
   CollapsibleTrigger,
 } from "@/components/ui/collapsible";
-import { useExploreChats } from "@/store/explore/hook";
-import LoadingAnimation from "../utils/LoadingAnimation";
+import useExploreChats from "@/store/explore/hooks/use-explore-chats";
+import LoadingAnimation from "@/components/utils/LoadingAnimation";
 import { useToast } from "@/hooks/use-toast";
+import useExplore from "@/store/explore/hooks/use-explore";
 
 const RecentConversations: React.FC = () => {
   const { chats, loading, fetchChatHistory, deleteChat } = useExploreChats();
+  const { loadChat } = useExplore();
   const [isOpen, setIsOpen] = useState(true);
   const { toast } = useToast();
 
@@ -62,6 +64,7 @@ const RecentConversations: React.FC = () => {
                   <motion.div
                     key={id}
                     whileHover={{ scale: 1.01 }}
+                    onClick={() => loadChat(id)}
                     className="group relative p-4 rounded-lg bg-zinc-900/50 border border-zinc-800/50 
                              hover:border-primary/30 hover:bg-zinc-900/70 transition-all duration-200 cursor-pointer"
                   >

@@ -7,12 +7,13 @@ from core.vector.store import VectorDB
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
 from core import ChatGenerateOpions, BaseChatSystem
-from .db_models import get_chat_messages, add_chat_message, create_empty_chat, update_chat_topic
+from .db_models import get_chat_messages, create_empty_chat, update_chat_topic, create_empty_chat_message, update_chat_message
 
 from config.models import Model, get_model
 
 
 class ChatNotFoundError(Exception):
+
     def __init__(self, chat_id: int):
         self.chat_id = chat_id
         super().__init__(f"Chat with id {chat_id} not found")
@@ -91,6 +92,8 @@ At the end of your response, always include:
         """
         model, extra_instructions = options.model, options.extra_instructions
         machine_answer = []
+        empty_chat = await create_empty_chat_message(self.chat_id)
+        yield "chat_message_id: " + str(empty_chat)
         try:
             async for chunk in self.generate_response(message, model, extra_instructions):
                 machine_answer.append(chunk)
@@ -100,7 +103,11 @@ At the end of your response, always include:
                 create_task(self._set_chat_topic(message))
             assistant_answer = "".join(machine_answer)
             create_task(
-                add_chat_message(self.chat_id, message, assistant_answer)
+                update_chat_message(
+                    self.chat_id,
+                    user_question=message,
+                    assistant_answer=assistant_answer
+                )
             )
 
     async def _set_chat_topic(self, question: str) -> str:

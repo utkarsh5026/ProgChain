@@ -6,7 +6,7 @@ import {
   ContextMenuTrigger,
 } from "@/components/ui/context-menu";
 import { Compass, BookOpen, BrainCircuit, GitFork } from "lucide-react";
-import useExplore from "@/store/explore/hook";
+import useExplore from "@/store/explore/hooks/use-explore";
 import { useNavigate } from "react-router-dom";
 
 interface ConceptContextMenuProps {

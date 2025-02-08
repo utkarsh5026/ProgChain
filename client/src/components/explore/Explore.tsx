@@ -1,12 +1,19 @@
-import React, { useState, useRef, useEffect, useCallback } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import useExplore from "@/store/explore/hook";
+import useExplore from "@/store/explore/hooks/use-explore";
 import AskQuestion from "@/components/explore/AskQuestion";
 import Explanation from "@/components/explore/Explanation";
-import ChatInput from "../llm/ChatInput";
+import ChatInput from "@/components/llm/ChatInput";
 import { Button } from "@/components/ui/button";
-import MinimapDrawer from "@/components/explore/MiniMapDrawer";
-import { BookOpen, GraduationCap } from "lucide-react";
+
+import Minimap from "@/components/llm/Minimap";
+import { BookOpen, GraduationCap, Home } from "lucide-react";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "../ui/tooltip";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -31,38 +38,45 @@ const Explore: React.FC = () => {
     useExplore();
   const [isResetting, setIsResetting] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [activeQuestion, setActiveQuestion] = useState<string | null>(null);
+  const [activeQuestion, setActiveQuestion] = useState<number | null>(null);
   const explanationsRef = useRef<{ [key: string]: HTMLDivElement | null }>({});
-  const [isMinimapOpen, setIsMinimapOpen] = useState(false);
+
+  const scrollToMessage = (id: number) => {
+    const element = explanationsRef.current[id];
+    if (element) {
+      element.scrollIntoView({
+        behavior: "instant",
+        block: "start",
+      });
+      setActiveQuestion(id);
+    }
+  };
 
   useEffect(() => {
-    const savedPreference = localStorage.getItem("minimapOpen");
-    if (savedPreference !== null) {
-      setIsMinimapOpen(savedPreference === "true");
-    }
-  }, []);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = Number(entry.target.getAttribute("data-message-id"));
+            setActiveQuestion(id);
+          }
+        });
+      },
 
-  const handleScroll = useCallback(() => {
-    let closest = null;
-    let closestDistance = Infinity;
+      {
+        rootMargin: "-100px 0px -100px 0px",
+        threshold: 0.5,
+      }
+    );
 
-    Object.entries(explanationsRef.current).forEach(([id, element]) => {
+    Object.values(explanationsRef.current).forEach((element) => {
       if (element) {
-        const distance = Math.abs(element.getBoundingClientRect().top);
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closest = id;
-        }
+        observer.observe(element);
       }
     });
 
-    setActiveQuestion(closest);
-  }, [explanationsRef]);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
+    return () => observer.disconnect();
+  }, []);
 
   const handleReset = async () => {
     setIsResetting(true);
@@ -73,29 +87,10 @@ const Explore: React.FC = () => {
     }
   };
 
-  const scrollToQuestion = (questionId: string) => {
-    const element = explanationsRef.current[questionId];
-    if (element) {
-      const headerOffset = 20;
-      const elementPosition = element.getBoundingClientRect().top;
-      const offsetPosition = elementPosition + window.scrollY - headerOffset;
-
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: "instant",
-      });
-    }
-  };
-
-  const toggleMinimap = () => {
-    setIsMinimapOpen((prev) => !prev);
-    localStorage.setItem("minimapOpen", (!isMinimapOpen).toString());
-  };
-
   useEffect(() => {
     if (currentPath.length > 0) {
       const lastQuestionId = currentPath[currentPath.length - 1];
-      scrollToQuestion(lastQuestionId);
+      scrollToMessage(lastQuestionId);
       setActiveQuestion(lastQuestionId);
     }
   }, [currentPath]);
@@ -120,19 +115,35 @@ const Explore: React.FC = () => {
         exit="exit"
         className="min-h-screen bg-gradient-to-b from-zinc-900 to-zinc-950 p-6 pb-32 rounded-lg"
       >
-        <MinimapDrawer
-          isOpen={isMinimapOpen}
-          onToggle={toggleMinimap}
-          currentPath={currentPath}
-          activeQuestion={activeQuestion}
-          onQuestionClick={scrollToQuestion}
-          getQuestion={getQuestion}
-          onReset={handleReset}
-          isResetting={isResetting}
+        <Minimap
+          questions={currentPath.map((questionID) => ({
+            id: questionID,
+            text: getQuestion(questionID)?.text || "",
+          }))}
+          onQuestionClick={scrollToMessage}
+          activeQuestionId={activeQuestion}
         />
 
+        <TooltipProvider>
+          <Tooltip>
+            <TooltipTrigger asChild>
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={handleReset}
+                className="fixed top-4 right-4"
+              >
+                <Home className="h-5 w-5" />
+              </Button>
+            </TooltipTrigger>
+
+            <TooltipContent>
+              <p>Go back to the home page</p>
+            </TooltipContent>
+          </Tooltip>
+        </TooltipProvider>
+
         <div className="max-w-4xl mx-auto space-y-6">
-          {/* Questions Content */}
           <motion.div variants={itemVariants} className="space-y-8">
             {currentPath.length === 0 ? (
               <div className="text-center py-12">

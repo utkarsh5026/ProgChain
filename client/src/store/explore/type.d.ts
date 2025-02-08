@@ -1,11 +1,10 @@
 import type { Model } from "@/config/config";
-
+import type { Operation } from "@/base";
 export interface Question {
-  id: string;
+  id: number;
   text: string;
   explanation: string;
-  relatedQuestionIDs: string[];
-  followUpQuestionIDs: string[];
+  generating: Operation;
 }
 
 export interface ResponseQuestion {
