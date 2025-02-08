@@ -22,17 +22,20 @@ interface ChatInputProps {
     attachments: File[]
   ) => Promise<void>;
   isLoading?: boolean;
+  extraClasses?: string;
 }
 
 const ChatInput: React.FC<ChatInputProps> = ({
   onSubmit,
   isLoading = false,
+  extraClasses,
 }) => {
   const {
     text,
     pastedContents,
     model,
     promptType,
+
     setText,
     addPastedContent,
     reset,
@@ -116,7 +119,7 @@ const ChatInput: React.FC<ChatInputProps> = ({
   };
 
   return (
-    <Card className=" bg-zinc-900/95 border-t border-zinc-800/50 backdrop-blur-xl">
+    <Card className={` border-zinc-800/50 backdrop-blur-xl ${extraClasses}`}>
       <form onSubmit={handleSubmit} className="mx-auto p-4">
         <div className="flex items-center justify-between mb-3">
           <Button

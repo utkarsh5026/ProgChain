@@ -1,24 +1,15 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import React, { useState, useEffect, useRef } from "react";
+import { Card, CardContent, CardHeader } from "@/components/ui/card";
 import {
   Collapsible,
   CollapsibleContent,
   CollapsibleTrigger,
-} from "../ui/collapsible";
-import {
-  BookOpen,
-  CheckCircle,
-  ChevronDown,
-  Copy,
-  Lightbulb,
-  RefreshCw,
-} from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+} from "@/components/ui/collapsible";
+import { ChevronDown, Copy, CheckCircle } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 import MarkdownContent from "@/components/markdown/MarkdownContent";
 import type { Operation } from "@/base";
-import { Button } from "../ui/button";
-import { cn } from "@/lib/utils";
 
 interface MessageProps {
   userQuestion: string;
@@ -34,6 +25,18 @@ const Message: React.FC<MessageProps> = ({
   loading,
 }) => {
   const [copied, setCopied] = useState(false);
+  const [isOpen, setIsOpen] = useState(true);
+  const messageRef = useRef<HTMLDivElement>(null);
+
+  // Handle initial scroll when message opens
+  useEffect(() => {
+    if (isOpen && messageRef.current) {
+      messageRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }
+  }, [isOpen]);
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(aiResponse);
@@ -42,97 +45,68 @@ const Message: React.FC<MessageProps> = ({
   };
 
   return (
-    <Collapsible defaultOpen={true}>
-      <div className="w-full max-w-4xl mx-auto">
-        <Card className="bg-zinc-900/50 backdrop-blur-xl border-zinc-800/50 shadow-2xl overflow-hidden">
-          <CardHeader className="border-b border-zinc-800 bg-gradient-to-br from-zinc-900 via-zinc-900 to-zinc-950">
-            <div className="flex items-center gap-3 mb-3 justify-between">
-              <div className="flex items-center gap-3">
-                <motion.div
-                  initial={{ scale: 0.8, opacity: 0 }}
-                  animate={{ scale: 1, opacity: 1 }}
-                  transition={{ delay: 0.3, duration: 0.5 }}
-                >
-                  <BookOpen className="h-5 w-5 text-primary" />
-                </motion.div>
-                <Badge
-                  variant="outline"
-                  className="bg-zinc-900/80 backdrop-blur-sm border-zinc-700/50 shadow-sm"
-                >
-                  Question #{chatId}
-                </Badge>
+    <Collapsible open={isOpen} onOpenChange={setIsOpen}>
+      <div ref={messageRef} className="w-full max-w-4xl mx-auto scroll-mt-4">
+        <Card className="bg-white/5 backdrop-blur-sm border-zinc-800/50">
+          <div className="sticky top-0 z-10 relative">
+            <div className="absolute inset-0 bg-black/20 backdrop-blur-lg" />
+
+            <CardHeader className="border-b border-zinc-800/50 pb-4 relative">
+              <div className="flex items-center justify-between relative">
+                <span className="text-sm text-zinc-400">Q{chatId}</span>
+
+                <CollapsibleTrigger asChild>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className={cn(
+                      "p-1 transition-transform duration-200",
+                      !isOpen && "rotate-180"
+                    )}
+                  >
+                    <ChevronDown className="h-4 w-4" />
+                  </Button>
+                </CollapsibleTrigger>
               </div>
-              <CollapsibleTrigger asChild>
-                <Button variant="ghost" size="icon" className="p-0">
-                  <ChevronDown className="h-4 w-4" />
-                </Button>
-              </CollapsibleTrigger>
-            </div>
-            <CardTitle className="text-xl text-zinc-100">
-              {userQuestion}
-            </CardTitle>
-          </CardHeader>
+              <h2 className="text-lg font-medium text-zinc-100 mt-2 relative">
+                {userQuestion}
+              </h2>
+            </CardHeader>
+          </div>
 
           <CollapsibleContent>
-            <CardContent className="p-6">
+            <CardContent className="p-4">
               {!aiResponse ? (
-                <div className="space-y-4">
-                  <div className="text-center text-zinc-400">
-                    <RefreshCw className="h-6 w-6 animate-spin mx-auto mb-2" />
-                    <p>Generating explanation...</p>
+                <div className="flex justify-center py-8">
+                  <div className="animate-pulse text-zinc-400">
+                    Generating...
                   </div>
                 </div>
               ) : (
-                <div className="space-y-6">
-                  <div className="bg-zinc-900 backdrop-blur-sm rounded-lg p-6 shadow-inner">
-                    <div className="flex items-center justify-between mb-4">
-                      <div className="flex items-center gap-2">
-                        <Lightbulb className="h-5 w-5 text-primary" />
-                        <h2 className="text-lg font-semibold text-zinc-100">
-                          Explanation
-                        </h2>
-                      </div>
-                      <button
-                        onClick={handleCopy}
-                        className={cn(
-                          "flex items-center gap-2 px-3 py-1.5 text-sm rounded-md",
-                          "transition-all duration-300 ease-out",
-                          "border shadow-sm",
-                          copied
-                            ? "bg-emerald-500/20 border-emerald-500/50 text-emerald-400"
-                            : "bg-zinc-800/80 border-zinc-700/50 hover:bg-zinc-700/80 text-zinc-300"
-                        )}
-                      >
-                        <AnimatePresence mode="wait">
-                          {copied ? (
-                            <motion.div
-                              initial={{ scale: 0.8, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
-                              exit={{ scale: 0.8, opacity: 0 }}
-                              key="check"
-                            >
-                              <CheckCircle className="h-4 w-4" />
-                            </motion.div>
-                          ) : (
-                            <motion.div
-                              initial={{ scale: 0.8, opacity: 0 }}
-                              animate={{ scale: 1, opacity: 1 }}
-                              exit={{ scale: 0.8, opacity: 0 }}
-                              key="copy"
-                            >
-                              <Copy className="h-4 w-4" />
-                            </motion.div>
-                          )}
-                        </AnimatePresence>
-                        {copied ? "Copied!" : "Copy"}
-                      </button>
-                    </div>
-                    <div className="prose prose-invert max-w-none">
-                      <MarkdownContent
-                        content={aiResponse}
-                        operation={loading}
-                      />
-                    </div>
+                <div className="space-y-4">
+                  <div className="flex justify-end">
+                    <button
+                      onClick={handleCopy}
+                      className={cn(
+                        "flex items-center gap-2 px-2 py-1 text-sm rounded",
+                        "transition-colors duration-200",
+                        copied
+                          ? "text-emerald-400"
+                          : "text-zinc-400 hover:text-zinc-200"
+                      )}
+                    >
+                      {copied ? (
+                        <CheckCircle className="h-4 w-4" />
+                      ) : (
+                        <Copy className="h-4 w-4" />
+                      )}
+                      <span className="text-xs">
+                        {copied ? "Copied" : "Copy"}
+                      </span>
+                    </button>
+                  </div>
+                  <div className="prose prose-invert max-w-none">
+                    <MarkdownContent content={aiResponse} operation={loading} />
                   </div>
                 </div>
               )}
