@@ -4,15 +4,12 @@ import { cn } from "@/lib/utils";
 const containerVariants: Variants = {
   hidden: {
     opacity: 0,
-    y: -20,
   },
   visible: {
     opacity: 1,
-    y: 0,
     transition: {
       duration: 0.6,
       ease: "easeOut",
-      staggerChildren: 0.2,
     },
   },
 };
@@ -65,7 +62,6 @@ const PageHeader: React.FC<PageHeaderProps> = ({
       animate="visible"
       className={cn("text-center mb-12 space-y-8 relative")}
     >
-      {/* Decorative background elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-32 bg-gradient-to-r from-transparent via-primary/5 to-transparent rotate-3 blur-xl" />
       </div>
@@ -81,7 +77,7 @@ const PageHeader: React.FC<PageHeaderProps> = ({
             key={index}
             variants={itemVariants}
             whileHover={{
-              scale: 1.1,
+              scale: 1.4,
               rotate: index % 2 === 0 ? 10 : -10,
               transition: {
                 type: "spring",
@@ -102,29 +98,25 @@ const PageHeader: React.FC<PageHeaderProps> = ({
         ))}
       </motion.div>
 
-      {/* Title section */}
-      <motion.h1
-        variants={itemVariants}
+      <h1
         className={cn(
-          "text-5xl md:text-6xl font-bold",
+          "text-2xl md:text-4xl font-bold",
           "bg-clip-text text-transparent",
           "bg-gradient-to-r from-primary via-indigo-400 to-primary",
           "animate-gradient tracking-tight"
         )}
       >
         {title}
-      </motion.h1>
+      </h1>
 
-      {/* Description section */}
-      <motion.p
-        variants={itemVariants}
+      <p
         className={cn(
-          "text-xl md:text-2xl text-zinc-400 max-w-2xl mx-auto",
+          "text-lg md:text-xl text-zinc-400 max-w-2xl mx-auto",
           "font-light leading-relaxed"
         )}
       >
         {description}
-      </motion.p>
+      </p>
     </motion.div>
   );
 };

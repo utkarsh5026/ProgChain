@@ -5,7 +5,7 @@ import { SendHorizontal, Loader2, Command, Brain, Blocks } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import ModelSelect from "@/components/utils/ModelSelect";
+import ModelSelect from "@/components/llm/ModelSelect";
 import PageHeader from "../utils/PageHeader";
 
 import { type Model } from "@/config/config";

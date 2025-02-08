@@ -7,6 +7,7 @@ import problemSlice from "./leetcode/problemSlice";
 import chatsSlice from "./explore/chatsSlice";
 import threadsSlice from "./threads/slice";
 import chatInputSlice from "./chat-input/slice";
+import threadChatSlice from "./threads/threadChatSlice";
 
 export const store = configureStore({
   reducer: {
@@ -17,6 +18,7 @@ export const store = configureStore({
     problem: problemSlice,
     exploreChats: chatsSlice,
     threads: threadsSlice,
+    threadChat: threadChatSlice,
     chatInput: chatInputSlice,
   },
 });

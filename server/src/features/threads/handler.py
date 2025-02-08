@@ -37,6 +37,29 @@ class ThreadChatRequest(BaseContentGenerateRequest):
     )
 
 
+@router.get("/chat/{thread_content_id}")
+async def get_chats_for_thread_content(thread_content_id: int):
+    try:
+        chats = await tccs.get_chats_for_thread_content(thread_content_id)
+        return {
+            "chats": chats
+        }
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
+
+
+@router.post("/chat/stop")
+async def stop_chat(thread_content_id: int):
+    try:
+        tccs.stop_chat(thread_content_id)
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e))
+    return Response(status_code=status.HTTP_200_OK, content="Chat stopped")
+
+
 @router.post("/chat")
 async def chat(request: ThreadChatRequest):
     thread_content_id, question = request.thread_content_id, request.question
@@ -54,17 +77,6 @@ async def chat(request: ThreadChatRequest):
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
-
-
-@router.post("/chat/stop")
-async def stop_chat(thread_content_id: int):
-    try:
-        tccs.stop_chat(thread_content_id)
-    except Exception as e:
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e))
-    return Response(status_code=status.HTTP_200_OK, content="Chat stopped")
 
 
 @router.get("/")

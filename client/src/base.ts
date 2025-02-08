@@ -1,9 +1,18 @@
 import type { Model } from "@/config/config";
 
 export type BaseLLMRequest = Partial<{
+  question: string;
   model: Model;
   promptInstructions: string;
 }>;
+
+export const req = (llm_req: BaseLLMRequest) => {
+  return {
+    question: llm_req.question,
+    model: llm_req.model,
+    prompt_instructions: llm_req.promptInstructions,
+  };
+};
 
 export type LoadingStatus = "pending" | "fulfilled" | "rejected" | null;
 

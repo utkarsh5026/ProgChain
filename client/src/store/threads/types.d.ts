@@ -1,3 +1,5 @@
+import { Operation } from "@/base";
+
 type LearningContent = {
   id: string;
   topic: string;
@@ -9,4 +11,18 @@ export type Thread = {
   mainTopic: string;
   currentIdx: number;
   content: LearningContent[];
+};
+
+type ThreadMessage = {
+  chatId: number;
+  userQuestion: string;
+  aiResponse: string;
+  createdAt?: string;
+  updatedAt?: string;
+  loading: Operation;
+};
+
+export type ThreadChatContent = {
+  threadContentId: number;
+  chats: ThreadMessage[];
 };

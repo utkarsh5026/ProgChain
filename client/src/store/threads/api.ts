@@ -1,7 +1,7 @@
 import { postStream } from "@/api/stream";
-import type { LearningContent } from "./types";
-import { API_BASE_URL } from "@/api/caller";
-import type { BaseLLMRequest } from "@/base";
+import type { LearningContent, ThreadMessage } from "./types";
+import caller, { API_BASE_URL } from "@/api/caller";
+import { req, type BaseLLMRequest } from "@/base";
 
 const BASE_THREAD_URL = `${API_BASE_URL}/threads`;
 const GENERATE_URL = `${BASE_THREAD_URL}/generate`;
@@ -13,6 +13,10 @@ export type ThreadCreateRequest = BaseLLMRequest & {
 
 export type ThreadGenerateRequest = BaseLLMRequest & {
   threadID: number;
+};
+
+export type ThreadChatRequest = BaseLLMRequest & {
+  threadContentId: number;
 };
 
 type ThreadContent = {
@@ -81,4 +85,35 @@ export const fetchThread = async (
 export const getAllThreads = async () => {
   const response = await fetch(`${BASE_THREAD_URL}`);
   return response.json();
+};
+
+export const loadThreadChats = async (
+  threadContentId: number
+): Promise<ThreadMessage[]> => {
+  const response = await caller.get(
+    `${BASE_THREAD_URL}/chat/${threadContentId}`
+  );
+  const data = response.data;
+  return data.chats.map((chat: any) => ({
+    chatId: chat.id,
+    userQuestion: chat.user_question,
+    aiResponse: chat.ai_answer,
+  }));
+};
+
+export const streamAiAnswer = async function* (
+  threadContentId: number,
+  request: BaseLLMRequest
+): AsyncGenerator<ThreadMessage, void> {
+  const url = `${BASE_THREAD_URL}/${threadContentId}/chats`;
+  const body = req(request);
+  for await (const message of postStream(url, body)) {
+    yield message;
+  }
+};
+
+export const stopChat = async (threadContentId: number) => {
+  const url = `${BASE_THREAD_URL}/${threadContentId}/chats/stop`;
+  const response = await caller.post(url);
+  return response.data;
 };

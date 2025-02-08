@@ -5,8 +5,8 @@ from config.models import Model
 from asyncio import Queue, Lock
 from .models import (create_thread, create_content,
                      load_thread_with_topics,
-                     get_all_threads, get_thread_contents
-                     )
+                     get_all_threads, get_thread_contents,
+                     get_chats_for_thread_content)
 from .chat import ThreadIDChat
 from core import ChatGenerateOpions
 
@@ -245,3 +245,6 @@ class ThreadContentChatService:
             yield "".join(buffer)
 
         return stream_chat
+
+    async def get_chats_for_thread_content(self, content_id: int) -> list[dict]:
+        return await get_chats_for_thread_content(content_id)

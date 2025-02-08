@@ -20,24 +20,16 @@ interface MarkdownProps {
 
 const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
   const { toast } = useToast();
-  console.log("Content", content);
 
-  // A ref to act as a mutable pointer that tracks our position in the global markdown content.
   const currentIndexRef = useRef<number>(0);
-
-  // Reset the pointer when the markdown content changes.
   useEffect(() => {
     currentIndexRef.current = 0;
   }, [content]);
 
-  // Given the text extracted from an element, attempt to find its position
-  // in the global markdown string (starting at the current position), then update
-  // the pointer accordingly.
   const getIndicesForText = (
     text: string
   ): { startIndex: number; endIndex: number } => {
     if (!text || text.trim() === "") {
-      console.log("Empty text");
       return {
         startIndex: currentIndexRef.current,
         endIndex: currentIndexRef.current,
@@ -46,10 +38,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
     const fromIndex = 0;
     let foundIndex = content.indexOf(text, fromIndex);
     if (foundIndex === -1) {
-      console.log("Text not found", text);
       foundIndex = currentIndexRef.current;
-    } else {
-      console.log("Text found", text);
     }
     const startIndex = foundIndex;
     const endIndex = foundIndex + text.length;

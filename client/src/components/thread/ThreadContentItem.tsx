@@ -3,12 +3,11 @@ import { motion } from "framer-motion";
 import { CheckCircleIcon } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import ContentHeader from "./ContentHeader";
-import MarkdownContent from "../markdown/MarkdownContent";
+import MarkdownContent from "@/components/markdown/MarkdownContent";
 import type { LearningContent } from "@/store/threads/types";
 import type { Model } from "@/config/config";
 import useCapture from "@/hooks/use-capture";
 import { useToast } from "@/hooks/use-toast";
-
 interface LearningContentProps {
   content: LearningContent;
   onRegenerate?: (model: Model) => void;
@@ -64,12 +63,7 @@ const LearningContentDisplay: React.FC<LearningContentProps> = ({
 
   return (
     <div className="container py-8 px-bg-gradient-to-b from-zinc-950 to-black rounded-lg">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.5 }}
-        className="max-w-4xl mx-auto"
-      >
+      <motion.div className="max-w-4xl mx-auto">
         <Card className="border-zinc-800/30 bg-zinc-900/30 backdrop-blur-xl shadow-2xl overflow-hidden">
           {/* Decorative elements with pointer-events disabled */}
           <div className="absolute inset-0 pointer-events-none bg-gradient-to-br from-indigo-500/5 to-purple-500/5" />

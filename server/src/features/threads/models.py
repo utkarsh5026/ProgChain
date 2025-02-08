@@ -232,3 +232,16 @@ async def get_thread_content(content_id: int) -> ThreadContent:
         # Create a detached copy of the object
         session.expunge(thread_content)
         return thread_content
+
+
+async def get_chats_for_thread_content(content_id: int) -> list[dict]:
+    """
+    Get all chats for a given thread content.
+    """
+    async with db_session() as session:
+        result = await session.execute(
+            select(ThreadContentChat)
+            .filter(ThreadContentChat.content_id == content_id)
+        )
+
+        return result.scalars().all()

@@ -25,7 +25,6 @@ const SideNavigationButton: React.FC<SideNavigationButtonProps> = ({
         [direction === "left" ? "left" : "right"]: "2rem",
       }}
       className={`
-        fixed top-1/2 transform -translate-y-1/2
         flex items-center justify-center
         h-48 w-20 rounded-2xl
         border border-zinc-700/20

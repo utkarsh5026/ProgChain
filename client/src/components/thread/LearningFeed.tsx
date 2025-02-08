@@ -1,30 +1,26 @@
 import React, { useState, useEffect, useMemo, useCallback } from "react";
-import { ChevronLeft, ChevronRight, X } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import LearningContentDisplay from "./ThreadContentItem";
 import useThreads from "@/store/threads/hook";
 import SideNavigationButton from "./SideNavigationButton";
 import { loading } from "@/base";
-import ChatInput from "../llm/ChatInput";
 import { useToast } from "@/hooks/use-toast";
+import ThreadMessages from "./ThreadMessages";
 
 const LearningFeed: React.FC = () => {
   const { fetchMoreContent, thread, generating } = useThreads();
   const [activeIndex, setActiveIndex] = useState(0);
   const [isTransitioning, setIsTransitioning] = useState(false);
   const { toast } = useToast();
-  const [slideDirection, setSlideDirection] = useState<"left" | "right" | null>(
-    null
-  );
   const [isExploring, setIsExploring] = useState(false);
+
   const content = useMemo(() => thread?.content ?? [], [thread]);
   const handlePrevious = useCallback(() => {
     if (activeIndex > 0 && !isTransitioning) {
       setIsTransitioning(true);
-      setSlideDirection("right");
       setActiveIndex((prev) => prev - 1);
       setTimeout(() => {
         setIsTransitioning(false);
-        setSlideDirection(null);
       }, 300);
     }
   }, [activeIndex, isTransitioning]);
@@ -32,11 +28,9 @@ const LearningFeed: React.FC = () => {
   const handleNext = useCallback(() => {
     if (activeIndex < content.length - 1 && !isTransitioning) {
       setIsTransitioning(true);
-      setSlideDirection("left");
       setActiveIndex((prev) => prev + 1);
       setTimeout(() => {
         setIsTransitioning(false);
-        setSlideDirection(null);
       }, 300);
     }
   }, [activeIndex, content.length, isTransitioning]);
@@ -78,27 +72,12 @@ const LearningFeed: React.FC = () => {
     return () => window.removeEventListener("keydown", handleKeyPress);
   }, [activeIndex, handlePrevious, handleNext]);
 
-  // When the user clicks "Explore" from the header.
   const handleExplore = useCallback(() => {
     setIsExploring(true);
   }, []);
 
   return (
-    <div className="w-full relative bg-gradient-to-b from-zinc-950 to-zinc-900 flex justify-center">
-      <div className="flex items-center justify-center px-32">
-        <div
-          className={`transform transition-all duration-300 ease-in-out
-            ${isTransitioning ? "opacity-0 scale-95" : "opacity-100 scale-100"}
-            ${slideDirection === "left" ? "-translate-x-4" : ""}
-            ${slideDirection === "right" ? "translate-x-4" : ""}`}
-        >
-          <LearningContentDisplay
-            content={content[activeIndex]}
-            onExplore={handleExplore}
-            isExploring={isExploring}
-          />
-        </div>
-      </div>
+    <div className="w-full relative flex justify-center items-center">
       <SideNavigationButton
         direction="left"
         onClick={handlePrevious}
@@ -109,6 +88,21 @@ const LearningFeed: React.FC = () => {
           group-hover:-translate-x-1 group-hover:scale-110"
         />
       </SideNavigationButton>
+      <div className="flex items-center justify-center">
+        {isExploring ? (
+          <ThreadMessages
+            threadContent={content[activeIndex]}
+            exploring={isExploring}
+            closeExploring={() => setIsExploring(false)}
+          />
+        ) : (
+          <LearningContentDisplay
+            content={content[activeIndex]}
+            onExplore={handleExplore}
+            isExploring={isExploring}
+          />
+        )}
+      </div>
       <SideNavigationButton
         direction="right"
         onClick={handleNext}
@@ -120,18 +114,6 @@ const LearningFeed: React.FC = () => {
           group-hover:translate-x-1 group-hover:scale-110"
         />
       </SideNavigationButton>
-
-      {isExploring && (
-        <div className="absolute bottom-4 left-0 right-0 px-32">
-          <div className="flex items-center justify-end bg-zinc-900/50 p-2 rounded-t-xl">
-            <X
-              className="w-4 h-4 cursor-pointer hover:text-red-500"
-              onClick={() => setIsExploring(false)}
-            />
-          </div>
-          <ChatInput onSubmit={() => setIsExploring(false)} />
-        </div>
-      )}
     </div>
   );
 };
