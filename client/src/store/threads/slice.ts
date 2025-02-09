@@ -7,6 +7,7 @@ import {
   type ThreadCreateRequest,
   type ThreadGenerateRequest,
 } from "./api";
+import { onNewThreadContents } from "./actions";
 import { type Operation, op } from "@/base";
 
 interface ThreadState {
@@ -60,6 +61,9 @@ export const fetchThreadThunk = createAsyncThunk(
         currentIdx: 0,
         content: contents,
       })
+    );
+    dispatch(
+      onNewThreadContents(contents.map((content) => parseInt(content.id)))
     );
   }
 );

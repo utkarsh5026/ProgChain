@@ -14,6 +14,7 @@ import SideNavigationButton from "./SideNavigationButton";
 import { loading } from "@/base";
 import { useToast } from "@/hooks/use-toast";
 import ThreadMessages from "./ThreadMessages";
+import ProgressIndicator from "./ProgressIndicator";
 
 const LearningFeed: React.FC = () => {
   const { fetchMoreContent, thread, generating } = useThreads();
@@ -153,6 +154,13 @@ const LearningFeed: React.FC = () => {
             group-hover:translate-x-1 group-hover:scale-110"
           />
         </SideNavigationButton>
+      )}
+      {!isExploring && (
+        <ProgressIndicator
+          current={activeIndex}
+          total={content.length}
+          onItemSelect={setActiveIndex}
+        />
       )}
     </div>
   );

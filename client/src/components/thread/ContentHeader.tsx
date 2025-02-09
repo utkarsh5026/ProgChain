@@ -1,9 +1,8 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import ModelSelect from "@/components/llm/ModelSelect";
 import PromptTypeSelect from "@/components/llm/PromptTypeSelect";
 import { Button } from "@/components/ui/button";
-import { RefreshCw, Sparkles, DownloadIcon, Compass } from "lucide-react";
+import { RefreshCw, Sparkles, DownloadIcon } from "lucide-react";
 import type { Model } from "@/config/config";
 
 interface ContentHeaderProps {
@@ -16,7 +15,6 @@ interface ContentHeaderProps {
 const ContentHeader: React.FC<ContentHeaderProps> = ({
   onRegenerate,
   onCapture,
-  onExplore,
   isExploring,
 }: ContentHeaderProps) => {
   const [selectedModel, setSelectedModel] = useState<Model>("gpt-4o-mini");
@@ -41,35 +39,6 @@ const ContentHeader: React.FC<ContentHeaderProps> = ({
             </div>
           </div>
         </div>
-
-        {/* Center - Enhanced Explore button (only show if not already exploring) */}
-        {!isExploring && onExplore && (
-          <div>
-            <Button
-              className="bg-black text-white hover:bg-zinc-800"
-              onClick={onExplore}
-            >
-              <motion.span
-                whileHover={{ rotate: 360 }}
-                transition={{ type: "spring", stiffness: 300 }}
-                className="inline-block mr-2"
-              >
-                <Compass className="w-5 h-5" />
-              </motion.span>
-              <motion.span
-                animate={{ scale: [1, 1.1, 1] }}
-                transition={{
-                  duration: 1,
-                  ease: "easeInOut",
-                  repeat: Infinity,
-                }}
-                className="inline-block"
-              >
-                Explore
-              </motion.span>
-            </Button>
-          </div>
-        )}
 
         {/* Right side - Capture button and customization options */}
         <div className="flex flex-1 justify-end">
