@@ -8,6 +8,7 @@ import chatsSlice from "./explore/chatsSlice";
 import threadsSlice from "./threads/slice";
 import chatInputSlice from "./chat-input/slice";
 import threadChatSlice from "./threads/threadChatSlice";
+import chatPdfSlice from "./chat-pdf/slice";
 
 export const store = configureStore({
   reducer: {
@@ -20,6 +21,7 @@ export const store = configureStore({
     threads: threadsSlice,
     threadChat: threadChatSlice,
     chatInput: chatInputSlice,
+    chatPdf: chatPdfSlice,
   },
 });
 

@@ -9,8 +9,11 @@ import {
   Code,
   Dna,
   History,
+  MessageSquare,
+  File,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
+
 import {
   NavigationMenu,
   NavigationMenuItem,
@@ -74,6 +77,12 @@ const Sidebar: React.FC = () => {
       icon: <Dna className="h-5 w-5" />,
       title: "Threads",
       description: "Share your thoughts",
+    },
+    {
+      key: "/chatpdf",
+      icon: <File className="h-5 w-5" />,
+      title: "ChatPDF",
+      description: "Chat with PDF files",
     },
     {
       key: "/history",
