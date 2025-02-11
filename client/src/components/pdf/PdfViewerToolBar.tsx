@@ -13,6 +13,7 @@ import {
 import useChatPdf from "@/store/chat-pdf/use-chat-pdf";
 import { Sheet, SheetContent } from "@/components/ui/sheet";
 import OutlineViewer from "./OutlineViewer";
+import { ScrollArea } from "../ui/scroll-area";
 
 interface PdfViewerToolBarProps {
   onOutlineClick: (dest: any) => void;
@@ -124,10 +125,12 @@ const PdfViewerToolBar = forwardRef<HTMLInputElement, PdfViewerToolBarProps>(
                 className="w-72 p-4"
               >
                 <h3 className="text-lg font-semibold mb-2">Chapters</h3>
-                <OutlineViewer
-                  outline={pdf.outline}
-                  onItemClick={(item) => onOutlineClick(item.dest)}
-                />
+                <ScrollArea className="max-h-[calc(100vh-10rem)] overflow-auto">
+                  <OutlineViewer
+                    outline={pdf.outline}
+                    onItemClick={(item) => onOutlineClick(item.dest)}
+                  />
+                </ScrollArea>
               </SheetContent>
             </Sheet>
           )}

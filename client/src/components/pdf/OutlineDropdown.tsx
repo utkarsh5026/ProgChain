@@ -49,7 +49,7 @@ const OutlineDropdown: React.FC<OutlineDropdownProps> = ({
     <div className="relative inline-block" ref={dropdownRef}>
       {/* Dropdown button with dark theme styling */}
       <button
-        className="px-4 py-2 rounded flex items-center gap-2 bg-gray-800 text-gray-100 hover:bg-gray-700 transition-colors w-full text-left"
+        className="px-4 py-2 rounded flex items-center gap-2 text-gray-100 transition-colors w-full text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="flex-grow">{displayText}</span>
@@ -72,7 +72,7 @@ const OutlineDropdown: React.FC<OutlineDropdownProps> = ({
       </button>
 
       {isOpen && (
-        <div className="absolute left-0 mt-2 w-64 border border-gray-700 shadow-lg z-10 max-h-80 overflow-auto bg-gray-800 text-gray-100 rounded-lg">
+        <div className="absolute left-0 mt-2 w-64 border bg-black border-gray-700 shadow-lg z-10 max-h-80 overflow-auto text-gray-100 rounded-lg">
           <OutlineViewer outline={outline} onItemClick={handleItemClick} />
         </div>
       )}
@@ -85,8 +85,8 @@ const OutlineDropdown: React.FC<OutlineDropdownProps> = ({
               <TooltipProvider key={content}>
                 <Tooltip>
                   <TooltipTrigger asChild>
-                    <div className="inline-flex items-center bg-gray-900 text-gray-200 rounded-full px-2 py-1 w-32 hover:opacity-80">
-                      <span className="flex-grow text-sm truncate whitespace-nowrap">
+                    <div className="inline-flex items-center  text-gray-200 rounded-full px-2 py-1 w-32 hover:opacity-80">
+                      <span className="flex-grow text-xs truncate whitespace-nowrap text-slate-300">
                         {content}
                       </span>
                       <button
@@ -97,7 +97,7 @@ const OutlineDropdown: React.FC<OutlineDropdownProps> = ({
                       </button>
                     </div>
                   </TooltipTrigger>
-                  <TooltipContent className="bg-gray-800 text-gray-200 text-xs">
+                  <TooltipContent className="bg-gray-950 text-gray-200 text-xs">
                     {content}
                   </TooltipContent>
                 </Tooltip>

@@ -40,7 +40,7 @@ const TreeItem: React.FC<{
     <li>
       <button
         type="button"
-        className="flex items-center space-x-1 px-2 py-1 hover:bg-gray-200 cursor-pointer rounded"
+        className="flex items-center space-x-1 px-2 py-1 hover:bg-gray-800 cursor-pointer rounded"
         onClick={() => onItemClick && onItemClick(item)}
       >
         {icon}
