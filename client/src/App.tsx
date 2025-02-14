@@ -8,7 +8,6 @@ import TopicChain from "@/components/topics/TopicChain";
 import Projects from "@/components/projects/Projects";
 import { Toaster } from "@/components/ui/toaster";
 import Thread from "@/components/thread/Thread";
-import ChatPdf from "@/components/pdf/ChatPdf";
 
 function App() {
   useEffect(() => {
@@ -29,7 +28,6 @@ function App() {
               <Route path="/leetcode/*" element={<Leetcode />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/threads" element={<Thread />} />
-              <Route path="/chatpdf" element={<ChatPdf />} />
               <Route path="/" element={<Explore />} />
             </Routes>
             <Toaster />
