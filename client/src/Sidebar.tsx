@@ -9,8 +9,6 @@ import {
   Code,
   Dna,
   History,
-  MessageSquare,
-  File,
 } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -26,88 +24,82 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
+const sidebarVariants = {
+  hidden: { opacity: 0, x: -20 },
+  visible: {
+    opacity: 1,
+    x: 0,
+    transition: {
+      duration: 0.3,
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, x: -10 },
+  visible: { opacity: 1, x: 0 },
+};
+
+const menuItems = [
+  {
+    key: "/topics",
+    icon: <Book className="h-5 w-5" />,
+    title: "Topics",
+    description: "Explore programming topics",
+  },
+  {
+    key: "/interview",
+    icon: <Users className="h-5 w-5" />,
+    title: "Interview",
+    description: "Practice interview questions",
+  },
+  {
+    key: "/explore",
+    icon: <Compass className="h-5 w-5" />,
+    title: "Explore",
+    description: "Discover new concepts",
+  },
+  {
+    key: "/leetcode",
+    icon: (
+      <img
+        src="https://www.svgrepo.com/show/306328/leetcode.svg"
+        alt="Leetcode"
+        className={cn(
+          "h-5 w-5",
+          location.pathname === "/leetcode"
+            ? "text-primary [&]:brightness-100 [&]:invert-[0.85]"
+            : "text-zinc-400 [&]:brightness-100 [&]:invert-[0.6]"
+        )}
+      />
+    ),
+    title: "LeetCode",
+    description: "Practice coding problems",
+  },
+  {
+    key: "/projects",
+    icon: <Code className="h-5 w-5" />,
+    title: "Projects",
+    description: "Showcase your projects",
+  },
+  {
+    key: "/threads",
+    icon: <Dna className="h-5 w-5" />,
+    title: "Threads",
+    description: "Share your thoughts",
+  },
+  {
+    key: "/history",
+    icon: <History className="h-5 w-5" />,
+    title: "History",
+    description: "View your chat history",
+  },
+];
+
 const Sidebar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-
-  const menuItems = [
-    {
-      key: "/topics",
-      icon: <Book className="h-5 w-5" />,
-      title: "Topics",
-      description: "Explore programming topics",
-    },
-    {
-      key: "/interview",
-      icon: <Users className="h-5 w-5" />,
-      title: "Interview",
-      description: "Practice interview questions",
-    },
-    {
-      key: "/explore",
-      icon: <Compass className="h-5 w-5" />,
-      title: "Explore",
-      description: "Discover new concepts",
-    },
-    {
-      key: "/leetcode",
-      icon: (
-        <img
-          src="https://www.svgrepo.com/show/306328/leetcode.svg"
-          alt="Leetcode"
-          className={cn(
-            "h-5 w-5",
-            location.pathname === "/leetcode"
-              ? "text-primary [&]:brightness-100 [&]:invert-[0.85]"
-              : "text-zinc-400 [&]:brightness-100 [&]:invert-[0.6]"
-          )}
-        />
-      ),
-      title: "LeetCode",
-      description: "Practice coding problems",
-    },
-    {
-      key: "/projects",
-      icon: <Code className="h-5 w-5" />,
-      title: "Projects",
-      description: "Showcase your projects",
-    },
-    {
-      key: "/threads",
-      icon: <Dna className="h-5 w-5" />,
-      title: "Threads",
-      description: "Share your thoughts",
-    },
-    {
-      key: "/chatpdf",
-      icon: <File className="h-5 w-5" />,
-      title: "ChatPDF",
-      description: "Chat with PDF files",
-    },
-    {
-      key: "/history",
-      icon: <History className="h-5 w-5" />,
-      title: "History",
-      description: "View your chat history",
-    },
-  ];
-
-  const sidebarVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: {
-        duration: 0.3,
-        staggerChildren: 0.1,
-      },
-    },
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, x: -10 },
-    visible: { opacity: 1, x: 0 },
-  };
 
   return (
     <motion.div
