@@ -1,12 +1,12 @@
 import asyncio
 from typing import AsyncGenerator
 from pydantic import BaseModel
+from cachetools import LFUCache
 
 from .models import ExploreChat, ExploreChatMessage
 from .chat import ResearchAssistant
 from config.models import Model
 from core import ChatGenerateOptions
-from config.stream import BaseContentGenerateRequest
 
 
 class ChatNotExistsError(Exception):
@@ -39,6 +39,7 @@ class ResearchAssistantService:
         Initialize the ResearchAssistantService.
         """
         self.assistants: dict[str, ResearchAssistant] = {}
+        self.cache = LFUCache(maxsize=100)
 
     async def start_exploration(self, topic: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
         """
@@ -73,7 +74,7 @@ class ResearchAssistantService:
             AsyncGenerator[str, None]: Chunks of the generated assistant response.
         """
         await self._load_chat_messages(chat_id)
-        assistant = self.assistants[chat_id]
+        assistant = self.cache.get(chat_id)
 
         async for chunk in assistant.generate_answer(options):
             yield chunk
@@ -91,8 +92,8 @@ class ResearchAssistantService:
             bool: True if the chat was deleted, False if it does not exist.
         """
         deleted = await ExploreChat.delete(chat_id)
-        if chat_id in self.assistants:
-            del self.assistants[chat_id]
+        if chat_id in self.cache:
+            del self.cache[chat_id]
         return deleted
 
     async def get_all_chats(self, limit: int = 10, page: int = 1):
@@ -138,8 +139,8 @@ class ResearchAssistantService:
         Raises:
             ChatNotExistsError: If no messages exist for the given chat_id.
         """
-        if chat_id in self.assistants:
+        if chat_id in self.cache:
             return
         assistant = await ResearchAssistant.create(chat_id)
-        self.assistants[chat_id] = assistant
+        self.cache[chat_id] = assistant
         print(f"Loaded assistant for chat {chat_id}")

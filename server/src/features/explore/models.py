@@ -175,7 +175,9 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
 
     @classmethod
     @with_session()
-    async def create(cls, session: AsyncSession, chat_public_id: str, user_question: str,
+    async def create(cls, session: AsyncSession,
+                     chat_public_id: str,
+                     user_question: str,
                      assistant_answer: str) -> "ExploreChatMessage":
         """
         Add a new message to an existing chat.

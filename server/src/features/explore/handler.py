@@ -1,9 +1,11 @@
 from fastapi import status, APIRouter, HTTPException
+from loguru import logger
 
 from pydantic import Field
-from config.stream import stream_response, BaseContentGenerateRequest
+
 from .service import ResearchAssistantService
 from core import ChatGenerateOptions
+from fastapi_components import stream_response, BaseContentGenerateRequest
 
 
 service = ResearchAssistantService()
@@ -29,6 +31,9 @@ async def explore_topic(request: BaseContentGenerateRequest):
             model=request.model,
             extra_instructions=request.extra_instructions
         )
+
+        logger.info(
+            f"Staring exploration with the options: {options.model_dump_json(indent=4)}")
         async for chunk in service.start_exploration(options):
             yield chunk
 
@@ -38,7 +43,9 @@ async def explore_topic(request: BaseContentGenerateRequest):
 @router.post("/question")
 async def ask_question(question_request: AskQuestionRequest):
     chat_id = question_request.chat_id
-    print(question_request)
+
+    logger.info(
+        f"User asked question {question_request.model_dump_json(indent=2)}")
 
     async def stream_func():
         async for chunk in service.ask_question(chat_id, question_request):
