@@ -1,17 +1,21 @@
+import logging
+import uuid
+import functools
+
 from sqlalchemy.orm import sessionmaker, Session
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from contextlib import asynccontextmanager
 from sqlalchemy import Column, DateTime, func, Integer, String, select
-import logging
-import uuid
+
+from contextlib import asynccontextmanager
+from typing import TypeVar, Type, Callable, Any, Optional
+
 
 logger = logging.getLogger(__name__)
 logging.basicConfig(level=logging.INFO)
 
 ASYNC_DATABASE_URL = "sqlite+aiosqlite:///./sqlite.db"
 async_engine = create_async_engine(ASYNC_DATABASE_URL, echo=False)
-
 
 AsyncSessionLocal = sessionmaker(
     autocommit=False,
@@ -20,6 +24,8 @@ AsyncSessionLocal = sessionmaker(
     class_=AsyncSession
 )
 Base = declarative_base()
+
+T = TypeVar('T')
 
 
 @asynccontextmanager
@@ -53,11 +59,35 @@ def with_session():
     The wrapped function should have 'session' as its first parameter after self (for methods)
     or as its first parameter (for standalone functions).
     """
-    def decorator(func):
+
+    def decorator(function: Callable[..., T]) -> Callable[..., T]:
+        @functools.wraps(function)
         async def wrapper(*args, **kwargs):
-            async with db_session() as session:
-                return await func(*args, session, **kwargs)
+            is_class_method = isinstance(args[0], type)
+
+            async with AsyncSessionLocal() as session:
+                try:
+                    if is_class_method:
+                        cls = args[0]
+                        other_args = args[1:]
+                        result = await function(cls, session, *other_args, **kwargs)
+                    else:
+                        result = await function(session, *args, **kwargs)
+                    for obj in session.identity_map.values():
+                        await session.refresh(obj)
+
+                    session.expunge_all()
+                    await session.commit()
+                    return result
+
+                except Exception as error:
+                    logger.exception(
+                        f"Database Operation failed with error:  {error}")
+                    await session.rollback()
+                    raise
+
         return wrapper
+
     return decorator
 
 
@@ -66,13 +96,12 @@ async def init_db():
     Asynchronously initialize the database by creating all tables defined in Base.
     """
     async with async_engine.begin() as conn:
-
         await conn.run_sync(Base.metadata.create_all)
 
 
 class TimestampMixin(object):
     @declared_attr
-    def created_at(cls):
+    def created_at(self):
         return Column(
             DateTime(timezone=True),
             server_default=func.now(),
@@ -80,7 +109,7 @@ class TimestampMixin(object):
         )
 
     @declared_attr
-    def updated_at(cls):
+    def updated_at(self):
         return Column(
             DateTime(timezone=True),
             server_default=func.now(),
@@ -101,7 +130,17 @@ class TimestampMixin(object):
 class PublicIDMixin:
     """Mixin to handle public IDs and ID masking in models."""
     id = Column(Integer, primary_key=True, autoincrement=True)
-    public_id = Column(String, unique=True, nullable=False, index=True)
+
+    @declared_attr
+    def public_id(cls) -> Column:
+        """Define public_id as a declared attribute for better inheritance."""
+        return Column(
+            String,
+            unique=True,
+            nullable=False,
+            index=True,
+            default=lambda: cls.generate_public_id()
+        )
 
     def __init__(self, *args, **kwargs):
         kwargs['public_id'] = self.generate_public_id()
@@ -117,27 +156,37 @@ class PublicIDMixin:
         return f"{prefix}_{unique_id}"
 
     @classmethod
-    async def get_by_public_id(cls, public_id: str):
-        """Get a model by its public ID."""
-        async with db_session() as session:
-            result = await session.execute(select(cls).filter(cls.public_id == public_id))
-            return result.scalar_one_or_none()
+    @with_session()
+    async def get_by_public_id(cls, session: AsyncSession, public_id: str):
+        """
+        Get a model instance by its public ID.
+        Uses the session decorator for cleaner transaction management.
+        """
+        result = await session.scalar(
+            select(cls).where(cls.public_id == public_id)
+        )
+        return result
 
     @classmethod
-    async def delete(cls, public_id: str):
+    @with_session()
+    async def delete(cls, session: AsyncSession, public_id: str):
         """Delete a model by its public ID."""
-        async with db_session() as session:
-            result = await session.execute(select(cls).filter(cls.public_id == public_id))
-            obj = result.scalar_one_or_none()
-            if obj:
-                await session.delete(obj)
-                await session.commit()
+        obj = await cls.get_by_public_id(session, public_id)
+        if obj:
+            await session.delete(obj)
+            return True
+        return False
 
-    def to_dict(self) -> dict:
-        """Convert model to dictionary, excluding internal ID."""
-        data = {
+    def to_dict(self, exclude: Optional[set[str]] = None) -> dict:
+        """
+        Convert model to dictionary, with configurable field exclusion.
+        Automatically excludes internal ID and any specified fields.
+        """
+        exclude = exclude or set()
+        exclude.add('id')
+
+        return {
             column.name: getattr(self, column.name)
             for column in self.__table__.columns
-            if column.name != 'id'
+            if column.name not in exclude
         }
-        return data
