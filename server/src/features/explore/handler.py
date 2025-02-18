@@ -1,8 +1,9 @@
 from fastapi import status, APIRouter, HTTPException
 
-from pydantic import BaseModel, Field
+from pydantic import Field
 from config.stream import stream_response, BaseContentGenerateRequest
 from .service import ResearchAssistantService
+from core import ChatGenerateOptions
 
 
 service = ResearchAssistantService()
@@ -10,14 +11,8 @@ service = ResearchAssistantService()
 router = APIRouter(prefix="/explore", tags=["explore"])
 
 
-class TopicExploreRequest(BaseModel):
-    topic: str
-    depth: str = "comprehensive"
-    focus_areas: str = "all"
-
-
 class AskQuestionRequest(BaseContentGenerateRequest):
-    chat_id: int = Field(description="The chat id to add the question to")
+    chat_id: str = Field(description="The chat id to add the question to")
 
 
 class ChatNotFoundError(HTTPException):
@@ -27,9 +22,14 @@ class ChatNotFoundError(HTTPException):
 
 
 @router.post("/topic")
-async def explore_topic(request: TopicExploreRequest):
+async def explore_topic(request: BaseContentGenerateRequest):
     async def stream_func():
-        async for chunk in service.start_exploration(request.topic):
+        options = ChatGenerateOptions(
+            question=request.question,
+            model=request.model,
+            extra_instructions=request.extra_instructions
+        )
+        async for chunk in service.start_exploration(options):
             yield chunk
 
     return stream_response(stream_func)
@@ -58,7 +58,7 @@ async def get_all_chats():
 
 
 @router.delete("/chat/{chat_id}")
-async def delete_chat(chat_id: int):
+async def delete_chat(chat_id: str):
     try:
         deleted = await service.delete_chat(chat_id)
         if not deleted:
@@ -70,7 +70,7 @@ async def delete_chat(chat_id: int):
 
 
 @router.get("/chat/{chat_id}")
-async def get_chat_for_id(chat_id: int):
+async def get_chat_for_id(chat_id: str):
     try:
         chat = await service.get_chat(chat_id)
         if chat is None:

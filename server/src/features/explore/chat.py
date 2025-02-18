@@ -1,13 +1,11 @@
-from typing import Optional
-from asyncio import create_task, Lock
-
-from typing import AsyncGenerator
+import asyncio
+from typing import Optional, AsyncGenerator
 from core.chat.chat import ChatConfig
-from core.vector.store import VectorDB
+
 from langchain_core.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain_core.output_parsers import StrOutputParser
-from core import ChatGenerateOpions, BaseChatSystem
-from .db_models import get_chat_messages, create_empty_chat, update_chat_topic, create_empty_chat_message, update_chat_message
+from core import ChatGenerateOptions, BaseChatSystem, VectorDB
+from .models import ExploreChat, ExploreChatMessage
 
 from config.models import Model, get_model
 
@@ -50,13 +48,11 @@ At the end of your response, always include:
 """
 
     @classmethod
-    async def create(cls, chat_id: Optional[int] = None):
-        if chat_id is None:
-            chat_id = await create_empty_chat()
-
-        initial_context = await cls.create_context(chat_id)
+    async def create(cls, chat_id: Optional[str] = None):
+        chat = await cls._load_or_create_chat(chat_id)
+        initial_context = await cls.create_context(chat.id)
         return cls(
-            chat_id=chat_id,
+            chat=chat,
             prompt=ChatPromptTemplate.from_messages([
                 ("system", cls.system_prompt),
                 ("human", "{input}"),
@@ -65,13 +61,20 @@ At the end of your response, always include:
             initial_context=initial_context
         )
 
-    def __init__(self, chat_id: int,  prompt: ChatPromptTemplate, vector_db: Optional[VectorDB] = None, config: Optional[ChatConfig] = None, initial_context: str = "") -> None:
-        super().__init__(prompt, vector_db, config, initial_context)
-        self.chat_id = chat_id
-        self.topic = None
-        self.lock = Lock()
+    @classmethod
+    async def _load_or_create_chat(cls, chat_id: Optional[str]) -> ExploreChat:
+        if chat_id is None:
+            return await ExploreChat.create_empty_chat()
+        return await ExploreChat.get_by_public_id(chat_id)
 
-    async def generate_answer(self, message: str, options: ChatGenerateOpions) -> AsyncGenerator[str, None]:
+    def __init__(self, chat: ExploreChat,  prompt: ChatPromptTemplate, vector_db: Optional[VectorDB] = None, config: Optional[ChatConfig] = None, initial_context: str = "") -> None:
+        super().__init__(prompt, vector_db, config, initial_context)
+        self._chat_public_id = chat.public_id
+        self._chat_internal_id = chat.id
+        self.topic = None
+        self.lock = asyncio.Lock()
+
+    async def generate_answer(self, options: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
         """
         Generate an answer for a given question with optional extra instructions.
 
@@ -83,32 +86,43 @@ At the end of your response, always include:
           5. Saves the complete interaction to the vector store.
 
         Parameters:
-          message: The user's question or prompt.
-          model: The language model to use for generating the answer (defaults to GPT_4O).
-          extra_instructions: Additional instructions to tailor the response.
+          options: The chat generation options including the model name and extra instructions.
 
         Returns:
           An asynchronous generator that yields parts of the generated answer as they are produced.
         """
-        model, extra_instructions = options.model, options.extra_instructions
         machine_answer = []
-        empty_chat = await create_empty_chat_message(self.chat_id)
-        yield "chat_message_id: " + str(empty_chat)
+        chat_public_id = await self._create_empty_chat_message()
+
         try:
-            async for chunk in self.generate_response(message, model, extra_instructions):
+            async for chunk, metadata in self.generate_response(options):
                 machine_answer.append(chunk)
-                yield chunk
+                yield {
+                    "chat_id": self._chat_public_id,
+                    "chat_message_id": chat_public_id,
+                    "message": chunk,
+                    "llm_metadata": metadata.model_dump()
+                }
         finally:
-            if self.topic is None:
-                create_task(self._set_chat_topic(message))
-            assistant_answer = "".join(machine_answer)
-            create_task(
-                update_chat_message(
-                    self.chat_id,
-                    user_question=message,
-                    assistant_answer=assistant_answer
-                )
+            await self._reflect_db_changes(options.question, machine_answer)
+
+    async def _reflect_db_changes(self, message: str, machine_answer: list[str]):
+        """
+        Reflects changes in the database by updating the chat topic and the chat message.
+
+        This method ensures that the chat topic is set if it is not already set, and updates the chat message
+        with the latest user question and assistant answer.
+        """
+        if self.topic is None:
+            await asyncio.create_task(self._set_chat_topic(message))
+        assistant_answer = "".join(machine_answer)
+        await asyncio.create_task(
+            ExploreChatMessage.update_chat_message(
+                self._chat_internal_id,
+                user_question=message,
+                assistant_answer=assistant_answer
             )
+        )
 
     async def _set_chat_topic(self, question: str) -> str:
         """
@@ -123,22 +137,35 @@ At the end of your response, always include:
             str: The determined chat topic.
         """
         prompt = ChatPromptTemplate.from_messages([
-            ("system", "You are a helpful assistant that determines the topic of a question. Only give the topic, no other text."),
+            ("system", "You are a helpful assistant that determines the topic of a question. Only give the topic, "
+                       "no other text."),
             ("human", "Question: {question}"),
         ])
         small_model = get_model(Model.GPT_4O_MINI.value)
         chain = prompt | small_model | StrOutputParser()
         self.topic = await chain.ainvoke({"question": question})
-        await update_chat_topic(self.chat_id, self.topic)
+        await ExploreChat.update_chat_topic(self._chat_internal_id, self.topic)
 
     @classmethod
-    async def create_context(cls, chat_id: int) -> str:
-        chat_messages = await get_chat_messages(chat_id)
+    async def create_context(cls, chat_internal_id: int) -> str:
+        """
+        Create a context string for the chat based on the internal ID.
+
+        This method retrieves all messages associated with the specified chat and formats them into a context string.
+        The context includes the user's questions and the assistant's answers.
+        """
+        chat_messages = await ExploreChatMessage.get_messages_by_internal_id(chat_internal_id)
         context = ""
         for message in chat_messages:
-
             uq = message.user_question
             aq = message.assistant_answer
             context += f"User: {uq}\nAssistant: {aq}\n"
-
         return cls.system_prompt + "\n\n" + context
+
+    async def _create_empty_chat_message(self) -> str:
+        """
+        Create an empty chat message for the chat.
+
+        This method creates an empty chat message for the chat and returns its public ID.
+        """
+        return await ExploreChatMessage.create_empty_chat_message(self._chat_internal_id, self._chat_public_id)

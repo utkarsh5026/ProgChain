@@ -1,16 +1,11 @@
-from asyncio import create_task, get_running_loop
+import asyncio
 from typing import AsyncGenerator
 from pydantic import BaseModel
 
-from langchain_core.prompts import ChatPromptTemplate
-from langchain_core.output_parsers import StrOutputParser
-
-from .db_models import (create_chat, add_chat_message,
-                        delete_chat, get_chats, get_chat_messages)
-from .db_models import ExploreChatMessage
+from .models import ExploreChat, ExploreChatMessage
 from .chat import ResearchAssistant
-from config.models import Model, get_model
-from core import ChatGenerateOpions
+from config.models import Model
+from core import ChatGenerateOptions
 from config.stream import BaseContentGenerateRequest
 
 
@@ -42,15 +37,10 @@ class ResearchAssistantService:
     def __init__(self) -> None:
         """
         Initialize the ResearchAssistantService.
-
-        Attributes:
-            assistants (dict[int, ResearchAssistant]): Stores active ResearchAssistant instances keyed by chat ID.
-            small_model: A lightweight model used for determining chat topics.
-            lock: An asyncio Lock to synchronize operations that modify shared resources.
         """
-        self.assistants: dict[int, ResearchAssistant] = {}
+        self.assistants: dict[str, ResearchAssistant] = {}
 
-    async def start_exploration(self, question: str, model_name: str = Model.GPT_4O.value, extra_instructions: str = "") -> AsyncGenerator[str | int, None]:
+    async def start_exploration(self, topic: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
         """
         Start a new exploration session by generating an answer for the given question.
 
@@ -59,24 +49,16 @@ class ResearchAssistantService:
         from the question, stores the new chat with its conversation, and registers the assistant.
 
         Args:
-            question (str): The initial question to explore.
-            model_name (str): Model to use for generating the answer (default is GPT_4O).
-            extra_instructions (str): Additional generation instructions if needed.
+            topic (TopicQuestion): The question details including text, model name, and extra instructions.
 
         Yields:
             AsyncGenerator[str, None]: Chunks of the generated answer.
         """
         assistant = await ResearchAssistant.create()
-        options = ChatGenerateOpions(
-            model_name=model_name,
-            extra_instructions=extra_instructions
-        )
-        async for chunk in assistant.generate_answer(question, options):
+        async for chunk in assistant.generate_answer(topic):
             yield chunk
 
-        yield assistant.chat_id
-
-    async def ask_question(self, chat_id: int, question: BaseContentGenerateRequest) -> AsyncGenerator[str, None]:
+    async def ask_question(self, chat_id: str, options: ChatGenerateOptions) -> AsyncGenerator[str, None]:
         """
 
         Ask a follow-up question within an existing chat session.
@@ -85,7 +67,7 @@ class ResearchAssistantService:
 
         Args:
             chat_id (int): The ID of the existing chat session.
-            question (TopicQuestion): The question details including text, model name, and extra instructions.
+            options (ChatGenerateOptions): The question details including text, model name, and extra instructions.
 
         Yields:
             AsyncGenerator[str, None]: Chunks of the generated assistant response.
@@ -93,26 +75,22 @@ class ResearchAssistantService:
         await self._load_chat_messages(chat_id)
         assistant = self.assistants[chat_id]
 
-        options = ChatGenerateOpions(
-            model_name=question.model,
-            extra_instructions=question.extra_instructions
-        )
-        async for chunk in assistant.generate_answer(question.question, options):
+        async for chunk in assistant.generate_answer(options):
             yield chunk
 
-    async def delete_chat(self, chat_id: int) -> bool:
+    async def delete_chat(self, chat_id: str) -> bool:
         """
         Delete a chat session.
 
         Removes the chat from the database and clears the associated assistant instance.
 
         Args:
-            chat_id (int): The ID of the chat session to delete.
+            chat_id (str): The ID of the chat session to delete.
 
         Returns:
             bool: True if the chat was deleted, False if it does not exist.
         """
-        deleted = await delete_chat(chat_id)
+        deleted = await ExploreChat.delete(chat_id)
         if chat_id in self.assistants:
             del self.assistants[chat_id]
         return deleted
@@ -124,9 +102,10 @@ class ResearchAssistantService:
         Returns:
             A list of all chat records.
         """
-        return await get_chats()
+        chats = await ExploreChat.get_chats()
+        return chats
 
-    async def get_chat(self, chat_id: int) -> list[ExploreChatMessage]:
+    async def get_chat(self, chat_id: str) -> list[ExploreChatMessage]:
         """
         Retrieve all messages from a specific chat session.
 
@@ -142,11 +121,11 @@ class ResearchAssistantService:
         Raises:
             ChatNotExistsError: If the chat session does not exist.
         """
-        messages = await get_chat_messages(chat_id)
-        create_task(self._load_chat_messages(chat_id))
+        messages = await ExploreChatMessage.get_chat_messages(chat_id)
+        await asyncio.create_task(self._load_chat_messages(chat_id))
         return messages
 
-    async def _load_chat_messages(self, chat_id: int):
+    async def _load_chat_messages(self, chat_id: str):
         """
         Load chat messages and initialize the ResearchAssistant's context for an existing chat.
 
@@ -154,7 +133,7 @@ class ResearchAssistantService:
         and registers the assistant if not already loaded.
 
         Args:
-            chat_id (int): The ID of the chat session.
+            chat_id (str): The ID of the chat session.
 
         Raises:
             ChatNotExistsError: If no messages exist for the given chat_id.
