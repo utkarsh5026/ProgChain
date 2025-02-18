@@ -79,6 +79,7 @@ pdfminer = "^20191125"
 pypdf2 = "^3.0.1"
 pymupdf = "^1.25.3"
 camelot-py = "^1.0.0"
+loguru = "^0.7.3"
 
 [tool.poetry.dev-dependencies]
 
