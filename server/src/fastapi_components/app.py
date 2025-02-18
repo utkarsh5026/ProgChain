@@ -11,6 +11,8 @@ from fastapi.exceptions import RequestValidationError, ResponseValidationError
 from contextlib import asynccontextmanager
 from config.db import init_db
 
+from .middleware import RequestLoggingMiddleware
+
 
 class Environment(Enum):
     DEV = "dev"
@@ -52,6 +54,9 @@ app.add_middleware(
     TrustedHostMiddleware,
     allowed_hosts=["*"] if ENVIRONMENT == Environment.DEV else ALLOWED_HOSTS,
 )
+
+
+app.add_middleware(RequestLoggingMiddleware)
 
 
 @app.exception_handler(Exception)
