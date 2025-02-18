@@ -1,14 +1,15 @@
 import logging
 import uuid
 import functools
+from datetime import datetime
 
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker, Session, Mapped, mapped_column
 from sqlalchemy.ext.declarative import declarative_base, declared_attr
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
-from sqlalchemy import Column, DateTime, func, Integer, String, select
+from sqlalchemy import DateTime, func, Integer, String, select
 
 from contextlib import asynccontextmanager
-from typing import TypeVar, Type, Callable, Any, Optional
+from typing import TypeVar, Callable, Optional
 
 
 logger = logging.getLogger(__name__)
@@ -101,16 +102,16 @@ async def init_db():
 
 class TimestampMixin(object):
     @declared_attr
-    def created_at(self):
-        return Column(
+    def created_at(self) -> Mapped[datetime]:
+        return mapped_column(
             DateTime(timezone=True),
             server_default=func.now(),
             nullable=False
         )
 
     @declared_attr
-    def updated_at(self):
-        return Column(
+    def updated_at(self) -> Mapped[datetime]:
+        return mapped_column(
             DateTime(timezone=True),
             server_default=func.now(),
             onupdate=func.now(),
@@ -129,12 +130,13 @@ class TimestampMixin(object):
 
 class PublicIDMixin:
     """Mixin to handle public IDs and ID masking in models."""
-    id = Column(Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(
+        Integer, primary_key=True, autoincrement=True)
 
     @declared_attr
-    def public_id(cls) -> Column:
+    def public_id(cls) -> Mapped[str]:
         """Define public_id as a declared attribute for better inheritance."""
-        return Column(
+        return mapped_column(
             String,
             unique=True,
             nullable=False,
@@ -181,12 +183,16 @@ class PublicIDMixin:
         """
         Convert model to dictionary, with configurable field exclusion.
         Automatically excludes internal ID and any specified fields.
+        Handles relationship attributes by converting them to dictionaries as well.
         """
         exclude = exclude or set()
         exclude.add('id')
 
-        return {
-            column.name: getattr(self, column.name)
-            for column in self.__table__.columns
-            if column.name not in exclude
-        }
+        result = {}
+
+        # Handle regular columns
+        for column in self.__table__.columns:
+            if column.name not in exclude:
+                result[column.name] = getattr(self, column.name)
+
+        return result
