@@ -1,9 +1,8 @@
 from typing import List, Sequence, Optional
 
-from config.db import Base, with_session, PublicIDMixin, TimestampMixin
+from db import Base, with_session, PublicIDMixin, TimestampMixin
 from sqlalchemy import (
     Integer,
-    Column,
     String,
     Float,
     ForeignKey,
@@ -13,24 +12,31 @@ from sqlalchemy import (
     event,
 )
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.orm import relationship, Session, joinedload
+from sqlalchemy.orm import relationship, Session, joinedload, Mapped, mapped_column
 
 
 class ExploreChat(Base, TimestampMixin, PublicIDMixin):
     __tablename__ = "explore_chats"
 
-    chat_topic = Column(String, nullable=False)
-    chat_messages = relationship("ExploreChatMessage",
-                                 back_populates="chat",
-                                 lazy="dynamic",
-                                 primaryjoin="ExploreChatMessage.chat_internal_id == ExploreChat.id",
-                                 order_by="desc(ExploreChatMessage.created_at)")
-    chat_messages_count = Column(Integer, nullable=False, default=0)
-    stats = relationship("ExploreChatStats",
-                         back_populates="chat",
-                         lazy="joined",
-                         primaryjoin="ExploreChatStats.chat_internal_id == ExploreChat.id",
-                         order_by="desc(ExploreChatStats.created_at)")
+    chat_topic: Mapped[str] = mapped_column(String, nullable=False)
+    chat_messages_count: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0)
+
+    chat_messages: Mapped[list["ExploreChatMessage"]] = relationship(
+        "ExploreChatMessage",
+        back_populates="chat",
+        lazy="dynamic",
+        primaryjoin="ExploreChatMessage.chat_internal_id == ExploreChat.id",
+        order_by="desc(ExploreChatMessage.created_at)"
+    )
+
+    stats: Mapped[list["ExploreChatStats"]] = relationship(
+        "ExploreChatStats",
+        back_populates="chat",
+        lazy="joined",
+        primaryjoin="ExploreChatStats.chat_internal_id == ExploreChat.id",
+        order_by="desc(ExploreChatStats.created_at)"
+    )
 
     def __repr__(self) -> str:
         return f"<ExploreChat(chat_id={self.public_id})>"
@@ -130,24 +136,26 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
 class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
     __tablename__ = "explore_chat_messages"
 
-    user_question = Column(String, nullable=False)
-    assistant_answer = Column(String, nullable=False)
-    chat_id = Column(
+    user_question: Mapped[str] = mapped_column(String, nullable=False)
+    assistant_answer: Mapped[str] = mapped_column(String, nullable=False)
+    chat_id: Mapped[str] = mapped_column(
         String,
         ForeignKey("explore_chats.public_id"),
         nullable=False,
         index=True
     )
-
-    chat_internal_id = Column(
+    chat_internal_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("explore_chats.id"),
         nullable=False,
         index=True
     )
 
-    chat = relationship(
-        "ExploreChat", back_populates="chat_messages", foreign_keys=[chat_internal_id])
+    chat: Mapped["ExploreChat"] = relationship(
+        "ExploreChat",
+        back_populates="chat_messages",
+        foreign_keys=[chat_internal_id]
+    )
 
     def __repr__(self) -> str:
         return f"<ExploreChatMessage(id={self.id}, chat_id={self.chat_id})>"
@@ -283,25 +291,28 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
 class ExploreChatStats(Base, TimestampMixin, PublicIDMixin):
     __tablename__ = "explore_chat_stats"
 
-    chat_id = Column(
+    chat_id: Mapped[str] = mapped_column(
         String,
         ForeignKey("explore_chats.public_id"),
         nullable=False,
-        index=True)
-
-    chat_internal_id = Column(
+        index=True
+    )
+    chat_internal_id: Mapped[int] = mapped_column(
         Integer,
         ForeignKey("explore_chats.id"),
         nullable=False,
-        index=True)
+        index=True
+    )
+    total_tokens: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0)
+    prompt_tokens: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0)
+    completion_tokens: Mapped[int] = mapped_column(
+        Integer, nullable=False, default=0)
+    msg_cnt: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    total_cost: Mapped[float] = mapped_column(Float, nullable=False, default=0)
 
-    total_tokens = Column(Integer, nullable=False, default=0)
-    prompt_tokens = Column(Integer, nullable=False, default=0)
-    completion_tokens = Column(Integer, nullable=False, default=0)
-    msg_cnt = Column(Integer, nullable=False, default=0)
-    total_cost = Column(Float, nullable=False, default=0)
-
-    chat = relationship(
+    chat: Mapped["ExploreChat"] = relationship(
         "ExploreChat",
         back_populates="stats",
         foreign_keys=[chat_internal_id],
