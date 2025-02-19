@@ -9,14 +9,14 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError, ResponseValidationError
 from contextlib import asynccontextmanager
-from config.db import init_db
+from db import init_db
 
 from .middleware import RequestLoggingMiddleware
 
 
 class Environment(Enum):
     DEV = "dev"
-    PROD = "prod"
+    PROD = "production"
 
 
 load_dotenv()
@@ -28,7 +28,6 @@ ALLOWED_HOSTS = os.getenv("ALLOWED_HOSTS", "").split(",")
 @asynccontextmanager
 async def lifespan(app: FastAPI):
     await init_db()
-    print(os.getenv("OPENAI_API_KEY"))
     yield
 
 
