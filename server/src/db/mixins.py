@@ -7,9 +7,12 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy import DateTime, func, Integer, String, select
 
 from .context import with_session
+from cache import Cache
 
 
 class TimestampMixin(object):
+    __abstract__ = True
+
     @declared_attr
     def created_at(self) -> Mapped[datetime]:
         return mapped_column(
@@ -38,6 +41,8 @@ class TimestampMixin(object):
 
 
 class PublicIDMixin:
+
+    __abstract__ = True
     """Mixin to handle public IDs and ID masking in models."""
     id: Mapped[int] = mapped_column(
         Integer, primary_key=True, autoincrement=True)
@@ -73,10 +78,28 @@ class PublicIDMixin:
         Get a model instance by its public ID.
         Uses the session decorator for cleaner transaction management.
         """
+        def cache_key(cls, public_id: str):
+            return f"{cls.__name__}:{public_id}"
+
+        internal_id = Cache.get(cache_key(cls, public_id))
+        if internal_id:
+            return cls.get_by_internal_id(session, internal_id)
+
         result = await session.scalar(
             select(cls).where(cls.public_id == public_id)
         )
+        Cache.set(cache_key(cls, public_id), result.id)
         return result
+
+    @classmethod
+    @with_session()
+    async def get_by_internal_id(cls, session: AsyncSession, internal_id: int):
+        """
+        Get a model instance by its internal ID.
+        """
+        return await session.scalar(
+            select(cls).where(cls.id == internal_id)
+        )
 
     @classmethod
     @with_session()
