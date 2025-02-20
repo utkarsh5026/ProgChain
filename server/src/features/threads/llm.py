@@ -1,10 +1,13 @@
+from loguru import logger
+from functools import lru_cache
+from typing import AsyncGenerator, Optional
 from pydantic import BaseModel, Field
-from config.models import get_model, Model
+
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.output_parsers import StrOutputParser
-from typing import AsyncGenerator, Optional
-from functools import lru_cache
 from langchain_core.callbacks import AsyncCallbackHandler
+
+from config.models import get_model, Model
 
 
 class TopicGenerate(BaseModel):
@@ -19,7 +22,7 @@ class ContentGenerator:
     Generates progressive, non-repetitive learning content for any topic.
     """
 
-    def __init__(self, topic: str, batch_size: int = 3, previous_concepts: list[str] = []) -> None:
+    def __init__(self, topic: str, batch_size: int = 3, previous_concepts: list[str] = None) -> None:
         """
         Initialize the ContentGenerator with a topic and previous concepts.
 
@@ -30,7 +33,7 @@ class ContentGenerator:
         """
         self.topic = topic
         self.batch_size = batch_size
-        self.previous_concepts: list[str] = previous_concepts
+        self.previous_concepts: list[str] = previous_concepts if previous_concepts else []
 
         self.content_prompt = ChatPromptTemplate.from_template("""
         You are an expert educator creating engaging learning content about {topic}.
@@ -80,8 +83,9 @@ class ContentGenerator:
         Ensure all content is fresh and builds naturally from what's been covered.
         """)
 
+    @classmethod
     @lru_cache(maxsize=32)
-    def determine_depth_level(self, index: int) -> str:
+    def determine_depth_level(cls, index: int) -> str:
         """Cache depth level calculations since they're deterministic"""
         if index < 10:
             return "Foundation"
@@ -91,7 +95,8 @@ class ContentGenerator:
             return "Application"
         return "Innovation"
 
-    def __get_focus_area(self, depth_level: str) -> str:
+    @classmethod
+    def __get_focus_area(cls, depth_level: str) -> str:
         """Determines appropriate focus area based on progress."""
         if depth_level == "Foundation":
             return "core_principles"
@@ -101,7 +106,8 @@ class ContentGenerator:
             return "practical_usage"
         return "advanced_applications"
 
-    def _extract_concept(self, content: str) -> str:
+    @classmethod
+    def _extract_concept(cls, content: str) -> str:
         """Extract concept title from content more reliably"""
         try:
             lines = content.split('\n')
@@ -113,10 +119,10 @@ class ContentGenerator:
             return "Untitled Concept"
 
     async def generate_content_stream(
-        self,
-        current_idx: int,
-        model: str = Model.GPT_4O_MINI.value,
-        callback_handler: Optional[AsyncCallbackHandler] = None
+            self,
+            current_idx: int,
+            model: str = Model.GPT_4O_MINI.value,
+            callback_handler: Optional[AsyncCallbackHandler] = None
     ) -> AsyncGenerator[TopicGenerate, None]:
         """
         Generate content stream with improved error handling and optional callback
@@ -126,7 +132,7 @@ class ContentGenerator:
 
         for i in range(self.batch_size):
             try:
-                print(f"Loaded previous concepts: {self.previous_concepts}")
+                logger.info(f"Loaded previous concepts: {self.previous_concepts}")
                 chain = self.content_prompt | get_model(
                     model) | StrOutputParser()
                 content = await chain.ainvoke({
