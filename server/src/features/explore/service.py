@@ -1,4 +1,5 @@
 import asyncio
+from datetime import datetime
 from typing import AsyncGenerator
 from pydantic import BaseModel
 from cachetools import LFUCache
@@ -7,6 +8,8 @@ from .models import ExploreChat, ExploreChatMessage
 from .chat import ResearchAssistant
 from config.models import Model
 from core import ChatGenerateOptions
+
+from fastapi_components import ListDataRequest
 
 
 class ChatNotExistsError(Exception):
@@ -96,14 +99,18 @@ class ResearchAssistantService:
             del self.cache[chat_id]
         return deleted
 
-    async def get_all_chats(self, limit: int = 10, page: int = 1):
+    @classmethod
+    async def get_all_chats(cls, request: ListDataRequest):
         """
         Retrieve all existing chat sessions.
 
         Returns:
             A list of all chat records.
         """
-        chats = await ExploreChat.get_chats()
+        chats = await ExploreChat.get_pagination(cursor=request.timestamp,
+                                                 limit=request.limit)
+
+        chats.items = [chat.to_dict() for chat in chats.items]
         return chats
 
     async def get_chat(self, chat_id: str) -> list[ExploreChatMessage]:

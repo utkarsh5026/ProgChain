@@ -5,32 +5,7 @@ from contextlib import asynccontextmanager
 from typing import Optional, Callable, AsyncGenerator
 
 from fastapi import HTTPException, status
-from pydantic import BaseModel, Field
 from fastapi.responses import StreamingResponse
-
-from config.models import Model
-
-
-class BaseContentGenerateRequest(BaseModel):
-    """
-    Base request for content generation.
-
-    Attributes:
-        model: The model to use for the thread
-        extra_instructions: Extra instructions for the thread
-        question: The question to ask the model
-    """
-    model: Optional[str] = Field(
-        default=Model.GPT_4O_MINI.value,
-        description="The model to use for the thread"
-    )
-    extra_instructions: Optional[str] = Field(
-        default="",
-        description="Extra instructions for the thread"
-    )
-    question: str = Field(
-        description="The question to ask the model"
-    )
 
 
 class StreamManager:

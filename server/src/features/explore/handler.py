@@ -5,7 +5,7 @@ from pydantic import Field
 
 from .service import ResearchAssistantService
 from core import ChatGenerateOptions
-from fastapi_components import stream_response, BaseContentGenerateRequest
+from fastapi_components import stream_response, BaseContentGenerateRequest, ListDataRequest
 
 
 service = ResearchAssistantService()
@@ -54,10 +54,10 @@ async def ask_question(question_request: AskQuestionRequest):
     return stream_response(stream_func)
 
 
-@router.get("/chats")
-async def get_all_chats():
+@router.post("/chats/list")
+async def get_all_chats(request: ListDataRequest):
     try:
-        chats = await service.get_all_chats()
+        chats = await service.get_all_chats(request=request)
         return chats
     except Exception as e:
         raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,

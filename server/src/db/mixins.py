@@ -1,13 +1,29 @@
 import uuid
 from datetime import datetime
-from typing import Optional
+from dataclasses import dataclass
+from typing import TypeVar, Generic, Literal, Optional
+from loguru import logger
+
 from sqlalchemy.orm import Session, Mapped, mapped_column
 from sqlalchemy.ext.declarative import declared_attr
 from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy import DateTime, func, Integer, String, select
+from sqlalchemy import DateTime, func, Integer, String, select, asc, desc
 
 from .context import with_session
 from cache import Cache
+
+T = TypeVar('T')
+
+
+@dataclass
+class PaginatedResponse(Generic[T]):
+    """
+    A structured response for paginated results that includes both
+    ascending and descending cursors for flexible navigation.
+    """
+    items: list[T]
+    has_next: bool
+    total_count: Optional[int] = None
 
 
 class TimestampMixin(object):
@@ -38,6 +54,53 @@ class TimestampMixin(object):
         """
         self.updated_at = func.now()
         session.add(self)
+
+    @classmethod
+    @with_session()
+    async def get_pagination(cls, session: AsyncSession,
+                             order_type: Literal['created_asc',
+                                                 'updated_desc'] = 'updated_desc',
+                             cursor: Optional[datetime] = None,
+                             limit: int = 10) -> PaginatedResponse[T]:
+        """
+        Get a paginated response for the model.
+
+        Args:
+            session: The database session.
+            order_type: The type of order to use for the pagination.
+            cursor: The cursor to use for the pagination.
+            limit: The limit of items to return.
+
+        Returns:
+            A paginated response for the model.
+        """
+        if cursor is None or cursor == datetime.min:
+            cursor = datetime.now() if order_type == 'updated_desc' else datetime.min
+
+        if order_type == 'created_asc':
+            order_column = cls.created_at
+            order_func = asc
+            operator = '>'
+        elif order_type == 'updated_desc':
+            order_column = cls.updated_at
+            order_func = desc
+            operator = '<'
+
+        logger.info(f"Ordering by {order_type} with cursor {cursor}")
+
+        query = select(cls).where(
+            order_column.op(operator)(cursor)
+        ).order_by(order_func(order_column)).limit(limit)
+
+        result = await session.execute(query)
+        items = result.scalars().unique().all()
+
+        total_count = await session.scalar(
+            select(func.count()).select_from(cls)
+        )
+        return PaginatedResponse(items=items,
+                                 has_next=len(items) == limit,
+                                 total_count=total_count)
 
 
 class PublicIDMixin:
