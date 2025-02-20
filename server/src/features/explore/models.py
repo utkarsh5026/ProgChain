@@ -132,6 +132,74 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
             .values(chat_topic=chat_topic)
         )
 
+    @classmethod
+    def __declare_last__(cls):
+        """Register all SQLAlchemy event listeners for this model."""
+        event.listen(ExploreChat, 'after_insert', cls._after_chat_insert)
+        event.listen(ExploreChatMessage, 'after_insert',
+                     cls._after_message_insert)
+
+    @staticmethod
+    def _after_chat_insert(mapper, connection: Session, target: "ExploreChat"):
+        """Handle updates after a new chat is inserted.
+
+        This event listener updates the chat's message count in ExploreChat and creates a stats object.
+        """
+        connection.execute(
+            update(ExploreChat)
+            .where(ExploreChat.id == target.id)
+            .values(
+                chat_messages_count=0,
+                updated_at=func.now()
+            )
+        )
+
+        connection.execute(
+            ExploreChatStats.__table__.insert().values(
+                chat_internal_id=target.id,
+                chat_id=target.public_id,
+                total_tokens=0,
+                prompt_tokens=0,
+                completion_tokens=0,
+                msg_cnt=0,
+                total_cost=0
+            )
+        )
+
+    @staticmethod
+    def _after_message_insert(mapper, connection: Session, target: "ExploreChatMessage"):
+        """Handle updates after a new message is inserted.
+
+        This event listener updates both the chat's message count in ExploreChat
+        and the statistics in ExploreChatStats for the associated chat.
+        """
+        connection.execute(
+            update(ExploreChat)
+            .where(ExploreChat.id == target.chat_internal_id)
+            .values(
+                chat_messages_count=ExploreChat.chat_messages_count + 1,
+                updated_at=func.now()
+            )
+        )
+
+        prompt_token_count = len(target.user_question.split())
+        completion_token_count = len(target.assistant_answer.split())
+        total_token_count = prompt_token_count + completion_token_count
+        cost = total_token_count * 0.001
+
+        connection.execute(
+            update(ExploreChatStats)
+            .where(ExploreChatStats.chat_internal_id == target.chat_internal_id)
+            .values(
+                msg_cnt=ExploreChatStats.msg_cnt + 1,
+                total_tokens=ExploreChatStats.total_tokens + total_token_count,
+                prompt_tokens=ExploreChatStats.prompt_tokens + prompt_token_count,
+                completion_tokens=ExploreChatStats.completion_tokens + completion_token_count,
+                total_cost=ExploreChatStats.total_cost + cost,
+                updated_at=func.now()
+            )
+        )
+
 
 class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
     __tablename__ = "explore_chat_messages"
@@ -335,69 +403,3 @@ class ExploreChatStats(Base, TimestampMixin, PublicIDMixin):
         exclude = exclude or set()
         exclude.add('chat_internal_id')
         return super().to_dict(exclude)
-
-
-@event.listens_for(ExploreChat, 'after_insert')
-def after_chat_insert(mapper, connection: Session, target: ExploreChat):
-    """Handle updates after a new chat is inserted.
-
-    This event listener updates the chat's message count in ExploreChat and creates a stats object.
-    """
-    # Update the chat's message count
-    connection.execute(
-        update(ExploreChat)
-        .where(ExploreChat.id == target.id)
-        .values(
-            chat_messages_count=0,
-            updated_at=func.now()
-        )
-    )
-
-    # Create the stats object after the chat is inserted
-    connection.execute(
-        ExploreChatStats.__table__.insert().values(
-            chat_internal_id=target.id,
-            chat_id=target.public_id,
-            total_tokens=0,
-            prompt_tokens=0,
-            completion_tokens=0,
-            msg_cnt=0,
-            total_cost=0
-        )
-    )
-
-
-@event.listens_for(ExploreChatMessage, 'after_insert')
-def after_message_insert(mapper, connection: Session, target: ExploreChatMessage):
-    """Handle updates after a new message is inserted.
-
-    This event listener updates both the chat's message count in ExploreChat
-    and the statistics in ExploreChatStats for the associated chat.
-    """
-    # Update the chat's message count
-    connection.execute(
-        update(ExploreChat)
-        .where(ExploreChat.id == target.chat_internal_id)
-        .values(
-            chat_messages_count=ExploreChat.chat_messages_count + 1,
-            updated_at=func.now()
-        )
-    )
-
-    prompt_token_count = len(target.user_question.split())
-    completion_token_count = len(target.assistant_answer.split())
-    total_token_count = prompt_token_count + completion_token_count
-    cost = total_token_count * 0.001
-
-    connection.execute(
-        update(ExploreChatStats)
-        .where(ExploreChatStats.chat_internal_id == target.chat_internal_id)
-        .values(
-            msg_cnt=ExploreChatStats.msg_cnt + 1,
-            total_tokens=ExploreChatStats.total_tokens + total_token_count,
-            prompt_tokens=ExploreChatStats.prompt_tokens + prompt_token_count,
-            completion_tokens=ExploreChatStats.completion_tokens + completion_token_count,
-            total_cost=ExploreChatStats.total_cost + cost,
-            updated_at=func.now()
-        )
-    )
