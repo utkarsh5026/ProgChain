@@ -1,15 +1,16 @@
 FROM node:20-alpine3.20
+
 WORKDIR /app
 
-# Copy package files for caching the dependency installation step
-COPY package*.json ./
-RUN npm install
+# Install dependencies
+COPY package.json package-lock.json* ./
+RUN npm ci
 
-# Copy all source code
+# Copy the rest of the application code
 COPY . .
 
-# Expose the port used by the Vite dev server (default: 5173)
+# Expose the port the app will run on
 EXPOSE 5173
 
-# Start the Vite development server
-CMD ["npm", "run", "dev"]
+# Start the development server with host set to 0.0.0.0
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
