@@ -400,6 +400,17 @@ webencodings = "*"
 css = ["tinycss2 (>=1.1.0,<1.5)"]
 
 [[package]]
+name = "cachetools"
+version = "5.5.2"
+description = "Extensible memoizing collections and decorators"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "cachetools-5.5.2-py3-none-any.whl", hash = "sha256:d26a22bcc62eb95c3beabd9f1ee5e820d3d2704fe2967cbe350e20c8ffcd3f0a"},
+    {file = "cachetools-5.5.2.tar.gz", hash = "sha256:1a661caa9175d26759571b2e19580f9d6393969e5dfca11fdb1f947a23e640d4"},
+]
+
+[[package]]
 name = "camelot-py"
 version = "1.0.0"
 description = "PDF Table Extraction for Humans."
@@ -4623,4 +4634,4 @@ cffi = ["cffi (>=1.11)"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.10"
-content-hash = "55f229e9b2b149ca4943c6b0146bf1f02ce3b121f3cb08b8d6a54f22aed10a1c"
+content-hash = "c36af9815823c6e9e0c8bb5977dd9574289d8e4a07ed0d432b19ba2b41f05afc"

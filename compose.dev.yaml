@@ -17,6 +17,22 @@ services:
     networks:
       - app-network
 
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/app
+      - /app/.venv
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONUNBUFFERED=1
+      - PYTHONPATH=/app/src
+    restart: unless-stopped
+    networks:
+      - app-network
+
 volumes:
   server_project_files:
 
