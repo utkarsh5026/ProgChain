@@ -1,12 +1,14 @@
+from loguru import logger
+
 from fastapi import APIRouter
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel, Field
-from typing import Optional
+from fastapi_components import stream_response, BaseContentGenerateRequest
 
 
-from config.models import Model
 from .lang import TopicNode
 from .topics import generate_topics as generate_topics_lang
+from .service import TopicService
 import json
 
 router = APIRouter(
@@ -15,12 +17,8 @@ router = APIRouter(
 )
 
 
-class TopicRequest(BaseModel):
-    topic_path: str = Field(description="The path of the topic to generate")
-    conversation_id: Optional[str] = Field(
-        description="The id of the conversation to generate topics for")
-    model: Optional[str] = Field(
-        description="The model to use to generate topics", default=Model.GPT_4O_MINI.value)
+class TopicGenerateRequest(BaseContentGenerateRequest):
+    topic_chain_id: str
 
 
 class TopicResponse(BaseModel):
@@ -30,7 +28,8 @@ class TopicResponse(BaseModel):
 
 
 @router.post("/generate")
-async def generate_topics(request: TopicRequest):
+async def generate_topics(request: TopicGenerateRequest):
+    logger.info(f"Recieved request {request.model_dump_json(indent=4)}")
     topics_path = request.topic_path.split(">")
     current_path = " > ".join(topics_path)
 
@@ -56,3 +55,9 @@ async def generate_topics(request: TopicRequest):
             "Connection": "keep-alive",
         }
     )
+
+
+@router.post("/create-topic-chain")
+async def create_topic_chain(request: BaseContentGenerateRequest):
+    topic_service = TopicService()
+    return await topic_service.create_topic_chain(request.topic_path)
