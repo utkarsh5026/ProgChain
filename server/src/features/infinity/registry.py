@@ -47,3 +47,12 @@ class ModeRegistry:
     def serialize_all_modes(cls) -> list[dict[str, Any]]:
         """Serialize all modes for API responses."""
         return [mode.serialize() for mode in cls.get_all_modes()]
+
+
+def get_mode(mode_type: str) -> ModeConfig:
+    """Get a mode instance by its type string."""
+    try:
+        mode_enum = ModeType(mode_type)
+        return ModeRegistry.get_mode(mode_enum)
+    except ValueError:
+        raise ValueError(f"Unknown mode type: {mode_type}")
