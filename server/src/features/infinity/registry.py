@@ -1,8 +1,13 @@
 from typing import Type, Any
 from .base import ModeType, ModeConfig
 from .impls import (
-    StandardMode, InterviewMode, FirstPrinciplesMode,
-    PracticalMode, ComparativeMode, QuizMode, VisualMode
+    StandardMode,
+    InterviewMode,
+    FirstPrinciplesMode,
+    PracticalMode,
+    ComparativeMode,
+    QuizMode,
+    VisualMode
 )
 
 
