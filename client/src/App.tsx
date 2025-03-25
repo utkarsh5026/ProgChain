@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Sidebar from "./Sidebar";
 import Explore from "@/components/explore/Explore";
 import Interview from "@/components/interview/Interview";
-import Leetcode from "@/components/leetcode/Leetcode";
+
 import TopicChain from "@/components/topics/TopicChain";
 import Projects from "@/components/projects/Projects";
 import { Toaster } from "@/components/ui/toaster";
@@ -26,7 +26,6 @@ function App() {
               <Route path="/topics" element={<TopicChain />} />
               <Route path="/interview" element={<Interview />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/leetcode/*" element={<Leetcode />} />
               <Route path="/projects" element={<Projects />} />
               <Route path="/threads" element={<Thread />} />
               <Route path="/" element={<Explore />} />

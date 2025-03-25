@@ -1,16 +1,9 @@
 import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import {
-  Book,
-  Users,
-  Compass,
-  GraduationCap,
-  Code,
-  Dna,
-  History,
-} from "lucide-react";
+import { GraduationCap, Infinity } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { menuItems } from "./menuItems";
 
 import {
   NavigationMenu,
@@ -41,64 +34,22 @@ const itemVariants = {
   visible: { opacity: 1, x: 0 },
 };
 
-const menuItems = [
-  {
-    key: "/topics",
-    icon: <Book className="h-5 w-5" />,
-    title: "Topics",
-    description: "Explore programming topics",
-  },
-  {
-    key: "/interview",
-    icon: <Users className="h-5 w-5" />,
-    title: "Interview",
-    description: "Practice interview questions",
-  },
-  {
-    key: "/explore",
-    icon: <Compass className="h-5 w-5" />,
-    title: "Explore",
-    description: "Discover new concepts",
-  },
-  {
-    key: "/leetcode",
-    icon: (
-      <img
-        src="https://www.svgrepo.com/show/306328/leetcode.svg"
-        alt="Leetcode"
-        className={cn(
-          "h-5 w-5",
-          location.pathname === "/leetcode"
-            ? "text-primary [&]:brightness-100 [&]:invert-[0.85]"
-            : "text-zinc-400 [&]:brightness-100 [&]:invert-[0.6]"
-        )}
-      />
-    ),
-    title: "LeetCode",
-    description: "Practice coding problems",
-  },
-  {
-    key: "/projects",
-    icon: <Code className="h-5 w-5" />,
-    title: "Projects",
-    description: "Showcase your projects",
-  },
-  {
-    key: "/threads",
-    icon: <Dna className="h-5 w-5" />,
-    title: "Threads",
-    description: "Share your thoughts",
-  },
-  {
-    key: "/history",
-    icon: <History className="h-5 w-5" />,
-    title: "History",
-    description: "View your chat history",
-  },
-];
-
+/**
+ * Sidebar component for navigation.
+ *
+ * This component renders a sidebar with navigation items. It uses motion from 'framer-motion' for animations.
+ * It also uses 'react-router-dom' for navigation and 'lucide-react' for icons.
+ *
+ * @returns The Sidebar component.
+ */
 const Sidebar: React.FC = () => {
+  /**
+   * Hook to get the current location from 'react-router-dom'.
+   */
   const location = useLocation();
+  /**
+   * Hook to navigate to a new location from 'react-router-dom'.
+   */
   const navigate = useNavigate();
 
   return (
@@ -149,12 +100,48 @@ const Sidebar: React.FC = () => {
                           scale: location.pathname === item.key ? 1.1 : 1,
                         }}
                         className={cn(
-                          "transition-colors duration-200",
+                          "transition-colors duration-200 relative",
                           location.pathname === item.key
                             ? "text-primary"
                             : "text-zinc-400"
                         )}
                       >
+                        {location.pathname === item.key && (
+                          <motion.div
+                            className={cn(
+                              "absolute inset-0 -z-10 rounded-full blur-md opacity-70 bg-gradient-to-r",
+                              item.gradient
+                            )}
+                            initial={{ opacity: 0, scale: 0.8 }}
+                            animate={{
+                              opacity: 0.7,
+                              scale: 1.2,
+                              rotate: [0, 5, 0, -5, 0],
+                            }}
+                            transition={{
+                              rotate: {
+                                repeat: Infinity,
+                                duration: 5,
+                                ease: "easeInOut",
+                              },
+                            }}
+                          />
+                        )}
+
+                        <motion.div
+                          className={cn(
+                            "absolute inset-0 -z-10 rounded-full blur-md opacity-0 bg-gradient-to-r",
+                            item.gradient
+                          )}
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileHover={{
+                            opacity: 0.4,
+                            scale: 1.2,
+                            transition: { duration: 0.3 },
+                          }}
+                          transition={{ duration: 0.3 }}
+                        />
+
                         {item.icon}
                       </motion.div>
                     </motion.button>
