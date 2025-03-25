@@ -36,6 +36,13 @@ class BaseContentGenerateRequest(BaseModel):
 
 
 class ListDataRequest(BaseModel):
+    """
+    Base request for listing data.
+
+    Attributes:
+        timestamp: The timestamp to start the list from in isoformat
+        limit: The maximum number of items to return
+    """
     timestamp: datetime = Field(
         default=datetime.min,
         description="The timestamp to start the list from in isoformat")
