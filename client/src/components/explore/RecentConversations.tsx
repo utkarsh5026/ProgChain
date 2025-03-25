@@ -22,7 +22,7 @@ const RecentConversations: React.FC = () => {
     fetchChatHistory(10, 1);
   }, [fetchChatHistory]);
 
-  const handleDelete = async (id: number, e: React.MouseEvent) => {
+  const handleDelete = async (id: string, e: React.MouseEvent) => {
     e.stopPropagation();
     const chatTopic = chats.find((chat) => chat.id === id)?.topic;
     await deleteChat(id);

@@ -7,7 +7,8 @@
     "dev": "vite --host ${VITE_HOST:-localhost}",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "dev:win": "vite --host localhost"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.10.0",
