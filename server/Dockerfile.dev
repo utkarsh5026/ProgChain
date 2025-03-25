@@ -1,26 +1,37 @@
 FROM python:3.12-slim
 
+# Set environment variables
+ENV PYTHONDONTWRITEBYTECODE=1 \
+    PYTHONUNBUFFERED=1 \
+    POETRY_VERSION=1.6.1 \
+    POETRY_NO_INTERACTION=1 \
+    POETRY_VIRTUALENVS_CREATE=false
 
-RUN apt-get update && \
-    apt-get install -y curl build-essential && \
-    rm -rf /var/lib/apt/lists/*
+# Install system dependencies
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    build-essential \
+    && rm -rf /var/lib/apt/lists/*
 
-
-ENV POETRY_VERSION=1.5.1
-ENV POETRY_HOME="/opt/poetry"
-ENV PATH="$POETRY_HOME/bin:$PATH"
+# Install Poetry
 RUN curl -sSL https://install.python-poetry.org | python3 -
 
+# Add Poetry to PATH
+ENV PATH="${PATH}:/root/.local/bin"
+
+# Set working directory
 WORKDIR /app
 
-COPY pyproject.toml poetry.lock* /app/
-RUN poetry config virtualenvs.create false && \
-    poetry install --no-interaction --no-root
+# Copy dependency definition files
+COPY pyproject.toml poetry.lock* ./
 
-COPY . /app
+# Install dependencies including development dependencies
+RUN poetry install --no-root
 
+# Copy the rest of the application
+COPY . .
+
+# Expose port
 EXPOSE 8000
-
-WORKDIR /app
 
 CMD ["poetry", "run", "uvicorn", "src.server:app", "--host", "0.0.0.0", "--port", "8000", "--reload"]
