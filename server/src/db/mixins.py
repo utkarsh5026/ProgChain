@@ -27,10 +27,18 @@ class PaginatedResponse(Generic[T]):
 
 
 class TimestampMixin(object):
+    """
+    A mixin class that provides common timestamp fields and methods for models.
+    This mixin is designed to be used with SQLAlchemy models to add created_at and updated_at timestamps.
+    """
     __abstract__ = True
 
     @declared_attr
     def created_at(self) -> Mapped[datetime]:
+        """
+        Represents the timestamp when the record was created.
+        This field is automatically set to the current datetime when a new record is inserted.
+        """
         return mapped_column(
             DateTime(timezone=True),
             server_default=func.now(),
@@ -39,6 +47,10 @@ class TimestampMixin(object):
 
     @declared_attr
     def updated_at(self) -> Mapped[datetime]:
+        """
+        Represents the timestamp when the record was last updated.
+        This field is automatically set to the current datetime when a record is updated.
+        """
         return mapped_column(
             DateTime(timezone=True),
             server_default=func.now(),
@@ -50,7 +62,7 @@ class TimestampMixin(object):
     def touch(self, session: Session):
         """
         Explicitly update the updated_at timestamp.
-        Useful for triggering updates from related models.
+        This method is useful for triggering updates from related models.
         """
         self.updated_at = func.now()
         session.add(self)
@@ -63,16 +75,16 @@ class TimestampMixin(object):
                              cursor: Optional[datetime] = None,
                              limit: int = 10) -> PaginatedResponse[T]:
         """
-        Get a paginated response for the model.
+        Retrieve a paginated response for the model, ordered by either creation or update time.
 
         Args:
-            session: The database session.
-            order_type: The type of order to use for the pagination.
-            cursor: The cursor to use for the pagination.
-            limit: The limit of items to return.
+            session: The database session to use for the query.
+            order_type: The type of order to use for the pagination. Options are 'created_asc' for ascending order by creation time and 'updated_desc' for descending order by update time.
+            cursor: The cursor to use for the pagination. If None, it defaults to the current datetime for 'updated_desc' order or datetime.min for 'created_asc' order.
+            limit: The limit of items to return in the pagination.
 
         Returns:
-            A paginated response for the model.
+            A paginated response for the model, including the items, a flag indicating if there are more items, and the total count of items.
         """
         if cursor is None or cursor == datetime.min:
             cursor = datetime.now() if order_type == 'updated_desc' else datetime.min
@@ -104,6 +116,9 @@ class TimestampMixin(object):
 
 
 class PublicIDMixin:
+    """
+    A mixin class that provides a public ID for models. This mixin is designed to be used with SQLAlchemy models to generate a unique public ID for each instance. The public ID is generated based on the model name and a UUID.
+    """
 
     __abstract__ = True
     """Mixin to handle public IDs and ID masking in models."""
