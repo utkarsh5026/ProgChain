@@ -50,7 +50,20 @@ class ModeRegistry:
 
 
 def get_mode(mode_type: str) -> ModeConfig:
-    """Get a mode instance by its type string."""
+    """
+    Retrieves a mode instance based on its type string.
+
+    This function attempts to convert the provided string into a ModeType enum and then uses the ModeRegistry to get an instance of the corresponding mode. If the conversion fails or the mode type is unknown, it raises a ValueError.
+
+    Args:
+        mode_type (str): The string representation of the mode type.
+
+    Returns:
+        ModeConfig: An instance of the mode configuration.
+
+    Raises:
+        ValueError: If the mode type string is invalid or does not correspond to a known mode type.
+    """
     try:
         mode_enum = ModeType(mode_type)
         return ModeRegistry.get_mode(mode_enum)
