@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Sidebar from "./Sidebar";
+import Sidebar from "./components/layout/Sidebar";
 import Explore from "@/components/explore/Explore";
 import Interview from "@/components/interview/Interview";
 
