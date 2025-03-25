@@ -141,17 +141,17 @@ class PublicIDMixin:
         Get a model instance by its public ID.
         Uses the session decorator for cleaner transaction management.
         """
-        def cache_key(cls, public_id: str):
+        def cache_key():
             return f"{cls.__name__}:{public_id}"
 
-        internal_id = Cache.get(cache_key(cls, public_id))
+        internal_id = Cache.get(cache_key())
         if internal_id:
             return cls.get_by_internal_id(session, internal_id)
 
         result = await session.scalar(
             select(cls).where(cls.public_id == public_id)
         )
-        Cache.set(cache_key(cls, public_id), result.id)
+        Cache.set(cache_key(), result.id)
         return result
 
     @classmethod
