@@ -1,7 +1,7 @@
 import { streamText } from "@/api/stream";
 import caller, { API_BASE_URL } from "@/api/caller";
 import type { Model } from "@/config/config";
-import type { QuestionRequest, Question } from "./type";
+import type { QuestionRequest, Question, ChatBasic, ChatStats } from "./type";
 
 const EXPLORE_URL = `${API_BASE_URL}/explore`;
 
@@ -37,17 +37,34 @@ export const askQuestion = async function* (questionRequest: QuestionRequest) {
   }
 };
 
-export const getChatHistory = async (limit: number = 10, page: number = 1) => {
-  const url = `${API_BASE_URL}/explore/chats`;
+export const getChatHistory = async (
+  limit: number = 10,
+  page: number = 1
+): Promise<ChatBasic[]> => {
+  const url = `${API_BASE_URL}/explore/chats/list`;
   const postBody = {
     limit: limit,
     page: page,
   };
   const response = await caller.get(url, { params: postBody });
-  return response.data;
+  const data = response.data;
+
+  return data.map(({ chat, stats }: { chat: any; stats: any }) => {
+    return {
+      id: chat.public_id,
+      topic: chat.chat_topic,
+      createdAt: chat.created_at,
+      updatedAt: chat.updated_at,
+      totalTokens: stats.total_tokens,
+      promptTokens: stats.prompt_tokens,
+      completionTokens: stats.completion_tokens,
+      msgCnt: stats.msg_cnt,
+      totalCost: stats.total_cost,
+    };
+  });
 };
 
-export const deleteChat = async (chat_id: number) => {
+export const deleteChat = async (chat_id: string) => {
   const url = `${EXPLORE_URL}/chat/${chat_id}`;
   const response = await caller.delete(url);
   return response.data;

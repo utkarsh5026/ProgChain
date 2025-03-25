@@ -10,14 +10,7 @@ export const fetchChatHistoryThunk = createAsyncThunk(
   "chats/fetchChatHistory",
   async ({ limit, page }: { limit: number; page: number }) => {
     const data = await getChatHistory(limit, page);
-    return data.map((ch: any) => {
-      return {
-        topic: ch.chat_topic,
-        createdAt: ch.created_at,
-        updatedAt: ch.updated_at,
-        id: ch.chat_id,
-      };
-    });
+    return data;
   }
 );
 
@@ -37,7 +30,7 @@ const chatsSlice = createSlice({
   name: "chats",
   initialState,
   reducers: {
-    deleteChat: (state, action: PayloadAction<number>) => {
+    deleteChat: (state, action: PayloadAction<string>) => {
       state.chats = state.chats.filter((chat) => chat.id !== action.payload);
     },
   },

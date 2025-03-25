@@ -22,9 +22,17 @@ export type QuestionRequest = TopicRequest & {
   chat_id: number;
 };
 
-export type ChatBasic = {
+export type ChatStats = {
+  totalTokens: number;
+  promptTokens: number;
+  completionTokens: number;
+  msgCnt: number;
+  totalCost: number;
+};
+
+export type ChatBasic = ChatStats & {
   topic: string;
   createdAt: string;
   updatedAt: string;
-  id: number;
+  id: string;
 };

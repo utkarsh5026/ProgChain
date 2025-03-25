@@ -20,7 +20,7 @@ const useExploreChats = () => {
   );
 
   const deleteChat = useCallback(
-    async (chatId: number) => {
+    async (chatId: string) => {
       dispatch(deleteChatAction(chatId));
       await deleteChatApi(chatId);
     },
