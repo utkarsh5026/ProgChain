@@ -3,8 +3,8 @@ from fastapi.responses import StreamingResponse, Response
 from pydantic import Field
 
 from .service import ThreadService, ThreadGenerate, ThreadContentChatService
-from config.stream import stream_response, BaseContentGenerateRequest
-from core import ChatGenerateOpions
+from fastapi_components import stream_response, BaseContentGenerateRequest
+from core import ChatGenerateOptions
 from .chat import ThreadIDChatError
 
 
@@ -28,17 +28,13 @@ class ThreadGetRequest(BaseContentGenerateRequest):
 
 
 class ThreadChatRequest(BaseContentGenerateRequest):
-    thread_content_id: int = Field(
+    thread_content_public_id: str = Field(
         description="The id of the thread content to chat"
-    )
-
-    question: str = Field(
-        description="The question to ask the thread content"
     )
 
 
 @router.get("/chat/{thread_content_id}")
-async def get_chats_for_thread_content(thread_content_id: int):
+async def get_chats_for_thread_content(thread_content_id: str):
     try:
         chats = await tccs.get_chats_for_thread_content(thread_content_id)
         return {
@@ -50,7 +46,7 @@ async def get_chats_for_thread_content(thread_content_id: int):
 
 
 @router.post("/chat/stop")
-async def stop_chat(thread_content_id: int):
+async def stop_chat(thread_content_id: str):
     try:
         tccs.stop_chat(thread_content_id)
     except Exception as e:
@@ -62,13 +58,14 @@ async def stop_chat(thread_content_id: int):
 
 @router.post("/chat")
 async def chat(request: ThreadChatRequest):
-    thread_content_id, question = request.thread_content_id, request.question
-    options = ChatGenerateOpions(
+    thread_content_id = request.thread_content_public_id
+    options = ChatGenerateOptions(
         model=request.model,
-        extra_instructions=request.extra_instructions
+        extra_instructions=request.extra_instructions,
+        question=request.question
     )
     try:
-        stream_chat = await tccs.create_chat_stream(thread_content_id, question, options)
+        stream_chat = await tccs.create_chat_stream(thread_content_id, options)
         return stream_response(stream_chat)
     except ThreadIDChatError as e:
         raise HTTPException(
@@ -84,6 +81,7 @@ async def get_all_threads():
     try:
         return await ts.get_all_threads()
     except Exception as e:
+        print(e)
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e))
 

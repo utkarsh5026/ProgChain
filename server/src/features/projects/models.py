@@ -1,8 +1,7 @@
-from config.db import Base
+from db import Base, db_session
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, JSON
 from datetime import datetime, timezone
 from sqlalchemy.orm import relationship
-from config.db import db_session
 
 
 class Project(Base):
