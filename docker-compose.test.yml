@@ -1,0 +1,73 @@
+version: "3.8"
+
+services:
+  test-db:
+    image: postgres:15-alpine
+    environment:
+      POSTGRES_DB: test_progchain
+      POSTGRES_USER: test_user
+      POSTGRES_PASSWORD: test_password
+    ports:
+      - "5433:5432"
+    tmpfs:
+      - /var/lib/postgresql/data  # Use tmpfs for faster tests
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U test_user"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test-network
+
+  test-redis:
+    image: redis:7-alpine
+    ports:
+      - "6380:6379"
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+    networks:
+      - test-network
+
+  test-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./server:/app
+    environment:
+      - DATABASE_URL=postgresql+asyncpg://test_user:test_password@test-db:5432/test_progchain
+      - REDIS_URL=redis://test-redis:6379/0
+      - PYTHONPATH=/app/src
+      - TESTING=true
+      - OPENAI_API_KEY=${OPENAI_API_KEY:-test-key}
+    depends_on:
+      test-db:
+        condition: service_healthy
+      test-redis:
+        condition: service_healthy
+    networks:
+      - test-network
+    command: pytest /app/tests -v --cov=src --cov-report=html --cov-report=term-missing
+
+  test-client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile.dev
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=test
+      - VITE_API_URL=http://test-server:8000
+    depends_on:
+      - test-server
+    networks:
+      - test-network
+    command: npm run test:coverage
+
+networks:
+  test-network:
+    driver: bridge
