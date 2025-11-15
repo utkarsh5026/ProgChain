@@ -1,7 +1,7 @@
 # ProgChain Features Documentation
 
 ## Overview
-ProgChain is an AI-powered learning platform that helps developers learn programming concepts, prepare for technical interviews, and create structured learning paths. It provides personalized learning experiences through multiple learning modes powered by AI.
+ProgChain is an AI-powered learning platform that helps developers learn programming concepts and create structured learning paths. It provides personalized learning experiences through multiple learning modes powered by AI.
 
 ---
 
@@ -39,45 +39,7 @@ User asks: "Python"
 
 ---
 
-### 2. **Interview Preparation** - Technical Interview Questions
-
-**What it does**: Generates AI-powered interview questions for specific technologies and topics.
-
-**Key Features**:
-- **Topic-Based Questions**: Generate questions for any tech stack
-- **Contextual Understanding**: Provide additional context for more targeted questions
-- **Streaming Responses**: Real-time question generation
-- **Question Quality**: AI ensures questions are relevant and appropriately challenging
-
-**API Endpoints**:
-- `POST /interview/questions` - Generate interview questions with streaming
-
-**Request Example**:
-```json
-{
-  "topic": "React Hooks",
-  "context": "Senior frontend developer position"
-}
-```
-
-**Response Format**:
-```json
-{
-  "topic": "React Hooks",
-  "questions": [
-    {
-      "question": "Explain the difference between useEffect and useLayoutEffect",
-      "difficulty": "intermediate"
-    }
-  ]
-}
-```
-
-**Frontend Component**: `client/src/components/interview/Interview.tsx`
-
----
-
-### 3. **Explore Mode** - Conversational Learning Assistant
+### 2. **Explore Mode** - Conversational Learning Assistant
 
 **What it does**: Interactive Q&A system where users can explore any programming topic through conversation.
 
@@ -114,7 +76,7 @@ User: "How do I create a decorator with arguments?"
 
 ---
 
-### 4. **Learning Threads** - Structured Content Generation
+### 3. **Learning Threads** - Structured Content Generation
 
 **What it does**: Creates multi-part learning content organized as threads with individual content pieces.
 
@@ -183,7 +145,6 @@ User creates thread: "Advanced React Patterns"
 /                  → Explore Mode (default)
 /explore           → Conversational Learning
 /topics            → Topic Explorer
-/interview         → Interview Prep
 /threads           → Learning Threads
 /history           → Chat History
 ```
@@ -238,7 +199,6 @@ User creates thread: "Advanced React Patterns"
 ProgChain offers different learning approaches:
 - Topic exploration (structured)
 - Conversational learning (flexible)
-- Interview prep (practical)
 - Thread-based learning (sequential)
 
 ### 2. **AI-Powered Personalization**
@@ -256,21 +216,20 @@ ProgChain offers different learning approaches:
 ### 4. **Comprehensive Coverage**
 - Any programming language
 - Any framework or technology
-- Interview preparation
 - Theoretical concepts
+- Practical examples
 
 ---
 
 ## 📊 Feature Comparison
 
-| Feature | ProgChain | Stack Overflow | LeetCode | Coursera |
-|---------|-----------|----------------|----------|----------|
-| AI-Powered Q&A | ✅ | ❌ | ❌ | ❌ |
-| Topic Exploration | ✅ | ❌ | ❌ | ✅ |
-| Interview Prep | ✅ | ❌ | ✅ | ❌ |
-| Streaming Responses | ✅ | ❌ | ❌ | ❌ |
-| Personalized Paths | ✅ | ❌ | ❌ | ✅ |
-| Free to Use | ✅* | ✅ | Partial | Partial |
+| Feature | ProgChain | Stack Overflow | Coursera |
+|---------|-----------|----------------|----------|
+| AI-Powered Q&A | ✅ | ❌ | ❌ |
+| Topic Exploration | ✅ | ❌ | ✅ |
+| Streaming Responses | ✅ | ❌ | ❌ |
+| Personalized Paths | ✅ | ❌ | ✅ |
+| Free to Use | ✅* | ✅ | Partial |
 
 *Requires OpenAI API key
 
@@ -288,9 +247,9 @@ ProgChain offers different learning approaches:
    → Generate learning path for Python
    → Follow beginner → intermediate → advanced
 
-3. Practice with Interview Questions
-   → Test understanding
-   → Get immediate feedback
+3. Review with Threads
+   → Create structured content
+   → Study systematically
 ```
 
 ### Intermediate Workflow
@@ -303,9 +262,9 @@ ProgChain offers different learning approaches:
    → Ask specific questions
    → Get detailed explanations
 
-3. Interview Preparation
-   → Generate questions for target role
-   → Practice explanations
+3. Build Knowledge Base
+   → Save important conversations
+   → Create topic chains
 ```
 
 ### Advanced Workflow
@@ -356,22 +315,17 @@ Based on the current architecture, here are potential features:
 - Get instant answers to questions
 - Build structured knowledge
 
-### 2. **Interview Preparation**
-- Practice technical questions
-- Understand concepts deeply
-- Build confidence
-
-### 3. **Professional Development**
+### 2. **Professional Development**
 - Learn new frameworks quickly
 - Stay current with technology
 - Deep dive into specific topics
 
-### 4. **Students**
+### 3. **Students**
 - Supplement coursework
 - Get additional explanations
 - Practice for exams
 
-### 5. **Technical Writers**
+### 4. **Technical Writers**
 - Research topics thoroughly
 - Generate structured content
 - Understand complex concepts
@@ -383,8 +337,7 @@ Based on the current architecture, here are potential features:
 ### Quick Start
 1. **Explore Mode**: Ask any programming question
 2. **Topic Explorer**: Enter a technology you want to learn
-3. **Interview Prep**: Select your target role/technology
-4. **Threads**: Generate structured learning content
+3. **Threads**: Generate structured learning content
 
 ### Best Practices
 - Start broad, then go deep
@@ -397,9 +350,9 @@ Based on the current architecture, here are potential features:
 ## 📈 Feature Metrics
 
 ### Current Capabilities
-- **4 Main Learning Modes**
-- **12+ API Endpoints**
-- **40+ Frontend Components**
+- **3 Main Learning Modes**
+- **9+ API Endpoints**
+- **35+ Frontend Components**
 - **Multiple AI Models Supported**
 - **Unlimited Topics Coverage**
 - **Real-time Streaming**
@@ -427,10 +380,6 @@ Learning Features:
 │   ├── Vector Search
 │   └── Chat History
 │
-├── Interview Prep
-│   ├── Question Generation
-│   └── Streaming Responses
-│
 └── Threads
     ├── Content Generation
     ├── Thread Management
@@ -441,11 +390,10 @@ Learning Features:
 
 ## 📝 Summary
 
-ProgChain is a comprehensive AI-powered learning platform that combines:
+ProgChain is a focused AI-powered learning platform that combines:
 - **Structured learning** (Topic Explorer, Threads)
 - **Conversational learning** (Explore Mode)
-- **Practical application** (Interview Prep)
 - **Modern technology** (Real-time streaming, Vector search)
 - **Flexible architecture** (Extensible, modular)
 
-It's designed to help developers at all levels learn more effectively by providing multiple learning modes, AI assistance, and personalized experiences.
+It's designed to help developers at all levels learn more effectively by providing multiple learning modes, AI assistance, and personalized experiences focused on deep understanding and structured knowledge building.

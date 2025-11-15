@@ -1,6 +1,5 @@
 import {
   Book,
-  Users,
   Compass,
   Dna,
   History,
@@ -13,13 +12,6 @@ export const menuItems = [
     title: "Topics",
     description: "Explore programming topics",
     gradient: "from-blue-500 to-cyan-500",
-  },
-  {
-    key: "/interview",
-    icon: <Users className="h-5 w-5" />,
-    title: "Interview",
-    description: "Practice interview questions",
-    gradient: "from-emerald-500 to-green-500",
   },
   {
     key: "/explore",
