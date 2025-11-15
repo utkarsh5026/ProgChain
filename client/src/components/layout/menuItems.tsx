@@ -1,21 +1,12 @@
 import {
-  Infinity,
   Book,
   Users,
   Compass,
-  Code,
   Dna,
   History,
 } from "lucide-react";
 
 export const menuItems = [
-  {
-    key: "/infinity",
-    icon: <Infinity className="h-5 w-5" />,
-    title: "Infinity",
-    description: "Explore programming topics",
-    gradient: "from-violet-500 to-indigo-500",
-  },
   {
     key: "/topics",
     icon: <Book className="h-5 w-5" />,
@@ -36,13 +27,6 @@ export const menuItems = [
     title: "Explore",
     description: "Discover new concepts",
     gradient: "from-orange-500 to-amber-500",
-  },
-  {
-    key: "/projects",
-    icon: <Code className="h-5 w-5" />,
-    title: "Projects",
-    description: "Showcase your projects",
-    gradient: "from-red-500 to-pink-500",
   },
   {
     key: "/threads",

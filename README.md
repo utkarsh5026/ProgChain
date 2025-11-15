@@ -8,8 +8,7 @@ This project is a comprehensive full-stack learning platform I've built to help 
 - **Interactive Concept Exploration**: Users can ask questions about programming topics and follow a guided learning path that branches based on their interests.
 - **Topic Learning Journeys**: The platform generates personalized learning paths for any programming concept, organized by difficulty level.
 - **Technical Interview Preparation**: Practice with AI-generated interview questions tailored to specific technologies and difficulty levels.
-- **LeetCode-style Problem Practice**: A collection of coding challenges with AI-generated solutions and explanations.
-- **Project Management**: Users can create and manage projects, upload relevant files, and maintain project-specific knowledge bases.
+- **Learning Threads**: Create structured multi-part learning content organized as sequential threads with interactive Q&A.
 
 ## 🏗️ Architecture Overview
 

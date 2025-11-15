@@ -5,7 +5,6 @@ import Explore from "@/components/explore/Explore";
 import Interview from "@/components/interview/Interview";
 
 import TopicChain from "@/components/topics/TopicChain";
-import Projects from "@/components/projects/Projects";
 import { Toaster } from "@/components/ui/toaster";
 import Thread from "@/components/thread/Thread";
 import History from "./components/history/History";
@@ -26,7 +25,6 @@ function App() {
               <Route path="/topics" element={<TopicChain />} />
               <Route path="/interview" element={<Interview />} />
               <Route path="/explore" element={<Explore />} />
-              <Route path="/projects" element={<Projects />} />
               <Route path="/threads" element={<Thread />} />
               <Route path="/" element={<Explore />} />
               <Route path="/history" element={<History />} />

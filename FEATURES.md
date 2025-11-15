@@ -1,7 +1,7 @@
 # ProgChain Features Documentation
 
 ## Overview
-ProgChain is an AI-powered learning platform that helps developers learn programming concepts, prepare for technical interviews, and manage coding projects. It combines multiple learning modes with AI assistance to create personalized learning experiences.
+ProgChain is an AI-powered learning platform that helps developers learn programming concepts, prepare for technical interviews, and create structured learning paths. It provides personalized learning experiences through multiple learning modes powered by AI.
 
 ---
 
@@ -156,75 +156,6 @@ User creates thread: "Advanced React Patterns"
 
 ---
 
-### 5. **Project Management** - File-Based Knowledge System
-
-**What it does**: Manage coding projects with file uploads and AI-powered project understanding.
-
-**Key Features**:
-- **Project Creation**: Create and organize multiple projects
-- **File Upload**: Upload project files (code, docs, etc.)
-- **Vector Database**: Each project has its own vector store for semantic search
-- **Project Chat**: Ask questions about your project files
-- **File Context**: AI answers are grounded in your actual project files
-- **Chat History**: Maintains conversation history per project
-
-**API Endpoints**:
-- `POST /projects/create` - Create a new project
-- `POST /projects/upload-file` - Upload files to a project
-
-**Database Models**:
-- `Project`: Project metadata (title, description, vector DB path)
-- `ProjectFiles`: Uploaded files with paths
-- `ProjectChats`: Chat sessions for each project
-- `ProjectChatMessages`: Individual messages with file context
-
-**Frontend Component**: `client/src/components/projects/Projects.tsx`
-
-**Example Workflow**:
-```
-1. Create project: "E-commerce API"
-2. Upload files: server.js, routes.js, models.js
-3. System indexes files in vector database
-4. User asks: "How is authentication handled?"
-5. AI searches through files and provides answer based on actual code
-```
-
----
-
-### 6. **Infinity Mode** - Extensible Learning Modes (Beta)
-
-**What it does**: Provides a registry system for different learning modes and content generation.
-
-**Key Features**:
-- **Mode Registry**: Pluggable system for different learning experiences
-- **Topic Generation**: Mass generate learning topics
-- **Categorization**: Organize topics by categories
-- **Extensible Architecture**: Easy to add new learning modes
-
-**API Endpoints**:
-- `POST /infinity/topics/generate` - Generate multiple topic titles
-
-**Frontend Integration**: Can be extended for new learning modes
-
----
-
-### 7. **LeetCode Problem Scraper** (Utility)
-
-**What it does**: Scrapes LeetCode problems for offline practice and learning.
-
-**Key Features**:
-- **Selenium-Based Scraping**: Automated browser scraping
-- **Problem Details**: Extracts descriptions, tags, examples
-- **Multi-Processing**: Parallel scraping for efficiency
-- **JSON Export**: Saves problems in structured format
-- **Retry Logic**: Handles failures gracefully
-
-**Files**: `server/src/scrape/problem_scrape.py`
-
-**Use Case**: Build a local database of coding problems for practice
-
----
-
 ## 🎨 Frontend Features
 
 ### UI Components
@@ -254,7 +185,6 @@ User creates thread: "Advanced React Patterns"
 /topics            → Topic Explorer
 /interview         → Interview Prep
 /threads           → Learning Threads
-/projects          → Project Management
 /history           → Chat History
 ```
 
@@ -281,11 +211,6 @@ User creates thread: "Advanced React Patterns"
 - SQLAlchemy ORM (async)
 - Database models with mixins (timestamps, public IDs)
 
-**File Processing**:
-- **PyMuPDF**: PDF reading
-- **python-docx**: Word document processing
-- Multiple PDF libraries (pypdf, PyPDF2, pdfminer)
-
 ### Frontend Stack
 
 **Framework**: React 18 + TypeScript
@@ -304,18 +229,16 @@ User creates thread: "Advanced React Patterns"
 - React Markdown for content
 - Syntax highlighting
 - Math rendering (KaTeX)
-- PDF viewing
 
 ---
 
 ## 🌟 Unique Selling Points
 
 ### 1. **Multi-Modal Learning**
-Unlike single-purpose learning platforms, ProgChain offers:
+ProgChain offers different learning approaches:
 - Topic exploration (structured)
 - Conversational learning (flexible)
 - Interview prep (practical)
-- Project-based learning (contextual)
 - Thread-based learning (sequential)
 
 ### 2. **AI-Powered Personalization**
@@ -330,17 +253,10 @@ Unlike single-purpose learning platforms, ProgChain offers:
 - Better user experience
 - Efficient resource usage
 
-### 4. **Project Context Awareness**
-- Upload your actual code
-- Get answers based on YOUR project
-- No generic responses
-- Learn from your own codebase
-
-### 5. **Comprehensive Coverage**
+### 4. **Comprehensive Coverage**
 - Any programming language
 - Any framework or technology
 - Interview preparation
-- Practical coding problems
 - Theoretical concepts
 
 ---
@@ -352,7 +268,6 @@ Unlike single-purpose learning platforms, ProgChain offers:
 | AI-Powered Q&A | ✅ | ❌ | ❌ | ❌ |
 | Topic Exploration | ✅ | ❌ | ❌ | ✅ |
 | Interview Prep | ✅ | ❌ | ✅ | ❌ |
-| Project Context | ✅ | ❌ | ❌ | ❌ |
 | Streaming Responses | ✅ | ❌ | ❌ | ❌ |
 | Personalized Paths | ✅ | ❌ | ❌ | ✅ |
 | Free to Use | ✅* | ✅ | Partial | Partial |
@@ -384,10 +299,9 @@ Unlike single-purpose learning platforms, ProgChain offers:
    → Topic: "Advanced JavaScript Patterns"
    → Get structured multi-part content
 
-2. Deep Dive with Projects
-   → Upload your code
+2. Deep Dive with Explore Mode
    → Ask specific questions
-   → Get contextual answers
+   → Get detailed explanations
 
 3. Interview Preparation
    → Generate questions for target role
@@ -396,10 +310,9 @@ Unlike single-purpose learning platforms, ProgChain offers:
 
 ### Advanced Workflow
 ```
-1. Project-Based Learning
-   → Upload entire codebase
-   → Ask architecture questions
-   → Get refactoring suggestions
+1. Thread-Based Learning
+   → Create comprehensive topic threads
+   → Study each section systematically
 
 2. Specialized Topics
    → Explore cutting-edge concepts
@@ -414,11 +327,11 @@ Unlike single-purpose learning platforms, ProgChain offers:
 Based on the current architecture, here are potential features:
 
 ### Planned/In Development
-1. **Infinity Mode Expansion** - More learning modes
-2. **User Authentication** - Personal accounts
-3. **Progress Tracking** - Learning analytics
-4. **Code Execution** - Run code in browser
-5. **Collaborative Learning** - Share with others
+1. **User Authentication** - Personal accounts
+2. **Progress Tracking** - Learning analytics
+3. **Code Execution** - Run code in browser
+4. **Collaborative Learning** - Share with others
+5. **Spaced Repetition** - Memory retention
 
 ### Technical Enhancements
 1. **PostgreSQL Migration** - Better scalability
@@ -431,8 +344,8 @@ Based on the current architecture, here are potential features:
 1. **Quiz Generation** - Test knowledge
 2. **Code Challenges** - Practice problems
 3. **Video Integration** - Multimedia learning
-4. **Spaced Repetition** - Memory retention
-5. **Peer Review** - Community feedback
+4. **Peer Review** - Community feedback
+5. **Flashcards** - Quick review
 
 ---
 
@@ -450,18 +363,18 @@ Based on the current architecture, here are potential features:
 
 ### 3. **Professional Development**
 - Learn new frameworks quickly
-- Understand existing codebases
 - Stay current with technology
+- Deep dive into specific topics
 
 ### 4. **Students**
 - Supplement coursework
 - Get additional explanations
 - Practice for exams
 
-### 5. **Code Reviewers**
-- Understand unfamiliar code
-- Learn best practices
-- Improve code quality
+### 5. **Technical Writers**
+- Research topics thoroughly
+- Generate structured content
+- Understand complex concepts
 
 ---
 
@@ -471,13 +384,11 @@ Based on the current architecture, here are potential features:
 1. **Explore Mode**: Ask any programming question
 2. **Topic Explorer**: Enter a technology you want to learn
 3. **Interview Prep**: Select your target role/technology
-4. **Projects**: Upload code for contextual help
-5. **Threads**: Generate structured learning content
+4. **Threads**: Generate structured learning content
 
 ### Best Practices
 - Start broad, then go deep
 - Use multiple learning modes
-- Upload real projects for better context
 - Save important conversations
 - Follow difficulty progressions
 
@@ -486,14 +397,13 @@ Based on the current architecture, here are potential features:
 ## 📈 Feature Metrics
 
 ### Current Capabilities
-- **5 Main Learning Modes**
-- **15+ API Endpoints**
-- **50+ Frontend Components**
+- **4 Main Learning Modes**
+- **12+ API Endpoints**
+- **40+ Frontend Components**
 - **Multiple AI Models Supported**
 - **Unlimited Topics Coverage**
 - **Real-time Streaming**
 - **Vector Search Enabled**
-- **Multi-Format File Support**
 
 ---
 
@@ -521,15 +431,10 @@ Learning Features:
 │   ├── Question Generation
 │   └── Streaming Responses
 │
-├── Threads
-│   ├── Content Generation
-│   ├── Thread Management
-│   └── Interactive Chat
-│
-└── Projects
-    ├── File Upload
-    ├── Vector Indexing
-    └── Context-Aware AI
+└── Threads
+    ├── Content Generation
+    ├── Thread Management
+    └── Interactive Chat
 ```
 
 ---
@@ -539,7 +444,7 @@ Learning Features:
 ProgChain is a comprehensive AI-powered learning platform that combines:
 - **Structured learning** (Topic Explorer, Threads)
 - **Conversational learning** (Explore Mode)
-- **Practical application** (Interview Prep, Projects)
+- **Practical application** (Interview Prep)
 - **Modern technology** (Real-time streaming, Vector search)
 - **Flexible architecture** (Extensible, modular)
 
