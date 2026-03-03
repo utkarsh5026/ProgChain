@@ -1,9 +1,0 @@
-{
-    "description": "Given an integer array <code>nums</code>, partition it into two (contiguous) subarrays <code>left</code> and <code>right</code> so that:\n\nReturn <em>the length of </em><code>left</code><em> after such a partitioning</em>.\n\nTest cases are generated such that partitioning exists.\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

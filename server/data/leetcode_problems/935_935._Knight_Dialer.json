@@ -1,9 +1,0 @@
-{
-    "description": "The chess knight has a <strong>unique movement</strong>,&nbsp;it may move two squares vertically and one square horizontally, or two squares horizontally and one square vertically (with both forming the shape of an <strong>L</strong>). The possible movements of chess knight are shown in this diagram:\n\nA chess knight can move as indicated in the chess diagram below:\n\nWe have a chess knight and a phone pad as shown below, the knight <strong>can only stand on a numeric cell</strong>&nbsp;(i.e. blue cell).\n\nGiven an integer <code>n</code>, return how many distinct phone numbers of length <code>n</code> we can dial.\n\nYou are allowed to place the knight <strong>on any numeric cell</strong> initially and then you should perform <code>n - 1</code> jumps to dial a number of length <code>n</code>. All jumps should be <strong>valid</strong> knight jumps.\n\nAs the answer may be very large, <strong>return the answer modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\n",
-    "tags": [
-        {
-            "name": "Dynamic Programming",
-            "url": "https://leetcode.com/tag/dynamic-programming/"
-        }
-    ]
-}

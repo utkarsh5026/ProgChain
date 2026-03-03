@@ -1,9 +1,0 @@
-{
-    "description": "Given a string <code>s</code>, return <em>the number of segments in the string</em>.\n\nA <strong>segment</strong> is defined to be a contiguous sequence of <strong>non-space characters</strong>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

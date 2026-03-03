@@ -1,9 +1,0 @@
-{
-    "description": "Given an integer <code>x</code>, return <code>true</code><em> if </em><code>x</code><em> is a </em><span data-keyword=\"palindrome-integer\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:ro:\"><div><em><strong>palindrome</strong></em></div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(323px, 183px);\"></div></div></div></span><em>, and </em><code>false</code><em> otherwise</em>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

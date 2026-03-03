@@ -1,9 +1,0 @@
-{
-    "description": "Given a binary string <code>s</code> <strong>\u200b\u200b\u200b\u200b\u200bwithout leading zeros</strong>, return <code>true</code>\u200b\u200b\u200b <em>if </em><code>s</code><em> contains <strong>at most one contiguous segment of ones</strong></em>. Otherwise, return <code>false</code>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

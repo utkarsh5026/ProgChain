@@ -1,4 +1,0 @@
-{
-    "description": "We are given a list <code>nums</code> of integers representing a list compressed with run-length encoding.\n\nConsider each adjacent pair&nbsp;of elements <code>[freq, val] = [nums[2*i], nums[2*i+1]]</code>&nbsp;(with <code>i &gt;= 0</code>).&nbsp; For each such pair, there are <code>freq</code> elements with value <code>val</code> concatenated in a sublist. Concatenate all the sublists from left to right to generate the decompressed list.\n\nReturn the decompressed list.\n\n",
-    "tags": []
-}

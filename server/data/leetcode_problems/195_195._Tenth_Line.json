@@ -1,9 +1,0 @@
-{
-    "description": "Given a text file&nbsp;<code>file.txt</code>, print&nbsp;just the 10th line of the&nbsp;file.\n\n<strong class=\"example\">Example:</strong>\n\nAssume that <code>file.txt</code> has the following content:\n\nYour script should output the tenth line, which is:\n\n",
-    "tags": [
-        {
-            "name": "Shell",
-            "url": "https://leetcode.com/tag/shell/"
-        }
-    ]
-}

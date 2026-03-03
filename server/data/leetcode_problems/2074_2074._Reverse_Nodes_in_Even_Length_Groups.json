@@ -1,9 +1,0 @@
-{
-    "description": "You are given the <code>head</code> of a linked list.\n\nThe nodes in the linked list are <strong>sequentially</strong> assigned to <strong>non-empty</strong> groups whose lengths form the sequence of the natural numbers (<code>1, 2, 3, 4, ...</code>). The <strong>length</strong> of a group is the number of nodes assigned to it. In other words,\n\nNote that the length of the last group may be less than or equal to <code>1 + the length of the second to last group</code>.\n\n<strong>Reverse</strong> the nodes in each group with an <strong>even</strong> length, and return <em>the</em> <code>head</code> <em>of the modified linked list</em>.\n\n",
-    "tags": [
-        {
-            "name": "Linked List",
-            "url": "https://leetcode.com/tag/linked-list/"
-        }
-    ]
-}

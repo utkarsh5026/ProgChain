@@ -1,9 +1,0 @@
-{
-    "description": "You are given two positive integers <code>n</code> and <code>k</code>.\n\nYou can choose <strong>any</strong> bit in the <strong>binary representation</strong> of <code>n</code> that is equal to 1 and change it to 0.\n\nReturn the <em>number of changes</em> needed to make <code>n</code> equal to <code>k</code>. If it is impossible, return -1.\n\n",
-    "tags": [
-        {
-            "name": "Bit Manipulation",
-            "url": "https://leetcode.com/tag/bit-manipulation/"
-        }
-    ]
-}

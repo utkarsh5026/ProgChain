@@ -1,4 +1,0 @@
-{
-    "description": "You are given a <strong>0-indexed</strong> integer array <code>nums</code> and an integer <code>k</code>.\n\nReturn <em>an integer that denotes the <strong>sum</strong> of elements in </em><code>nums</code><em> whose corresponding <strong>indices</strong> have <strong>exactly</strong> </em><code>k</code><em> set bits in their binary representation.</em>\n\nThe <strong>set bits</strong> in an integer are the <code>1</code>'s present when it is written in binary.\n\n",
-    "tags": []
-}

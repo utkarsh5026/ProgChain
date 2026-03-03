@@ -1,9 +1,0 @@
-{
-    "description": "Given an integer <code>num</code>, return <em>a string of its <strong>base 7</strong> representation</em>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

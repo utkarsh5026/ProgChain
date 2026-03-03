@@ -1,4 +1,0 @@
-{
-    "description": "A&nbsp;company plans to provide its employees with a bonus.\n\nWrite a solution to create a new column name <code>bonus</code> that contains the <strong>doubled values</strong> of the <code>salary</code> column.\n\nThe result format is in the following example.\n\n",
-    "tags": []
-}

@@ -1,9 +1,0 @@
-{
-    "description": "Given an array of integers <code>arr</code>, return <em><code>true</code> if and only if it is a valid mountain array</em>.\n\nRecall that arr is a mountain array if and only if:\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

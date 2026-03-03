@@ -1,4 +1,0 @@
-{
-    "description": "Write a solution to <strong>create</strong> a DataFrame from a 2D list called <code>student_data</code>. This 2D list contains the IDs and ages of some students.\n\nThe DataFrame should have two columns, <code>student_id</code> and <code>age</code>, and be in the same order as the original 2D list.\n\nThe result format is in the following example.\n\n",
-    "tags": []
-}

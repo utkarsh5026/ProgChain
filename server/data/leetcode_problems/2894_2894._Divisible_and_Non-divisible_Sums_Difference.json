@@ -1,9 +1,0 @@
-{
-    "description": "You are given positive integers <code>n</code> and <code>m</code>.\n\nDefine two integers as follows:\n\nReturn <em>the integer</em> <code>num1 - num2</code>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

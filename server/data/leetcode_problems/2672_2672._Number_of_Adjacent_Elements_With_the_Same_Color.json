@@ -1,9 +1,0 @@
-{
-    "description": "You are given an integer <code>n</code> representing an array <code>colors</code> of length <code>n</code> where all elements are set to 0's meaning <strong>uncolored</strong>. You are also given a 2D integer array <code>queries</code> where <code>queries[i] = [index<sub>i</sub>, color<sub>i</sub>]</code>. For the <code>i<sup>th</sup></code> <strong>query</strong>:\n\nReturn an array <code>answer</code> of the same length as <code>queries</code> where <code>answer[i]</code> is the answer to the <code>i<sup>th</sup></code> query.\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

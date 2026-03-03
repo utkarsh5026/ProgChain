@@ -1,9 +1,0 @@
-{
-    "description": "The <strong>count-and-say</strong> sequence is a sequence of digit strings defined by the recursive formula:\n\n<a href=\"http://en.wikipedia.org/wiki/Run-length_encoding\" target=\"_blank\">Run-length encoding</a> (RLE) is a string compression method that works by replacing consecutive identical characters (repeated 2 or more times) with the concatenation of the character and the number marking the count of the characters (length of the run). For example, to compress the string <code>\"3322251\"</code> we replace <code>\"33\"</code> with <code>\"23\"</code>, replace <code>\"222\"</code> with <code>\"32\"</code>, replace <code>\"5\"</code> with <code>\"15\"</code> and replace <code>\"1\"</code> with <code>\"11\"</code>. Thus the compressed string becomes <code>\"23321511\"</code>.\n\nGiven a positive integer <code>n</code>, return <em>the </em><code>n<sup>th</sup></code><em> element of the <strong>count-and-say</strong> sequence</em>.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

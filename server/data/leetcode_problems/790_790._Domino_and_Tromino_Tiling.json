@@ -1,9 +1,0 @@
-{
-    "description": "You have two types of tiles: a <code>2 x 1</code> domino shape and a tromino shape. You may rotate these shapes.\n\nGiven an integer n, return <em>the number of ways to tile an</em> <code>2 x n</code> <em>board</em>. Since the answer may be very large, return it <strong>modulo</strong> <code>10<sup>9</sup> + 7</code>.\n\nIn a tiling, every square must be covered by a tile. Two tilings are different if and only if there are two 4-directionally adjacent cells on the board such that exactly one of the tilings has both squares occupied by a tile.\n\n",
-    "tags": [
-        {
-            "name": "Dynamic Programming",
-            "url": "https://leetcode.com/tag/dynamic-programming/"
-        }
-    ]
-}

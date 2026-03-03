@@ -1,4 +1,0 @@
-{
-    "description": "You are given an integer array <code>rewardValues</code> of length <code>n</code>, representing the values of rewards.\n\nInitially, your total reward <code>x</code> is 0, and all indices are <strong>unmarked</strong>. You are allowed to perform the following operation <strong>any</strong> number of times:\n\nReturn an integer denoting the <strong>maximum </strong><em>total reward</em> you can collect by performing the operations optimally.\n\n",
-    "tags": []
-}

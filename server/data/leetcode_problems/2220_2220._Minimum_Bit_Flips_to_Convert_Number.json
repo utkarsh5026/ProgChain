@@ -1,9 +1,0 @@
-{
-    "description": "A <strong>bit flip</strong> of a number <code>x</code> is choosing a bit in the binary representation of <code>x</code> and <strong>flipping</strong> it from either <code>0</code> to <code>1</code> or <code>1</code> to <code>0</code>.\n\nGiven two integers <code>start</code> and <code>goal</code>, return<em> the <strong>minimum</strong> number of <strong>bit flips</strong> to convert </em><code>start</code><em> to </em><code>goal</code>.\n\n",
-    "tags": [
-        {
-            "name": "Bit Manipulation",
-            "url": "https://leetcode.com/tag/bit-manipulation/"
-        }
-    ]
-}

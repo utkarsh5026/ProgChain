@@ -1,9 +1,0 @@
-{
-    "description": "Given a positive integer <code>n</code>, find the sum of all integers in the range <code>[1, n]</code> <strong>inclusive</strong> that are divisible by <code>3</code>, <code>5</code>, or <code>7</code>.\n\nReturn <em>an integer denoting the sum of all numbers in the given range satisfying&nbsp;the constraint.</em>\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

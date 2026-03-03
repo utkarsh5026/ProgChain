@@ -1,9 +1,0 @@
-{
-    "description": "Suppose you are given the following code:\n\nThe same instance of <code>FooBar</code> will be passed to two different threads:\n\nModify the given program to output <code>\"foobar\"</code> <code>n</code> times.\n\n",
-    "tags": [
-        {
-            "name": "Concurrency",
-            "url": "https://leetcode.com/tag/concurrency/"
-        }
-    ]
-}

@@ -1,9 +1,0 @@
-{
-    "description": "Given a binary string <code>s</code>, return <code>true</code><em> if the <strong>longest</strong> contiguous segment of </em><code>1</code>'<em>s is <strong>strictly longer</strong> than the <strong>longest</strong> contiguous segment of </em><code>0</code>'<em>s in </em><code>s</code>, or return <code>false</code><em> otherwise</em>.\n\nNote that if there are no <code>0</code>'s, then the longest continuous segment of <code>0</code>'s is considered to have a length <code>0</code>. The same applies if there is no <code>1</code>'s.\n\n",
-    "tags": [
-        {
-            "name": "String",
-            "url": "https://leetcode.com/tag/string/"
-        }
-    ]
-}

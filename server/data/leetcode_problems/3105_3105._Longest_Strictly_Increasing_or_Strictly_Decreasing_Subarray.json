@@ -1,9 +1,0 @@
-{
-    "description": "You are given an array of integers <code>nums</code>. Return <em>the length of the <strong>longest</strong> <span data-keyword=\"subarray-nonempty\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rr:\"><div>subarray</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(104px, 236px);\"></div></div></div></span> of </em><code>nums</code><em> which is either <strong><span data-keyword=\"strictly-increasing-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rt:\"><div>strictly increasing</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(337px, 236px);\"></div></div></div></span></strong> or <strong><span data-keyword=\"strictly-decreasing-array\" class=\" cursor-pointer relative text-dark-blue-s text-sm\"><div class=\"popover-wrapper inline-block\" data-headlessui-state=\"\"><div><div aria-expanded=\"false\" data-headlessui-state=\"\" id=\"headlessui-popover-button-:rv:\"><div>strictly decreasing</div></div><div style=\"position: fixed; z-index: 40; inset: 0px auto auto 0px; transform: translate(86px, 257px);\"></div></div></div></span></strong></em>.\n\n",
-    "tags": [
-        {
-            "name": "Array",
-            "url": "https://leetcode.com/tag/array/"
-        }
-    ]
-}

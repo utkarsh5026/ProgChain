@@ -1,4 +1,0 @@
-{
-    "description": "You are given an integer array <code>nums</code> and an integer <code>k</code>.\n\nThe <strong>frequency</strong> of an element <code>x</code> is the number of times it occurs in an array.\n\nAn array is called <strong>good</strong> if the frequency of each element in this array is <strong>less than or equal</strong> to <code>k</code>.\n\nReturn <em>the length of the <strong>longest</strong> <strong>good</strong> subarray of</em> <code>nums</code><em>.</em>\n\nA <strong>subarray</strong> is a contiguous non-empty sequence of elements within an array.\n\n",
-    "tags": []
-}

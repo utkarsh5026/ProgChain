@@ -1,4 +1,0 @@
-{
-    "description": "Given a&nbsp;<strong>multi-dimensional array</strong> of integers, return&nbsp;a generator object which&nbsp;yields integers in the same order as&nbsp;<strong>inorder traversal</strong>.\n\nA&nbsp;<strong>multi-dimensional array</strong>&nbsp;is a recursive data structure that contains both integers and other&nbsp;<strong>multi-dimensional arrays</strong>.\n\n<strong>inorder traversal</strong>&nbsp;iterates over&nbsp;each array from left to right, yielding any integers it encounters or applying&nbsp;<strong>inorder traversal</strong>&nbsp;to any arrays it encounters.\n\n",
-    "tags": []
-}

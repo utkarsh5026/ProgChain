@@ -1,9 +1,0 @@
-{
-    "description": "Given an integer <code>n</code>, return <em>the number of trailing zeroes in </em><code>n!</code>.\n\nNote that <code>n! = n * (n - 1) * (n - 2) * ... * 3 * 2 * 1</code>.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}

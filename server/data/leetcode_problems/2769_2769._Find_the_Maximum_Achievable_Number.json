@@ -1,9 +1,0 @@
-{
-    "description": "Given two integers, <code>num</code> and <code>t</code>. A <strong>number is achievable</strong> if it can become equal to <code>num</code> after applying the following operation:\n\nReturn the <strong>maximum achievable number</strong> after applying the operation at most <code>t</code> times.\n\n",
-    "tags": [
-        {
-            "name": "Math",
-            "url": "https://leetcode.com/tag/math/"
-        }
-    ]
-}
