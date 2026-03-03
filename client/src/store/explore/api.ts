@@ -1,7 +1,7 @@
 import { streamText } from "@/api/stream";
 import caller, { API_BASE_URL } from "@/api/caller";
 import type { Model } from "@/config/config";
-import type { QuestionRequest, Question, ChatBasic, ChatStats } from "./type";
+import type { QuestionRequest, Question, ChatBasic } from "./type";
 
 const EXPLORE_URL = `${API_BASE_URL}/explore`;
 
@@ -49,7 +49,9 @@ export const getChatHistory = async (
   const response = await caller.get(url, { params: postBody });
   const data = response.data;
 
-  return data.map(({ chat, stats }: { chat: any; stats: any }) => {
+  type ChatRaw = { public_id: string; chat_topic: string; created_at: string; updated_at: string };
+  type StatsRaw = { total_tokens: number; prompt_tokens: number; completion_tokens: number; msg_cnt: number; total_cost: number };
+  return data.map(({ chat, stats }: { chat: ChatRaw; stats: StatsRaw }) => {
     return {
       id: chat.public_id,
       topic: chat.chat_topic,
@@ -75,7 +77,7 @@ export const loadChat = async (chat_id: number): Promise<Question[]> => {
   const response = await caller.get(url);
   const chat = response.data.chat;
 
-  return chat.map((message: any) => {
+  return chat.map((message: { chat_id: string; user_question: string; assistant_answer: string }) => {
     return {
       id: message.chat_id,
       text: message.user_question,

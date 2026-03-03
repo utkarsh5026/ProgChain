@@ -1,5 +1,6 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import ReactMarkdown from "react-markdown";
+import type { Components } from "react-markdown";
 import { Card, CardContent } from "@/components/ui/card";
 import { Bot, Check, Copy } from "lucide-react";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -24,7 +25,7 @@ const customTheme = {
 const AIResponse = ({ content = "", isLoading = false }) => {
   const [displayedContent, setDisplayedContent] = useState("");
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [copiedStates, setCopiedStates] = useState(new Map());
+  const [copiedStates, setCopiedStates] = useState(new Map<string, boolean>());
 
   useEffect(() => {
     if (!content) return;
@@ -50,7 +51,7 @@ const AIResponse = ({ content = "", isLoading = false }) => {
     setCurrentIndex(0);
   }, [content]);
 
-  const handleCopy = useCallback(async (text, blockId) => {
+  const handleCopy = useCallback(async (text: string, blockId: string) => {
     try {
       await navigator.clipboard.writeText(text);
       setCopiedStates((prev) => new Map(prev).set(blockId, true));
@@ -66,14 +67,14 @@ const AIResponse = ({ content = "", isLoading = false }) => {
     }
   }, []);
 
-  const CodeBlock = ({ node, inline, className, children }) => {
+  const CodeBlock: Components["code"] = ({ className, children }) => {
     // Safe conversion of children to string, handling undefined/null cases
-    const content = children ? String(children) : "";
+    const codeContent = children ? String(children) : "";
 
     // Determine if this should be a code block based on className and content
     const hasLanguageClass = className?.includes("language-");
-    const hasMultipleLines = content.includes("\n");
-    const isCodeBlock = !inline && (hasLanguageClass || hasMultipleLines);
+    const hasMultipleLines = codeContent.includes("\n");
+    const isCodeBlock = hasLanguageClass || hasMultipleLines;
 
     // Extract language from className
     const match = /language-(\w+)/.exec(className || "");
@@ -81,12 +82,12 @@ const AIResponse = ({ content = "", isLoading = false }) => {
 
     // Generate unique ID for code blocks
     const blockId = isCodeBlock ? Math.random().toString(36) : null;
-    const isCopied = copiedStates.get(blockId);
+    const isCopied = blockId ? copiedStates.get(blockId) : false;
 
     if (!isCodeBlock) {
       return (
         <code className="px-1.5 py-0.5 mx-0.5 bg-slate-700/10 dark:bg-slate-700/50 text-slate-700 dark:text-slate-200 rounded font-mono text-[0.875em]">
-          {content}
+          {codeContent}
         </code>
       );
     }
@@ -96,7 +97,7 @@ const AIResponse = ({ content = "", isLoading = false }) => {
         <div className="absolute right-4 top-4 z-10 opacity-0 group-hover:opacity-100 transition-opacity">
           <button
             className="px-2 py-1 text-xs bg-slate-700 text-slate-300 rounded hover:bg-slate-600 transition-colors flex items-center gap-1"
-            onClick={() => handleCopy(content, blockId)}
+            onClick={() => blockId && handleCopy(codeContent, blockId)}
           >
             {isCopied ? (
               <>
@@ -120,11 +121,34 @@ const AIResponse = ({ content = "", isLoading = false }) => {
               paddingTop: "2rem",
             }}
           >
-            {content}
+            {codeContent}
           </SyntaxHighlighter>
         </div>
       </div>
     );
+  };
+
+  const components: Components = {
+    code: CodeBlock,
+    h1: ({ ...props }) => (
+      <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />
+    ),
+    h2: ({ ...props }) => (
+      <h2 className="text-xl font-bold mt-5 mb-3" {...props} />
+    ),
+    h3: ({ ...props }) => (
+      <h3 className="text-lg font-bold mt-4 mb-2" {...props} />
+    ),
+    p: ({ ...props }) => <p className="mb-4 leading-relaxed" {...props} />,
+    ul: ({ ...props }) => <ul className="list-disc pl-6 mb-4" {...props} />,
+    ol: ({ ...props }) => <ol className="list-decimal pl-6 mb-4" {...props} />,
+    li: ({ ...props }) => <li className="mb-2" {...props} />,
+    blockquote: ({ ...props }) => (
+      <blockquote
+        className="border-l-4 border-slate-300 dark:border-slate-600 pl-4 italic my-4"
+        {...props}
+      />
+    ),
   };
 
   return (
@@ -153,38 +177,7 @@ const AIResponse = ({ content = "", isLoading = false }) => {
                   />
                 </div>
               ) : (
-                <ReactMarkdown
-                  components={{
-                    code: CodeBlock,
-                    h1: ({ node, ...props }) => (
-                      <h1 className="text-2xl font-bold mt-6 mb-4" {...props} />
-                    ),
-                    h2: ({ node, ...props }) => (
-                      <h2 className="text-xl font-bold mt-5 mb-3" {...props} />
-                    ),
-                    h3: ({ node, ...props }) => (
-                      <h3 className="text-lg font-bold mt-4 mb-2" {...props} />
-                    ),
-                    p: ({ node, ...props }) => (
-                      <p className="mb-4 leading-relaxed" {...props} />
-                    ),
-                    ul: ({ node, ...props }) => (
-                      <ul className="list-disc pl-6 mb-4" {...props} />
-                    ),
-                    ol: ({ node, ...props }) => (
-                      <ol className="list-decimal pl-6 mb-4" {...props} />
-                    ),
-                    li: ({ node, ...props }) => (
-                      <li className="mb-2" {...props} />
-                    ),
-                    blockquote: ({ node, ...props }) => (
-                      <blockquote
-                        className="border-l-4 border-slate-300 dark:border-slate-600 pl-4 italic my-4"
-                        {...props}
-                      />
-                    ),
-                  }}
-                >
+                <ReactMarkdown components={components}>
                   {displayedContent}
                 </ReactMarkdown>
               )}

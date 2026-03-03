@@ -20,7 +20,7 @@ const HoverableContentWrapper: React.FC<HoverableContentWrapperProps> = ({
 }) => {
   const [hover, setHover] = useState(false);
   const { toast } = useToast();
-  const { setText } = useChatInput();
+  useChatInput();
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   const handleMouseEnter = () => {
@@ -62,7 +62,7 @@ const HoverableContentWrapper: React.FC<HoverableContentWrapperProps> = ({
         description: textBelow,
         duration: 500,
       });
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to copy",
         description: "Please try again",
@@ -82,7 +82,7 @@ const HoverableContentWrapper: React.FC<HoverableContentWrapperProps> = ({
         description: textAbove,
         duration: 500,
       });
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to copy",
         description: "Please try again",
@@ -101,7 +101,7 @@ const HoverableContentWrapper: React.FC<HoverableContentWrapperProps> = ({
         description: content,
         duration: 500,
       });
-    } catch (err) {
+    } catch {
       toast({
         title: "Failed to copy",
         description: "Please try again",

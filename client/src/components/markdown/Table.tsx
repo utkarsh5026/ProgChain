@@ -7,7 +7,6 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { DownloadIcon, FileSpreadsheet, FileType } from "lucide-react";
-import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import React, { useRef } from "react";
 
 type RowData = (string | null)[];

@@ -102,7 +102,7 @@ const MinimapDrawer: React.FC<{
   currentPath: string[];
   activeQuestion: string | null;
   onQuestionClick: (id: string) => void;
-  getQuestion: (id: string) => any;
+  getQuestion: (id: string) => { text: string } | undefined;
   onReset: () => void;
   isResetting: boolean;
 }> = ({

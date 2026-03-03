@@ -49,7 +49,7 @@ const LearningFeed: React.FC = () => {
     if (activeIndex === content.length - 2 && !loading(generating)) {
       try {
         fetchMoreContent({});
-      } catch (error) {
+      } catch {
         toast({
           title: "Error fetching more content",
           description: generating.error,

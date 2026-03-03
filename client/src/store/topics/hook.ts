@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import { fetchGeneratedTopics, setCurrentTopic, setSuccess } from "./slice";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import type { TopicConcepts } from "./types";
@@ -37,8 +37,6 @@ const useTopics = (): TopicsHookResult => {
     error,
   } = topics;
 
-  const memoizedTopicConcepts = useMemo(() => topicConcepts, [topicConcepts]);
-
   const fetchTopics = useCallback(
     async (topicPath: string, model: Model) => {
       if (topicPath in topicConcepts) {
@@ -49,12 +47,12 @@ const useTopics = (): TopicsHookResult => {
       dispatch(setCurrentTopic(topicPath));
       await dispatch(fetchGeneratedTopics(data));
     },
-    [conversationId]
+    [conversationId, dispatch, topicConcepts]
   );
 
   return {
     currentTopic,
-    topicConcepts: memoizedTopicConcepts,
+    topicConcepts,
     loading,
     fetchTopics,
     generating,

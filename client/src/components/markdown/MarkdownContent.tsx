@@ -27,7 +27,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
   }, [content]);
 
   const getIndicesForText = (
-    text: string
+    text: string,
   ): { startIndex: number; endIndex: number } => {
     if (!text || text.trim() === "") {
       return {
@@ -84,7 +84,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
         components={{
           // For headings, paragraphs, and list items we wrap them in the HoverableContentWrapper,
           // passing the full markdown content and the computed startIndex/endIndex for that element.
-          h1: ({ node, ...props }) => {
+          h1: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
             return (
@@ -101,7 +101,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          h2: ({ node, ...props }) => {
+          h2: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
             return (
@@ -118,7 +118,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          h3: ({ node, ...props }) => {
+          h3: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
             return (
@@ -135,7 +135,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          h4: ({ node, ...props }) => {
+          h4: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
             return (
@@ -152,7 +152,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          p: ({ node, ...props }) => {
+          p: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
             return (
@@ -166,7 +166,7 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          li: ({ node, ...props }) => {
+          li: ({ ...props }) => {
             const text = extractText(props.children);
             const { startIndex, endIndex } = getIndicesForText(text);
 
@@ -181,63 +181,63 @@ const Markdown: React.FC<MarkdownProps> = ({ content, operation }) => {
               </HoverableContentWrapper>
             );
           },
-          strong: ({ node, ...props }) => (
+          strong: ({ ...props }) => (
             <strong
               {...props}
               className="font-medium text-zinc-200 strong-text"
             />
           ),
-          em: ({ node, ...props }) => (
+          em: ({ ...props }) => (
             <em {...props} className="italic text-blue-300" />
           ),
-          ul: ({ node, ...props }) => (
+          ul: ({ ...props }) => (
             <ul
               {...props}
               className="my-8 ml-6 list-disc space-y-3 text-zinc-400"
             />
           ),
-          ol: ({ node, ...props }) => (
+          ol: ({ ...props }) => (
             <ol
               {...props}
               className="my-8 ml-6 list-decimal space-y-3 text-zinc-400"
             />
           ),
-          a: ({ node, ...props }) => (
+          a: ({ ...props }) => (
             <a
               {...props}
               className="font-medium text-blue-300 underline underline-offset-4 hover:text-blue-200 transition-colors duration-200"
             />
           ),
-          blockquote: ({ node, ...props }) => (
+          blockquote: ({ ...props }) => (
             <blockquote
               {...props}
               className="mt-6 border-l-2 border-blue-400/30 pl-6 italic text-zinc-500"
             />
           ),
-          table: ({ node, ...props }) => <MarkDownTable props={props} />,
-          tr: ({ node, ...props }) => (
+          table: ({ ...props }) => <MarkDownTable props={props} />,
+          tr: ({ ...props }) => (
             <tr {...props} className="border-b border-zinc-800" />
           ),
-          th: ({ node, ...props }) => (
+          th: ({ ...props }) => (
             <th
               {...props}
               className="px-4 py-3 text-left text-sm font-semibold text-zinc-200 whitespace-normal break-words"
             />
           ),
-          td: ({ node, ...props }) => (
+          td: ({ ...props }) => (
             <td
               {...props}
               className="px-4 py-3 text-sm text-zinc-400 whitespace-normal break-words"
             />
           ),
-          pre: ({ node, ...props }) => <CodeSegment props={props} />,
-          code: ({ node, ...props }) => (
+          pre: ({ ...props }) => <CodeSegment props={props} />,
+          code: ({ ...props }) => (
             <code
               {...props}
               className="font-mono text-sm text-zinc-300 code-text"
             />
           ),
-          hr: ({ node, ...props }) => (
+          hr: ({ ...props }) => (
             <hr {...props} className="my-8 border-zinc-800/50" />
           ),
         }}
@@ -268,10 +268,14 @@ const wrapTextWithMarkdownSyntax = (
   text: string,
   element:
     | React.ReactPortal
-    | React.ReactElement<unknown, string | React.JSXElementConstructor<any>>
+    | React.ReactElement<
+        unknown,
+        string | React.JSXElementConstructor<unknown>
+      >,
 ) => {
-  const getElementName = (element: any) => {
-    return element?.props?.node?.tagName;
+  const getElementName = (el: unknown) => {
+    return (el as { props?: { node?: { tagName?: string } } })?.props?.node
+      ?.tagName;
   };
 
   if (element === undefined) return text;

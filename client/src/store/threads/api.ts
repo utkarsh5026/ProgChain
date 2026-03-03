@@ -24,7 +24,9 @@ type ThreadContent = {
   content: LearningContent;
 };
 
-const parseContent = (thread: any): ThreadContent => {
+type RawThread = { thread_id: number; content: { thread_topic: string; content: string; content_id: number } };
+
+const parseContent = (thread: RawThread): ThreadContent => {
   const threadID = thread.thread_id;
   const content = thread.content;
   return {
@@ -74,7 +76,7 @@ export const fetchThread = async (
   console.log(data);
   return {
     threadID,
-    contents: data.map((content: any) => ({
+    contents: data.map((content: { id: number; topic: string; content: string }) => ({
       id: content.id,
       topic: content.topic,
       content: content.content,
@@ -94,7 +96,7 @@ export const loadThreadChats = async (
     `${BASE_THREAD_URL}/chat/${threadContentId}`
   );
   const data = response.data;
-  return data.chats.map((chat: any) => ({
+  return data.chats.map((chat: { id: number; user_question: string; ai_answer: string }) => ({
     chatId: chat.id,
     userQuestion: chat.user_question,
     aiResponse: chat.ai_answer,

@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Card } from "../ui/card";
 interface CodeSegmentProps {
-  props: any;
+  props: React.HTMLAttributes<HTMLPreElement>;
 }
 
 const CopiedCodeContent = ({ content }: { content: string }) => {

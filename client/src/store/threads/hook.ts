@@ -28,7 +28,7 @@ const useThreads = () => {
       const threadID = thread.threadID;
       dispatch(generateThreadThunk({ threadID, ...options }));
     },
-    [dispatch]
+    [dispatch, thread]
   );
 
   const reset = useCallback(() => {

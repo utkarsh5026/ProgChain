@@ -77,9 +77,6 @@ const ChatInput: React.FC<ChatInputProps> = ({
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Get current selections for display
-  const currentModel =
-    modelDescriptions.find((m) => m.name === selectedModel) ||
-    modelDescriptions[0];
   const currentPrompt =
     promptTypes.find((p) => p.id === selectedPromptType) || promptTypes[0];
 

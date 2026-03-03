@@ -5,7 +5,7 @@
  * @returns An async generator that yields parsed JSON objects from the stream
  * @throws {Error} If the HTTP response is not OK or if the stream cannot be read
  */
-export const postStream = async function* <T extends Record<string, any>>(
+export const postStream = async function* <T extends Record<string, unknown>>(
   url: string,
   body: T
 ) {
@@ -33,7 +33,7 @@ export const postStream = async function* <T extends Record<string, any>>(
  * @throws Will throw an error if the URL or body is missing, if the HTTP response status is not OK,
  *         if no response body is available, or if a reader cannot be created.
  */
-export const streamText = async function* <Rq extends Record<string, any>>(
+export const streamText = async function* <Rq extends Record<string, unknown>>(
   url: string,
   body: Rq
 ): AsyncGenerator<string> {
