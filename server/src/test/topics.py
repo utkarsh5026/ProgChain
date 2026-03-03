@@ -5,17 +5,13 @@ import json
 SERVER_URL = "http://localhost:8000"
 
 # Test data
-test_data = {
-    "topic_path": "Python Object-Oriented Programming",
-    "model": "gpt-4o-mini"
-}
+test_data = {"topic_path": "Python Object-Oriented Programming", "model": "gpt-4o-mini"}
 
 
 def test_generate_topics():
     try:
         # Make a POST request to the server
-        response = requests.post(
-            f"{SERVER_URL}/topics/generate", json=test_data)
+        response = requests.post(f"{SERVER_URL}/topics/generate", json=test_data)
 
         # Check if the request was successful
         response.raise_for_status()
@@ -26,10 +22,10 @@ def test_generate_topics():
         print(json.dumps(topics, indent=2, ensure_ascii=False))
 
         assert "topics" in topics, "Response doesn't contain 'topics' key"
-        assert isinstance(topics["topics"],
-                          dict), "'topics' should be a dictionary"
-        assert all(key in topics["topics"] for key in [
-                   "beginner", "intermediate", "advanced"]), "Missing difficulty levels"
+        assert isinstance(topics["topics"], dict), "'topics' should be a dictionary"
+        assert all(
+            key in topics["topics"] for key in ["beginner", "intermediate", "advanced"]
+        ), "Missing difficulty levels"
 
         print("Test passed successfully!")
 

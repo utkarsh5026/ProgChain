@@ -27,6 +27,7 @@ gpt_4o = ChatOpenAI(
 
 class Model(Enum):
     """Enumeration for available models."""
+
     GPT_4O_MINI = "gpt-4o-mini"
     GPT_4O = "gpt-4o"
 

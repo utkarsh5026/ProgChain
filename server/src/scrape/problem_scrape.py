@@ -67,9 +67,9 @@ def get_description(driver):
     if description_div:
         p_tags = description_div.find_elements(By.TAG_NAME, "p")
         for p in p_tags:
-            if "&nbsp;" == p.get_attribute('innerHTML'):
+            if "&nbsp;" == p.get_attribute("innerHTML"):
                 break
-            description += p.get_attribute('innerHTML') + "\n\n"
+            description += p.get_attribute("innerHTML") + "\n\n"
 
     return description
 
@@ -93,11 +93,11 @@ def get_tags(driver):
         elements = driver.find_elements(By.CSS_SELECTOR, selector)
         print(selector)
         for elem in elements:
-            tag_text = elem.get_attribute('innerHTML')
-            tag_href = elem.get_attribute('href')
+            tag_text = elem.get_attribute("innerHTML")
+            tag_href = elem.get_attribute("href")
 
             print("tag", tag_text, tag_href)
-            if tag_text and not any(tag['name'] == tag_text for tag in tags):
+            if tag_text and not any(tag["name"] == tag_text for tag in tags):
                 tags.append({"name": tag_text, "url": tag_href})
 
     return tags
@@ -122,10 +122,7 @@ def scrape_leetcode_problem(problem_url):
         description = get_description(driver)
         tags = get_tags(driver)
 
-        return {
-            "description": description,
-            "tags": tags
-        }
+        return {"description": description, "tags": tags}
 
     except Exception as e:
         print(f"An error occurred: {e}")

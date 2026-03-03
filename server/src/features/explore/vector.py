@@ -12,7 +12,7 @@ class VectorStoreManager:
         self,
         initial_text: str = "System: Conversation Start",
         search_k: int = 5,
-        chunk_size: int = 1000
+        chunk_size: int = 1000,
     ) -> None:
         """
         Initialize the vector store manager.
@@ -48,8 +48,7 @@ class VectorStoreManager:
             raise ValueError("Query must be a non-empty string")
 
         try:
-            memory_variables = self.memory.load_memory_variables(
-                {"prompt": query})
+            memory_variables = self.memory.load_memory_variables({"prompt": query})
             history = memory_variables["relevant_history"]
 
             if isinstance(history, str):
@@ -70,10 +69,7 @@ class VectorStoreManager:
         return [SystemMessage(content=history)]
 
     async def add_interaction(
-        self,
-        human_msg: str,
-        ai_msg: str,
-        validate: bool = True
+        self, human_msg: str, ai_msg: str, validate: bool = True
     ) -> None:
         """
         Add a conversation interaction to the vector store.
@@ -94,8 +90,7 @@ class VectorStoreManager:
 
         try:
             await self.memory.asave_context({"input": human_msg}, {"output": ai_msg})
-            self.vector_store.add_texts(
-                [f"Human: {human_msg}", f"AI: {ai_msg}"])
+            self.vector_store.add_texts([f"Human: {human_msg}", f"AI: {ai_msg}"])
         except Exception as e:
             raise RuntimeError(f"Failed to add interaction: {str(e)}")
 
@@ -107,17 +102,14 @@ class VectorStoreManager:
             initial_text: Optional new initial text
         """
         try:
-            self._initialize_stores(
-                initial_text or "System: Conversation Start"
-            )
+            self._initialize_stores(initial_text or "System: Conversation Start")
         except Exception as e:
             raise RuntimeError(f"Failed to clear vector store: {str(e)}")
 
     def _initialize_stores(self, initial_text: str) -> None:
         """Initialize vector store and memory with given text."""
         self.vector_store = FAISS.from_texts(
-            texts=[initial_text],
-            embedding=self.embeddings
+            texts=[initial_text], embedding=self.embeddings
         )
         self.retriever = self.vector_store.as_retriever(
             search_kwargs={"k": self.search_k}
@@ -125,5 +117,5 @@ class VectorStoreManager:
         self.memory = VectorStoreRetrieverMemory(
             retriever=self.retriever,
             return_messages=True,
-            memory_key="relevant_history"
+            memory_key="relevant_history",
         )

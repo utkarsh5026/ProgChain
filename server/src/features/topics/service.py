@@ -8,7 +8,6 @@ from typing import AsyncGenerator
 from fastapi_components import BaseContentGenerateRequest
 
 
-
 class TopicService:
 
     def __init__(self) -> None:
@@ -31,9 +30,13 @@ class TopicService:
         return tg
 
     @classmethod
-    async def _generate(cls, tg: TopicsGenerator, path: list[str], model_name: Model) -> AsyncGenerator[dict, None]:
+    async def _generate(
+        cls, tg: TopicsGenerator, path: list[str], model_name: Model
+    ) -> AsyncGenerator[dict, None]:
         async for topics_dict in tg.generate_topics(path, model_name):
             yield topics_dict
 
-    async def start_generation(self, topic: BaseContentGenerateRequest) -> AsyncGenerator[dict, None]:
+    async def start_generation(
+        self, topic: BaseContentGenerateRequest
+    ) -> AsyncGenerator[dict, None]:
         tg = await self.__create_topic_chain(topic_name=topic.question)

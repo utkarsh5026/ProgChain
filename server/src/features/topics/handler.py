@@ -39,7 +39,7 @@ async def generate_topics(request: TopicGenerateRequest):
                 response = TopicResponse(
                     conversation_id=request.conversation_id or "",
                     current_path=current_path,
-                    available_topics=topics_dict
+                    available_topics=topics_dict,
                 )
                 json_str = json.dumps(response.model_dump())
                 yield f"data: {json_str}\n\n"
@@ -53,7 +53,7 @@ async def generate_topics(request: TopicGenerateRequest):
         headers={
             "Cache-Control": "no-cache",
             "Connection": "keep-alive",
-        }
+        },
     )
 
 

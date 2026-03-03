@@ -1,9 +1,5 @@
 from fastapi_components import fastapi_app as app
-from features import (
-    topics_router,
-    explore_router,
-    threads_router
-)
+from features import topics_router, explore_router, threads_router
 
 
 app.include_router(topics_router)

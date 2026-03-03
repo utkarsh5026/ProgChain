@@ -26,6 +26,7 @@ class TopicQuestion(BaseModel):
     """
     Data model representing a user's question along with optional model name and extra instructions.
     """
+
     question: str
     model_name: str = Model.GPT_4O.value
     extra_instructions: str
@@ -44,7 +45,9 @@ class ResearchAssistantService:
         self.assistants: dict[str, ResearchAssistant] = {}
         self.cache = LFUCache(maxsize=100)
 
-    async def start_exploration(self, topic: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
+    async def start_exploration(
+        self, topic: ChatGenerateOptions
+    ) -> AsyncGenerator[dict, None]:
         """
         Start a new exploration session by generating an answer for the given question.
 
@@ -62,7 +65,9 @@ class ResearchAssistantService:
         async for chunk in assistant.generate_answer(topic):
             yield chunk
 
-    async def ask_question(self, chat_id: str, options: ChatGenerateOptions) -> AsyncGenerator[str, None]:
+    async def ask_question(
+        self, chat_id: str, options: ChatGenerateOptions
+    ) -> AsyncGenerator[str, None]:
         """
 
         Ask a follow-up question within an existing chat session.
@@ -107,8 +112,9 @@ class ResearchAssistantService:
         Returns:
             A list of all chat records.
         """
-        chats = await ExploreChat.get_pagination(cursor=request.timestamp,
-                                                 limit=request.limit)
+        chats = await ExploreChat.get_pagination(
+            cursor=request.timestamp, limit=request.limit
+        )
 
         chats.items = [chat.to_dict() for chat in chats.items]
         return chats

@@ -15,8 +15,11 @@ str_parser = StrOutputParser()
 
 manager = TopicsManager()
 
-topic_generator_template = ChatPromptTemplate.from_messages([
-    ("system", """You are an expert at creating comprehensive programming topic hierarchies.
+topic_generator_template = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            """You are an expert at creating comprehensive programming topic hierarchies.
     Current Topic: {current_topic}
     Previously Explored Topics: {explored_topics}
     Context: {context}
@@ -46,15 +49,20 @@ topic_generator_template = ChatPromptTemplate.from_messages([
     ]}}###DIFFICULTY_END###
 
     Focus on discovering novel but relevant subtopics that expand the learner's understanding. 
-    Ensure each JSON object is valid and complete before the delimiter."""),
-    ("human", "Generate topics for {current_topic}")
-])
+    Ensure each JSON object is valid and complete before the delimiter.""",
+        ),
+        ("human", "Generate topics for {current_topic}"),
+    ]
+)
 
 
 class TopicNameGenerator:
 
-    template = ChatPromptTemplate.from_messages([
-        ("system", """You are an expert at creating concise and clear programming topic names.
+    template = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                """You are an expert at creating concise and clear programming topic names.
         Given Topic: {current_topic}
 
         Your task is to:
@@ -63,9 +71,11 @@ class TopicNameGenerator:
         3. Use standard programming terminology
         4. Remove unnecessary words and complexity
 
-        Return only the simplified topic name in title case, nothing else."""),
-        ("human", "Simplify this topic name: {current_topic}")
-    ])
+        Return only the simplified topic name in title case, nothing else.""",
+            ),
+            ("human", "Simplify this topic name: {current_topic}"),
+        ]
+    )
 
     def __init__(self, topic_name: str) -> None:
         self.topic_name = topic_name
@@ -83,9 +93,11 @@ class TopicNameGenerator:
         try:
             llm = get_model(Model.GPT_4O_MINI.value)
             chain = self.template | llm | str_parser
-            response = await chain.ainvoke({
-                "current_topic": self.topic_name,
-            })
+            response = await chain.ainvoke(
+                {
+                    "current_topic": self.topic_name,
+                }
+            )
             return response.strip()
         except Exception as e:
             logger.error(f"Error generating topic name: {e}")
@@ -116,8 +128,11 @@ class TopicsGenerator:
     def topic_chain_id(self) -> str:
         return self.topic_chain.public_id
 
-    template = ChatPromptTemplate.from_messages([
-        ("system", """You are an expert at creating comprehensive programming topic hierarchies.
+    template = ChatPromptTemplate.from_messages(
+        [
+            (
+                "system",
+                """You are an expert at creating comprehensive programming topic hierarchies.
     Current Topic: {current_topic}
     Context: {context}
 
@@ -146,9 +161,11 @@ class TopicsGenerator:
     ]}}###DIFFICULTY_END###
 
     Focus on discovering novel but relevant subtopics that expand the learner's understanding. 
-    Ensure each JSON object is valid and complete before the delimiter."""),
-        ("human", "Generate topics for {current_topic}")
-    ])
+    Ensure each JSON object is valid and complete before the delimiter.""",
+            ),
+            ("human", "Generate topics for {current_topic}"),
+        ]
+    )
 
     @classmethod
     async def parse_chunk(cls, chunk: str) -> Optional[dict]:
@@ -156,16 +173,16 @@ class TopicsGenerator:
         Parse a chunk of text containing topic information in JSON format.
 
         Args:
-            chunk (str): 
-                A raw text chunk that includes JSON data and a difficulty delimiter. 
-                This chunk is expected to contain information about programming topics 
+            chunk (str):
+                A raw text chunk that includes JSON data and a difficulty delimiter.
+                This chunk is expected to contain information about programming topics
                 categorized by difficulty levels.
 
         Returns:
-            Optional[dict]: 
-                A dictionary containing parsed topics in the format {difficulty: [topics]} 
-                where 'difficulty' is a string representing the level (e.g., "Beginner") 
-                and 'topics' is a list of topic dictionaries. 
+            Optional[dict]:
+                A dictionary containing parsed topics in the format {difficulty: [topics]}
+                where 'difficulty' is a string representing the level (e.g., "Beginner")
+                and 'topics' is a list of topic dictionaries.
                 Returns None if parsing fails due to missing fields or invalid structure.
         """
         try:
@@ -177,8 +194,7 @@ class TopicsGenerator:
             parsed = decode_json(json_str)
 
             if not all(key in parsed for key in ["difficulty", "topics"]):
-                logger.warning(
-                    f"Missing required fields in parsed JSON: {parsed}")
+                logger.warning(f"Missing required fields in parsed JSON: {parsed}")
                 return None
 
             difficulty, topics = parsed["difficulty"], parsed["topics"]
@@ -210,20 +226,20 @@ class TopicsGenerator:
         Generate programming topics based on the given path hierarchy.
 
         Args:
-            path (list[str]): 
-                A list representing the hierarchical path of topics. 
+            path (list[str]):
+                A list representing the hierarchical path of topics.
                 Each element in the list corresponds to a level in the topic hierarchy.
-            model_name (Model): 
-                The language model to use for generating topics. 
+            model_name (Model):
+                The language model to use for generating topics.
                 Defaults to Model.GPT_4O_MINI.
 
         Yields:
-            dict: 
-                A dictionary of generated topics grouped by difficulty level. 
+            dict:
+                A dictionary of generated topics grouped by difficulty level.
                 Each dictionary contains difficulty levels as keys and lists of topics as values.
 
         Raises:
-            ValueError: 
+            ValueError:
                 If the provided path is empty or invalid, indicating that topic generation cannot proceed.
         """
         if not path:
@@ -251,16 +267,15 @@ class TopicsGenerator:
         Save a new topic to the database.
 
         Args:
-            topic_name (str): 
+            topic_name (str):
                 The name of the topic to be saved.
 
         Returns:
-            str: 
+            str:
                 The public ID of the newly created topic.
         """
         topic = await BaseTopic.create(
-            name=topic_name,
-            topic_chain_public_id=self.topic_chain.public_id
+            name=topic_name, topic_chain_public_id=self.topic_chain.public_id
         )
         return topic.public_id
 
@@ -270,13 +285,13 @@ class TopicsGenerator:
         Save subtopics associated with a given topic ID.
 
         Args:
-            topic_id (str): 
+            topic_id (str):
                 The ID of the topic to which the subtopics belong.
-            subtopics (dict): 
+            subtopics (dict):
                 A dictionary containing subtopics categorized by difficulty level.
 
         Raises:
-            ValueError: 
+            ValueError:
                 If no topics are found for a specific difficulty level.
         """
 
@@ -288,53 +303,58 @@ class TopicsGenerator:
         for difficulty in VALID_DIFFICULTIES:
             topics = subtopics[difficulty]
             if not topics:
-                raise ValueError(
-                    f"No topics found for difficulty: {difficulty}")
+                raise ValueError(f"No topics found for difficulty: {difficulty}")
 
             for topic in topics:
                 subtopic = SubTopicType(
                     topic=topic["topic"],
                     description=topic["description"],
-                    difficulty=diff_to_num(difficulty)
+                    difficulty=diff_to_num(difficulty),
                 )
                 subtopics_models.append(subtopic)
 
         await SubTopic.batch_create_subtopics(
-            subtopics=subtopics_models,
-            topic_id=topic_id
+            subtopics=subtopics_models, topic_id=topic_id
         )
 
-    async def _stream_topic_generation(self, path: list[str], model_name: str = Model.GPT_4O_MINI.value):
+    async def _stream_topic_generation(
+        self, path: list[str], model_name: str = Model.GPT_4O_MINI.value
+    ):
         """
         Stream the generation of topics based on the provided path and model.
 
         Args:
-            path (list[str]): 
+            path (list[str]):
                 The hierarchical path of topics to guide the generation process.
-            model_name (str): 
-                The name of the language model to use for generation. 
+            model_name (str):
+                The name of the language model to use for generation.
                 Defaults to Model.GPT_4O_MINI.
 
         Yields:
-            dict: 
+            dict:
                 Parsed topics as they are generated, structured by difficulty level.
         """
         llm = get_model(model_name)
-        context = '>'.join(path)
+        context = ">".join(path)
         current_topic = path[-1]
 
         chain = self.template | llm | str_parser
         buffer = ""
 
-        async for chunk in chain.astream({
-            "current_topic": current_topic,
-            "context": context,
-        }):
+        async for chunk in chain.astream(
+            {
+                "current_topic": current_topic,
+                "context": context,
+            }
+        ):
             buffer += chunk
             if parsed := await self.parse_chunk(buffer):
-                difficulty_end_pos = buffer.find(
-                    DIFFICULTY_DELIMITER) + len(DIFFICULTY_DELIMITER)
-                buffer = buffer[difficulty_end_pos:] if difficulty_end_pos > -1 else buffer
+                difficulty_end_pos = buffer.find(DIFFICULTY_DELIMITER) + len(
+                    DIFFICULTY_DELIMITER
+                )
+                buffer = (
+                    buffer[difficulty_end_pos:] if difficulty_end_pos > -1 else buffer
+                )
                 yield parsed
 
 

@@ -13,18 +13,14 @@ class BaseContentGenerateRequest(BaseModel):
         extra_instructions: Extra instructions for the thread
         question: The question to ask the model
     """
+
     model: Optional[str] = Field(
-        default=Model.GPT_4O_MINI.value,
-        description="The model to use for the thread"
+        default=Model.GPT_4O_MINI.value, description="The model to use for the thread"
     )
     extra_instructions: Optional[str] = Field(
-        default="",
-        description="Extra instructions for the thread"
+        default="", description="Extra instructions for the thread"
     )
-    question: str = Field(
-        description="The question to ask the model",
-        min_length=1
-    )
+    question: str = Field(description="The question to ask the model", min_length=1)
 
     @field_validator("model")
     @classmethod
@@ -43,12 +39,14 @@ class ListDataRequest(BaseModel):
         timestamp: The timestamp to start the list from in isoformat
         limit: The maximum number of items to return
     """
+
     timestamp: datetime = Field(
         default=datetime.min,
-        description="The timestamp to start the list from in isoformat")
+        description="The timestamp to start the list from in isoformat",
+    )
     limit: Optional[int] = Field(
-        description="The maximum number of items to return",
-        default=10, gt=0)
+        description="The maximum number of items to return", default=10, gt=0
+    )
 
     @field_validator("timestamp", mode="before")
     @classmethod

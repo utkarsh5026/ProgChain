@@ -47,10 +47,11 @@ class ResponseMetadata(BaseModel):
 
 class ChatConfig(BaseModel):
     """Essential configuration settings for the chat system"""
-    temperature: float = Field(
-        default=0.7, description="Controls response creativity")
+
+    temperature: float = Field(default=0.7, description="Controls response creativity")
     search_k: int = Field(
-        default=5, description="Number of context documents to retrieve")
+        default=5, description="Number of context documents to retrieve"
+    )
     use_memory: bool = Field(default=True, description="Enable context memory")
     after_generate_success: Optional[Callable[[str], None]] = None
 
@@ -65,17 +66,19 @@ class BaseChatSystem:
 
     DEFAULT_BUFFER_SIZE = 100
 
-    def __init__(self,
-                 prompt: Optional[ChatPromptTemplate] = None,
-                 vector_db: Optional[VectorDB] = None,
-                 config: Optional[ChatConfig] = None,
-                 initial_context: str = "") -> None:
+    def __init__(
+        self,
+        prompt: Optional[ChatPromptTemplate] = None,
+        vector_db: Optional[VectorDB] = None,
+        config: Optional[ChatConfig] = None,
+        initial_context: str = "",
+    ) -> None:
         self.config = config or ChatConfig()
 
         self.vector_db = vector_db or VectorDB(
             initial_text=initial_context,
             search_k=self.config.search_k,
-            use_memory=self.config.use_memory
+            use_memory=self.config.use_memory,
         )
 
         self.prompt = prompt or self._create_default_prompt()
@@ -122,14 +125,12 @@ Additional Instructions: {instructions}
 
 Respond in a way that builds upon our previous discussion while maintaining technical accuracy and educational value."""
 
-        return ChatPromptTemplate.from_messages([
-            ("system", system_prompt),
-            ("human", "{input}")
-        ])
+        return ChatPromptTemplate.from_messages(
+            [("system", system_prompt), ("human", "{input}")]
+        )
 
     async def generate_response(
-            self,
-            options: ChatGenerateOptions
+        self, options: ChatGenerateOptions
     ) -> AsyncGenerator[tuple[str, ResponseMetadata], None]:
         """
 
@@ -144,8 +145,7 @@ Respond in a way that builds upon our previous discussion while maintaining tech
             model_name=get_model(model=options.model).model_name,
             latency=0.0,
             response_tokens=0,
-            prompt_tokens=len(options.question) +
-            len(options.extra_instructions)
+            prompt_tokens=len(options.question) + len(options.extra_instructions),
         )
         async for chunk in self._generate_text(options):
             metadata.latency = time.time() - start_time
@@ -162,8 +162,9 @@ Respond in a way that builds upon our previous discussion while maintaining tech
         """
         await self.vector_db.clear(initial_context)
 
-    async def _generate_text(self, options: ChatGenerateOptions) -> \
-            AsyncGenerator[str, None]:
+    async def _generate_text(
+        self, options: ChatGenerateOptions
+    ) -> AsyncGenerator[str, None]:
         """
         Generate a text response using the specified model and extra instructions.
         Implements buffering to optimize chunk processing.
@@ -201,5 +202,5 @@ Respond in a way that builds upon our previous discussion while maintaining tech
         return {
             "input": options.question,
             "relevant_history": relevant_history,
-            "instructions": options.extra_instructions
+            "instructions": options.extra_instructions,
         }

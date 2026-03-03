@@ -64,7 +64,9 @@ class TopicsManager:
         self.topic_manager[conversation_id] = hierarchy
         return hierarchy
 
-    def get_explored_topics(self, conversation_id: str, topics_path: list[str]) -> list[str]:
+    def get_explored_topics(
+        self, conversation_id: str, topics_path: list[str]
+    ) -> list[str]:
         if len(topics_path) == 0:
             return []
 
@@ -74,7 +76,9 @@ class TopicsManager:
 
         return hierarchy.get_explored_topics(topics_path)
 
-    def update_explored_topics(self, conversation_id: str, topics_path: list[str]) -> None:
+    def update_explored_topics(
+        self, conversation_id: str, topics_path: list[str]
+    ) -> None:
         hierarchy = self.get_hierarchy(conversation_id)
         if not hierarchy:
             return

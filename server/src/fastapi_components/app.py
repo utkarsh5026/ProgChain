@@ -36,7 +36,7 @@ app = FastAPI(
     lifespan=lifespan,
     version="1.0.0",
     docs_url=None if ENVIRONMENT == Environment.PROD else "/docs",
-    redoc_url=None if ENVIRONMENT == Environment.PROD else "/redoc"
+    redoc_url=None if ENVIRONMENT == Environment.PROD else "/redoc",
 )
 
 
@@ -63,7 +63,7 @@ async def global_exception_handler(request: Request, exc: Exception):
     logger.error(f"Global exception: {exc}")
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": "Internal server error with message: " + str(exc)}
+        content={"detail": "Internal server error with message: " + str(exc)},
     )
 
 
@@ -72,14 +72,16 @@ async def validation_exception_handler(request: Request, exc: RequestValidationE
     logger.error(f"Validation error: {exc.errors()}")
     return JSONResponse(
         status_code=status.HTTP_422_UNPROCESSABLE_ENTITY,
-        content={"detail": exc.errors()}
+        content={"detail": exc.errors()},
     )
 
 
 @app.exception_handler(ResponseValidationError)
-async def response_validation_exception_handler(request: Request, exc: ResponseValidationError):
+async def response_validation_exception_handler(
+    request: Request, exc: ResponseValidationError
+):
     logger.error(f"Response validation error: {exc.errors()}")
     return JSONResponse(
         status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-        content={"detail": "Internal server error with message: " + str(exc)}
+        content={"detail": "Internal server error with message: " + str(exc)},
     )

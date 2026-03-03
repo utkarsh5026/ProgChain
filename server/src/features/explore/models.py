@@ -19,15 +19,14 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
     __tablename__ = "explore_chats"
 
     chat_topic: Mapped[str] = mapped_column(String, nullable=False)
-    chat_messages_count: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0)
+    chat_messages_count: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 
     chat_messages: Mapped[list["ExploreChatMessage"]] = relationship(
         "ExploreChatMessage",
         back_populates="chat",
         lazy="dynamic",
         primaryjoin="ExploreChatMessage.chat_internal_id == ExploreChat.id",
-        order_by="desc(ExploreChatMessage.created_at)"
+        order_by="desc(ExploreChatMessage.created_at)",
     )
 
     stats: Mapped[list["ExploreChatStats"]] = relationship(
@@ -35,7 +34,7 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
         back_populates="chat",
         lazy="joined",
         primaryjoin="ExploreChatStats.chat_internal_id == ExploreChat.id",
-        order_by="desc(ExploreChatStats.created_at)"
+        order_by="desc(ExploreChatStats.created_at)",
     )
 
     def __repr__(self) -> str:
@@ -75,8 +74,9 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
         return [
             {
                 "chat": chat.to_dict(),
-                "stats": [stat.to_dict() for stat in chat.stats] if chat.stats else []
-            } for chat in chats.unique().scalars().all()
+                "stats": [stat.to_dict() for stat in chat.stats] if chat.stats else [],
+            }
+            for chat in chats.unique().scalars().all()
         ]
 
     @classmethod
@@ -92,9 +92,7 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
         Returns:
             bool: True if the chat exists, False otherwise.
         """
-        result = await session.execute(
-            select(cls).where(cls.public_id == public_id)
-        )
+        result = await session.execute(select(cls).where(cls.public_id == public_id))
         chat = result.scalars().first()
         return chat is not None
 
@@ -117,7 +115,9 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
 
     @classmethod
     @with_session()
-    async def update_chat_topic(cls, session: AsyncSession, internal_id: int, chat_topic: str) -> None:
+    async def update_chat_topic(
+        cls, session: AsyncSession, internal_id: int, chat_topic: str
+    ) -> None:
         """
         Update the topic of an existing chat.
 
@@ -127,17 +127,14 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
             chat_topic (str): The new topic for the chat.
         """
         await session.execute(
-            update(cls)
-            .where(cls.id == internal_id)
-            .values(chat_topic=chat_topic)
+            update(cls).where(cls.id == internal_id).values(chat_topic=chat_topic)
         )
 
     @classmethod
     def __declare_last__(cls):
         """Register all SQLAlchemy event listeners for this model."""
-        event.listen(ExploreChat, 'after_insert', cls._after_chat_insert)
-        event.listen(ExploreChatMessage, 'after_insert',
-                     cls._after_message_insert)
+        event.listen(ExploreChat, "after_insert", cls._after_chat_insert)
+        event.listen(ExploreChatMessage, "after_insert", cls._after_message_insert)
 
     @staticmethod
     def _after_chat_insert(mapper, connection: Session, target: "ExploreChat"):
@@ -148,10 +145,7 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
         connection.execute(
             update(ExploreChat)
             .where(ExploreChat.id == target.id)
-            .values(
-                chat_messages_count=0,
-                updated_at=func.now()
-            )
+            .values(chat_messages_count=0, updated_at=func.now())
         )
 
         connection.execute(
@@ -162,12 +156,14 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
                 prompt_tokens=0,
                 completion_tokens=0,
                 msg_cnt=0,
-                total_cost=0
+                total_cost=0,
             )
         )
 
     @staticmethod
-    def _after_message_insert(mapper, connection: Session, target: "ExploreChatMessage"):
+    def _after_message_insert(
+        mapper, connection: Session, target: "ExploreChatMessage"
+    ):
         """Handle updates after a new message is inserted.
 
         This event listener updates both the chat's message count in ExploreChat
@@ -178,7 +174,7 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
             .where(ExploreChat.id == target.chat_internal_id)
             .values(
                 chat_messages_count=ExploreChat.chat_messages_count + 1,
-                updated_at=func.now()
+                updated_at=func.now(),
             )
         )
 
@@ -194,9 +190,10 @@ class ExploreChat(Base, TimestampMixin, PublicIDMixin):
                 msg_cnt=ExploreChatStats.msg_cnt + 1,
                 total_tokens=ExploreChatStats.total_tokens + total_token_count,
                 prompt_tokens=ExploreChatStats.prompt_tokens + prompt_token_count,
-                completion_tokens=ExploreChatStats.completion_tokens + completion_token_count,
+                completion_tokens=ExploreChatStats.completion_tokens
+                + completion_token_count,
                 total_cost=ExploreChatStats.total_cost + cost,
-                updated_at=func.now()
+                updated_at=func.now(),
             )
         )
 
@@ -207,22 +204,14 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
     user_question: Mapped[str] = mapped_column(String, nullable=False)
     assistant_answer: Mapped[str] = mapped_column(String, nullable=False)
     chat_id: Mapped[str] = mapped_column(
-        String,
-        ForeignKey("explore_chats.public_id"),
-        nullable=False,
-        index=True
+        String, ForeignKey("explore_chats.public_id"), nullable=False, index=True
     )
     chat_internal_id: Mapped[int] = mapped_column(
-        Integer,
-        ForeignKey("explore_chats.id"),
-        nullable=False,
-        index=True
+        Integer, ForeignKey("explore_chats.id"), nullable=False, index=True
     )
 
     chat: Mapped["ExploreChat"] = relationship(
-        "ExploreChat",
-        back_populates="chat_messages",
-        foreign_keys=[chat_internal_id]
+        "ExploreChat", back_populates="chat_messages", foreign_keys=[chat_internal_id]
     )
 
     def __repr__(self) -> str:
@@ -230,7 +219,9 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
 
     @classmethod
     @with_session()
-    async def get_chat_messages(cls, session: AsyncSession, chat_public_id: str) -> List["ExploreChatMessage"]:
+    async def get_chat_messages(
+        cls, session: AsyncSession, chat_public_id: str
+    ) -> List["ExploreChatMessage"]:
         """
         Retrieve all messages for a given chat.
 
@@ -244,17 +235,18 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
         Returns:
             List[ExploreChatMessage]: A list of messages related to the specified chat.
         """
-        result = await session.execute(
-            select(cls).where(cls.chat_id == chat_public_id)
-        )
+        result = await session.execute(select(cls).where(cls.chat_id == chat_public_id))
         return result.scalars().all()
 
     @classmethod
     @with_session()
-    async def create(cls, session: AsyncSession,
-                     chat_public_id: str,
-                     user_question: str,
-                     assistant_answer: str) -> "ExploreChatMessage":
+    async def create(
+        cls,
+        session: AsyncSession,
+        chat_public_id: str,
+        user_question: str,
+        assistant_answer: str,
+    ) -> "ExploreChatMessage":
         """
         Add a new message to an existing chat.
 
@@ -277,14 +269,16 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
             chat_id=chat_public_id,
             chat_internal_id=chat.id,
             user_question=user_question,
-            assistant_answer=assistant_answer
+            assistant_answer=assistant_answer,
         )
         session.add(message)
         return message
 
     @classmethod
     @with_session()
-    async def create_empty_chat_message(cls, session: AsyncSession, chat_internal_id: int, chat_public_id: str) -> str:
+    async def create_empty_chat_message(
+        cls, session: AsyncSession, chat_internal_id: int, chat_public_id: str
+    ) -> str:
         """
         Create a new empty chat message.
 
@@ -303,14 +297,21 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
             chat_internal_id=chat_internal_id,
             chat_id=chat_public_id,
             user_question="",
-            assistant_answer="")
+            assistant_answer="",
+        )
         session.add(message)
         await session.flush()
         return message.public_id
 
     @classmethod
     @with_session()
-    async def update_chat_message(cls, session: AsyncSession, chat_internal_id: int, user_question: str, assistant_answer: str) -> None:
+    async def update_chat_message(
+        cls,
+        session: AsyncSession,
+        chat_internal_id: int,
+        user_question: str,
+        assistant_answer: str,
+    ) -> None:
         """
         Update a chat message.
 
@@ -331,9 +332,7 @@ class ExploreChatMessage(Base, PublicIDMixin, TimestampMixin):
     @classmethod
     @with_session()
     async def get_messages_by_internal_id(
-            cls,
-            session: AsyncSession,
-            chat_internal_id: int
+        cls, session: AsyncSession, chat_internal_id: int
     ) -> Sequence["ExploreChatMessage"]:
         """
         Internal method for efficient message retrieval using internal ID.
@@ -360,23 +359,14 @@ class ExploreChatStats(Base, TimestampMixin, PublicIDMixin):
     __tablename__ = "explore_chat_stats"
 
     chat_id: Mapped[str] = mapped_column(
-        String,
-        ForeignKey("explore_chats.public_id"),
-        nullable=False,
-        index=True
+        String, ForeignKey("explore_chats.public_id"), nullable=False, index=True
     )
     chat_internal_id: Mapped[int] = mapped_column(
-        Integer,
-        ForeignKey("explore_chats.id"),
-        nullable=False,
-        index=True
+        Integer, ForeignKey("explore_chats.id"), nullable=False, index=True
     )
-    total_tokens: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0)
-    prompt_tokens: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0)
-    completion_tokens: Mapped[int] = mapped_column(
-        Integer, nullable=False, default=0)
+    total_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    prompt_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
+    completion_tokens: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     msg_cnt: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
     total_cost: Mapped[float] = mapped_column(Float, nullable=False, default=0)
 
@@ -384,7 +374,7 @@ class ExploreChatStats(Base, TimestampMixin, PublicIDMixin):
         "ExploreChat",
         back_populates="stats",
         foreign_keys=[chat_internal_id],
-        lazy='joined'
+        lazy="joined",
     )
 
     def __repr__(self) -> str:
@@ -395,11 +385,11 @@ class ExploreChatStats(Base, TimestampMixin, PublicIDMixin):
         Convert the ExploreChatStats instance to a dictionary.
 
         Args:
-            exclude (set[str]): A set of column names to exclude from the dictionary.   
+            exclude (set[str]): A set of column names to exclude from the dictionary.
 
         Returns:
             dict: A dictionary representation of the ExploreChatStats instance.
         """
         exclude = exclude or set()
-        exclude.add('chat_internal_id')
+        exclude.add("chat_internal_id")
         return super().to_dict(exclude)

@@ -21,14 +21,18 @@ class StreamManager:
             yield json.dumps({"error": "Streaming error occurred", "details": str(e)})
 
 
-async def stream_text_response(stream_function: Callable[[], AsyncGenerator[str, None]]):
+async def stream_text_response(
+    stream_function: Callable[[], AsyncGenerator[str, None]],
+):
     async with StreamManager.stream_context():
         try:
             async for chunk in stream_function():
                 try:
                     serialized = json.dumps(
                         chunk,
-                        default=lambda o: o.isoformat() if isinstance(o, datetime) else str(o)
+                        default=lambda o: (
+                            o.isoformat() if isinstance(o, datetime) else str(o)
+                        ),
                     )
                     yield serialized
                 except (TypeError, ValueError) as e:
@@ -39,7 +43,10 @@ async def stream_text_response(stream_function: Callable[[], AsyncGenerator[str,
             yield json.dumps({"error": "Internal server error"})
 
 
-def stream_response(stream_func: Callable[[], AsyncGenerator[str, None]], headers: Optional[dict[str, str]] = None):
+def stream_response(
+    stream_func: Callable[[], AsyncGenerator[str, None]],
+    headers: Optional[dict[str, str]] = None,
+):
     """
     Create a StreamingResponse with configurable options.
 
@@ -60,11 +67,11 @@ def stream_response(stream_func: Callable[[], AsyncGenerator[str, None]], header
         return StreamingResponse(
             stream_text_response(stream_func),
             media_type="text/event-stream",
-            headers=default_headers
+            headers=default_headers,
         )
     except Exception as e:
         logger.error(f"Error streaming response: {e}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Failed to initialize stream: {e}"
+            detail=f"Failed to initialize stream: {e}",
         )

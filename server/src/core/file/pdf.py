@@ -12,13 +12,12 @@ logger = getLogger(__name__)
 class PDFOutline(BaseModel):
     title: str = Field(description="The title of the outline item")
     page_number: int = Field(description="The page number of the outline item")
-    children: list["PDFOutline"] = Field(
-        description="A list of child outline items"
-    )
+    children: list["PDFOutline"] = Field(description="A list of child outline items")
 
 
 class PDFOutlineError(Exception):
     """Custom exception for PDF outline processing errors."""
+
     pass
 
 
@@ -81,17 +80,14 @@ class PDFProcessor:
                     page_number = self._get_page_number(item)
                     if page_number is not None:
                         node = PDFOutline(
-                            title=item.title,
-                            page_number=page_number,
-                            children=[]
+                            title=item.title, page_number=page_number, children=[]
                         )
                         tree.append(node)
 
             return tree
         except Exception as e:
             logger.error(f"Failed to build outline tree: {str(e)}")
-            raise PDFOutlineError(
-                f"Failed to build outline tree: {str(e)}") from e
+            raise PDFOutlineError(f"Failed to build outline tree: {str(e)}") from e
 
     def _extract_page_range_text(self, start_page: int, end_page: int) -> str:
         """
@@ -112,14 +108,15 @@ class PDFProcessor:
                     text_parts.append(page_text)
             except Exception as e:
                 logger.warning(
-                    f"Failed to extract text from page {page_index}: {str(e)}")
+                    f"Failed to extract text from page {page_index}: {str(e)}"
+                )
         return "\n".join(text_parts)
 
     def _extract_leaf_documents(
         self,
         outline_nodes: list[dict[str, Any]],
         default_end: int,
-        hierarchy: Optional[list[str]] = None
+        hierarchy: Optional[list[str]] = None,
     ) -> list[Document]:
         """
         Recursively extracts text from leaf nodes in the outline tree.
@@ -142,36 +139,39 @@ class PDFProcessor:
         try:
             for idx, node in enumerate(outline_nodes):
                 start_page = node["page_number"]
-                end_page = (outline_nodes[idx + 1]["page_number"]
-                            if idx + 1 < len(outline_nodes) else default_end)
+                end_page = (
+                    outline_nodes[idx + 1]["page_number"]
+                    if idx + 1 < len(outline_nodes)
+                    else default_end
+                )
 
                 current_hierarchy = hierarchy + [node["title"]]
 
                 if node["children"]:
-                    docs.extend(self._extract_leaf_documents(
-                        node["children"],
-                        default_end=end_page,
-                        hierarchy=current_hierarchy
-                    ))
+                    docs.extend(
+                        self._extract_leaf_documents(
+                            node["children"],
+                            default_end=end_page,
+                            hierarchy=current_hierarchy,
+                        )
+                    )
                 else:
                     section_text = self._extract_page_range_text(
-                        start_page=start_page,
-                        end_page=end_page
+                        start_page=start_page, end_page=end_page
                     )
                     doc = Document(
                         page_content=section_text,
                         metadata={
                             "hierarchy": current_hierarchy,
                             "start_page": start_page,
-                            "end_page": end_page
-                        }
+                            "end_page": end_page,
+                        },
                     )
                     docs.append(doc)
 
         except Exception as e:
             logger.error(f"Failed to extract leaf documents: {str(e)}")
-            raise PDFOutlineError(
-                f"Failed to extract leaf documents: {str(e)}") from e
+            raise PDFOutlineError(f"Failed to extract leaf documents: {str(e)}") from e
 
     def extract_leaf_sections(self) -> list[Document]:
         """
@@ -185,13 +185,11 @@ class PDFProcessor:
         """
         try:
             return self._extract_leaf_documents(
-                self.outline_tree,
-                default_end=len(self.reader.pages)
+                self.outline_tree, default_end=len(self.reader.pages)
             )
         except Exception as e:
             logger.error(f"Failed to extract leaf sections: {str(e)}")
-            raise PDFOutlineError(
-                f"Failed to extract leaf sections: {str(e)}") from e
+            raise PDFOutlineError(f"Failed to extract leaf sections: {str(e)}") from e
 
 
 def extract_sections_from_pdf(pdf_bytes: bytes) -> list[Document]:

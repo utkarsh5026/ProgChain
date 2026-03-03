@@ -13,9 +13,11 @@ from . import models, llm, chat
 class ThreadGenerate(BaseModel):
     thread_id: str = Field(description="The id of the thread")
     model: str = Field(
-        description="The model to use for the thread", default=Model.GPT_4O_MINI.value)
+        description="The model to use for the thread", default=Model.GPT_4O_MINI.value
+    )
     extra_instructions: Optional[str] = Field(
-        description="Extra instructions for the thread")
+        description="Extra instructions for the thread"
+    )
 
 
 class Content(BaseModel):
@@ -40,8 +42,7 @@ class Thread:
         self.id = thread_pid
         self.topic = topic
         self.content_generator = llm.ContentGenerator(
-            topic=topic,
-            previous_concepts=previous_concepts
+            topic=topic, previous_concepts=previous_concepts
         )
         self.current_idx = 0
         self.is_generating = False
@@ -53,15 +54,13 @@ class Thread:
         Create a new ThreadContent instance in the DB asynchronously.
         """
         return await models.ThreadContent.create(
-            thread_public_id=self.id,
-            topic=thread_topic,
-            content=content
+            thread_public_id=self.id, topic=thread_topic, content=content
         )
 
     async def generate_content(
-            self,
-            model: str = Model.GPT_4O_MINI.value,
-            extra_instructions: Optional[str] = None
+        self,
+        model: str = Model.GPT_4O_MINI.value,
+        extra_instructions: Optional[str] = None,
     ) -> AsyncGenerator[Content, None]:
         """
         Generate content asynchronously via the content generator.
@@ -77,7 +76,9 @@ class Thread:
             else:
                 self.is_generating = True
                 try:
-                    async for data in self.content_generator.generate_content_stream(self.current_idx, model):
+                    async for data in self.content_generator.generate_content_stream(
+                        self.current_idx, model
+                    ):
                         self.current_idx += 1
                         topic = data.topic
                         content = data.topic_content
@@ -87,7 +88,7 @@ class Thread:
                             thread_topic=topic,
                             content=content,
                             current_idx=self.current_idx,
-                            content_id=content_id
+                            content_id=content_id,
                         )
 
                         await self.content_queue.put(content)
@@ -130,16 +131,18 @@ class ThreadService:
         """
         Load a thread from the database asynchronously.
         """
-        thread, contents = await models.Thread.load_thread_contents(thread_public_id=thread_id)
+        thread, contents = await models.Thread.load_thread_contents(
+            thread_public_id=thread_id
+        )
         content_list = [content.content for content in contents]
         self.threads[thread_id] = Thread(
-            topic=thread.topic,
-            thread_pid=thread_id,
-            previous_concepts=content_list
+            topic=thread.topic, thread_pid=thread_id, previous_concepts=content_list
         )
         return self.threads[thread_id]
 
-    async def generate_content(self, thread_generate: ThreadGenerate) -> AsyncGenerator[ThreadGenerateResponse, None]:
+    async def generate_content(
+        self, thread_generate: ThreadGenerate
+    ) -> AsyncGenerator[ThreadGenerateResponse, None]:
         """
         Generate content for a specific thread asynchronously based on given generation parameters.
 
@@ -168,17 +171,19 @@ class ThreadService:
             return
 
         content_generator = self.threads[thread_id]
-        async for content in content_generator.generate_content(model, extra_instructions):
+        async for content in content_generator.generate_content(
+            model, extra_instructions
+        ):
             yield ThreadGenerateResponse(
                 thread_id=thread_id,
                 content=content,
             )
 
     async def create_thread(
-            self,
-            topic: str,
-            model: str = Model.GPT_4O_MINI.value,
-            extra_instructions: Optional[str] = None
+        self,
+        topic: str,
+        model: str = Model.GPT_4O_MINI.value,
+        extra_instructions: Optional[str] = None,
     ) -> AsyncGenerator[ThreadGenerateResponse, None]:
         """
         Create a new thread in the database and initiate its content generation process asynchronously.
@@ -196,9 +201,7 @@ class ThreadService:
         """
         thread_id = await self.__create_thread(topic)
         thread_generate = ThreadGenerate(
-            thread_id=thread_id,
-            model=model,
-            extra_instructions=extra_instructions
+            thread_id=thread_id, model=model, extra_instructions=extra_instructions
         )
         async for content in self.generate_content(thread_generate):
             yield content
@@ -208,10 +211,14 @@ class ThreadService:
         """
         Get all threads from the database.
         """
-        return await models.Thread.get_pagination(cursor=request.timestamp, limit=request.limit)
+        return await models.Thread.get_pagination(
+            cursor=request.timestamp, limit=request.limit
+        )
 
     @classmethod
-    async def get_thread_contents(cls, thread_id: str, request: ListDataRequest) -> list[dict]:
+    async def get_thread_contents(
+        cls, thread_id: str, request: ListDataRequest
+    ) -> list[dict]:
         """
         Get all contents for a given thread.
         """
@@ -247,7 +254,8 @@ class ThreadContentChatService:
         Initializes the ThreadContentChatService, setting up the cache for thread content chats.
         """
         self.thread_content_chats: LRUCache[str, chat.ThreadIDChat] = LRUCache(
-            maxsize=1000)
+            maxsize=1000
+        )
 
     def stop_chat(self, thread_content_id: str) -> None:
         """
@@ -276,7 +284,9 @@ class ThreadContentChatService:
             self.thread_content_chats[thread_content_id] = new_chat
         return self.thread_content_chats[thread_content_id]
 
-    async def create_chat_stream(self, thread_content_id: str, options: ChatGenerateOptions):
+    async def create_chat_stream(
+        self, thread_content_id: str, options: ChatGenerateOptions
+    ):
         """
         Creates a streaming chat generator for the specified thread content ID.
 

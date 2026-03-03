@@ -4,9 +4,7 @@ SERVER_URL = "http://localhost:8000"
 
 
 def test_answer():
-    test_data = {
-        "question": "What is a binary search tree?"
-    }
+    test_data = {"question": "What is a binary search tree?"}
 
     response = requests.post(f"{SERVER_URL}/interview/answer", json=test_data)
     response.raise_for_status()

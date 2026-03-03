@@ -15,8 +15,8 @@ def decode_json(text: str) -> dict:
     if not text or not isinstance(text, str):
         raise ValueError("Input must be a non-empty string")
 
-    start = text.find('{')
-    end = text.rfind('}')
+    start = text.find("{")
+    end = text.rfind("}")
 
     if start == -1 or end == -1:
         raise ValueError(
@@ -26,12 +26,15 @@ def decode_json(text: str) -> dict:
 
     if end <= start:
         raise ValueError(
-            "Invalid JSON structure - closing bracket appears before opening bracket")
+            "Invalid JSON structure - closing bracket appears before opening bracket"
+        )
 
-    json_str = text[start:end + 1]
+    json_str = text[start : end + 1]
 
     try:
         return json.loads(json_str)
     except json.JSONDecodeError as e:
-        raise ValueError(f"Invalid JSON format: {str(e)}. JSON string: '{
-                         json_str[:100]}...'") from e
+        raise ValueError(
+            f"Invalid JSON format: {str(e)}. JSON string: '{
+                         json_str[:100]}...'"
+        ) from e

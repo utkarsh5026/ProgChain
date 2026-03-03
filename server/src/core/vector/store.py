@@ -24,7 +24,7 @@ class VectorDB:
         initial_text: str = "",
         search_k: int = 5,
         chunk_size: int = 1000,
-        use_memory: bool = False
+        use_memory: bool = False,
     ) -> None:
         """
         Initialize the optimized vector database.
@@ -47,10 +47,7 @@ class VectorDB:
     def _initialize_vector_store(self, initial_text: str) -> None:
         """Initialize FAISS vector store and, optionally, the memory retriever."""
         texts = [initial_text] if initial_text else []
-        self.vector_store = FAISS.from_texts(
-            texts=texts,
-            embedding=self.embeddings
-        )
+        self.vector_store = FAISS.from_texts(texts=texts, embedding=self.embeddings)
 
         self.retriever = self.vector_store.as_retriever(
             search_kwargs={"k": self.search_k}
@@ -59,7 +56,7 @@ class VectorDB:
             self.memory = VectorStoreRetrieverMemory(
                 retriever=self.retriever,
                 return_messages=True,
-                memory_key="relevant_history"
+                memory_key="relevant_history",
             )
         else:
             self.memory = None
@@ -81,8 +78,11 @@ class VectorDB:
         if self.memory:
             memory_vars = self.memory.load_memory_variables({"prompt": query})
             history = memory_vars.get("relevant_history", [])
-            result = [h.strip() for h in history] if isinstance(
-                history, list) else [history.strip()]
+            result = (
+                [h.strip() for h in history]
+                if isinstance(history, list)
+                else [history.strip()]
+            )
         else:
             docs = self.retriever.get_relevant_documents(query)
             result = [doc.page_content for doc in docs]
@@ -108,10 +108,7 @@ class VectorDB:
         # Using asyncio.sleep(0) as a placeholder to yield control; in a real-world application,
         # you might batch multiple interactions before writing them.
         await asyncio.sleep(0)
-        self.vector_store.add_texts([
-            f"Human: {human_msg}",
-            f"AI: {ai_msg}"
-        ])
+        self.vector_store.add_texts([f"Human: {human_msg}", f"AI: {ai_msg}"])
 
     async def add_message(self, message: str, role: Optional[str] = None) -> None:
         """

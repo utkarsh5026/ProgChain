@@ -12,11 +12,12 @@ class RequestLoggingMiddleware(BaseHTTPMiddleware):
         try:
             body = await request.body()
             if body:
-                content_type = request.headers.get('content-type', '')
-                if 'application/json' in content_type:
+                content_type = request.headers.get("content-type", "")
+                if "application/json" in content_type:
                     body_json = await request.json()
                     logger.info(
-                        f"Request body (JSON):\n{json.dumps(body_json, indent=4)}")
+                        f"Request body (JSON):\n{json.dumps(body_json, indent=4)}"
+                    )
                 else:
                     try:
                         body_text = body.decode()

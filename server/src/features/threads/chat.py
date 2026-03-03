@@ -8,8 +8,10 @@ from . import models
 
 class ThreadIDChatError(Exception):
     def __init__(self, thread_content_id: str):
-        super().__init__(f"Thread content with id {
-            thread_content_id} not found")
+        super().__init__(
+            f"Thread content with id {
+            thread_content_id} not found"
+        )
 
 
 class ThreadIDChat(BaseChatSystem):
@@ -36,22 +38,24 @@ class ThreadIDChat(BaseChatSystem):
         """
         try:
             thread_content = await models.ThreadContent.get_by_public_id(
-                thread_content_id)
+                thread_content_id
+            )
             return cls(
                 thread_content_id=thread_content_id,
-                initial_context=thread_content.content
+                initial_context=thread_content.content,
             )
         except Exception:
-            logger.error(
-                f"Thread content with id {thread_content_id} not found")
+            logger.error(f"Thread content with id {thread_content_id} not found")
             raise ThreadIDChatError(thread_content_id)
 
-    def __init__(self,
-                 thread_content_id: str,
-                 prompt: Optional[ChatPromptTemplate] = None,
-                 vector_db: Optional[VectorDB] = None,
-                 config: Optional[ChatConfig] = None,
-                 initial_context: str = "") -> None:
+    def __init__(
+        self,
+        thread_content_id: str,
+        prompt: Optional[ChatPromptTemplate] = None,
+        vector_db: Optional[VectorDB] = None,
+        config: Optional[ChatConfig] = None,
+        initial_context: str = "",
+    ) -> None:
         """
         Initializes a ThreadIDChat instance.
 
@@ -65,7 +69,9 @@ class ThreadIDChat(BaseChatSystem):
         super().__init__(prompt, vector_db, config, initial_context)
         self.thread_content_id = thread_content_id
 
-    async def stream_chat(self, options: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
+    async def stream_chat(
+        self, options: ChatGenerateOptions
+    ) -> AsyncGenerator[dict, None]:
         """
         Asynchronously streams chat responses based on the provided options.
 
@@ -82,7 +88,7 @@ class ThreadIDChat(BaseChatSystem):
                 yield {
                     "content_id": self.thread_content_id,
                     "content": chunk,
-                    "metadata": metadata
+                    "metadata": metadata,
                 }
 
         finally:
@@ -90,5 +96,5 @@ class ThreadIDChat(BaseChatSystem):
             await models.ThreadContentChat.create_chat(
                 content_public_id=self.thread_content_id,
                 user_question=options.question,
-                ai_answer="".join(contents)
+                ai_answer="".join(contents),
             )

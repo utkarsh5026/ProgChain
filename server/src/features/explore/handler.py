@@ -5,7 +5,11 @@ from pydantic import Field
 
 from .service import ResearchAssistantService
 from core import ChatGenerateOptions
-from fastapi_components import stream_response, BaseContentGenerateRequest, ListDataRequest
+from fastapi_components import (
+    stream_response,
+    BaseContentGenerateRequest,
+    ListDataRequest,
+)
 
 
 service = ResearchAssistantService()
@@ -19,8 +23,10 @@ class AskQuestionRequest(BaseContentGenerateRequest):
 
 class ChatNotFoundError(HTTPException):
     def __init__(self, chat_id: int):
-        super().__init__(status_code=status.HTTP_404_NOT_FOUND,
-                         detail=f"Chat with id {chat_id} not found")
+        super().__init__(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail=f"Chat with id {chat_id} not found",
+        )
 
 
 @router.post("/topic")
@@ -29,11 +35,12 @@ async def explore_topic(request: BaseContentGenerateRequest):
         options = ChatGenerateOptions(
             question=request.question,
             model=request.model,
-            extra_instructions=request.extra_instructions
+            extra_instructions=request.extra_instructions,
         )
 
         logger.info(
-            f"Staring exploration with the options: {options.model_dump_json(indent=4)}")
+            f"Staring exploration with the options: {options.model_dump_json(indent=4)}"
+        )
         async for chunk in service.start_exploration(options):
             yield chunk
 
@@ -44,8 +51,7 @@ async def explore_topic(request: BaseContentGenerateRequest):
 async def ask_question(question_request: AskQuestionRequest):
     chat_id = question_request.chat_id
 
-    logger.info(
-        f"User asked question {question_request.model_dump_json(indent=2)}")
+    logger.info(f"User asked question {question_request.model_dump_json(indent=2)}")
 
     async def stream_func():
         async for chunk in service.ask_question(chat_id, question_request):
@@ -60,8 +66,9 @@ async def get_all_chats(request: ListDataRequest):
         chats = await service.get_all_chats(request=request)
         return chats
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )
 
 
 @router.delete("/chat/{chat_id}")
@@ -69,8 +76,9 @@ async def delete_chat(chat_id: str):
     try:
         deleted = await service.delete_chat(chat_id)
         if not deleted:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail="Chat not found")
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Chat not found"
+            )
         return {"message": "Chat deleted successfully"}
     except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))
@@ -81,12 +89,14 @@ async def get_chat_for_id(chat_id: str):
     try:
         chat = await service.get_chat(chat_id)
         if chat is None:
-            raise HTTPException(status_code=status.HTTP_404_NOT_FOUND,
-                                detail="Chat not found")
+            raise HTTPException(
+                status_code=status.HTTP_404_NOT_FOUND, detail="Chat not found"
+            )
 
         return {
             "chat": chat,
         }
     except Exception as e:
-        raise HTTPException(status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-                            detail=str(e))
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR, detail=str(e)
+        )

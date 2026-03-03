@@ -3,7 +3,7 @@ from typing import Callable, TypeVar
 from loguru import logger
 from .config import AsyncSessionLocal
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 def with_session():
@@ -34,8 +34,7 @@ def with_session():
                     return result
 
                 except Exception as error:
-                    logger.exception(
-                        f"Database Operation failed with error:  {error}")
+                    logger.exception(f"Database Operation failed with error:  {error}")
                     await session.rollback()
                     raise
 

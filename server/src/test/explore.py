@@ -4,9 +4,7 @@ import json
 SERVER_URL = "http://localhost:8000"
 
 # Test data
-test_data = {
-    "question": "What is a binary search tree?"
-}
+test_data = {"question": "What is a binary search tree?"}
 
 
 def test_explore():
@@ -26,16 +24,20 @@ def test_explore():
             json.dump(result, f, indent=2, ensure_ascii=False)
 
         assert "explanation" in result, "Response doesn't contain 'explanation' key"
-        assert isinstance(result["explanation"],
-                          str), "'explanation' should be a string"
-        assert len(result["explanation"]
-                   ) > 0, "Explanation should not be empty"
+        assert isinstance(
+            result["explanation"], str
+        ), "'explanation' should be a string"
+        assert len(result["explanation"]) > 0, "Explanation should not be empty"
 
-        assert "follow_up_questions" in result, "Response doesn't contain 'follow_up_questions' key"
-        assert isinstance(result["follow_up_questions"],
-                          list), "'follow_up_questions' should be a list"
-        assert len(result["follow_up_questions"]
-                   ) == 10, "There should be 10 follow-up questions"
+        assert (
+            "follow_up_questions" in result
+        ), "Response doesn't contain 'follow_up_questions' key"
+        assert isinstance(
+            result["follow_up_questions"], list
+        ), "'follow_up_questions' should be a list"
+        assert (
+            len(result["follow_up_questions"]) == 10
+        ), "There should be 10 follow-up questions"
 
         print("Test passed successfully!")
 

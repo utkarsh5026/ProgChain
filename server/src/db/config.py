@@ -14,10 +14,7 @@ ASYNC_DATABASE_URL = "sqlite+aiosqlite:///./sqlite.db"
 async_engine = create_async_engine(ASYNC_DATABASE_URL, echo=False)
 
 AsyncSessionLocal = sessionmaker(
-    autocommit=False,
-    autoflush=False,
-    bind=async_engine,
-    class_=AsyncSession
+    autocommit=False, autoflush=False, bind=async_engine, class_=AsyncSession
 )
 Base = declarative_base()
 

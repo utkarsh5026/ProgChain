@@ -6,6 +6,7 @@ class Cache:
     """
     Cache class for caching data.
     """
+
     _cache = LRUCache[str, int](maxsize=1000)
 
     @classmethod

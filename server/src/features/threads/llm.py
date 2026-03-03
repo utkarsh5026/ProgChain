@@ -12,8 +12,7 @@ from config.models import get_model, Model
 
 class TopicGenerate(BaseModel):
     topic: str = Field(description="The topic to generate content for")
-    topic_content: str = Field(
-        description="The topic content to generate content for")
+    topic_content: str = Field(description="The topic content to generate content for")
     current_idx: int = Field(description="The current index of the content")
 
 
@@ -22,7 +21,9 @@ class ContentGenerator:
     Generates progressive, non-repetitive learning content for any topic.
     """
 
-    def __init__(self, topic: str, batch_size: int = 3, previous_concepts: list[str] = None) -> None:
+    def __init__(
+        self, topic: str, batch_size: int = 3, previous_concepts: list[str] = None
+    ) -> None:
         """
         Initialize the ContentGenerator with a topic and previous concepts.
 
@@ -33,9 +34,12 @@ class ContentGenerator:
         """
         self.topic = topic
         self.batch_size = batch_size
-        self.previous_concepts: list[str] = previous_concepts if previous_concepts else []
+        self.previous_concepts: list[str] = (
+            previous_concepts if previous_concepts else []
+        )
 
-        self.content_prompt = ChatPromptTemplate.from_template("""
+        self.content_prompt = ChatPromptTemplate.from_template(
+            """
         You are an expert educator creating engaging learning content about {topic}.
         Previous concepts covered: {previous_concepts}
         Current exploration depth: {depth_level}
@@ -81,7 +85,8 @@ class ContentGenerator:
         - [Next concept 2]
 
         Ensure all content is fresh and builds naturally from what's been covered.
-        """)
+        """
+        )
 
     @classmethod
     @lru_cache(maxsize=32)
@@ -110,19 +115,19 @@ class ContentGenerator:
     def _extract_concept(cls, content: str) -> str:
         """Extract concept title from content more reliably"""
         try:
-            lines = content.split('\n')
+            lines = content.split("\n")
             for line in lines:
-                if line.startswith('# '):
-                    return line.replace('# ', '').strip()
+                if line.startswith("# "):
+                    return line.replace("# ", "").strip()
             return "Untitled Concept"
         except Exception:
             return "Untitled Concept"
 
     async def generate_content_stream(
-            self,
-            current_idx: int,
-            model: str = Model.GPT_4O_MINI.value,
-            callback_handler: Optional[AsyncCallbackHandler] = None
+        self,
+        current_idx: int,
+        model: str = Model.GPT_4O_MINI.value,
+        callback_handler: Optional[AsyncCallbackHandler] = None,
     ) -> AsyncGenerator[TopicGenerate, None]:
         """
         Generate content stream with improved error handling and optional callback
@@ -133,21 +138,21 @@ class ContentGenerator:
         for i in range(self.batch_size):
             try:
                 logger.info(f"Loaded previous concepts: {self.previous_concepts}")
-                chain = self.content_prompt | get_model(
-                    model) | StrOutputParser()
-                content = await chain.ainvoke({
-                    "topic": self.topic,
-                    "previous_concepts": self.previous_concepts,
-                    "depth_level": depth_level,
-                    "focus_area": focus_area
-                }, callbacks=[callback_handler] if callback_handler else None)
+                chain = self.content_prompt | get_model(model) | StrOutputParser()
+                content = await chain.ainvoke(
+                    {
+                        "topic": self.topic,
+                        "previous_concepts": self.previous_concepts,
+                        "depth_level": depth_level,
+                        "focus_area": focus_area,
+                    },
+                    callbacks=[callback_handler] if callback_handler else None,
+                )
 
                 concept = self._extract_concept(content)
 
                 yield TopicGenerate(
-                    topic=concept,
-                    topic_content=content,
-                    current_idx=current_idx + i
+                    topic=concept, topic_content=content, current_idx=current_idx + i
                 )
                 self.previous_concepts.append(concept)
 

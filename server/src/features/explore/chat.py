@@ -18,7 +18,6 @@ class ChatNotFoundError(Exception):
 
 
 class ResearchAssistant(BaseChatSystem):
-
     """
     ResearchAssistant is an advanced tool for deep technical exploration.
 
@@ -29,6 +28,7 @@ class ResearchAssistant(BaseChatSystem):
     The assistant uses a chat prompt template combined with contextual history from its vector store to generate
     informative and well-structured responses.
     """
+
     system_prompt = """You are an advanced research assistant specializing in deep technical exploration. 
 Your role is to help users understand complex technical topics by providing clear, detailed, and accurate explanations.
 
@@ -53,12 +53,14 @@ At the end of your response, always include:
         initial_context = await cls.create_context(chat.id)
         return cls(
             chat=chat,
-            prompt=ChatPromptTemplate.from_messages([
-                ("system", cls.system_prompt),
-                ("human", "{input}"),
-                MessagesPlaceholder(variable_name="relevant_history")
-            ]),
-            initial_context=initial_context
+            prompt=ChatPromptTemplate.from_messages(
+                [
+                    ("system", cls.system_prompt),
+                    ("human", "{input}"),
+                    MessagesPlaceholder(variable_name="relevant_history"),
+                ]
+            ),
+            initial_context=initial_context,
         )
 
     @classmethod
@@ -67,14 +69,23 @@ At the end of your response, always include:
             return await ExploreChat.create_empty_chat()
         return await ExploreChat.get_by_public_id(chat_id)
 
-    def __init__(self, chat: ExploreChat,  prompt: ChatPromptTemplate, vector_db: Optional[VectorDB] = None, config: Optional[ChatConfig] = None, initial_context: str = "") -> None:
+    def __init__(
+        self,
+        chat: ExploreChat,
+        prompt: ChatPromptTemplate,
+        vector_db: Optional[VectorDB] = None,
+        config: Optional[ChatConfig] = None,
+        initial_context: str = "",
+    ) -> None:
         super().__init__(prompt, vector_db, config, initial_context)
         self._chat_public_id = chat.public_id
         self._chat_internal_id = chat.id
         self.topic = None
         self.lock = asyncio.Lock()
 
-    async def generate_answer(self, options: ChatGenerateOptions) -> AsyncGenerator[dict, None]:
+    async def generate_answer(
+        self, options: ChatGenerateOptions
+    ) -> AsyncGenerator[dict, None]:
         """
         Generate an answer for a given question with optional extra instructions.
 
@@ -101,7 +112,7 @@ At the end of your response, always include:
                     "chat_id": self._chat_public_id,
                     "chat_message_id": chat_public_id,
                     "message": chunk,
-                    "llm_metadata": metadata.model_dump()
+                    "llm_metadata": metadata.model_dump(),
                 }
         finally:
             await self._reflect_db_changes(options.question, machine_answer)
@@ -120,7 +131,7 @@ At the end of your response, always include:
             ExploreChatMessage.update_chat_message(
                 self._chat_internal_id,
                 user_question=message,
-                assistant_answer=assistant_answer
+                assistant_answer=assistant_answer,
             )
         )
 
@@ -136,11 +147,16 @@ At the end of your response, always include:
         Returns:
             str: The determined chat topic.
         """
-        prompt = ChatPromptTemplate.from_messages([
-            ("system", "You are a helpful assistant that determines the topic of a question. Only give the topic, "
-                       "no other text."),
-            ("human", "Question: {question}"),
-        ])
+        prompt = ChatPromptTemplate.from_messages(
+            [
+                (
+                    "system",
+                    "You are a helpful assistant that determines the topic of a question. Only give the topic, "
+                    "no other text.",
+                ),
+                ("human", "Question: {question}"),
+            ]
+        )
         small_model = get_model(Model.GPT_4O_MINI.value)
         chain = prompt | small_model | StrOutputParser()
         self.topic = await chain.ainvoke({"question": question})
@@ -154,7 +170,9 @@ At the end of your response, always include:
         This method retrieves all messages associated with the specified chat and formats them into a context string.
         The context includes the user's questions and the assistant's answers.
         """
-        chat_messages = await ExploreChatMessage.get_messages_by_internal_id(chat_internal_id)
+        chat_messages = await ExploreChatMessage.get_messages_by_internal_id(
+            chat_internal_id
+        )
         context = ""
         for message in chat_messages:
             uq = message.user_question
@@ -168,4 +186,6 @@ At the end of your response, always include:
 
         This method creates an empty chat message for the chat and returns its public ID.
         """
-        return await ExploreChatMessage.create_empty_chat_message(self._chat_internal_id, self._chat_public_id)
+        return await ExploreChatMessage.create_empty_chat_message(
+            self._chat_internal_id, self._chat_public_id
+        )

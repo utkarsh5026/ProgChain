@@ -12,7 +12,7 @@ from sqlalchemy import DateTime, func, Integer, String, select, asc, desc
 from .context import with_session
 from cache import Cache
 
-T = TypeVar('T')
+T = TypeVar("T")
 
 
 @dataclass
@@ -21,6 +21,7 @@ class PaginatedResponse(Generic[T]):
     A structured response for paginated results that includes both
     ascending and descending cursors for flexible navigation.
     """
+
     items: list[T]
     has_next: bool
     total_count: Optional[int] = None
@@ -31,6 +32,7 @@ class TimestampMixin(object):
     A mixin class that provides common timestamp fields and methods for models.
     This mixin is designed to be used with SQLAlchemy models to add created_at and updated_at timestamps.
     """
+
     __abstract__ = True
 
     @declared_attr
@@ -40,9 +42,7 @@ class TimestampMixin(object):
         This field is automatically set to the current datetime when a new record is inserted.
         """
         return mapped_column(
-            DateTime(timezone=True),
-            server_default=func.now(),
-            nullable=False
+            DateTime(timezone=True), server_default=func.now(), nullable=False
         )
 
     @declared_attr
@@ -56,7 +56,7 @@ class TimestampMixin(object):
             server_default=func.now(),
             onupdate=func.now(),
             index=True,  # create index for updated_at
-            nullable=False
+            nullable=False,
         )
 
     def touch(self, session: Session):
@@ -69,11 +69,13 @@ class TimestampMixin(object):
 
     @classmethod
     @with_session()
-    async def get_pagination(cls, session: AsyncSession,
-                             order_type: Literal['created_asc',
-                                                 'updated_desc'] = 'updated_desc',
-                             cursor: Optional[datetime] = None,
-                             limit: int = 10) -> PaginatedResponse[T]:
+    async def get_pagination(
+        cls,
+        session: AsyncSession,
+        order_type: Literal["created_asc", "updated_desc"] = "updated_desc",
+        cursor: Optional[datetime] = None,
+        limit: int = 10,
+    ) -> PaginatedResponse[T]:
         """
         Retrieve a paginated response for the model, ordered by either creation or update time.
 
@@ -87,32 +89,33 @@ class TimestampMixin(object):
             A paginated response for the model, including the items, a flag indicating if there are more items, and the total count of items.
         """
         if cursor is None or cursor == datetime.min:
-            cursor = datetime.now() if order_type == 'updated_desc' else datetime.min
+            cursor = datetime.now() if order_type == "updated_desc" else datetime.min
 
-        if order_type == 'created_asc':
+        if order_type == "created_asc":
             order_column = cls.created_at
             order_func = asc
-            operator = '>'
-        elif order_type == 'updated_desc':
+            operator = ">"
+        elif order_type == "updated_desc":
             order_column = cls.updated_at
             order_func = desc
-            operator = '<'
+            operator = "<"
 
         logger.info(f"Ordering by {order_type} with cursor {cursor}")
 
-        query = select(cls).where(
-            order_column.op(operator)(cursor)
-        ).order_by(order_func(order_column)).limit(limit)
+        query = (
+            select(cls)
+            .where(order_column.op(operator)(cursor))
+            .order_by(order_func(order_column))
+            .limit(limit)
+        )
 
         result = await session.execute(query)
         items = result.scalars().unique().all()
 
-        total_count = await session.scalar(
-            select(func.count()).select_from(cls)
+        total_count = await session.scalar(select(func.count()).select_from(cls))
+        return PaginatedResponse(
+            items=items, has_next=len(items) == limit, total_count=total_count
         )
-        return PaginatedResponse(items=items,
-                                 has_next=len(items) == limit,
-                                 total_count=total_count)
 
 
 class PublicIDMixin:
@@ -122,8 +125,7 @@ class PublicIDMixin:
 
     __abstract__ = True
     """Mixin to handle public IDs and ID masking in models."""
-    id: Mapped[int] = mapped_column(
-        Integer, primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
 
     @declared_attr
     def public_id(cls) -> Mapped[str]:
@@ -133,11 +135,11 @@ class PublicIDMixin:
             unique=True,
             nullable=False,
             index=True,
-            default=lambda: cls.generate_public_id()
+            default=lambda: cls.generate_public_id(),
         )
 
     def __init__(self, *args, **kwargs):
-        kwargs['public_id'] = self.generate_public_id()
+        kwargs["public_id"] = self.generate_public_id()
         super().__init__(*args, **kwargs)
 
     @classmethod
@@ -156,6 +158,7 @@ class PublicIDMixin:
         Get a model instance by its public ID.
         Uses the session decorator for cleaner transaction management.
         """
+
         def cache_key():
             return f"{cls.__name__}:{public_id}"
 
@@ -163,9 +166,7 @@ class PublicIDMixin:
         if internal_id:
             return cls.get_by_internal_id(session, internal_id)
 
-        result = await session.scalar(
-            select(cls).where(cls.public_id == public_id)
-        )
+        result = await session.scalar(select(cls).where(cls.public_id == public_id))
         Cache.set(cache_key(), result.id)
         return result
 
@@ -175,9 +176,7 @@ class PublicIDMixin:
         """
         Get a model instance by its internal ID.
         """
-        return await session.scalar(
-            select(cls).where(cls.id == internal_id)
-        )
+        return await session.scalar(select(cls).where(cls.id == internal_id))
 
     @classmethod
     @with_session()
@@ -196,7 +195,7 @@ class PublicIDMixin:
         Handles relationship attributes by converting them to dictionaries as well.
         """
         exclude = exclude or set()
-        exclude.add('id')
+        exclude.add("id")
 
         result = {}
 
