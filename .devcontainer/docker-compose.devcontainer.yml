@@ -1,0 +1,8 @@
+# Devcontainer overlay — extends compose.dev.yaml
+# Mounts the entire project root at /workspace so VS Code has full monorepo access.
+services:
+  server:
+    volumes:
+      - ..:/workspace:cached
+    environment:
+      - PYTHONPATH=/workspace/server/src

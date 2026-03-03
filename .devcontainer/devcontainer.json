@@ -1,0 +1,79 @@
+{
+  "name": "ProgChain",
+
+  // Reuse the existing dev compose stack + an overlay that mounts the full repo.
+  "dockerComposeFile": ["../compose.dev.yaml", "docker-compose.devcontainer.yml"],
+
+  // VS Code attaches to the server (Python/FastAPI) container.
+  // The client Vite dev server also starts automatically via compose.
+  "service": "server",
+  "workspaceFolder": "/workspace",
+
+  // Forward both services so browser-based tools open instantly.
+  "forwardPorts": [8000, 5173],
+  "portsAttributes": {
+    "8000": {
+      "label": "FastAPI Backend",
+      "onAutoForward": "notify"
+    },
+    "5173": {
+      "label": "Vite Frontend",
+      "onAutoForward": "notify"
+    }
+  },
+
+  // Install git (not in the base image) and copy example .env files if absent.
+  "postCreateCommand": "apt-get update -qq && apt-get install -y -qq git > /dev/null && test -f /workspace/server/.env || cp /workspace/server/.env.example /workspace/server/.env && test -f /workspace/client/.env || cp /workspace/client/.env.example /workspace/client/.env",
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        // Python
+        "ms-python.python",
+        "ms-python.pylance",
+        "ms-python.black-formatter",
+        // Frontend
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "bradlc.vscode-tailwindcss",
+        // General
+        "ms-azuretools.vscode-docker",
+        "eamodio.gitlens",
+        "christian-kohler.path-intellisense"
+      ],
+      "settings": {
+        // Python
+        "python.defaultInterpreterPath": "/usr/local/bin/python",
+        "python.analysis.typeCheckingMode": "basic",
+        "[python]": {
+          "editor.defaultFormatter": "ms-python.black-formatter",
+          "editor.formatOnSave": true
+        },
+        // TypeScript / React
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        "[typescriptreact]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode",
+          "editor.formatOnSave": true
+        },
+        // Editor defaults
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+          "source.fixAll.eslint": "explicit"
+        },
+        "files.exclude": {
+          "**/__pycache__": true,
+          "**/*.pyc": true
+        }
+      }
+    }
+  },
+
+  // Surface OPENAI_API_KEY from the host into the container.
+  // Set it in your host environment or in a .env file at the repo root.
+  "remoteEnv": {
+    "OPENAI_API_KEY": "${localEnv:OPENAI_API_KEY}"
+  }
+}
