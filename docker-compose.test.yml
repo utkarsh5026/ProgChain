@@ -12,7 +12,7 @@ services:
     tmpfs:
       - /var/lib/postgresql/data  # Use tmpfs for faster tests
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U test_user"]
+      test: ["CMD-SHELL", "pg_isready -U test_user -d test_progchain"]
       interval: 5s
       timeout: 5s
       retries: 5
@@ -50,7 +50,7 @@ services:
         condition: service_healthy
     networks:
       - test-network
-    command: pytest /app/tests -v --cov=src --cov-report=html --cov-report=term-missing
+    command: poetry run pytest /app/tests -v --cov=src --cov-report=html --cov-report=term-missing
 
   test-client:
     build:
