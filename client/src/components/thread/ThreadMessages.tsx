@@ -95,7 +95,7 @@ const ThreadMessages: React.FC<ThreadMessagesProps> = ({
         </div>
       </ScrollArea>
       <div className="fixed bottom-0 left-0 right-0 px-32 z-50 max-w-8xl mx-auto">
-        <ChatInput onSubmit={() => {}} />
+        <ChatInput onSubmit={async () => {}} />
       </div>
     </div>
   );

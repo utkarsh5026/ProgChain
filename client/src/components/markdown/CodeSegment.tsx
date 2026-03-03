@@ -18,7 +18,7 @@ const CopiedCodeContent = ({ content }: { content: string }) => {
 const CodeSegment: React.FC<CodeSegmentProps> = ({ props }) => {
   const { toast } = useToast();
   const codeElement = props.children;
-  const codeText = codeElement ? extractText(codeElement.props?.children) : "";
+  const codeText = React.isValidElement(codeElement) ? extractText(codeElement.props?.children) : "";
 
   const handleCopy = async () => {
     try {

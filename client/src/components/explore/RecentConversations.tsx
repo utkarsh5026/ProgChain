@@ -64,7 +64,7 @@ const RecentConversations: React.FC = () => {
                   <motion.div
                     key={id}
                     whileHover={{ scale: 1.01 }}
-                    onClick={() => loadChat(id)}
+                    onClick={() => loadChat(parseInt(id))}
                     className="group relative p-4 rounded-lg bg-zinc-900/50 border border-zinc-800/50 
                              hover:border-primary/30 hover:bg-zinc-900/70 transition-all duration-200 cursor-pointer"
                   >

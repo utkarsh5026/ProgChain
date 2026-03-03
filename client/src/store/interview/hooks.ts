@@ -35,10 +35,8 @@ export const useInterviewQuestions = (): InterviewQuestionsHook => {
   const getCachedQuestions = useCallback(
     (topic: string, context: string) => {
       const questions = topicQuestions[topic];
-      for (const question of questions) {
-        if (question.context === context) {
-          return question;
-        }
+      if (questions?.context === context) {
+        return questions;
       }
       return null;
     },

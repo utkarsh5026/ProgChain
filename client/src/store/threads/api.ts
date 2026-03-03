@@ -34,7 +34,7 @@ const parseContent = (thread: RawThread): ThreadContent => {
     content: {
       topic: content.thread_topic,
       content: content.content,
-      id: content.content_id,
+      id: String(content.content_id),
     },
   };
 };

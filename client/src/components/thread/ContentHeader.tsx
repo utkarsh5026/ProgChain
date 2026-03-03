@@ -6,7 +6,7 @@ import { RefreshCw, Sparkles, DownloadIcon } from "lucide-react";
 import type { Model } from "@/config/config";
 
 interface ContentHeaderProps {
-  onRegenerate: (model: Model) => void;
+  onRegenerate?: (model: Model) => void;
   onCapture?: () => void;
   onExplore?: () => void;
   isExploring?: boolean;
