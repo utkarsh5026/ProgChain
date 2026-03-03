@@ -23,7 +23,7 @@
   },
 
   // Install git (not in the base image) and copy example .env files if absent.
-  "postCreateCommand": "apt-get update -qq && apt-get install -y -qq git > /dev/null && test -f /workspace/server/.env || cp /workspace/server/.env.example /workspace/server/.env && test -f /workspace/client/.env || cp /workspace/client/.env.example /workspace/client/.env",
+  "postCreateCommand": "apt-get update -qq && apt-get install -y -qq git > /dev/null && test -f /workspace/server/.env || cp /workspace/server/.env.example /workspace/server/.env && test -f /workspace/client/.env || cp /workspace/client/.env.example /workspace/client/.env && npm --prefix /workspace/client install",
 
   "customizations": {
     "vscode": {
