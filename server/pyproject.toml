@@ -8,7 +8,7 @@ authors = ["Utkarsh Priyadarshi <utkarshpriyadarshi5026@gmail.com>"]
 [tool.poetry.dependencies]
 python = "^3.12"
 langchain = "^0.3.21"
-langchain-openai = "^0.3.10"
+langchain-openai = "^0.3.35"
 cachetools = "^5.5.2"
 fastapi = "^0.115.12"
 uvicorn = "^0.34.0"
